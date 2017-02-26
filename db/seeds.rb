@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+  User.create do |u|
+    u.email = 'nique.rio@gmail.com'
+    u.password = 'password' 
+    u.sca_name = 'Jadwiga Kryzanowska'
+    u.modern_name = 'Monique Rio'
+    u.street = '1430 Pontiac Trail'
+    u.city = 'Ann Arbor'
+    u.state = 'MI'
+    u.zipcode = '48105'
+    u.phone = '5865495224'
+  end
