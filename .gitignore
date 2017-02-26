@@ -6,6 +6,8 @@
 .env
 Procfile
 
+/config/secrets.yml
+
 *.gem
 *.rbc
 /.config
