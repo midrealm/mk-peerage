@@ -3,10 +3,15 @@
 <ul>
 <% @active_laurels.each do |l| %>
  
+  <% name = l.sca_name %>
+  <% if l.specialties.count > 0 %>
+    <% name = "#{l.sca_name} (#{l.show_specialties})" %>
+  <% end %>
   <% if l.vigilant? %> 
-  <li><b><%= link_to(l.sca_name, l.url) %></b></li>
+  <li><b><%= link_to(name, l.url) %></b></li>
   <% else %>
-  <li><%= link_to(l.sca_name, l.url) %></li>
+  
+  <li><%= link_to(name, l.url) %></li>
   <% end %>
 <%end %>
 </ul>
@@ -14,10 +19,14 @@
 <h3>Masters and Mistresses of the Laurel<br><small>Inactive in the Kingdom</small></h3>
 <ul>
 <% @inactive_laurels.each do |l| %>
+  <% name = l.sca_name %>
+  <% if l.specialties.count > 0 %>
+    <% name = "#{l.sca_name} (#{l.show_specialties})" %>
+  <% end %>
   <% if l.deceased? %> 
-  <li><strike><%= link_to(l.sca_name, l.url) %></strike></li>
+  <li><strike><%= link_to(name, l.url) %></strike></li>
   <% else %>
-  <li><%= link_to(l.sca_name, l.url) %></li>
+  <li><%= link_to(name, l.url) %></li>
   <% end %>
 <% end %>
 </ul>

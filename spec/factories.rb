@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :specialization do
+    user 
+    specialty 
+  end
+  factory :specialty do
+    name "MyString"
+  end
   sequence :email do |n|
     "person#{n}@example.com"
   end

@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:specializations) }
+  it { should have_many(:specialties).through(:specializations) }
 end
 RSpec.describe User, "slug" do
   it "returns appropriate slug link" do

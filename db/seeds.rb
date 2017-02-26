@@ -5,8 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+  Specialty.create([{name: 'Music'}, {name: 'Costuming'}, {name: 'Earwax Studies'}])
 
-  User.create do |u|
+  nique = User.create do |u|
     u.email = 'nique.rio@gmail.com'
     u.password = 'password' 
     u.sca_name = 'Jadwiga Kryzanowska'
@@ -21,22 +22,25 @@
     u.elevation_date = nil
     u.vigilant = false
   end
+  Specialization.create(user: nique, specialty: Specialty.find_by(name: 'Music'))
 
-  User.create do |u|
+  vig = User.create do |u|
     u.email = 'example@blah.com'
     u.password = Devise.friendly_token.first(8)  
     u.sca_name = 'Joe Vigilant'
     u.active = true
     u.vigilant = true
   end
-  User.create do |u|
+  inactive = User.create do |u|
     u.email = 'example2@blah.com'
     u.password = Devise.friendly_token.first(8)  
     u.sca_name = 'Jane Inactive'
     u.active = false
     u.vigilant = false
   end
-  User.create do |u|
+  Specialization.create(user: inactive, specialty: Specialty.find_by(name: 'Costuming'))
+  Specialization.create(user: inactive, specialty: Specialty.find_by(name: 'Music'))
+  dead = User.create do |u|
     u.email = 'example3@blah.com'
     u.password = Devise.friendly_token.first(8)  
     u.sca_name = 'Alex Deceased'
@@ -44,3 +48,6 @@
     u.vigilant = false
     u.deceased = true
   end
+  Specialization.create(user: dead, specialty: Specialty.find_by(name: 'Earwax Studies'))
+  Specialization.create(user: dead, specialty: Specialty.find_by(name: 'Costuming'))
+  Specialization.create(user: dead, specialty: Specialty.find_by(name: 'Music'))

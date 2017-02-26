@@ -2,8 +2,10 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   def edit
     @user = current_user
+    @specialties = Specialty.all
   end
   def update
+    byebug
     if current_user.update(user_params)
       name = current_user.sca_name.tr(' ','_')
       redirect_to "/laurels/#{name}"
