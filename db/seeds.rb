@@ -16,4 +16,31 @@
     u.state = 'MI'
     u.zipcode = '48105'
     u.phone = '5865495224'
+    u.deceased = false
+    u.active = true
+    u.elevation_date = nil
+    u.vigilant = false
+  end
+
+  User.create do |u|
+    u.email = 'example@blah.com'
+    u.password = Devise.friendly_token.first(8)  
+    u.sca_name = 'Joe Vigilant'
+    u.active = true
+    u.vigilant = true
+  end
+  User.create do |u|
+    u.email = 'example2@blah.com'
+    u.password = Devise.friendly_token.first(8)  
+    u.sca_name = 'Jane Inactive'
+    u.active = false
+    u.vigilant = false
+  end
+  User.create do |u|
+    u.email = 'example3@blah.com'
+    u.password = Devise.friendly_token.first(8)  
+    u.sca_name = 'Alex Deceased'
+    u.active = false
+    u.vigilant = false
+    u.deceased = true
   end

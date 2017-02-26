@@ -1,0 +1,4 @@
+<% if signed_in? && current_user.sca_name == @laurel.sca_name %>
+  <%= link_to('Edit Profile', '/users/edit') %>
+<% end %>
+<h1><%=@laurel.sca_name%></h1>

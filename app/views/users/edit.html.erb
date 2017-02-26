@@ -10,6 +10,25 @@
     <%= f.label :modern_name, 'Modern Name' %>
     <%= f.text_field :modern_name, class:'form-control' %>
   </div>
+  <div class='checkbox'>
+    <label>
+    <%= f.check_box :active  %> Active?
+    </label>
+  </div>
+  <div class='checkbox'>
+    <label>
+    <%= f.check_box :vigilant  %> Vigilant?
+    </label>
+  </div>
+  <div class='form-group'>
+    <%= f.label :elevation_date, 'Elevation Date' %>
+    <%= f.date_field :elevation_date, class:'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :eleveators, 'Elevated By' %>
+    <%= f.text_field :elevators, class:'form-control' %>
+  </div>
+
   <div class='form-group'>
     <%= f.label :street, 'Street' %>
     <%= f.text_field :street, class:'form-control' %>
@@ -29,10 +48,6 @@
   <div class='form-group'>
     <%= f.label :phone, 'Phone Number' %>
     <%= f.telephone_field :phone, class:'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :eleveators, 'Elevated By' %>
-    <%= f.text_field :elevators, class:'form-control' %>
   </div>
 
   <%= f.submit class: 'btn btn-default'%>

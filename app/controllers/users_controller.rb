@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   end
   def update
     if current_user.update(user_params)
-      redirect_to "/"
+      name = current_user.sca_name.tr(' ','_')
+      redirect_to "/laurels/#{name}"
     else
       render :edit
     end
@@ -13,6 +14,6 @@ class UsersController < ApplicationController
 
   private 
   def user_params
-    params.require(:user).permit(:sca_name, :modern_name, :street, :city, :state, :zipcode, :elevators,:phone,:user_id)
+    params.require(:user).permit(:sca_name, :modern_name, :street, :city, :state, :zipcode, :elevators,:phone,:user_id, :vigilant, :active, :elevation_date)
   end
 end

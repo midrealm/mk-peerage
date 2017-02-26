@@ -1,0 +1,23 @@
+<h1>Roll of Honor</h1>
+<h3>Masters and Mistresses of the Laurel<br><small>Active in the Kingdom</small></h3>
+<ul>
+<% @active_laurels.each do |l| %>
+ 
+  <% if l.vigilant? %> 
+  <li><b><%= link_to(l.sca_name, l.url) %></b></li>
+  <% else %>
+  <li><%= link_to(l.sca_name, l.url) %></li>
+  <% end %>
+<%end %>
+</ul>
+
+<h3>Masters and Mistresses of the Laurel<br><small>Inactive in the Kingdom</small></h3>
+<ul>
+<% @inactive_laurels.each do |l| %>
+  <% if l.deceased? %> 
+  <li><strike><%= link_to(l.sca_name, l.url) %></strike></li>
+  <% else %>
+  <li><%= link_to(l.sca_name, l.url) %></li>
+  <% end %>
+<% end %>
+</ul>
