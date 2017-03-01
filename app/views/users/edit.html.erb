@@ -1,64 +1,43 @@
+
 <div class="container">
-<div class="col-md-3">
-<h1>Edit Profile</h1>
-<%= form_for @user, as: :user, url: users_edit_path do |f| %>
-  <div class='form-group'>
-    <%= f.label :sca_name, 'SCA Name' %>
-    <%= f.text_field :sca_name, class:'form-control' %>
+  <div class="col-md-4">
+    <h1>Edit Profile</h1>
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
+      <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
+    </ul>
+    <%= semantic_form_for @user, url: users_edit_path do |f| %>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="personal">
+      <%= f.inputs do %>
+        <%= f.input :sca_name, label: 'SCA Name' %>
+        <%= f.input :modern_name, label: 'Modern Name' %>
+        <%= f.input :specialties %>
+        <%= f.input :active, label: "Active?" %>
+        <%= f.input :vigilant, label: "Vigilant?" %>
+        <%= f.input :elevators, label: "Elevated by" %>
+        <%= f.input :elevation_date  %>
+        <%= f.input :bio %>
+      <% end %>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="contact">
+      <%= f.inputs do %>
+        <%= f.input :street %>
+        <%= f.input :city %>
+        <%= f.input :state %>
+        <%= f.input :zipcode %>
+        <%= f.input :phone %>
+      <% end %>
+  
+      </div>
+      
+      <%= f.button class: 'btn btn-default' %>
+    <% end %>
+    </div>
   </div>
-  <div class='form-group'>
-    <%= f.label :modern_name, 'Modern Name' %>
-    <%= f.text_field :modern_name, class:'form-control' %>
-  </div>
-  <div>
-    <%= f.label :specialty_ids, 'Specialties' %>
-    <%= f.select(:specialty_ids,  @specialties.collect {|s| [ s.name, s.id ] }, {prompt: 'Select Specialty'}, class: 'js-specialty form-control', multiple: true) %>
-  </div>
-  <div class='checkbox'>
-    <label>
-    <%= f.check_box :active  %> Active?
-    </label>
-  </div>
-  <div class='checkbox'>
-    <label>
-    <%= f.check_box :vigilant  %> Vigilant?
-    </label>
-  </div>
-  <div class='form-group'>
-    <%= f.label :elevation_date, 'Elevation Date' %>
-    <%= f.date_field :elevation_date, class:'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :eleveators, 'Elevated By' %>
-    <%= f.text_field :elevators, class:'form-control' %>
-  </div>
-
-  <div class='form-group'>
-    <%= f.label :street, 'Street' %>
-    <%= f.text_field :street, class:'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :city  %>
-    <%= f.text_field :city, class:'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :state  %>
-    <%= f.text_field :state, class:'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :zipcode %>
-    <%= f.text_field :zipcode, class:'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :phone, 'Phone Number' %>
-    <%= f.telephone_field :phone, class:'form-control' %>
-  </div>
-
-  <%= f.submit class: 'btn btn-default'%>
-<% end %>
 </div>
 
-</div>
 <script>
-  $(".js-specialty").select2();
+  $("#user_specialty_ids").select2();
+  var simplemde = new SimpleMDE();
 </script>

@@ -34,6 +34,10 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem 'paperclip'
 gem 'select2-rails'
+gem 'formtastic'
+gem 'formtastic-bootstrap'
+gem 'rails-assets-simplemde', source: 'https://rails-assets.org'
+gem 'redcarpet'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

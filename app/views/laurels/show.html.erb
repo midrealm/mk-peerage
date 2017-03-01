@@ -1,4 +1,16 @@
 <% if signed_in? && current_user.sca_name == @laurel.sca_name %>
   <%= link_to('Edit Profile', '/users/edit') %>
 <% end %>
-<h1><%=@laurel.sca_name%></h1>
+<h1><%=@laurel.sca_name%> <small><%=@laurel.show_specialties%></h1>
+<strong>Modern Name:</strong> <%=@laurel.modern_name%><br>
+<strong>Contact Info</strong><br>
+<address>
+  <%=@laurel.street%><br>
+  <%=@laurel.city%>, <%=@laurel.state%> <%=@laurel.zipcode%><br>
+  Phone: <%=@laurel.phone%>
+</address>
+<strong>Elevated by:</strong> <%=@laurel.elevators%><br>
+<strong>Elevation Date:</strong> <%=@laurel.elevation_date%>
+<div style="margin-top:10px">
+<%= markdown(@laurel.bio) %>
+</div>
