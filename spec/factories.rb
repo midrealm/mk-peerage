@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :apprenticeship do
+    user nil
+  end
   factory :specialization do
     user 
     specialty 

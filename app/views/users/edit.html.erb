@@ -18,6 +18,8 @@
         <%= f.input :vigilant, label: "Vigilant?" %>
         <%= f.input :elevators, label: "Elevated by" %>
         <%= f.input :elevation_date  %>
+        <%= f.input :laurels, label: 'Apprenticed To:', member_label: (:sca_name) %>
+        <%= f.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)'  %>
         <%= f.input :bio %>
       <% end %>
       </div>
@@ -48,5 +50,6 @@
 
 <script>
   $("#user_specialty_ids").select2();
+  $("#user_laurel_ids").select2();
   var simplemde = new SimpleMDE();
 </script>

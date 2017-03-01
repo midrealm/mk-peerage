@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
   def update
     if current_user.update(user_params)
-      byebug
       name = current_user.sca_name.tr(' ','_')
       redirect_to "/laurels/#{name}"
     else
@@ -16,6 +15,6 @@ class UsersController < ApplicationController
 
   private 
   def user_params
-    params.require(:user).permit(:sca_name, :modern_name, {:specialty_ids => [] }, :street, :city, :state, :zipcode, :elevators,:phone,:user_id, :vigilant, :active, :elevation_date, :bio, :arms, :profile_pic)
+    params.require(:user).permit(:sca_name, :modern_name, {:laurel_ids => [] }, {:specialty_ids => [] }, :street, :city, :state, :zipcode, :elevators,:phone,:user_id, :vigilant, :active, :elevation_date, :bio, :arms, :profile_pic, :apprenticed_to)
   end
 end

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301193848) do
+ActiveRecord::Schema.define(version: 20170301205647) do
+
+  create_table "apprenticeships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "laurel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["laurel_id"], name: "index_apprenticeships_on_laurel_id", using: :btree
+    t.index ["user_id", "laurel_id"], name: "index_apprenticeships_on_user_id_and_laurel_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_apprenticeships_on_user_id", using: :btree
+  end
 
   create_table "specializations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -61,10 +71,13 @@ ActiveRecord::Schema.define(version: 20170301193848) do
     t.string   "profile_pic_content_type"
     t.integer  "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
+    t.string   "apprenticed_to"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "apprenticeships", "users"
+  add_foreign_key "apprenticeships", "users", column: "laurel_id"
   add_foreign_key "specializations", "specialties"
   add_foreign_key "specializations", "users"
 end
