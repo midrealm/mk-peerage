@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301211043) do
+ActiveRecord::Schema.define(version: 20170301222104) do
 
   create_table "advocacies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -35,8 +35,22 @@ ActiveRecord::Schema.define(version: 20170301211043) do
   create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "sca_name"
     t.boolean  "vote"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
+  end
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "candidate_id"
+    t.text     "text",         limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["candidate_id"], name: "index_comments_on_candidate_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "specializations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -44,6 +58,8 @@ ActiveRecord::Schema.define(version: 20170301211043) do
     t.integer  "specialty_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "candidate_id"
+    t.index ["candidate_id"], name: "index_specializations_on_candidate_id", using: :btree
     t.index ["specialty_id"], name: "index_specializations_on_specialty_id", using: :btree
     t.index ["user_id"], name: "index_specializations_on_user_id", using: :btree
   end
@@ -97,6 +113,9 @@ ActiveRecord::Schema.define(version: 20170301211043) do
   add_foreign_key "advocacies", "users"
   add_foreign_key "apprenticeships", "users"
   add_foreign_key "apprenticeships", "users", column: "laurel_id"
+  add_foreign_key "comments", "candidates"
+  add_foreign_key "comments", "users"
+  add_foreign_key "specializations", "candidates"
   add_foreign_key "specializations", "specialties"
   add_foreign_key "specializations", "users"
 end

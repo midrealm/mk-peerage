@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Specialization, type: :model do
-  it {should belong_to(:specialty)}
+RSpec.describe Comment, type: :model do
   it {should belong_to(:user)}
   it {should belong_to(:candidate)}
 end

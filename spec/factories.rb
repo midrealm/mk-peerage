@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :comment do
+    user 
+    candidate 
+    text "MyText"
+  end
   factory :advocacy do
     user 
     candidate 
@@ -14,6 +19,7 @@ FactoryGirl.define do
   factory :specialization do
     user 
     specialty 
+    candidate
   end
   factory :specialty do
     name "MyString"

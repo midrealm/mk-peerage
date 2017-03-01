@@ -1,0 +1,22 @@
+<h1>Candidates</h1>
+<h3>Vote List</h3>
+<ul>
+<% @vote_candidates.each do |candid| %>
+  <li><%= link_to "#{candid.sca_name} (#{candid.show_specialties})", "/chambers/candidates/#{candid.id}"%> | 
+    <% candid.users.each do |u| %>
+      <%= link_to u.sca_name, u.url%> 
+    <% end %>
+    </li>
+<% end %>
+</ul>
+
+<h3>Watch List</h3>
+<ul>
+<% @watch_candidates.each do |candid| %>
+  <li> <%= link_to "#{candid.sca_name} (#{candid.show_specialties})", "/chambers/candidates/#{candid.id}"%> | 
+    <% candid.users.each do |u| %>
+      <%= link_to u.sca_name, u.url%> 
+    <% end %>
+  </li>
+<% end %>
+</ul>

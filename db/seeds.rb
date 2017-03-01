@@ -51,3 +51,20 @@
   Specialization.create(user: dead, specialty: Specialty.find_by(name: 'Earwax Studies'))
   Specialization.create(user: dead, specialty: Specialty.find_by(name: 'Costuming'))
   Specialization.create(user: dead, specialty: Specialty.find_by(name: 'Music'))
+
+  vote = Candidate.create do |u|
+    u.sca_name = 'Vote List Candidate'
+    u.vote = true
+  end
+  Specialization.create(candidate: vote, specialty: Specialty.find_by(name: 'Music'))
+  Advocacy.create(candidate: vote, user: nique)
+  Advocacy.create(candidate: vote, user: vig)
+
+  watch = Candidate.create do |u|
+    u.sca_name = 'Watch List Candidate'
+    u.vote = false
+  end
+  Specialization.create(candidate: watch, specialty: Specialty.find_by(name: 'Costuming'))
+  Advocacy.create(candidate: watch, user: nique)
+  Advocacy.create(candidate: watch, user: vig)
+  

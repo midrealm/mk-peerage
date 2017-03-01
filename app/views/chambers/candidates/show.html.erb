@@ -1,0 +1,19 @@
+<h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+<h3>Comments</h3>
+<% @candidate.comments.each do |comment| %>
+  <div>
+  <strong>Comment by:</strong><%=comment.user.sca_name%><br>
+  <%= markdown(comment.text) %>
+  </div>
+<% end %>
+<h3>Add A Comment</h3>
+<%= semantic_form_for @comment, url: chambers_comments_path do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :text, label: 'Comment' %>
+    <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
+  <% end %>
+  <%= f.button class: 'btn btn-default' %>
+<% end %> 
+<script>
+  var simplemde = new SimpleMDE();
+</script>
