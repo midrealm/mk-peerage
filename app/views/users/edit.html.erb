@@ -5,6 +5,7 @@
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
+      <li role="presentation"><a href="#images" aria-controls="contact" role="tab" data-toggle="tab">Images</a></li>
     </ul>
     <%= semantic_form_for @user, url: users_edit_path do |f| %>
     <div class="tab-content">
@@ -27,6 +28,14 @@
         <%= f.input :state %>
         <%= f.input :zipcode %>
         <%= f.input :phone %>
+      <% end %>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="images">
+      <%= f.inputs do %>
+        <%= image_tag @user.profile_pic.url(:small) %>
+        <%= f.input :profile_pic %>
+        <%= image_tag @user.arms.url(:small) %>
+        <%= f.input :arms %>
       <% end %>
   
       </div>
