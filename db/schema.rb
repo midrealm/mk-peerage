@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301205647) do
+ActiveRecord::Schema.define(version: 20170301211043) do
+
+  create_table "advocacies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "candidate_id"
+    t.boolean  "apprenticeship"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["candidate_id"], name: "index_advocacies_on_candidate_id", using: :btree
+    t.index ["user_id"], name: "index_advocacies_on_user_id", using: :btree
+  end
 
   create_table "apprenticeships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -20,6 +30,13 @@ ActiveRecord::Schema.define(version: 20170301205647) do
     t.index ["laurel_id"], name: "index_apprenticeships_on_laurel_id", using: :btree
     t.index ["user_id", "laurel_id"], name: "index_apprenticeships_on_user_id_and_laurel_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_apprenticeships_on_user_id", using: :btree
+  end
+
+  create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "sca_name"
+    t.boolean  "vote"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "specializations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,6 +93,8 @@ ActiveRecord::Schema.define(version: 20170301205647) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "advocacies", "candidates"
+  add_foreign_key "advocacies", "users"
   add_foreign_key "apprenticeships", "users"
   add_foreign_key "apprenticeships", "users", column: "laurel_id"
   add_foreign_key "specializations", "specialties"

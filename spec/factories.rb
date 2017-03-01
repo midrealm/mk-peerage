@@ -1,7 +1,16 @@
 FactoryGirl.define do
-  factory :apprenticeship do
-    user nil
+  factory :advocacy do
+    user 
+    candidate 
+    apprenticeship false
   end
+  factory :candidate do
+    sca_name "MyString"
+  end
+  #factory :apprenticeship do
+  #  user 
+  #  laurel_id 1 
+  #end
   factory :specialization do
     user 
     specialty 
