@@ -13,7 +13,12 @@ class CandidatesController < ApplicationController
     @comment = Comment.new
   end
   def create
-    @candidate = Candidate.new(candidate_params)
+    byebug
+    new_params = candidate_params
+    image = Paperclip.io_adapters.for(new_params[:profile_pic])
+    image.original_filename = params[:not_included]
+    new_params[:profile_pic] = image
+    @candidate = Candidate.new(new_params)
     if @candidate.save
       redirect_to candidate_path(@candidate)
     else

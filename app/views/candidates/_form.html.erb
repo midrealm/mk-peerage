@@ -6,23 +6,57 @@
         <% unless @candidate.profile_pic.nil? %>
           <%= image_tag @candidate.profile_pic.url(:small) unless @candidate.profile_pic %>
         <% end %>
-        <%= f.input :profile_pic %>
+        <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
+        <span class="form-wrapper">
+          <input id="profile_pic" type="file" name="not_included">
+        </span>
+        <input type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
       <% end %>  
       <%= f.button class: 'btn btn-default' %>
     <% end %>
   </div>
-  <div class="col-md-4" id="profile_preview"></div>
+  <div class="col-md-4">
+    <div id="profile-preview"></div>
+    <button class="btn btn-default hidden" id="crop">Finish</button>
+    <div id="-container"></div>
+  </div>
 </div>
 <script>
-  $('#candidate_profile_pic').change(function (e) {
-    loadImage(
-        e.target.files[0],
-        function (img) {
-            $('#profile_preview').empty().append(img);
+  var $profile;
+
+  $('#profile_pic').change(function (e) {
+
+    var reader =  new window.FileReader();
+    reader.onload = function(e){
+      $('#profile-preview').empty();  
+      $profile = $('#profile-preview').croppie({
+        viewport:{
+          width: 300,
+          height: 400,
         },
-        { maxWidth: 600,
-          maxHeight: 600,
-        } // Options
-    );
-});
+        boundary: {
+          width: 400,
+          height: 400,
+        },
+      })
+      $profile.croppie('bind',{
+        url: e.target.result,
+      })
+    }   
+    reader.readAsDataURL(e.target.files[0]);
+    $('#crop').removeClass('hidden')
+
+  });
+
+  $('#crop').click(function(){
+    $profile.croppie('result' , {
+      type: 'canvas',
+      size: 'viewport'
+    }).then(function(resp){
+      $('#profile-preview').empty().append($('<img>',{src: resp}));
+      $('#crop').addClass('hidden')
+      $('#candidate_profile_pic').val(resp)
+    });
+  });
+  
 </script>

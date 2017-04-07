@@ -37,7 +37,7 @@ gem 'select2-rails'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 gem 'rails-assets-simplemde', source: 'https://rails-assets.org'
-gem 'rails-assets-blueimp-load-image', source: 'https://rails-assets.org'
+gem 'rails-assets-croppie', source: 'https://rails-assets.org'
 gem 'redcarpet'
 gem 'cancancan'
 
