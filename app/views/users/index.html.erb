@@ -1,0 +1,10 @@
+<h1>Private Chambers</h1>
+<%= link_to 'Edit Your Profile', '/users/edit' %><br>
+<%= link_to 'View Candidates', '/chambers/candidates' %>
+
+<% if can? :manage, :all %>
+<h3>Admin Tasks</h3>
+<%= link_to 'Add New Candidate', '/chambers/admin/add_new_candidate' %><br>
+<%= link_to 'Add New Laurel', '/chambers/admin/add_new_laurel' %><br>
+<%= link_to 'Polling', '#' %>
+<% end %>

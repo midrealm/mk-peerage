@@ -21,6 +21,14 @@ class User < ApplicationRecord
   has_attached_file :profile_pic, styles: {small: '100x100', med: '200x200', large: '500x500' }
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+  enum role: [ :admin, :normal ]
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.role ||= :normal
+  end
+
   def slug
     return self.sca_name.tr(' ', '_')
   end  

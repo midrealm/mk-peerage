@@ -5,8 +5,11 @@ Rails.application.routes.draw do
 
   get '/laurels/:sca_name' => 'laurels#show'
   get '/laurels' => 'laurels#index'
-  namespace :chambers do
-    resources :candidates, only: [:index, :show, :edit]
+  get '/chambers' => 'users#index'
+  get '/chambers/admin/add_new_laurel' => 'users#new'
+  scope :chambers do
+    resources :candidates, only: [:index, :show, :create, :update] 
+    get 'admin/add_new_candidate' => 'candidates#new'
     resources :comments, only: [:create]
   end
   root to: "home#index" 

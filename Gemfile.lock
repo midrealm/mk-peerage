@@ -48,6 +48,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    cancancan (1.16.0)
     climate_control (0.1.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
@@ -132,6 +133,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.0.1)
       sprockets-rails (>= 2.0.0)
+    rails-assets-blueimp-load-image (2.12.2)
     rails-assets-simplemde (1.10.0)
     rails-dom-testing (2.0.2)
       activesupport (>= 4.2.0, < 6.0)
@@ -218,6 +220,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   byebug
+  cancancan
   coffee-rails (~> 4.2)
   database_cleaner
   devise
@@ -231,6 +234,7 @@ DEPENDENCIES
   paperclip
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+  rails-assets-blueimp-load-image!
   rails-assets-simplemde!
   redcarpet
   rspec-rails

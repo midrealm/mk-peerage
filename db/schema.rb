@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301222104) do
+ActiveRecord::Schema.define(version: 20170305212849) do
 
   create_table "advocacies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170301222104) do
     t.integer  "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
     t.string   "apprenticed_to"
+    t.integer  "role"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

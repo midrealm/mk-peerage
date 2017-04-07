@@ -46,10 +46,27 @@
     <% end %>
     </div>
   </div>
+  <div class="col-md-6">
+    <div id="profile_preview">
+    </div>
+    <div id="arms_preview">
+    </div>
+  </div>
 </div>
 
 <script>
   $("#user_specialty_ids").select2();
   $("#user_laurel_ids").select2();
   var simplemde = new SimpleMDE();
+  $('#user_profile_pic').change(function (e) {
+    loadImage(
+        e.target.files[0],
+        function (img) {
+            $('#profile_preview').empty().append(img);
+        },
+        { maxWidth: 600,
+          maxHeight: 600,
+        } // Options
+    );
+});
 </script>

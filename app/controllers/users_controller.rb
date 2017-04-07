@@ -4,6 +4,13 @@ class UsersController < ApplicationController
     @user = current_user
     @specialties = Specialty.all
   end
+  def index
+    @user = current_user
+  end
+  def new
+    @user = User.new
+    authorize! :manage, :all
+  end
   def update
     if current_user.update(user_params)
       name = current_user.sca_name.tr(' ','_')

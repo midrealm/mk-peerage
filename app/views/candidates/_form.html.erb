@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="col-md-4">
+    <%= semantic_form_for @candidate do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :sca_name, label: 'SCA Name' %>
+        <% unless @candidate.profile_pic.nil? %>
+          <%= image_tag @candidate.profile_pic.url(:small) unless @candidate.profile_pic %>
+        <% end %>
+        <%= f.input :profile_pic %>
+      <% end %>  
+      <%= f.button class: 'btn btn-default' %>
+    <% end %>
+  </div>
+  <div class="col-md-4" id="profile_preview"></div>
+</div>
+<script>
+  $('#candidate_profile_pic').change(function (e) {
+    loadImage(
+        e.target.files[0],
+        function (img) {
+            $('#profile_preview').empty().append(img);
+        },
+        { maxWidth: 600,
+          maxHeight: 600,
+        } // Options
+    );
+});
+</script>

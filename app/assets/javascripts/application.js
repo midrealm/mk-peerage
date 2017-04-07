@@ -16,4 +16,5 @@
 //= require select2
 //= require simplemde
 //= require turbolinks
+//= require blueimp-load-image/js/load-image.all.min
 //= require_tree .
