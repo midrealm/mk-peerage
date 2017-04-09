@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require lodash
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
@@ -17,4 +18,6 @@
 //= require simplemde
 //= require turbolinks
 //= require croppie
-//= require_tree .
+//= require rails_jskit
+//= require_tree ./controllers
+

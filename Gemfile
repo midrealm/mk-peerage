@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'lodash-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -40,6 +41,7 @@ gem 'rails-assets-simplemde', source: 'https://rails-assets.org'
 gem 'rails-assets-croppie', source: 'https://rails-assets.org'
 gem 'redcarpet'
 gem 'cancancan'
+gem 'rails_jskit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +50,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'teaspoon-mocha'
+  gem 'magic_lamp'
 end
 
 group :development do
@@ -62,7 +66,6 @@ end
 group :test do
   gem "shoulda-matchers"
   gem 'database_cleaner'
-  #gem 'poltergeist'
   gem 'selenium-webdriver', '2.53.4'
 end
 
