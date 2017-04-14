@@ -38,6 +38,8 @@
 
 
 //= require application
+//= require support/sinon
 //= require support/chai
+//= require support/sinon-chai
 //= require magic_lamp
  window.expect = chai.expect;

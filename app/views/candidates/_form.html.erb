@@ -6,13 +6,15 @@
         <% unless @candidate.profile_pic.nil? %>
           <%= image_tag @candidate.profile_pic.url(:small) unless @candidate.profile_pic %>
         <% end %>
-        <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
-        <span class="form-wrapper">
-          <input id="profile_pic" type="file" name="not_included">
-        </span>
+        <div id='candidate_profile_pic_input' class='form-group'>
+          <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
+          <span class="form-wrapper">
+            <input id="profile_pic" type="file" name="not_included">
+          </span>
+        </div>
         <input type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
       <% end %>  
-      <%= f.button class: 'btn btn-default' %>
+      <%= f.button class: 'btn btn-default', id: 'submit' %>
     <% end %>
   </div>
   <div class="col-md-4">

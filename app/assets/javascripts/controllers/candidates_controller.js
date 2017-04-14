@@ -7,7 +7,32 @@ App.createController("Candidates", {
       profile: '#profile-preview',
       loadNewPic: ['#profile_pic', { change: 'openCroppie' }], 
       cropPicButton: ['#crop', { click: 'cropPicture' }],
+      clickSubmitButton: ['#submit', { click: 'validate' }], 
+      
     }
+  },
+  validate: function(e){
+    $('.has-error').removeClass('has-error')    
+    $('.help-block').remove();
+    var has_errors = false;
+    if($('#candidate_sca_name').val() == ''){
+      var msg = $('<span>').addClass('help-block').text('Need SCA Name')
+      $('#candidate_sca_name_input').addClass('has-error').append(msg)
+      has_errors = true
+    } 
+    if(this.$profile.is(':empty')){
+      var msg = $('<span>').addClass('help-block').text('Need Profile Picture');
+      $('#candidate_profile_pic_input').addClass('has-error').append(msg)
+      has_errors = true;
+    }
+    if(has_errors){
+      e.preventDefault(); 
+    }else if(!$('#crop').hasClass('hidden')){
+      var promise = this.cropPicture();
+      promise.then(function(){
+        console.log('promise success')
+      });
+    }   
   },
   
   openCroppie: function(e){
@@ -33,14 +58,20 @@ App.createController("Candidates", {
     $('#crop').removeClass('hidden')
   },
   cropPicture: function(){
-    this.$profile.croppie('result' , {
-      type: 'canvas',
-      size: 'viewport'
-    }).then(function(resp){
-      $('#profile-preview').empty().append($('<img>',{src: resp}));
-      $('#crop').addClass('hidden')
-      $('#candidate_profile_pic').val(resp)
+    var self = this
+    var promise = new Promise(function(resolve, reject){
+      self.$profile.croppie('result' , {
+        type: 'canvas',
+        size: 'viewport'
+      }).then(function(resp){
+        $('#profile-preview').empty().append($('<img>',{src: resp}));
+        $('#crop').addClass('hidden')
+        $('#candidate_profile_pic').val(resp)
+        $('#crop').trigger('cropped')
+        resolve('Success');
+      });
     });
+    return promise;
   },
   form: function(){ },//end form 
 });
