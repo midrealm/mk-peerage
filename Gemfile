@@ -42,6 +42,7 @@ gem 'rails-assets-croppie', source: 'https://rails-assets.org'
 gem 'redcarpet'
 gem 'cancancan'
 gem 'rails_jskit'
+gem 'acts_as_tree'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

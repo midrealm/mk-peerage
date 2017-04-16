@@ -1,0 +1,234 @@
+- name: Æthelmearc
+  type: Kingdom
+- name: An Tir
+  type: Kingdom
+- name: Ansteorra
+  type: Kingdom
+- name: Artemisia
+  type: Kingdom
+- name: Atenveldt
+  type: Kingdom
+- name: Atlantia
+  type: Kingdom
+- name: Avacal
+  type: Kingdom
+- name: Caid
+  type: Kingdom
+- name: Calontir
+  type: Kingdom
+- name: Drachenwald
+  type: Kingdom
+- name: Ealdormere
+  type: Kingdom
+- name: the East
+  type: Kingdom
+- name: Gleann Abhann
+  type: Kingdom
+- name: Lochac
+  type: Kingdom
+- name: Meridies
+  type: Kingdom
+- name: Northshield
+  type: Kingdom
+- name: the Outlands
+  type: Kingdom
+- name: Trimaris
+  type: Kingdom
+- name: the West
+  type: Kingdom
+- name: the Middle
+  type: Kingdom
+  groups: 
+  - name: Constellation
+    type: Region
+    groups:
+    - name: Afonlyn
+      type: Shire
+    - name: Cuil Cholium
+      type: Shire
+    - name: Greyhope
+      type: Shire
+    - name: Mynydd Seren
+      type: Shire
+    - name: Narrental 
+      type: Shire
+    - name: Qal`at Ja`far
+      type: Shire
+    - name: Rivenstar 
+      type: Barony
+    - name: Riviere Constelle
+      type: Shire
+    - name: Shadowed Stars
+      type: Barony
+    - name: Steren Codha
+      type: Shire
+    - name: Sternfeld
+      type: Barony
+    - name: White Waters
+      type: Barony
+  - name: Midlands
+    type: Region
+    groups:
+    - name: Ayreton 
+      type: Barony
+      groups:
+      - name: Foxvale 
+        type: Canton
+      - name: Grey Gargoyles
+        type: Canton
+      - name: Rokkehealden 
+        type: Canton
+      - name: Tree-Girt-Sea
+        type: Canton
+      - name: Vanished Wood
+        type: Canton
+    - name: Baile na Scolairi
+      type: Shire
+    - name: Blackhawk 
+      type: Shire
+    - name: Carraig Ban
+      type: Barony
+    - name: Dark River
+      type: Shire
+    - name: Illiton
+      type: Barony
+      groups:
+      - name: Lochmorrow 
+        type: Canton
+    - name: Ravenslake 
+      type: Shire
+    - name: Saint Carol on the Moor
+      type: College
+    - name: Shattered Crystal
+      type: Barony
+      groups: 
+      - name: Black Stone Forge
+        type: Incipient Canton
+    - name: Swordcliff
+      type: Shire
+    - name: Wurm Wald
+      type: Shire
+    - name: Rúnviðarstaðr
+      type: Incipient Shire
+  - name: North Oaken
+    type: Region
+    groups:
+    - name: Brendoken
+      type: Barony
+      groups:
+      - name: Alderford
+        type: Canton
+      - name: Gwyntarian
+        type: Canton
+      - name: Thistle 
+        type: Canton
+      - name: Three Towers
+        type: Canton
+    - name: Cleftlands
+      type: Barony
+    - name: Eastwatch
+      type: Shire
+    - name: Falcon's Quarry
+      type: Shire
+    - name: Middle Marches
+      type: Barony
+      groups:
+      - name: Dernehealde 
+        type: Shire
+      - name: Mugmort
+        type: Shire
+      - name: Tirnewydd
+        type: Shire
+      - name: Pferdestadt
+        type: Canton
+      - name: Saint Brutus
+        type: Incipient College
+    - name: Red Spears
+      type: Barony
+      groups:
+      - name: Castell Gwent
+        type: Canton
+      - name: Catteden 
+        type: Canton
+      - name: Hróðgeirsfjörðr
+        type: Canton
+      - name: Marche of the Marshes
+        type: Canton
+      - name: Oakford
+        type: Canton
+    - name: Rivenvale
+      type: Shire
+  - name: Pentamere
+    type: Region
+    groups: 
+    - name: Andelcrag
+      type: Barony
+      groups: 
+      - name: Dun Traigh
+        type: Canton
+      - name: Nordheim 
+        type: Canton
+      - name: Rimsholt
+        type: Canton
+      - name: Three Hills
+        type: Canton
+      - name: Three Walls
+        type: Canton
+      - name: Westemere
+        type: Canton
+    - name: Cynnabar
+      type: Barony
+    - name: Donnershafen
+      type: Barony
+    - name: Northwoods
+      type: Barony
+      groups:
+      - name: Ealdnordwuda 
+        type: Canton
+      - name: Hawkland Moor
+        type: Riding
+      - name: Wealdlake 
+        type: Canton
+      - name: Fearann na Criche
+        type: Canton
+      - name: Altenberg
+        type: Canton
+    - name: Roaring Wastes
+      type: Barony
+      groups: 
+      - name: Brackendelve 
+        type: Canton
+    - name: Starleaf Gate
+      type: Shire
+    - name: Stormvale
+      type: Shire
+    - name: Talonval
+      type: Shire
+  - name: South Oaken
+    type: Region
+    groups:
+    - name: Aurea Ripae
+      type: Shire
+    - name: Dragonsmark
+      type: Shire
+    - name: Okenshield
+      type: Shire
+    - name: Austrigatt 
+      type: Incipient Shire
+    - name: Fenix
+      type: Barony
+    - name: Flame
+      type: Barony
+    - name: Flaming Gryphon
+      type: Barony
+      groups: 
+      - name: Havenholde 
+        type: Canton
+      - name: Hawkes Keye
+        type: Canton
+      - name: Norborough 
+        type: Canton
+      - name: Unicorn
+        type: Canton
+      - name: Winged Hills
+        type: Canton
