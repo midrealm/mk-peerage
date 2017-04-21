@@ -1,0 +1,9 @@
+<h1>Laurels by Location</h1>
+<ul>
+<% @kingdoms.each do |kingdom| %>
+  <li>
+    <%= link_to kingdom.titled_name, laurel_group_url(kingdom.name) %>
+    <%= render 'draw_tree', node: kingdom %>
+  </li>
+<% end %>
+</ul>

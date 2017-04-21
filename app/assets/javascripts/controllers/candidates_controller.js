@@ -20,6 +20,11 @@ App.createController("Candidates", {
       $('#candidate_sca_name_input').addClass('has-error').append(msg)
       has_errors = true
     } 
+    if($('#candidate_group_id').val() == ''){
+      var msg = $('<span>').addClass('help-block').text('Need Group')
+      $('#candidate_group_input').addClass('has-error').append(msg)
+      has_errors = true
+    }
     if(this.$profile.is(':empty')){
       var msg = $('<span>').addClass('help-block').text('Need Profile Picture');
       $('#candidate_profile_pic_input').addClass('has-error').append(msg)
@@ -73,7 +78,9 @@ App.createController("Candidates", {
     });
     return promise;
   },
-  form: function(){ },//end form 
+  form: function(){ 
+    $('#candidate_group_id').select2();
+  },
 });
 
 App.CandidatesController;

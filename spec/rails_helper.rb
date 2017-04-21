@@ -61,7 +61,8 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include RequestSpecHelper, type: :request
   # Don't try to run javascript tests if DISPLAY is not set
-  config.filter_run_excluding js: true unless ENV['DISPLAY']
+  #config.filter_run_excluding js: true unless ENV['DISPLAY']
+  config.filter_run_excluding js: true #unless ENV['DISPLAY']
 config.use_transactional_fixtures = false
 
   config.before(:suite) do

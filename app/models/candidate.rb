@@ -7,6 +7,8 @@ class Candidate < ApplicationRecord
 
   has_many :comments
 
+  belongs_to :group
+
   has_attached_file :profile_pic, styles: {small: '100x100', med: '200x200', large: '500x500' }
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 

@@ -4,10 +4,16 @@ Rails.application.routes.draw do
   get '/users/edit' => 'users#edit'
   patch '/users/edit' => 'users#update'
 
+  get '/groups' => 'groups#index'
+  get '/groups/:name' => 'groups#show'
   get '/laurels/:sca_name' => 'laurels#show'
   get '/laurels' => 'laurels#index'
   get '/chambers' => 'users#index'
   get '/chambers/admin/add_new_laurel' => 'users#new'
+  namespace :chambers do
+    resources :groups, only: [:index]
+    get '/groups/:name' => 'groups#show'
+  end
   scope :chambers do
     resources :candidates, only: [:index, :show, :create, :update] 
     get 'admin/add_new_candidate' => 'candidates#new'

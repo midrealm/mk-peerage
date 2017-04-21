@@ -1,5 +1,7 @@
 <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
 <%= image_tag @candidate.profile_pic.url(:large) %>
+<br>
+<strong>Group</strong>: <%= candidate_link @candidate.group %>
 <h3>Comments</h3>
 <% @candidate.comments.each do |comment| %>
   <div>

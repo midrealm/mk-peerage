@@ -8,4 +8,6 @@ RSpec.describe Candidate, type: :model do
 
   it { should have_many(:specializations) }
   it { should have_many(:specialties).through(:specializations) }
+
+  it { should belong_to(:group) }
 end

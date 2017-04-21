@@ -14,6 +14,7 @@
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :modern_name, label: 'Modern Name' %>
         <%= f.input :specialties %>
+        <%= f.input :group, :as => :select, :collection => Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
         <%= f.input :active, label: "Active?" %>
         <%= f.input :vigilant, label: "Vigilant?" %>
         <%= f.input :elevators, label: "Elevated by" %>
@@ -55,6 +56,7 @@
 </div>
 
 <script>
+  $("#user_group_id").select2();
   $("#user_specialty_ids").select2();
   $("#user_laurel_ids").select2();
   var simplemde = new SimpleMDE();

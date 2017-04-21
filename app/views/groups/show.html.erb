@@ -1,0 +1,10 @@
+<h1><%=@group.titled_name%></h1>
+<ul>
+<%= render 'draw_tree', node: @group %>
+</ul>
+<h3>Laurels</h3>
+<ul>
+<% @group.users.each do |user|%>
+  <li><%= link_to user.sca_name, user.url %></li>
+<% end %>
+</ul>

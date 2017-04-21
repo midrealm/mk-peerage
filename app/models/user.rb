@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   has_many :apprenticeships
   has_many :laurels, through: :apprenticeships
+ 
+  belongs_to :group
 
   #has_many :apprentice_users, through: :apprenticeships, source: :user
 

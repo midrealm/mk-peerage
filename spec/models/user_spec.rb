@@ -10,6 +10,8 @@ RSpec.describe User, type: :model do
 
   it { should have_many(:specialties).through(:specializations) }
   it { should have_many(:comments) }
+
+  it { should belong_to(:group) }
 end
 RSpec.describe User, "slug" do
   it "returns appropriate slug link" do

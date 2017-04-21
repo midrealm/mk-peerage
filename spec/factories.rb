@@ -1,4 +1,12 @@
 FactoryGirl.define do
+  factory :group do
+    name "MyString"
+    parent_id nil
+    group_type
+  end
+  factory :group_type do
+    name "MyString"
+  end
   factory :comment do
     user 
     candidate 
@@ -31,5 +39,6 @@ FactoryGirl.define do
     email {generate :email}
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Jones"
+    group
   end
 end
