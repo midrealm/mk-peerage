@@ -1,14 +1,20 @@
 App.createController("Candidates", {
   actions: [{
-    new: 'form'
+    new: 'form',
+    edit: 'form', 
   }],
   elements: {
+    edit: {
+      profile: '#profile-preview',
+      loadNewPic: ['#profile_pic', { change: 'openCroppie' }], 
+      cropPicButton: ['#crop', { click: 'cropPicture' }],
+      clickSubmitButton: ['#submit', { click: 'validate' }], 
+    },
     new: {
       profile: '#profile-preview',
       loadNewPic: ['#profile_pic', { change: 'openCroppie' }], 
       cropPicButton: ['#crop', { click: 'cropPicture' }],
       clickSubmitButton: ['#submit', { click: 'validate' }], 
-      
     }
   },
   validate: function(e){

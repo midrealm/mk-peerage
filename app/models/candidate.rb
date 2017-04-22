@@ -9,7 +9,7 @@ class Candidate < ApplicationRecord
 
   belongs_to :group
 
-  has_attached_file :profile_pic, styles: {small: '100x100', med: '200x200', large: '500x500' }
+  has_attached_file :profile_pic, styles: {large: '300x400', thumb: '100x133' }, convert_options: { thumb: '-gravity South -chop 0x33' } 
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 

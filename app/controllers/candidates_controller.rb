@@ -14,6 +14,7 @@ class CandidatesController < ApplicationController
   end
   def create
     @candidate = Candidate.new(candidate_params)
+    @candidate.vote = false;
     if @candidate.save
       redirect_to candidate_path(@candidate)
     else
@@ -21,8 +22,30 @@ class CandidatesController < ApplicationController
     end
     
   end
+  def edit
+    authorize! :manage, :all
+    @candidate = Candidate.find(params[:id])
+  end
+  def update
+    @candidate = Candidate.find(params[:id])
+    if @candidate.update(candidate_params)
+      redirect_to candidate_path(@candidate)
+    else
+      render :edit
+    end
+  end
+  def destroy
+    @candidate = Candidate.find(params[:id])
+    @candidate.destroy
+    redirect_to manage_candidates_path
+  end
+  def manage
+    authorize! :manage, :all
+    @candidates = Candidate.all
+  end
+  
   private
   def candidate_params
-    params.require(:candidate).permit(:sca_name, :profile_pic, :group_id)
+    params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote)
   end
 end

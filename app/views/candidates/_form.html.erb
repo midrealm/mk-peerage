@@ -3,6 +3,9 @@
     <%= semantic_form_for @candidate do |f| %>
       <%= f.inputs do %>
         <%= f.input :sca_name, label: 'SCA Name' %>
+        <% if @candidate.persisted? %>
+          <%= f.input :vote, :as => :radio, label: 'List Status', :collection => [['Vote', true],['Watch', false]]%>
+        <% end %>
         <%= f.input :group, :as => :select, :collection => Hash[Group.where.not(parent_id: nil).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
         <div id='candidate_profile_pic_input' class='form-group'>
           <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
@@ -16,7 +19,11 @@
     <% end %>
   </div>
   <div class="col-md-4">
-    <div id="profile-preview"></div>
+    <div id="profile-preview">
+      <% unless @candidate.profile_pic_file_size.nil? %>
+        <%= image_tag @candidate.profile_pic.url(:large) %>
+      <% end %>
+    </div>
     <button class="btn btn-default hidden" id="crop">Finish</button>
     <div id="-container"></div>
   </div>

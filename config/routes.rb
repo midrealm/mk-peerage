@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     get '/groups/:name' => 'groups#show'
   end
   scope :chambers do
-    resources :candidates, only: [:index, :show, :create, :update] 
-    get 'admin/add_new_candidate' => 'candidates#new'
+    resources :candidates
+    get '/manage_candidates' => 'candidates#manage'
     resources :comments, only: [:create]
   end
   root to: "home#index" 

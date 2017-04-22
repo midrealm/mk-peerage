@@ -1,4 +1,5 @@
 <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+<%= image_tag @candidate.profile_pic.url(:thumb) %>
 <%= image_tag @candidate.profile_pic.url(:large) %>
 <br>
 <strong>Group</strong>: <%= candidate_link @candidate.group %>
