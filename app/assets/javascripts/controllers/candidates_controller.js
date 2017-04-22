@@ -86,6 +86,8 @@ App.createController("Candidates", {
   },
   form: function(){ 
     $('#candidate_group_id').select2();
+    $('#candidate_specialty_ids').select2();
+    $('#candidate_user_ids').select2();
   },
 });
 

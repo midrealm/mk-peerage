@@ -2,6 +2,16 @@
 <%= image_tag @candidate.profile_pic.url(:thumb) %>
 <%= image_tag @candidate.profile_pic.url(:large) %>
 <br>
+<% if @candidate.specialties.count > 0 %>
+  <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
+  <%= spec.name %>  
+  <% end %><br>
+<% end %>
+<% if @candidate.users.count > 0 %>
+  <strong>Advocates</strong>: <% @candidate.users.each do |adv| %>
+  <%=link_to adv.sca_name, adv.url %> 
+  <% end %><br>
+<%end%>
 <strong>Group</strong>: <%= candidate_link @candidate.group %>
 <h3>Comments</h3>
 <% @candidate.comments.each do |comment| %>

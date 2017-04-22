@@ -46,6 +46,6 @@ class CandidatesController < ApplicationController
   
   private
   def candidate_params
-    params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote)
+    params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote, {:specialty_ids => [] }, {:user_ids => [] })
   end
 end
