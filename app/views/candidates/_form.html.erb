@@ -8,7 +8,7 @@
         <% end %>
         <%= f.input :group, :as => :select, :collection => Hash[Group.where.not(parent_id: nil).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
         <%= f.input :specialties %>
-        <%= f.input :users, label: 'Advocates', member_label: (:sca_name) %>
+        <%= f.input :users, label: 'Advocates', collection: User.pluck(:sca_name, :id) %>
         <div id='candidate_profile_pic_input' class='form-group'>
           <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
           <span class="form-wrapper">

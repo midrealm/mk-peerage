@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount MagicLamp::Genie, at: "/magic_lamp" if defined?(MagicLamp)
   devise_for :users
+  resources :users, only: [:create]
   get '/users/edit' => 'users#edit'
   patch '/users/edit' => 'users#update'
 
@@ -9,7 +10,6 @@ Rails.application.routes.draw do
   get '/laurels/:sca_name' => 'laurels#show'
   get '/laurels' => 'laurels#index'
   get '/chambers' => 'users#index'
-  get '/chambers/admin/add_new_laurel' => 'users#new'
   namespace :chambers do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :candidates
     get '/manage_candidates' => 'candidates#manage'
     resources :comments, only: [:create]
+    get 'admin/add_new_laurel' => 'users#new'
   end
   root to: "home#index" 
 

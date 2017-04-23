@@ -19,7 +19,7 @@
         <%= f.input :vigilant, label: "Vigilant?" %>
         <%= f.input :elevators, label: "Elevated by" %>
         <%= f.input :elevation_date  %>
-        <%= f.input :laurels, label: 'Apprenticed To:', member_label: (:sca_name) %>
+        <%= f.input :laurels, label: 'Apprenticed To:', :collection => User.pluck(:sca_name, :id)%>
         <%= f.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)'  %>
         <%= f.input :bio %>
       <% end %>
