@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "Get /users/sca_name/edit" do
+describe "Get /users/edit" do
   it "shows edit page for laurel" do
     laurel = create(:user, sca_name: 'Mundugus Jones')
     sign_in(laurel)

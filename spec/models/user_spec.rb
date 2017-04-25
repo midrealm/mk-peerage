@@ -13,9 +13,11 @@ RSpec.describe User, type: :model do
 
   it { should belong_to(:group) }
 end
-RSpec.describe User, "slug" do
-  it "returns appropriate slug link" do
-    user = create(:user, sca_name: 'John Doe')
-    expect(user.slug).to eq('John_Doe')
+
+RSpec.describe User, 'set_slug' do
+  it 'should save slug' do
+    user = build(:user, sca_name: 'Heregyð Ketilsdóttir')
+    user.save 
+    expect(User.last.slug).to eq('heregyd_ketilsdottir')
   end
 end

@@ -7,18 +7,21 @@ Rails.application.routes.draw do
 
   get '/groups' => 'groups#index'
   get '/groups/:name' => 'groups#show'
-  get '/laurels/:sca_name' => 'laurels#show'
+  get '/laurels/:slug' => 'laurels#show'
   get '/laurels' => 'laurels#index'
   get '/chambers' => 'users#index'
   namespace :chambers do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
+    
   end
   scope :chambers do
-    resources :candidates
-    get '/manage_candidates' => 'candidates#manage'
     resources :comments, only: [:create]
-    get 'admin/add_new_laurel' => 'users#new'
+    resources :candidates, only: [:index, :show]
+    namespace :admin do
+      resources :laurels
+      resources :candidates, only: [:new, :create, :edit, :update, :destroy, :index]
+    end 
   end
   root to: "home#index" 
 

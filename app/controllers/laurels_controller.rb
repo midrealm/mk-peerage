@@ -1,7 +1,6 @@
 class LaurelsController < ApplicationController
   def show
-    name = params[:sca_name].tr("_"," ")
-    @laurel = User.find_by(sca_name: name)
+    @laurel = User.find_by(slug: params[:slug])
   end
 
   def index

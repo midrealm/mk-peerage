@@ -2,9 +2,10 @@
   <%= link_to('Edit Profile', '/users/edit') %>
 <% end %>
 <h1><%=@laurel.sca_name%> <small><%=@laurel.show_specialties%></h1>
-<%= image_tag @laurel.profile_pic.url %>
-<%= image_tag @laurel.arms.url(:small) %>
+<%= image_tag @laurel.profile_pic.url(:large) %>
+<%= image_tag @laurel.arms.url(:large) %>
 <strong>Modern Name:</strong> <%=@laurel.modern_name%><br>
+<strong>Specialties:</strong><%=@laurel.show_specialties%> (<%=@laurel.specialty_detail%>)<br/>
 <% unless @laurel.group.nil? %>
   <strong>Group:</strong> <%=laurel_link @laurel.group %> <br>
 <% end %>

@@ -19,21 +19,18 @@ class User < ApplicationRecord
 
   #has_many :apprentice_users, through: :apprenticeships, source: :user
 
-  has_attached_file :arms, styles: {small: '100x100', med: '200x200', large: '500x500' }
-  has_attached_file :profile_pic, styles: {small: '100x100', med: '200x200', large: '500x500' }
+  has_attached_file :arms, styles: {large: '100x200'}, default_url: ':style/no_arms.jpg'
+  has_attached_file :profile_pic, styles: {thumb: '100x133', large: '500x500' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: ':style/frame.jpg'
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   enum role: [ :admin, :normal ]
   after_initialize :set_defaults
+  before_save :set_slug, :set_deceased
 
   def set_defaults
     self.role ||= :normal
   end
-
-  def slug
-    return self.sca_name.tr(' ', '_')
-  end  
 
   def url
     return "/laurels/#{self.slug}"
@@ -41,5 +38,14 @@ class User < ApplicationRecord
 
   def show_specialties
     return self.specialties.map{|s| s.name}.to_sentence
+  end
+
+  private
+  def set_slug
+    self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')
+  end
+
+  def set_deceased
+    self.active = false if self.deceased
   end
 end

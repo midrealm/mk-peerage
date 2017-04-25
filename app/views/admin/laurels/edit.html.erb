@@ -1,0 +1,11 @@
+<h1>Edit Laurel <%=@laurel.sca_name%></h1>
+<div class="container">
+  <div class="col-md-4">
+    <%= semantic_form_for @laurel, as: :laurel, url: admin_laurel_path(@laurel) do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :deceased %>
+      <% end %>
+      <%= f.action :submit, as: :button, label: 'Update Laurel', button_html: {class: 'btn btn-default'}, id: 'submit' %>
+    <%end %>
+  </div>
+</div>
