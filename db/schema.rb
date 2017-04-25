@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423154401) do
+ActiveRecord::Schema.define(version: 20170425100027) do
 
   create_table "advocacies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -127,6 +127,8 @@ ActiveRecord::Schema.define(version: 20170423154401) do
     t.integer  "group_id"
     t.string   "specialty_detail"
     t.string   "slug"
+    t.boolean  "royalty"
+    t.boolean  "laurel"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["group_id"], name: "index_users_on_group_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

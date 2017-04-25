@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :laurels
       resources :candidates, only: [:new, :create, :edit, :update, :destroy, :index]
+      resources :royalty, only: [:index, :new, :create, :edit, :update]
     end 
   end
   root to: "home#index" 

@@ -40,5 +40,8 @@ FactoryGirl.define do
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Jones"
     group
+    active true
+    vigilant false
+    laurel true
   end
 end

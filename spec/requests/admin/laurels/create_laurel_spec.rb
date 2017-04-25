@@ -13,6 +13,8 @@ describe "post /chambers/admin/laurels" do
     post '/chambers/admin/laurels', params: { :laurel => {sca_name: 'Dingus McDOOOGLE', email: 'dingus@doogleson.com'} }
     expect(User.last.active).to be_truthy 
     expect(User.last.vigilant).to be_truthy 
+    expect(User.last.laurel).to be_truthy
+    expect(User.last.royalty).to be_falsy
   end
   it "handles false for vigilant for new laurel" do
     laurel = create(:user, sca_name: 'Mundugus Jones', role: 'admin')

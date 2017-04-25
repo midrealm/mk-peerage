@@ -5,7 +5,11 @@ class LaurelMailer < Devise::Mailer
   def reset_password_instructions(record, token, opts={})
     @token = token
     if record.last_sign_in_at.nil? && record.created_at > (Time.now - 10.minutes)
-      devise_mail(record, :welcome, opts)
+      if record.royalty?
+        devise_mail(record, :royal_welcome, opts)
+      else
+        devise_mail(record, :welcome, opts)
+      end
     else
       devise_mail(record, :reset_password_instructions, opts)
     end

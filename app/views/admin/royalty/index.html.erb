@@ -1,0 +1,21 @@
+<h1>Manage Royalty</h1>
+<table class='table'>
+<thead>
+<%= link_to 'Add New Royal', new_admin_royalty_path %>
+<th>SCA Name</th><th>Royal Status</th><th>Edit</th>
+</thead>
+<tbody>
+<% @users.order(royalty: :desc).each do |user| %>
+<tr>
+  <% if user.royalty %>
+  <td><strong><%=user.sca_name%></strong></td>
+  <td><%=user.royalty%></td>
+  <% else %>
+  <td><%=user.sca_name%></td>
+  <td></td>
+  <% end %>
+<td><%= link_to 'Edit', edit_admin_royalty_path(user.id)%></td>
+</tr>
+<%end%>
+</tbody>
+</table>

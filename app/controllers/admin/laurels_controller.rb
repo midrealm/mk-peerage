@@ -7,7 +7,7 @@ module Admin
     end
     def index
       authorize! :manage, :all
-      @users = User.all
+      @users = User.where(laurel: true)
     end
   def create
     @laurel = User.new(laurel_params)
@@ -15,6 +15,7 @@ module Admin
     @laurel.password = pwd
     @laurel.active = true
     @laurel.vigilant = true if params[:laurel][:vigilant].nil?
+    @laurel.laurel = true
     if @laurel.save
       redirect_to "/laurels/#{@laurel.slug}"
       @laurel.send_reset_password_instructions
