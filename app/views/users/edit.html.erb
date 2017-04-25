@@ -1,8 +1,8 @@
 
+<h1>Edit Profile</h1>
 <div class="container">
-  <div class="col-md-4">
-    <h1>Edit Profile</h1>
-    <ul class="nav nav-tabs" role="tablist">
+  <div class="col-md-6">
+    <ul class="nav nav-tabs" id="myTabs" role="tablist">
       <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
       <li role="presentation"><a href="#images" aria-controls="contact" role="tab" data-toggle="tab">Images</a></li>
@@ -36,40 +36,29 @@
       </div>
       <div role="tabpanel" class="tab-pane" id="images">
       <%= f.inputs do %>
-        <%= image_tag @user.profile_pic.url(:small) %>
-        <%= f.input :profile_pic %>
-        <%= image_tag @user.arms.url(:small) %>
         <%= f.input :arms %>
+        <div id='user_profile_pic_input' class='form-group'>
+          <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
+          <span class="form-wrapper">
+            <input id="profile_pic" type="file" name="not_included">
+          </span>
+        </div>
+        <input type="hidden" id="user_profile_pic" name="user[profile_pic]" value=''>
       <% end %>
   
       </div>
       
-      <%= f.button class: 'btn btn-default' %>
+      <%= f.button class: 'btn btn-default', id: 'submit' %>
     <% end %>
     </div>
   </div>
-  <div class="col-md-6">
-    <div id="profile_preview">
-    </div>
+  <div class="col-md-4 hidden" id="image_preview">
     <div id="arms_preview">
+        <%= image_tag @user.arms.url(:large) %>
     </div>
+    <div id="profile_preview">
+        <%= image_tag @user.profile_pic.url(:large) %>
+    </div>
+    <button class="btn btn-default hidden" id="crop">Finish</button>
   </div>
 </div>
-
-<script>
-  $("#user_group_id").select2();
-  $("#user_specialty_ids").select2();
-  $("#user_laurel_ids").select2();
-  var simplemde = new SimpleMDE();
-  $('#user_profile_pic').change(function (e) {
-    loadImage(
-        e.target.files[0],
-        function (img) {
-            $('#profile_preview').empty().append(img);
-        },
-        { maxWidth: 600,
-          maxHeight: 600,
-        } // Options
-    );
-});
-</script>
