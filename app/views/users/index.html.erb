@@ -8,11 +8,11 @@
   <%= link_to 'Manage Candidates', admin_candidates_path %><br>
   <%= link_to 'Manage Laurels', admin_laurels_path %><br>
   <%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
-  <% if !Poll.last.nil? %>
-    <% if Poll.last.end_date.past? %>
+  <% unless @poll.nil? %>
+    <% if @poll.end_date.past? %>
       <%= link_to 'Create New Poll', new_admin_poll_path %>
-    <% elsif Poll.last.end_date.future? %>
-      <%= link_to 'Edit Poll', edit_admin_poll_path %>
+    <% else  %>
+      <%= link_to 'Edit Poll', edit_admin_poll_path %> | <%= @poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= @poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
     <% end %>
   <% else %>
     <%= link_to 'Create New Poll', new_admin_poll_path %>

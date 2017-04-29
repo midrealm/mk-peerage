@@ -6,7 +6,7 @@
         <% if @poll.start_date > DateTime.now %>
           <%= f.input  :start_date, as: :string, input_html: { value: @poll.start_date.strftime('%d-%b-%Y') } %>
         <% end %>
-        <%= f.input  :end_date, as: :string, input_html: { value: @poll.start_date.strftime('%d-%b-%Y') } %>
+        <%= f.input  :end_date, as: :string, input_html: { value: @poll.end_date.strftime('%d-%b-%Y') } %>
       <% end %>
       <%= f.action :submit, as: :button, button_html: {class: 'btn btn-default'}, id: 'submit'%>
     <% end %>

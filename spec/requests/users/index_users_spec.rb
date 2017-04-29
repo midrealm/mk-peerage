@@ -30,7 +30,8 @@ describe "Get /chambers" do
     it "shows create poll link for admin if no active or scheduled poll" do
       admin = create(:user, role: :admin)
       sign_in(admin)
-      poll = create(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
+      past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
+      past_poll.save(:validate => false)
       get "/chambers"
       expect(response.body).to include('Create New Poll')
     end
@@ -38,7 +39,8 @@ describe "Get /chambers" do
       before(:each) do
         admin = create(:user, role: :admin)
         sign_in(admin)
-        poll = create(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+        current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+        current_poll.save(:validate => false)
         get "/chambers"
       end
       it "does not show polling link for admin if there is an active poll" do
@@ -46,6 +48,10 @@ describe "Get /chambers" do
       end
       it "shows edit poll link for admin if there is an active poll" do
         expect(response.body).to include('Edit Poll')
+      end
+      it "shows poll dates" do
+        expect(response.body).to include('12:01 AM')
+        expect(response.body).to include('11:59 PM')
       end
     end
     describe "scheduled poll" do
@@ -60,6 +66,10 @@ describe "Get /chambers" do
       end
       it "shows edit poll link for admin if there is a scheduled poll" do
         expect(response.body).to include('Edit Poll')
+      end
+      it "shows poll dates" do
+        expect(response.body).to include('12:01 AM')
+        expect(response.body).to include('11:59 PM')
       end
     end
   end

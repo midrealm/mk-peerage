@@ -10,8 +10,8 @@ FactoryGirl.define do
     name "MyString"
   end
   factory :poll do
-    start_date "2017-04-27 08:11:17"
-    end_date "2017-04-28 08:11:17"
+    start_date (DateTime.now + 1.days)
+    end_date (DateTime.now+2.days)
   end
   factory :group do
     name "MyString"

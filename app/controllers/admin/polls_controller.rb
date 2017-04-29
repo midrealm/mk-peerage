@@ -25,13 +25,12 @@ module Admin
   
     def update
       @poll = Poll.last
-      new_params = poll_params
-      tempPoll = Poll.new(poll_params) 
-      new_params.end_date = new_params.end_date + 23.hours + 59.minutes + 59.seconds unless tempPoll.end_date.nil?
-      if @poll.update(new_params)
+      @poll.assign_attributes(poll_params)
+      @poll.end_date = @poll.end_date + 23.hours + 59.minutes + 59.seconds unless @poll.end_date.nil?
+      if @poll.save
         redirect_to chambers_path
       else
-        render :update
+        render :edit
       end
     end
     private

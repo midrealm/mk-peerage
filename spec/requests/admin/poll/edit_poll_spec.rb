@@ -22,20 +22,20 @@ describe "Get /chambers/admin/poll/edit" do
       expect(response.body).to include('End date')
     end
     it "shows edit page for current poll" do
-      @current_poll.save
+      @current_poll.save(:validate => false)
       get "/chambers/admin/poll/edit"
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Edit Poll')
     end
     it "does not show start_date for current poll" do
-      @current_poll.save
+      @current_poll.save(:validate => false)
       get "/chambers/admin/poll/edit"
       expect(response).to have_http_status(:success)
       expect(response.body).not_to include('Start date')
       expect(response.body).to include('End date')
     end
     it "does not show edit page for past poll" do
-      @past_poll.save
+      @past_poll.save(:validate => false)
       get "/chambers/admin/poll/edit"
       expect(response).to have_http_status(:found)
       expect(response.body).to include('redirected')

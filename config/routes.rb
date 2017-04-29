@@ -7,9 +7,12 @@ Rails.application.routes.draw do
 
   get '/groups' => 'groups#index'
   get '/groups/:name' => 'groups#show'
+
   get '/laurels/:slug' => 'laurels#show'
   get '/laurels' => 'laurels#index'
+
   get '/chambers' => 'users#index'
+
   namespace :chambers do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
@@ -20,9 +23,9 @@ Rails.application.routes.draw do
     resources :candidates, only: [:index, :show]
     namespace :admin do
       resources :laurels
-      resources :candidates, only: [:new, :create, :edit, :update, :destroy, :index]
-      resources :royalty, only: [:index, :new, :create, :edit, :update]
-      resource :poll, except: :destroy
+      resources :candidates, except: :show
+      resources :royalty, except: [:destroy, :show] 
+      resource :poll, except: [:destroy, :show]
     end 
   end
   root to: "home#index" 
