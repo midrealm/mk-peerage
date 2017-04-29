@@ -19,4 +19,8 @@ class Poll < ApplicationRecord
       end
     end
   end
+
+  def active? 
+    self.start_date.past? && self.end_date.future? 
+  end
 end

@@ -1,25 +1,32 @@
 require "rails_helper"
+
 describe "Get /chambers" do
-  it "shows dashboard for logged in user" do
-    laurel = create(:user)
-    sign_in(laurel)
-    get "/chambers"
-    expect(response).to have_http_status(:success)
-    expect(response.body).to include('Edit Your Profile')
+  describe "logged in laurel user" do
+    before(:each) do
+      laurel = create(:user, laurel: true)
+      sign_in(laurel)
+    end
+    it "shows dashboard for logged in user" do
+      get "/chambers"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('Edit Your Profile')
+    end
+    it "does not show Admin Tasks" do
+      get "/chambers"
+      expect(response).to have_http_status(:success)
+      expect(response.body).not_to include('Admin Tasks')
+    end
   end
-  it "shows Admin Tasks for admin user" do
-    admin = create(:user, role: :admin)
-    sign_in(admin)
-    get "/chambers"
-    expect(response).to have_http_status(:success)
-    expect(response.body).to include('Admin Tasks')
-  end
-  it "does not show Admin Tasks for normal user" do
-    laurel = create(:user, role: :normal)
-    sign_in(laurel)
-    get "/chambers"
-    expect(response).to have_http_status(:success)
-    expect(response.body).not_to include('Admin Tasks')
+  describe "admin user" do
+    before(:each) do
+      admin = create(:user, role: :admin)
+      sign_in(admin)
+    end
+    it "shows Admin Tasks" do
+      get "/chambers"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('Admin Tasks')
+    end
   end
   it "redirects if not logged in" do
     get "/chambers"
@@ -27,49 +34,103 @@ describe "Get /chambers" do
     expect(response.body).to include('redirected')
   end
   describe "polling" do 
-    it "shows create poll link for admin if no active or scheduled poll" do
-      admin = create(:user, role: :admin)
-      sign_in(admin)
-      past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
-      past_poll.save(:validate => false)
-      get "/chambers"
-      expect(response.body).to include('Create New Poll')
+    describe "for signed in royal non-laurel" do
+      before(:each) do
+        royal = create(:user, royalty: true, laurel: false)
+        sign_in(royal)
+      end
+      describe "for current poll" do
+        before(:each) do
+          @current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+          @current_poll.save(:validate => false)
+          get "/chambers"
+        end
+        it "does not show take poll link for active poll" do
+          expect(response.body).not_to include('Take Poll')  
+        end
+      end
     end
-    describe "active poll" do
+    describe "for signed in non-admin laurel" do
+      before(:each) do
+        laurel = create(:user, laurel: true)
+        sign_in(laurel)
+      end
+      describe "for current poll" do
+        before(:each) do
+          @current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+          @current_poll.save(:validate => false)
+          get "/chambers"
+        end
+        it "shows take poll link for active poll" do
+          expect(response.body).to include('Take Poll')  
+        end
+        it "shows end date of active poll" do
+          expect(response.body).to include(@current_poll.end_date.strftime('%d-%b-%Y'))  
+        end
+      end
+      describe "for past poll" do
+        before(:each) do
+          @past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
+          @past_poll.save(:validate => false)
+          get "/chambers"
+        end
+        it "does not show take poll link for active poll" do
+          expect(response.body).not_to include('Take Poll')  
+        end
+      end
+      describe "for future poll" do
+        before(:each) do
+          create(:poll, start_date: DateTime.now + 3.days, end_date: DateTime.now + 4.days)
+          get "/chambers"
+        end
+        it "does not show take poll link for active poll" do
+          expect(response.body).not_to include('Take Poll')  
+        end
+      end
+    end
+    describe "for admin user" do
       before(:each) do
         admin = create(:user, role: :admin)
         sign_in(admin)
-        current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
-        current_poll.save(:validate => false)
+      end
+      it "shows create poll link for admin if no active or scheduled poll" do
+        past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
+        past_poll.save(:validate => false)
         get "/chambers"
+        expect(response.body).to include('Create New Poll')
       end
-      it "does not show polling link for admin if there is an active poll" do
-        expect(response.body).not_to include('Create New Poll')
+      describe "active poll" do
+        before(:each) do
+          current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+          current_poll.save(:validate => false)
+          get "/chambers"
+        end
+        it "does not show polling link for admin if there is an active poll" do
+          expect(response.body).not_to include('Create New Poll')
+        end
+        it "shows edit poll link for admin if there is an active poll" do
+          expect(response.body).to include('Edit Poll')
+        end
+        it "shows poll dates" do
+          expect(response.body).to include('12:01 AM')
+          expect(response.body).to include('11:59 PM')
+        end
       end
-      it "shows edit poll link for admin if there is an active poll" do
-        expect(response.body).to include('Edit Poll')
-      end
-      it "shows poll dates" do
-        expect(response.body).to include('12:01 AM')
-        expect(response.body).to include('11:59 PM')
-      end
-    end
-    describe "scheduled poll" do
-      before(:each) do
-        admin = create(:user, role: :admin)
-        sign_in(admin)
-        poll = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.days)
-        get "/chambers"
-      end
-      it "does not show polling link for admin if there is a scheduled poll" do
-        expect(response.body).not_to include('Create New Poll')
-      end
-      it "shows edit poll link for admin if there is a scheduled poll" do
-        expect(response.body).to include('Edit Poll')
-      end
-      it "shows poll dates" do
-        expect(response.body).to include('12:01 AM')
-        expect(response.body).to include('11:59 PM')
+      describe "scheduled poll" do
+        before(:each) do
+          poll = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.days)
+          get "/chambers"
+        end
+        it "does not show polling link for admin if there is a scheduled poll" do
+          expect(response.body).not_to include('Create New Poll')
+        end
+        it "shows edit poll link for admin if there is a scheduled poll" do
+          expect(response.body).to include('Edit Poll')
+        end
+        it "shows poll dates" do
+          expect(response.body).to include('12:01 AM')
+          expect(response.body).to include('11:59 PM')
+        end
       end
     end
   end

@@ -1,0 +1,11 @@
+<h1>Poll</h1>
+<table class='table'>
+<thead>
+<th>Candidate</th><th>Status</th>
+</thead>
+<tbody>
+<% @candidates.order(:sca_name).each do |cand| %>
+  <tr><td><%= link_to cand.sca_name, '#' %></td><td>Status</td></tr>
+<% end %>
+</tbody>
+</table>

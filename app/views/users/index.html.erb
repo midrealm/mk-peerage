@@ -2,6 +2,9 @@
 <%= link_to 'View Your Profile', current_user.url %><br>
 <%= link_to 'Edit Your Profile', '/users/edit' %><br>
 <%= link_to 'View Candidates', '/chambers/candidates' %>
+<% if !@poll.nil? && @poll.active? && can?(:take, Poll) %>
+  <%= link_to 'Take Poll', '#' %> Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> 
+<% end %>
 
 <% if can? :manage, :all %>
   <h3>Admin Tasks</h3>

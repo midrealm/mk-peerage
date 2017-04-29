@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   scope :chambers do
     resources :comments, only: [:create]
     resources :candidates, only: [:index, :show]
+    resource :poll, only: [:show]
     namespace :admin do
       resources :laurels
       resources :candidates, except: :show
