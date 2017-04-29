@@ -16,12 +16,15 @@ Rails.application.routes.draw do
   namespace :chambers do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
-    
   end
   scope :chambers do
     resources :comments, only: [:create]
     resources :candidates, only: [:index, :show]
     resource :poll, only: [:show]
+    namespace :poll do
+      get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
+      resources :candidates, only: [:update]
+    end
     namespace :admin do
       resources :laurels
       resources :candidates, except: :show
