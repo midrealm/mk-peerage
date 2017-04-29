@@ -26,4 +26,41 @@ describe "Get /chambers" do
     expect(response).to have_http_status(:found)
     expect(response.body).to include('redirected')
   end
+  describe "polling" do 
+    it "shows create poll link for admin if no active or scheduled poll" do
+      admin = create(:user, role: :admin)
+      sign_in(admin)
+      poll = create(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
+      get "/chambers"
+      expect(response.body).to include('Create New Poll')
+    end
+    describe "active poll" do
+      before(:each) do
+        admin = create(:user, role: :admin)
+        sign_in(admin)
+        poll = create(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+        get "/chambers"
+      end
+      it "does not show polling link for admin if there is an active poll" do
+        expect(response.body).not_to include('Create New Poll')
+      end
+      it "shows edit poll link for admin if there is an active poll" do
+        expect(response.body).to include('Edit Poll')
+      end
+    end
+    describe "scheduled poll" do
+      before(:each) do
+        admin = create(:user, role: :admin)
+        sign_in(admin)
+        poll = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.days)
+        get "/chambers"
+      end
+      it "does not show polling link for admin if there is a scheduled poll" do
+        expect(response.body).not_to include('Create New Poll')
+      end
+      it "shows edit poll link for admin if there is a scheduled poll" do
+        expect(response.body).to include('Edit Poll')
+      end
+    end
+  end
 end

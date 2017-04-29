@@ -43,6 +43,7 @@ gem 'redcarpet'
 gem 'cancancan'
 gem 'rails_jskit'
 gem 'acts_as_tree'
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

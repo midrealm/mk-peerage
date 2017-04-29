@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :laurels
       resources :candidates, only: [:new, :create, :edit, :update, :destroy, :index]
       resources :royalty, only: [:index, :new, :create, :edit, :update]
+      resource :poll, except: :destroy
     end 
   end
   root to: "home#index" 

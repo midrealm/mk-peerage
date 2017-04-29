@@ -4,9 +4,17 @@
 <%= link_to 'View Candidates', '/chambers/candidates' %>
 
 <% if can? :manage, :all %>
-<h3>Admin Tasks</h3>
-<%= link_to 'Manage Candidates', admin_candidates_path %><br>
-<%= link_to 'Manage Laurels', admin_laurels_path %><br>
-<%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
-<%= link_to 'Polling', '#' %>
+  <h3>Admin Tasks</h3>
+  <%= link_to 'Manage Candidates', admin_candidates_path %><br>
+  <%= link_to 'Manage Laurels', admin_laurels_path %><br>
+  <%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
+  <% if !Poll.last.nil? %>
+    <% if Poll.last.end_date.past? %>
+      <%= link_to 'Create New Poll', new_admin_poll_path %>
+    <% elsif Poll.last.end_date.future? %>
+      <%= link_to 'Edit Poll', edit_admin_poll_path %>
+    <% end %>
+  <% else %>
+    <%= link_to 'Create New Poll', new_admin_poll_path %>
+  <% end %></br>
 <% end %>

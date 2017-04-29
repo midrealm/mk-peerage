@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
   Specialty.create([{name: 'Music'}, {name: 'Costuming'}, {name: 'Earwax Studies'}])
+  Judgement.create([{name: 'Elevate'}, {name: 'Drop'}, {name: 'No Strong Opinion'}])
 
   nique = User.create do |u|
     u.email = 'nique.rio@gmail.com'

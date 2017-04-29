@@ -1,4 +1,18 @@
 FactoryGirl.define do
+  factory :advising do
+    user 
+    candidate 
+    poll
+    judgement 
+    comment "My Advice to the Crown on this Candidate is... Yay"
+  end
+  factory :judgement do
+    name "MyString"
+  end
+  factory :poll do
+    start_date "2017-04-27 08:11:17"
+    end_date "2017-04-28 08:11:17"
+  end
   factory :group do
     name "MyString"
     parent_id nil

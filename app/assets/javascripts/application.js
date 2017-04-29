@@ -18,6 +18,7 @@
 //= require simplemde
 //= require turbolinks
 //= require croppie
+//= require bootstrap-datepicker
 //= require rails_jskit
 //= require_tree ./controllers
 
