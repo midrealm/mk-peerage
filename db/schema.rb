@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427121633) do
+ActiveRecord::Schema.define(version: 20170430005335) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20170427121633) do
     t.text     "comment",      limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.boolean  "submitted"
     t.index ["candidate_id"], name: "index_advisings_on_candidate_id", using: :btree
     t.index ["judgement_id"], name: "index_advisings_on_judgement_id", using: :btree
     t.index ["poll_id"], name: "index_advisings_on_poll_id", using: :btree

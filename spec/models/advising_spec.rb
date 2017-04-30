@@ -6,3 +6,4 @@ RSpec.describe Advising, type: :model do
   it {should belong_to(:poll)}
   it {should belong_to(:judgement)}
 end
+

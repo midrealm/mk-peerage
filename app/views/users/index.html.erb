@@ -1,9 +1,9 @@
 <h1>Private Chambers</h1>
 <%= link_to 'View Your Profile', current_user.url %><br>
 <%= link_to 'Edit Your Profile', '/users/edit' %><br>
-<%= link_to 'View Candidates', '/chambers/candidates' %>
+<%= link_to 'View Candidates', '/chambers/candidates' %><br>
 <% if !@poll.nil? && @poll.active? && can?(:take, Poll) %>
-  <%= link_to 'Take Poll', '#' %> Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> 
+  <%= link_to 'Take Poll', poll_path %> Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> 
 <% end %>
 
 <% if can? :manage, :all %>

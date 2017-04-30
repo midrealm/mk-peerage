@@ -5,7 +5,7 @@
 </thead>
 <tbody>
 <% @candidates.order(:sca_name).each do |cand| %>
-  <tr><td><%= link_to cand.sca_name, '#' %></td><td>Status</td></tr>
+  <tr><td><%= link_to cand.sca_name, poll_edit_candidate_path(cand.id) %></td><td>Status</td></tr>
 <% end %>
 </tbody>
 </table>
