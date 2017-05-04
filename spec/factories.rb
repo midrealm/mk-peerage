@@ -1,4 +1,14 @@
 FactoryGirl.define do
+  factory :poll_result do
+    candidate
+    poll 
+    drop 1
+    no_strong_opinion 1
+    wait 1
+    elevate 1
+    rec 1.5
+    fav 1.5
+  end
   factory :advising do
     user 
     candidate 

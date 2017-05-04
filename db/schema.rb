@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430005335) do
+ActiveRecord::Schema.define(version: 20170504183412) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -90,6 +90,21 @@ ActiveRecord::Schema.define(version: 20170430005335) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "poll_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "candidate_id"
+    t.integer  "poll_id"
+    t.integer  "drop"
+    t.integer  "no_strong_opinion"
+    t.integer  "wait"
+    t.integer  "elevate"
+    t.float    "rec",               limit: 24
+    t.float    "fav",               limit: 24
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["candidate_id"], name: "index_poll_results_on_candidate_id", using: :btree
+    t.index ["poll_id"], name: "index_poll_results_on_poll_id", using: :btree
   end
 
   create_table "polls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -174,6 +189,8 @@ ActiveRecord::Schema.define(version: 20170430005335) do
   add_foreign_key "comments", "candidates"
   add_foreign_key "comments", "users"
   add_foreign_key "groups", "group_types"
+  add_foreign_key "poll_results", "candidates"
+  add_foreign_key "poll_results", "polls"
   add_foreign_key "specializations", "candidates"
   add_foreign_key "specializations", "specialties"
   add_foreign_key "specializations", "users"
