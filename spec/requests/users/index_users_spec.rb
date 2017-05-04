@@ -33,7 +33,10 @@ describe "Get /chambers" do
     expect(response).to have_http_status(:found)
     expect(response.body).to include('redirected')
   end
-  describe "polling" do 
+  context "polling" do 
+    before(:each) do
+      @candidate = create(:candidate)
+    end
     describe "for signed in royal non-laurel" do
       before(:each) do
         royal = create(:user, royalty: true, laurel: false)
@@ -50,23 +53,40 @@ describe "Get /chambers" do
         end
       end
     end
-    describe "for signed in non-admin laurel" do
+    context "for signed in non-admin laurel" do
       before(:each) do
-        laurel = create(:user, laurel: true)
-        sign_in(laurel)
+        @laurel = create(:user, laurel: true)
+        sign_in(@laurel)
       end
       describe "for current poll" do
         before(:each) do
           @current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
           @current_poll.save(:validate => false)
-          get "/chambers"
         end
         it "shows take poll link for active poll" do
+          get "/chambers"
           expect(response.body).to include('Take Poll')  
         end
         it "shows end date of active poll" do
+          get "/chambers"
           expect(response.body).to include(@current_poll.end_date.strftime('%d-%b-%Y'))  
         end
+        it "shows if user has completed the poll" do
+          @advising = create(:advising, candidate: @candidate, user: @laurel, poll: @current_poll, submitted: true)
+          get "/chambers"
+          expect(response.body).to include('Finished')  
+          expect(response.body).to include('Edit Poll')  
+        end
+        it "shows if user has not completed the poll" do
+          get "/chambers"
+          expect(response.body).not_to include('Finished')  
+          expect(response.body).to include('Take Poll')  
+        end
+        it "shows if user has not completed the poll" do
+          get "/chambers"
+          expect(response.body).to include('0/1 Submitted')  
+        end
+        
       end
       describe "for past poll" do
         before(:each) do

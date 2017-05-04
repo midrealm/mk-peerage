@@ -40,6 +40,41 @@ class User < ApplicationRecord
     return self.specialties.map{|s| s.name}.to_sentence
   end
 
+  def poll_complete?
+    if Poll.last.active?
+      poll = Poll.last
+      incomplete = false
+      Candidate.all.each do |cand|
+        advising = poll.advisings.find_by(user_id: self.id, candidate_id: cand.id, submitted: true)  
+        if advising.nil?
+          incomplete = true
+          break  
+        end 
+      end
+      if incomplete
+        return false
+      else
+        return true
+      end
+    else
+      return false
+    end
+  end
+
+  def poll_submitted_count
+    if Poll.last.active?
+      count = 0
+      poll = Poll.last
+      Candidate.all.each do |cand|
+        advising = poll.advisings.find_by(user_id: self.id, candidate_id: cand.id, submitted: true)  
+        count = count + 1 unless advising.nil?
+      end
+      return count
+    else
+      return 0
+    end
+  end
+
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')

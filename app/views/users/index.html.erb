@@ -3,8 +3,14 @@
 <%= link_to 'Edit Your Profile', '/users/edit' %><br>
 <%= link_to 'View Candidates', '/chambers/candidates' %><br>
 <% if !@poll.nil? && @poll.active? && can?(:take, Poll) %>
-  <%= link_to 'Take Poll', poll_path %> Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> 
+  <% unless current_user.poll_complete? %>
+    <%= link_to 'Take Poll', poll_path %> | <%="#{current_user.poll_submitted_count}/#{Candidate.all.count}"%> Submitted |
+  <% else  %>
+    <%= link_to 'Edit Poll', poll_path %> Finished! | 
+  <%end %>
+  Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> <br/>
 <% end %>
+<%= link_to 'View Results from last Poll', '#' %>
 
 <% if can? :manage, :all %>
   <h3>Admin Tasks</h3>
