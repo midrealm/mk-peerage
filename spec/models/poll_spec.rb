@@ -14,7 +14,7 @@ RSpec.describe Poll, type: :model do
   end
 
   it 'does not accept start_dates in the past' do
-    poll = build(:poll, start_date: DateTime.now - 1.day, end_date: DateTime.now + 1.day)
+    poll = build(:poll, start_date: DateTime.now - 3.day, end_date: DateTime.now + 1.day)
     expect(poll.valid?).to be_falsey
   end
 

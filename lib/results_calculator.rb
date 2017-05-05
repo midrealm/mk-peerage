@@ -1,7 +1,7 @@
 class ResultsCalculator
   def calculate
-    poll = Poll.last
-    if !PollResult.exists?(poll: poll) and poll.end_date < DateTime.now
+    poll = Poll.where('end_date < ?', DateTime.now).order('end_date DESC').first
+    unless PollResult.exists?(poll: poll) || poll.nil?
       
         wait = Judgement.find_by(name:'Wait')
         no_strong_opinion = Judgement.find_by(name:'No Strong Opinion')

@@ -15,6 +15,25 @@
 <% if @candidate.group %>
 <strong>Group</strong>: <%= candidate_link @candidate.group %>
 <% end %>
+<% unless @pr.nil? %>
+  <table class="table">
+  <thead>
+  <th>Elevate now</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+  <th>Rec%</th><th>Fav%</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%=@pr.elevate%></td>
+    <td><%=@pr.wait%></td>
+    <td><%=@pr.no_strong_opinion%></td>
+    <td><%=@pr.drop%></td>
+    <td><%=@pr.rec%></td>
+    <td><%=@pr.fav%></td>
+  </tr>
+  </tbody>
+  </table>
+<% end%>
+
 <h3>Comments</h3>
 <% @candidate.comments.each do |comment| %>
   <div>

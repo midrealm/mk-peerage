@@ -60,6 +60,13 @@ describe "calculate" do
       @rc.calculate
       expect(PollResult.count).to eq(1)
     end
+    it "creates poll results for past poll even when there's a scheduled poll" do
+      future = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.day)
+      @advising1.save
+      @rc.calculate
+      expect(PollResult.count).to eq(1)
+      
+    end
     it "computes result calculations for given candidate" do
       @advising1.judgement = @elevate
       @advising1.save

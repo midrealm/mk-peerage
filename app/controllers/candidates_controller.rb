@@ -1,8 +1,8 @@
 class CandidatesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @vote_candidates = Candidate.where(vote: true)
-    @watch_candidates = Candidate.where(vote: false)
+     @vote_candidates = Candidate.where(vote: true)
+     @watch_candidates = Candidate.where(vote: false)
   end
   def new
     @candidate = Candidate.new
@@ -10,6 +10,7 @@ class CandidatesController < ApplicationController
   end
   def show
     @candidate = Candidate.find(params[:id])
+    @pr = @candidate.poll_results.last
     @comment = Comment.new
   end
   def create

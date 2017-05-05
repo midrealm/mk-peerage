@@ -10,7 +10,6 @@
   <%end %>
   Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> <br/>
 <% end %>
-<%= link_to 'View Results from last Poll', '#' %>
 
 <% if can? :manage, :all %>
   <h3>Admin Tasks</h3>
