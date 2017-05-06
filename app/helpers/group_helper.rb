@@ -36,4 +36,16 @@ module GroupHelper
       link_to("#{group.group_type.name} of #{group.name}", candidate_group_url(group.name))
     end
   end
+
+  def candidate_region_link(group)
+    region = nil
+    if group.parent.group_type.name == 'Barony'
+      region = group.parent.parent
+    elsif group.parent.group_type.name == 'Region'
+      region = group.parent
+    else
+      region = group
+    end
+      link_to region.name, candidate_group_url(region.name)
+  end
 end

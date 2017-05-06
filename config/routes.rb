@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   scope :chambers do
     resources :comments, only: [:create]
     resources :candidates, only: [:index, :show]
+    get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
     resource :poll, only: [:show]
     namespace :poll do
       get '/candidates/:id' => 'candidates#edit', as: :edit_candidate

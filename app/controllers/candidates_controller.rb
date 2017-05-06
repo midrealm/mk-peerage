@@ -38,11 +38,17 @@ class CandidatesController < ApplicationController
   def destroy
     @candidate = Candidate.find(params[:id])
     @candidate.destroy
-    redirect_to manage_candidates_path
+    redirect_to admin_candidates_path
   end
-  def manage
-    authorize! :manage, :all
-    @candidates = Candidate.all
+  def poll_comments
+    authorize! :read, PollResult
+    @candidate = Candidate.find(params[:id])
+    @pr = @candidate.poll_results.last
+    unless @pr.nil?
+      @advisings = Advising.where("candidate_id = ? AND poll_id = ? AND submitted = true", @candidate.id, @pr.poll_id)
+    else
+      redirect_to candidates_path
+    end
   end
   
   private

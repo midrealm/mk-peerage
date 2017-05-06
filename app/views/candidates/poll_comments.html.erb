@@ -1,0 +1,40 @@
+<h3>Full Poll Results for</h3>
+<h1><%=@candidate.sca_name%></h1>
+<% if @candidate.specialties.count > 0 %>
+  <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
+  <%= spec.name %>  
+  <% end %><br>
+<% end %>
+<% if @candidate.users.count > 0 %>
+  <strong>Advocates</strong>: <% @candidate.users.each do |adv| %>
+  <%=link_to adv.sca_name, adv.url %> 
+  <% end %><br>
+<%end%>
+<% if @candidate.group %>
+<strong>Group</strong>: <%= candidate_link @candidate.group %>
+<% end %>
+<table class="table">
+<thead>
+<th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+<th>Rec%</th><th>Fav%</th>
+</thead>
+<tbody>
+<tr>
+  <td><%=@pr.elevate%></td>
+  <td><%=@pr.wait%></td>
+  <td><%=@pr.no_strong_opinion%></td>
+  <td><%=@pr.drop%></td>
+  <td><%=@pr.rec%></td>
+  <td><%=@pr.fav%></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Comments</h3>
+<% @advisings.each do |adv| %>
+  <div>
+  <%= image_tag adv.user.profile_pic.url(:thumb) %><strong>Comment by:</strong><%= link_to adv.user.sca_name, adv.user.url%><br>
+  <strong>Judgement:</strong> <%=adv.judgement.name%><br/>
+  <%= markdown(adv.comment) %>
+  </div>
+<% end %>

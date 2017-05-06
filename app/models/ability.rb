@@ -11,6 +11,11 @@ class Ability
     else
       can :read, :all
     end
-    
+   
+    if user.royalty?
+      can :read, PollResult
+    else
+      cannot :read, PollResult
+    end 
   end
 end

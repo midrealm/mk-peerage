@@ -53,7 +53,7 @@ describe "Get /chambers/candidates" do
       pr = create(:poll_result, candidate: @candidate, poll: p, wait: 123456)
       get "/chambers/candidates"
       expect(response.body).not_to include('Comments from Last Poll')
-      expect(response.body).not_to include("chambers/candidates/#{@candidate.id}/poll_comments")
+      expect(response.body).not_to include("candidates/#{@candidate.id}/poll_comments")
   end
   it "redirects if not logged in" do
     get "/chambers/candidates"
