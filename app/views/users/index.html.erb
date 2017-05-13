@@ -2,6 +2,7 @@
 <%= link_to 'View Your Profile', current_user.url %><br>
 <%= link_to 'Edit Your Profile', '/users/edit' %><br>
 <%= link_to 'View Candidates', '/chambers/candidates' %><br>
+<%= link_to 'Browse Candidates By Group', '/chambers/groups/' %><br/>
 <% if !@poll.nil? && @poll.active? && can?(:take, Poll) %>
   <% unless current_user.poll_complete? %>
     <%= link_to 'Take Poll', poll_path %> | <%="#{current_user.poll_submitted_count}/#{Candidate.all.count}"%> Submitted |

@@ -1,7 +1,6 @@
+<div class="container">
+<%= image_tag @candidate.profile_pic.url(:large), class: 'pull-right' %>
 <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
-<%= image_tag @candidate.profile_pic.url(:thumb) %>
-<%= image_tag @candidate.profile_pic.url(:large) %>
-<br>
 <% if @candidate.specialties.count > 0 %>
   <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
   <%= spec.name %>  
@@ -33,14 +32,19 @@
   </tbody>
   </table>
 <% end%>
-
+</div>
 <h3>Comments</h3>
 <% @candidate.comments.each do |comment| %>
-  <div>
-  <%= image_tag comment.user.profile_pic.url(:thumb) %><strong>Comment by:</strong><%= link_to comment.user.sca_name, comment.user.url%><br>
+  <div class="container">
+  <div class="col-md-2" style="text-align:center">
+  <%= image_tag comment.user.profile_pic.url(:thumb) %><br/><%= link_to comment.user.sca_name, comment.user.url%><br>
+</div>
+<div class="col-md-4">
   <%= markdown(comment.text) %>
+</div>
   </div>
 <% end %>
+<div class="col-md-6">
 <h3>Add A Comment</h3>
 <%= semantic_form_for @comment, url: comments_path do |f| %>
   <%= f.inputs do %>
@@ -49,6 +53,7 @@
   <% end %>
   <%= f.button class: 'btn btn-default' %>
 <% end %> 
+</div>
 <script>
   var simplemde = new SimpleMDE();
 </script>

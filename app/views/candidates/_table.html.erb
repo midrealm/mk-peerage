@@ -11,7 +11,9 @@
   <% candidates.each do |cand| %>
     <% pr = cand.poll_results.last %>
    <tr>
-    <td><%= link_to "#{cand.sca_name} (#{cand.show_specialties})", candidate_path(cand.id) %></td>
+    <td>
+<%= image_tag cand.profile_pic.url(:thumb), class: 'pull-left' %>
+<%= link_to "#{cand.sca_name} (#{cand.show_specialties})", candidate_path(cand.id) %></td>
     <% unless pr.nil? %>
     <% if can?(:read, PollResult) %>
         <td><%= link_to 'Comments', poll_comments_path(cand.id) %></td>
@@ -31,7 +33,6 @@
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
     <%end%>
     <td>
     <% if cand.group %>
@@ -43,7 +44,7 @@
         <%= link_to u.sca_name, u.url%> 
       <% end %>
    <td>
-   <tr> 
+   </tr> 
   <% end%>
 </tbody>
 </table>

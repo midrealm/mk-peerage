@@ -8,4 +8,15 @@ class Group < ApplicationRecord
   def titled_name
     "#{self.group_type.name} of #{self.name}"
   end
+
+  def all_laurels 
+    users + children.flat_map { |grp| grp.all_laurels}
+    #children.reduce(users) do |user_total, grp| 
+    #  user_total.concat(grp.all_laurels)
+    #end
+  end
+
+  def all_candidates
+    candidates + children.flat_map { |grp| grp.all_candidates}
+  end
 end

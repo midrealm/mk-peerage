@@ -158,6 +158,9 @@ GEM
       railties (= 5.0.1)
       sprockets-rails (>= 2.0.0)
     rails-assets-croppie (2.4.1)
+    rails-assets-datatables (1.10.12)
+      rails-assets-jquery (>= 1.7.0)
+    rails-assets-jquery (3.1.0)
     rails-assets-simplemde (1.10.0)
     rails-dom-testing (2.0.2)
       activesupport (>= 4.2.0, < 6.0)
@@ -279,6 +282,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-croppie!
+  rails-assets-datatables!
   rails-assets-simplemde!
   rails_jskit
   redcarpet

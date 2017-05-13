@@ -3,8 +3,27 @@
 <%= render 'draw_tree', node: @group %>
 </ul>
 <h3>Laurels</h3>
-<ul>
-<% @group.users.each do |user|%>
-  <li><%= link_to user.sca_name, user.url %></li>
+<table class="table">
+<thead>
+<th>Name</th><th>Specialty</th><th>Group</th>
+</thead>
+<tbody>
+
+<% @group.all_laurels.each do |user|%>
+  <tr>
+  <td><%= link_to user.sca_name, user.url %></td>
+  <td><%=user.show_specialties%></td>
+  <td><%=link_to "#{user.group.group_type.name} of #{user.group.name}", laurel_group_url(user.group.name) %></td>
+  </tr>
 <% end %>
-</ul>
+</tbody>
+</table>
+<script>
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>

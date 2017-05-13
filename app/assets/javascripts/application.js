@@ -19,6 +19,7 @@
 //= require turbolinks
 //= require croppie
 //= require bootstrap-datepicker
+//= require datatables
 //= require rails_jskit
 //= require_tree ./controllers
 

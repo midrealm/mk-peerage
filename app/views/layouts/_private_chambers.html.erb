@@ -6,6 +6,7 @@
   <li><%= link_to 'View Profile', current_user.url %></li>
   <li><a href="/users/edit">Update Profile</a></li>
   <li><a href="/chambers/candidates">View Candidates</a></li>
+  <li><%= link_to 'Browse Candidates By Group', '/chambers/groups/' %></li>
   <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
 <% else %>
 <li><a href="/users/sign_in">Private Chambers</a></li>

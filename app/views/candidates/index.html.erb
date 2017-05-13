@@ -5,3 +5,12 @@
 
 <h3>Watch List</h3>
 <%= render 'table', candidates: @watch_candidates%>
+<script>
+$(document).ready( function () {
+    $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>
