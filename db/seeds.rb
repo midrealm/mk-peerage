@@ -5,5 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-  Judgement.create([{name: 'Elevate'}, {name: 'Drop'}, {name: 'No Strong Opinion'}])
+  Judgement.create([{name: 'Elevate'}, {name: 'Drop'}, {name: 'No Strong Opinion'}, {name: 'Wait'}])
 

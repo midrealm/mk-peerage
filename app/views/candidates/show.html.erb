@@ -1,58 +1,61 @@
-<div class="container">
-<%= image_tag @candidate.profile_pic.url(:large), class: 'pull-right' %>
-<h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
-<% if @candidate.specialties.count > 0 %>
-  <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
-  <%= spec.name %>  
-  <% end %><br>
-<% end %>
-<% if @candidate.users.count > 0 %>
-  <strong>Advocates</strong>: <% @candidate.users.each do |adv| %>
-  <%=link_to adv.sca_name, adv.url %> 
-  <% end %><br>
-<%end%>
-<% if @candidate.group %>
-<strong>Group</strong>: <%= candidate_link @candidate.group %>
-<% end %>
-<% unless @pr.nil? %>
-  <table class="table">
-  <thead>
-  <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
-  <th>Rec%</th><th>Fav%</th>
-  </thead>
-  <tbody>
-  <tr>
-    <td><%=@pr.elevate%></td>
-    <td><%=@pr.wait%></td>
-    <td><%=@pr.no_strong_opinion%></td>
-    <td><%=@pr.drop%></td>
-    <td><%=@pr.rec%></td>
-    <td><%=@pr.fav%></td>
-  </tr>
-  </tbody>
-  </table>
-<% end%>
-</div>
-<h3>Comments</h3>
-<% @candidate.comments.each do |comment| %>
-  <div class="container">
-  <div class="col-md-2" style="text-align:center">
-  <%= image_tag comment.user.profile_pic.url(:thumb) %><br/><%= link_to comment.user.sca_name, comment.user.url%><br>
+<div class="col-md-8">
+  <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+  <% if @candidate.specialties.count > 0 %>
+    <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
+    <%= spec.name %>  
+    <% end %><br>
+  <% end %>
+  <% if @candidate.users.count > 0 %>
+    <strong>Advocates</strong>: <% @candidate.users.each do |adv| %>
+    <%=link_to adv.sca_name, adv.url %> 
+    <% end %><br>
+  <%end%>
+  <% if @candidate.group %>
+  <strong>Group</strong>: <%= candidate_link @candidate.group %>
+  <% end %>
+  <% unless @pr.nil? %>
+    <table class="table">
+    <thead>
+    <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+    <th>Rec%</th><th>Fav%</th>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%=@pr.elevate%></td>
+      <td><%=@pr.wait%></td>
+      <td><%=@pr.no_strong_opinion%></td>
+      <td><%=@pr.drop%></td>
+      <td><%=@pr.rec%></td>
+      <td><%=@pr.fav%></td>
+    </tr>
+    </tbody>
+    </table>
+  <% end%>
+  <h3>Comments</h3>
+  <% @candidate.comments.each do |comment| %>
+  <div class="container" style="padding: 10px">
+    <div class="col-md-2" style="text-align:center">
+    <%= image_tag comment.user.profile_pic.url(:thumb) %><br/><%= link_to comment.user.sca_name, comment.user.url%><br>
+    </div>
+    <div class="col-md-5">
+      <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
+      <%= markdown(comment.text) %>
+    </div>
+  </div>
+  <% end %>
+  <div class="col-md-12">
+  <h3>Add A Comment</h3>
+  <%= semantic_form_for @comment, url: comments_path do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :text, label: 'Comment' %>
+      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
+    <% end %>
+    <%= f.button class: 'btn btn-default' %>
+  <% end %> 
+  </div>
 </div>
 <div class="col-md-4">
-  <%= markdown(comment.text) %>
-</div>
-  </div>
-<% end %>
-<div class="col-md-6">
-<h3>Add A Comment</h3>
-<%= semantic_form_for @comment, url: comments_path do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :text, label: 'Comment' %>
-    <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
-  <% end %>
-  <%= f.button class: 'btn btn-default' %>
-<% end %> 
+<%= image_tag @candidate.profile_pic.url(:large) %>
 </div>
 <script>
   var simplemde = new SimpleMDE();

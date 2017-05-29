@@ -13,7 +13,8 @@
    <tr>
     <td>
 <%= image_tag cand.profile_pic.url(:thumb), class: 'pull-left' %>
-<%= link_to "#{cand.sca_name} (#{cand.show_specialties})", candidate_path(cand.id) %></td>
+<%= link_to "#{cand.sca_name} (#{cand.show_specialties})", candidate_path(cand.id) %>
+</td>
     <% unless pr.nil? %>
     <% if can?(:read, PollResult) %>
         <td><%= link_to 'Comments', poll_comments_path(cand.id) %></td>
@@ -28,6 +29,7 @@
     <% if can?(:read, PollResult) %>
         <td></td>
     <% end %>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
