@@ -21,5 +21,6 @@
 //= require bootstrap-datepicker
 //= require datatables
 //= require rails_jskit
+//= require blueimp-gallery
 //= require_tree ./controllers
 

@@ -12,6 +12,7 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     @pr = @candidate.poll_results.last
     @comment = Comment.new
+    @image = Image.new
   end
   def create
     @candidate = Candidate.new(candidate_params)

@@ -11,8 +11,19 @@
     <% end %><br>
   <%end%>
   <% if @candidate.group %>
-  <strong>Group</strong>: <%= candidate_link @candidate.group %>
+  <strong>Group</strong>: <%= candidate_link @candidate.group %><br>
   <% end %>
+  <% if @candidate.images %>
+    <%= render 'gallery', images: @candidate.images %>
+  <% end %>
+  <h3>Add An Image</h3>
+  <%= semantic_form_for @image, url: chambers_images_path do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :image, label: 'Image', as: :file %>
+      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
+    <% end %>
+    <%= f.button class: 'btn btn-default' %>
+  <% end %> 
   <% unless @pr.nil? %>
     <table class="table">
     <thead>
