@@ -8,10 +8,10 @@ set :repo_url, 'mrio@caroso.elkiss.com:/srv/repos/laurel.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/srv/www/laurel_demo'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -24,6 +24,7 @@ set :repo_url, 'mrio@caroso.elkiss.com:/srv/repos/laurel.git'
 # set :pty, true
 
 # Default value for :linked_files is []
+set :linked_files, fetch(:linked_files, []).push('.env')
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
@@ -34,3 +35,7 @@ set :repo_url, 'mrio@caroso.elkiss.com:/srv/repos/laurel.git'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+
+set :rbenv_ruby, '2.3.0'
+set :rbenv_path, '/home/aelkiss/.rbenv'

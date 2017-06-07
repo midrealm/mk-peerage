@@ -30,9 +30,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
+gem 'capistrano-rbenv', group: :development
 
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'paperclip'
 gem 'select2-rails'
 gem 'formtastic'
