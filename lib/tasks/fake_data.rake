@@ -153,6 +153,8 @@ namespace :fake_data do
       u.profile_pic = File.open('lib/assets/fake_data/oliver.png')
       u.group = Group.find_by(name: 'Roaring Wastes')
     end    
+    Image.create(candidate:oliver, image: File.open('lib/assets/fake_data/oliver_1.jpg'))
+    Image.create(candidate:oliver, image: File.open('lib/assets/fake_data/oliver_2.jpg'))
 
     Specialization.create(candidate: oliver, specialty: Specialty.find_by(name: 'Painting'))
     Advocacy.create(candidate: oliver, user: hilliard)

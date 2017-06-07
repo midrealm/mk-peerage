@@ -1,3 +1,4 @@
+<div class ="row">
 <div class="col-md-8">
   <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
   <% if @candidate.specialties.count > 0 %>
@@ -67,6 +68,7 @@
 </div>
 <div class="col-md-4">
 <%= image_tag @candidate.profile_pic.url(:large) %>
+</div>
 </div>
 <script>
   var simplemde = new SimpleMDE();
