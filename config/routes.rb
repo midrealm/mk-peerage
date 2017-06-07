@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   namespace :chambers do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
+    resources :images, only: [:create]
   end
   scope :chambers do
     resources :comments, only: [:create]

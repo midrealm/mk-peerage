@@ -1,5 +1,6 @@
 class Candidate < ApplicationRecord
   after_initialize :set_defaults
+  has_many :images
 
   has_many :advocacies
   has_many :users, through: :advocacies

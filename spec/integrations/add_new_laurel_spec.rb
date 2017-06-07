@@ -6,13 +6,13 @@ RSpec.feature 'Add New Laurel' do
     admin = create(:user, role: :admin)
     expect(User.count).to eq(1)
     sign_in(admin)
-    visit '/admin/users/new' 
-    fill_in 'name', with: 'Smarty Pants'
-    fill_in 'email', with: 'fake@elkiss.com'
-    click_on 'Create User'
+    visit '/chambers/admin/laurels/new' 
+    fill_in 'laurel_sca_name', with: 'Smarty Pants'
+    fill_in 'laurel_email', with: 'fake@elkiss.com'
+    click_on 'Create Laurel'
     
     expect(User.count).to eq(2)
-    expect(User.name).to eq('Smarty Pants')
+    expect(User.last.sca_name).to eq('Smarty Pants')
     expect(User.last.email).to eq('fake@elkiss.com')
   end
 end

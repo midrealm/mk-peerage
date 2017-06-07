@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :image do
+    image ""
+    candidate nil
+  end
   factory :poll_result do
     candidate
     poll 

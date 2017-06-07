@@ -4,6 +4,7 @@ describe 'Get /chambers/groups' do
     group = create(:group, name: 'the Middle')
     child = create(:group, name: 'High Haven', parent_id: group.id)
     laurel = create(:user, sca_name: 'Mundugus Jones', group: group)
+    candidate = create(:candidate, group: child)
     sign_in(laurel)
     get '/chambers/groups'
     expect(response).to have_http_status(:success)
@@ -15,6 +16,7 @@ describe 'Get /chambers/groups' do
     sign_in(laurel)
     child = create(:group, name: 'The Barrows', parent_id: group.id)
     grand_child = create(:group, name: 'Poopland', parent_id: child.id)
+    create(:candidate, group: grand_child)
     get '/chambers/groups'
     expect(response.body).not_to include('/chambers/groups/the_Middle')
     expect(response.body).to include('/chambers/groups/The_Barrows')

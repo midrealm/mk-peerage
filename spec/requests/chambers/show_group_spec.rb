@@ -15,6 +15,7 @@ describe 'Get /chambers/groups/High_Haven' do
     group = create(:group, name: 'High Haven')
     child = create(:group, name: 'The Barrows', parent_id: group.id)
     grand_child = create(:group, name: 'Poopland', parent_id: child.id)
+    create(:candidate, group: grand_child)
     get '/chambers/groups/High_Haven'
     expect(response.body).not_to include('/groups/High_Haven')
     expect(response.body).to include('/groups/The_Barrows')
