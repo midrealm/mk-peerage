@@ -7,7 +7,7 @@
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
       <li role="presentation"><a href="#images" aria-controls="contact" role="tab" data-toggle="tab">Images</a></li>
     </ul>
-    <%= semantic_form_for @user, url: users_edit_path do |f| %>
+    <%= semantic_form_for @user, url: users_update_path do |f| %>
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="personal">
       <%= f.inputs do %>
