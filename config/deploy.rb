@@ -24,7 +24,7 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('.env')
+set :linked_files, fetch(:linked_files, []).push('.env', 'config/secrets.yml')
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
@@ -38,9 +38,16 @@ set :linked_files, fetch(:linked_files, []).push('.env')
 
 
 set :rbenv_ruby, '2.3.0'
-set :rbenv_path, '/home/aelkiss/.rbenv'
+set :rbenv_path, '/home/mrio/.rbenv'
 
 namespace :deploy do
+  desc 'Restart application'
+  task :restart do
+   on roles(:app) do
+     execute :sudo, '/bin/systemctl', 'restart', 'laurel_demo'
+   end
+  end
+
   task :init_db do
     on primary fetch(:migration_role) do
       within release_path do
@@ -51,4 +58,5 @@ namespace :deploy do
     end
   end
   before :finishing, :init_db
+  after  :finishing, :restart
 end
