@@ -45,7 +45,7 @@ namespace :deploy do
     on primary fetch(:migration_role) do
       within release_path do
         with rails_env: fetch(:rails_env)  do
-          execute :rake, 'fake_data:all'
+          execute :rake, 'fake_data:all DISABLE_DATABASE_ENVIRONMENT_CHECK=1'
         end
       end
     end
