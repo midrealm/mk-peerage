@@ -57,6 +57,6 @@ namespace :deploy do
       end
     end
   end
-  before :finishing, :init_db
+  #before :finishing, :init_db
   after  :finishing, :restart
 end
