@@ -20,7 +20,7 @@ Procfile
 /tmp/
 /log
 /db/*.sqlite3
-config/database.yml
+#config/database.yml
 spec/examples.txt
 
 #Ignore Spring Files
