@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get '/laurels/:slug' => 'laurels#show'
   get '/laurels' => 'laurels#index'
+  get '/laurels/:slug/contact' => 'contact#new', as: :contact_laurel
+  post 'laurels/:slug/contact' => 'contact#create'
 
   get '/chambers' => 'users#index'
 

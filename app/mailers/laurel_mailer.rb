@@ -21,4 +21,10 @@ class LaurelMailer < Devise::Mailer
       devise_mail(record, :reset_password_instructions, opts)
     end
   end
+  def contact_laurel(user, subject, from_name, from_email, message)
+    @message = message
+    @from_name = from_name
+    @from_email = from_email
+    mail(to: user.email, from:'no_reply@laurelist.org', subject: "Contact from Midrealm Laurel Site: #{subject}", reply_to: from_email)
+  end
 end

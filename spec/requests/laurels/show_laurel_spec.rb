@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "Get /" do
+describe "Get /laurels/LAUREL_NAME" do
   it "shows laurel page" do
     laurel = create(:user, sca_name: 'Mundungus Smith')
     get "/laurels/mundungus_smith"

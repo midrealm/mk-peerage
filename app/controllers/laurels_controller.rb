@@ -7,4 +7,5 @@ class LaurelsController < ApplicationController
     @active_laurels = User.where("active = ? AND laurel = ?", true, true)
     @inactive_laurels = User.where("active = ? AND laurel = ?", false, true)
   end
+
 end
