@@ -3,4 +3,5 @@ Recaptcha.configure do |config|
   config.private_key = ENV['RECAPTCHA_SECRET_KEY']
   # Uncomment the following line if you are using a proxy server:
   # config.proxy = 'http://myproxy.com.au:8080'
+  #config.proxy = 'http://www.google.com/recaptcha/api/verify'
 end

@@ -58,8 +58,10 @@
   </div><!-- /.container-fluid -->
 </nav>
   <div class="container">
-       <!--<p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p> -->
+    <div class="flash">
+       <span class="bg-success"><%= notice %></span>
+       <span class="bg-danger"><%= alert %></span>
+    </div>
     <%= yield %>
   </div>
     <%= jskit %>

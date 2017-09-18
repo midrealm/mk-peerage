@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/groups' => 'groups#index'
   get '/groups/:name' => 'groups#show'
 
-  get '/laurels/:slug' => 'laurels#show'
+  get '/laurels/:slug' => 'laurels#show', as: :laurel
   get '/laurels' => 'laurels#index'
   get '/laurels/:slug/contact' => 'contact#new', as: :contact_laurel
   post 'laurels/:slug/contact' => 'contact#create'

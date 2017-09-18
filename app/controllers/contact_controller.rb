@@ -5,8 +5,19 @@ class ContactController < ApplicationController
 
   def create
     @laurel = User.find_by(slug:params[:slug])
-    # *contact_params.values explodes items out of the array
-    LaurelMailer.contact_laurel(@laurel, *contact_params.values).deliver 
+    if verify_recaptcha
+      if params['contact']['message'].present?
+        # *contact_params.values explodes items out of the array
+        LaurelMailer.contact_laurel(@laurel, *contact_params.values).deliver 
+        flash.notice = "email successfully sent"
+        redirect_to laurel_path
+      else
+        flash.alert = "not sending email - message must be present"
+        render 'new'
+      end
+    else
+      render 'new'
+    end
   end
 
   private

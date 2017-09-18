@@ -19,16 +19,36 @@ RSpec.feature 'Contact email' do
     expect(email.subject).to match(TEST_SUBJECT)
   end
 
-  scenario 'sends email to laurel' do
+  def setup_contact
     laurel = create(:user, sca_name: 'Mundungus Smith')
     visit "/laurels/#{laurel.slug}/contact"
+    laurel
+  end
+
+  scenario 'sends email to laurel' do
+    laurel = setup_contact
     send_mail
     expect_email_to(laurel.email)
   end
 
+  scenario 'does not send an empty email' do
+    setup_contact
+    expect { send_mail('') }.not_to change(ActionMailer::Base.deliveries, :count)
+  end
+
   context "with recaptcha enabled" do
     before(:each) do
-      Recaptcha.configureation.skip_verify_env << "test"
+      Recaptcha.configuration.skip_verify_env << "test"
+    end
+
+    scenario 'does not send email without recaptcha' do
+      Recaptcha.configuration.skip_verify_env.delete('test')
+      setup_contact
+      expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
+    end
+
+    after(:each) do
+      Recaptcha.configuration.skip_verify_env << "test"
     end
   end
 
