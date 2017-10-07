@@ -6,19 +6,55 @@ App.createController("Users", {
     edit: {
       profile: '#profile_preview',
       clickTab: ["#myTabs a", { click: 'toggleImagePreview' }],
-      loadNewPic: ['#profile_pic', { change: 'openCroppie' }], 
+      loadNewPic: ['.profile-pic', { change: 'openCroppie' }], 
       loadNewArms: ['#user_arms', {change: 'previewArms' }],
       cropPicButton: ['#crop', { click: 'cropPicture' }],
       clickSubmitButton: ['#submit', { click: 'validate' }], 
     },
   },
   toggleImagePreview: function(e){
-    if(e.target.hash == '#images'){
+    $('.image-preview').addClass('hidden')
+      $('.user-profile-pic-input').removeClass('active')
+      $('.profile-pic').removeClass('active')
+      $('.user-profile-pic').removeClass('active')
+      $('.orig-profile-pic').removeClass('active')
+    if(e.target.hash == '#personal'){
+      $('#arms_image_preview').removeClass('hidden')
+    }else if(e.target.hash == '#laurel'){
       $('#image_preview').removeClass('hidden')
-    }else{
-      $('#image_preview').addClass('hidden')
-    }
+      $('#laurel .user-profile-pic-input').addClass('active')
+      $('#laurel .profile-pic').addClass('active')
+      $('#laurel .user-profile-pic').addClass('active')
+      $('#laurel .orig-profile-pic').addClass('active')
+      var $img = $('#laurel .orig-profile-pic').clone().removeClass('hidden')
+      $('#profile_preview').html($img) 
+    }else if(e.target.hash == '#pelican'){
+      $('#image_preview').removeClass('hidden')
+      $('#pelican .user-profile-pic-input').addClass('active')
+      $('#pelican .profile-pic').addClass('active')
+      $('#pelican .user-profile-pic').addClass('active')
+      $('#pelican .orig-profile-pic').addClass('active')
+      var $img = $('#pelican .orig-profile-pic').clone().removeClass('hidden')
+      $('#profile_preview').html($img) 
+    }else if(e.target.hash == '#knight'){
+      $('#image_preview').removeClass('hidden')
+      $('#knight .user-profile-pic-input').addClass('active')
+      $('#knight .profile-pic').addClass('active')
+      $('#knight .user-profile-pic').addClass('active')
+      $('#knight .orig-profile-pic').addClass('active')
+      var $img = $('#knight .orig-profile-pic').clone().removeClass('hidden')
+      $('#profile_preview').html($img) 
+    }else if(e.target.hash == '#defense'){
+      $('#image_preview').removeClass('hidden')
+      $('#defense .user-profile-pic-input').addClass('active')
+      $('#defense .profile-pic').addClass('active')
+      $('#defense .user-profile-pic').addClass('active')
+      $('#defense .orig-profile-pic').addClass('active')
+      var $img = $('#defense .orig-profile-pic').clone().removeClass('hidden')
+      $('#profile_preview').html($img) 
+    }     
   },
+
   validate: function(e){
     $('.has-error').removeClass('has-error')    
     $('.help-block').remove();
@@ -28,16 +64,6 @@ App.createController("Users", {
       $('#user_sca_name_input').addClass('has-error').append(msg)
       has_errors = true
     } 
-  //  if($('#candidate_group_id').val() == ''){
-  //    var msg = $('<span>').addClass('help-block').text('Need Group')
-  //    $('#candidate_group_input').addClass('has-error').append(msg)
-  //    has_errors = true
-  //  }
-  //  if(this.$profile.is(':empty')){
-  //    var msg = $('<span>').addClass('help-block').text('Need Profile Picture');
-  //    $('#candidate_profile_pic_input').addClass('has-error').append(msg)
-  //    has_errors = true;
-  //  }
     if(has_errors){
       e.preventDefault(); 
     }else if(!$('#crop').hasClass('hidden')){
@@ -93,7 +119,8 @@ App.createController("Users", {
       }).then(function(resp){
         $('#profile_preview').empty().append($('<img>',{src: resp}));
         $('#crop').addClass('hidden')
-        $('#user_profile_pic').val(resp)
+        $('.user-profile-pic.active').first().val(resp)
+        $('.orig-profile-pic.active').first().attr('src',resp)
         $('#crop').trigger('cropped')
         resolve('Success');
       });

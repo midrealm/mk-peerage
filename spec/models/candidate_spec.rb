@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Candidate, type: :model do
   it {should have_many(:advocacies)}
-  it {should have_many(:users).through(:advocacies)}
+  it {should have_many(:peers).through(:advocacies)}
 
   it {should have_many(:comments)}
   it {should have_many(:images)}
@@ -16,7 +16,7 @@ end
 
 RSpec.describe Candidate, 'poll_entry_submitted?' do
   before(:each) do
-    @laurel = create(:user, laurel: true)
+    @laurel = create(:peer)
     @candidate = create(:candidate)
     @judgement = create(:judgement)
   end
@@ -25,7 +25,7 @@ RSpec.describe Candidate, 'poll_entry_submitted?' do
       @current_poll = build(:poll, start_date: DateTime.now - 1.day)
       @current_poll.save(validate: false)
       @advising = build(:advising, candidate: @candidate, 
-        poll: @current_poll, user: @laurel, comment: 'Comment', 
+        poll: @current_poll, peer: @laurel, comment: 'Comment', 
         judgement: @judgement, submitted: true)
     end
     it "returns true if user has a submitted advising for given poll" do
@@ -49,7 +49,7 @@ RSpec.describe Candidate, 'poll_entry_submitted?' do
         end_date: DateTime.now - 1.day)
       @past_poll.save(validate: false)
       @advising = create(:advising, candidate: @candidate,
-        poll: @past_poll, user: @laurel, comment: 'Comment', 
+        poll: @past_poll, peer: @laurel, comment: 'Comment', 
         judgement: @judgement, submitted: true)
 
       expect(@candidate.poll_entry_submitted?(@laurel)).to be_falsey

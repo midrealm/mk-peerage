@@ -1,0 +1,2 @@
+class Laurel < Peer
+end

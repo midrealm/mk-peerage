@@ -3,7 +3,7 @@ class Candidate < ApplicationRecord
   has_many :images
 
   has_many :advocacies
-  has_many :users, through: :advocacies
+  has_many :peers, through: :advocacies
 
   has_many :specializations
   has_many :specialties, through: :specializations
@@ -24,9 +24,9 @@ class Candidate < ApplicationRecord
     return self.specialties.map{|s| s.name}.to_sentence
   end
 
-  def poll_entry_submitted?(user)
+  def poll_entry_submitted?(peer)
     if(Poll.last.active?)
-      advising = Advising.find_by(candidate: self, user: user, 
+      advising = Advising.find_by(candidate: self, peer: peer, 
         poll: Poll.last, submitted: true)
       if advising.nil?
         return false

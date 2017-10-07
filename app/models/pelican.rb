@@ -1,0 +1,2 @@
+class Pelican < Peer
+end

@@ -4,7 +4,9 @@
     <ul class="nav nav-tabs" id="myTabs" role="tablist">
       <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
-      <li role="presentation"><a href="#images" aria-controls="contact" role="tab" data-toggle="tab">Images</a></li>
+      <% @peerages.each do |peerage| %>
+        <li role="presentation"><%= link_to peerage, "##{peerage.downcase}", aria: {controls: peerage.downcase}, role: "tab", data: { toggle: "tab"} %></li>
+      <% end %>
     </ul>
     <%= semantic_form_for @user, url: users_edit_path do |f| %>
     <div class="tab-content">
@@ -12,17 +14,12 @@
       <%= f.inputs do %>
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :modern_name, label: 'Modern Name' %>
-        <%= f.input :specialties %>
-        <%= f.input :specialty_detail %>
+        <%=# f.input :specialties 
+%>
         <%= f.input :group, :as => :select, :collection => Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
-        <%= f.input :active, label: "Active?" %>
-        <%= f.input :vigilant, label: "Vigilant?" %>
-        <%= f.input :elevators, label: "Elevated by" %>
-        <%= f.input :elevation_date  %>
-        <%= f.input :laurels, label: 'Apprenticed To:', :collection => User.pluck(:sca_name, :id)%>
-        <%= f.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)'  %>
-        <%= f.input :bio %>
-      <% end %>
+        <%= f.input :arms %>
+
+      <%end%>
       </div>
       <div role="tabpanel" class="tab-pane" id="contact">
       <%= f.inputs do %>
@@ -33,30 +30,49 @@
         <%= f.input :phone %>
       <% end %>
       </div>
-      <div role="tabpanel" class="tab-pane" id="images">
-      <%= f.inputs do %>
-        <%= f.input :arms %>
-        <div id='user_profile_pic_input' class='form-group'>
-          <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
-          <span class="form-wrapper">
-            <input id="profile_pic" type="file" name="not_included">
-          </span>
+
+      <% @peerages.each do |peerage| %>
+        <div role="tabpanel" class="tab-pane" id=<%=peerage.downcase%>>
+        <%= f.inputs do %>
+          <%= f.semantic_fields_for peerage.downcase.to_sym do |p| %>
+            <%= p.inputs do %>
+            <div class='form-group user-profile-pic-input' id="user_<%=peerage.downcase%>_attributes_profile_pic_input">
+              <span class="form-label"><label for="user_<%=peerage.downcase%>_attributes_profile_pic" class="control-label"><%=peerage%> Profile Pic</label></span>
+              <span class="form-wrapper">
+                <input class="profile-pic" type="file" name="not_included">
+              </span>
+            </div>
+            <input id="user_<%=peerage.downcase%>_attributes_profile_pic" type="hidden" class="user-profile-pic" name="user[<%=peerage.downcase%>_attributes][profile_pic]" value=<%=@user.peers.find_by(type: peerage).profile_pic_data_uri%>>
+        <%= image_tag @user.peers.find_by(type: peerage).profile_pic.url(:large), class:'hidden orig-profile-pic' %>
+            <%= p.input :specialty_detail %>
+            <%= p.input :active, label: "Active?" %>
+            <%= p.input :vigilant, label: "Vigilant?" %>
+            <%= p.input :elevated_by, label: "Elevated by" %>
+            <%= p.input :elevation_date  %>
+            <%=# f.input :laurels, label: 'Apprenticed To:', :collection => User.pluck(:sca_name, :id)
+%>
+            <%=#:w f.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)' 
+ 
+%>
+            <%= p.input :bio %>
+            <% end %>
+          <%end%>
+        <% end %>
         </div>
-        <input type="hidden" id="user_profile_pic" name="user[profile_pic]" value=''>
-      <% end %>
-  
-      </div>
-      
+      <%end%>
+
       <%= f.button class: 'btn btn-default', id: 'submit' %>
     <% end %>
     </div>
   </div>
-  <div class="col-md-4 hidden" id="image_preview">
+ 
+  <div class="col-md-4 image-preview" id="arms_image_preview">
     <div id="arms_preview">
         <%= image_tag @user.arms.url(:large) %>
     </div>
+  </div>
+  <div class="col-md-4 hidden image-preview" id="image_preview">
     <div id="profile_preview">
-        <%= image_tag @user.profile_pic.url(:large) %>
     </div>
     <button class="btn btn-default hidden" id="crop">Finish</button>
   </div>

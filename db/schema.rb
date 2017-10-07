@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529020145) do
+ActiveRecord::Schema.define(version: 20171007014715) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
     t.integer  "candidate_id"
     t.integer  "poll_id"
     t.integer  "judgement_id"
@@ -21,20 +20,21 @@ ActiveRecord::Schema.define(version: 20170529020145) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "submitted"
+    t.integer  "peer_id"
     t.index ["candidate_id"], name: "index_advisings_on_candidate_id", using: :btree
     t.index ["judgement_id"], name: "index_advisings_on_judgement_id", using: :btree
+    t.index ["peer_id"], name: "index_advisings_on_peer_id", using: :btree
     t.index ["poll_id"], name: "index_advisings_on_poll_id", using: :btree
-    t.index ["user_id"], name: "index_advisings_on_user_id", using: :btree
   end
 
   create_table "advocacies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
     t.integer  "candidate_id"
     t.boolean  "apprenticeship"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "peer_id"
     t.index ["candidate_id"], name: "index_advocacies_on_candidate_id", using: :btree
-    t.index ["user_id"], name: "index_advocacies_on_user_id", using: :btree
+    t.index ["peer_id"], name: "index_advocacies_on_peer_id", using: :btree
   end
 
   create_table "apprenticeships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -62,13 +62,13 @@ ActiveRecord::Schema.define(version: 20170529020145) do
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
     t.integer  "candidate_id"
     t.text     "text",         limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "peer_id"
     t.index ["candidate_id"], name: "index_comments_on_candidate_id", using: :btree
-    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+    t.index ["peer_id"], name: "index_comments_on_peer_id", using: :btree
   end
 
   create_table "group_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -103,6 +103,25 @@ ActiveRecord::Schema.define(version: 20170529020145) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "peers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "type"
+    t.text     "bio",                      limit: 65535
+    t.date     "elevation_date"
+    t.string   "elevated_by"
+    t.string   "specialty_detail"
+    t.boolean  "active"
+    t.boolean  "vigilant"
+    t.string   "role"
+    t.integer  "user_id"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
+    t.index ["user_id"], name: "index_peers_on_user_id", using: :btree
+  end
+
   create_table "poll_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "candidate_id"
     t.integer  "poll_id"
@@ -126,14 +145,14 @@ ActiveRecord::Schema.define(version: 20170529020145) do
   end
 
   create_table "specializations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
     t.integer  "specialty_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "candidate_id"
+    t.integer  "peer_id"
     t.index ["candidate_id"], name: "index_specializations_on_candidate_id", using: :btree
+    t.index ["peer_id"], name: "index_specializations_on_peer_id", using: :btree
     t.index ["specialty_id"], name: "index_specializations_on_specialty_id", using: :btree
-    t.index ["user_id"], name: "index_specializations_on_user_id", using: :btree
   end
 
   create_table "specialties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -143,18 +162,18 @@ ActiveRecord::Schema.define(version: 20170529020145) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                                  default: "", null: false
-    t.string   "encrypted_password",                     default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "sca_name"
     t.string   "modern_name"
     t.string   "street"
@@ -162,27 +181,14 @@ ActiveRecord::Schema.define(version: 20170529020145) do
     t.string   "state"
     t.string   "zipcode"
     t.string   "phone"
-    t.string   "elevators"
-    t.boolean  "active"
     t.boolean  "deceased"
-    t.boolean  "vigilant"
-    t.date     "elevation_date"
-    t.text     "bio",                      limit: 65535
     t.string   "arms_file_name"
     t.string   "arms_content_type"
     t.integer  "arms_file_size"
     t.datetime "arms_updated_at"
-    t.string   "profile_pic_file_name"
-    t.string   "profile_pic_content_type"
-    t.integer  "profile_pic_file_size"
-    t.datetime "profile_pic_updated_at"
-    t.string   "apprenticed_to"
-    t.integer  "role"
     t.integer  "group_id"
-    t.string   "specialty_detail"
     t.string   "slug"
     t.boolean  "royalty"
-    t.boolean  "laurel"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["group_id"], name: "index_users_on_group_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -190,21 +196,21 @@ ActiveRecord::Schema.define(version: 20170529020145) do
 
   add_foreign_key "advisings", "candidates"
   add_foreign_key "advisings", "judgements"
+  add_foreign_key "advisings", "peers"
   add_foreign_key "advisings", "polls"
-  add_foreign_key "advisings", "users"
   add_foreign_key "advocacies", "candidates"
-  add_foreign_key "advocacies", "users"
+  add_foreign_key "advocacies", "peers"
   add_foreign_key "apprenticeships", "users"
   add_foreign_key "apprenticeships", "users", column: "laurel_id"
   add_foreign_key "candidates", "groups"
   add_foreign_key "comments", "candidates"
-  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "peers"
   add_foreign_key "groups", "group_types"
   add_foreign_key "images", "candidates"
   add_foreign_key "poll_results", "candidates"
   add_foreign_key "poll_results", "polls"
   add_foreign_key "specializations", "candidates"
+  add_foreign_key "specializations", "peers"
   add_foreign_key "specializations", "specialties"
-  add_foreign_key "specializations", "users"
   add_foreign_key "users", "groups"
 end

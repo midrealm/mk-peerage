@@ -1,4 +1,14 @@
 FactoryGirl.define do
+  factory :peer do
+    type "Laurel"
+    bio "MyText"
+    elevation_date "2017-10-04"
+    elevated_by "Arthur and Guinevere"
+    specialty_detail "Earwax Studies"
+    active true
+    vigilant false
+    role "normal"
+  end
   factory :image do
     image ""
     candidate nil
@@ -14,7 +24,7 @@ FactoryGirl.define do
     fav 1.5
   end
   factory :advising do
-    user 
+    peer 
     candidate 
     poll
     judgement 
@@ -36,12 +46,12 @@ FactoryGirl.define do
     name "MyString"
   end
   factory :comment do
-    user 
+    peer 
     candidate 
     text "MyText"
   end
   factory :advocacy do
-    user 
+    peer 
     candidate 
     apprenticeship false
   end
@@ -53,7 +63,7 @@ FactoryGirl.define do
   #  laurel_id 1 
   #end
   factory :specialization do
-    user 
+    peer 
     specialty 
     candidate
   end
