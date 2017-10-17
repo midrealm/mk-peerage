@@ -14,15 +14,8 @@
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :modern_name, label: 'Modern Name' %>
         <%= f.input :specialties %>
-        <%= f.input :specialty_detail %>
         <%= f.input :group, :as => :select, :collection => Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
-        <%= f.input :active, label: "Active?" %>
-        <%= f.input :vigilant, label: "Vigilant?" %>
-        <%= f.input :elevators, label: "Elevated by" %>
-        <%= f.input :elevation_date  %>
         <%= f.input :laurels, label: 'Apprenticed To:', :collection => User.pluck(:sca_name, :id)%>
-        <%= f.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)'  %>
-        <%= f.input :bio %>
       <% end %>
       </div>
       <div role="tabpanel" class="tab-pane" id="contact">
@@ -39,6 +32,12 @@
           <%= f.semantic_fields_for :peer do |p| %>
             <%= p.inputs do %>
               <%= p.input :specialty_detail %>
+              <%= p.input :elevated_by %>
+              <%= p.input :elevation_date %>
+              <%= p.input :active, label: "Active?" %>
+              <%= p.input :vigilant, label: "Vigilant?" %>
+              <%= p.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)'  %>
+              <%= p.input :bio %>
             <% end %>
           <% end %>
         <% end %>

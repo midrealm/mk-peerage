@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable 
   
   has_one :peer
+  accepts_nested_attributes_for :peer
+
   has_many :specializations
   has_many :specialties, through: :specializations
   
