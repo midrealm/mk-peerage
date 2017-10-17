@@ -9,6 +9,7 @@ module Admin
       @users = User.where(laurel: true)
     end
   def create
+    authorize! :manage, :all
     @laurel = User.new(laurel_params)
     pwd = Devise.friendly_token.first(8)  
     @laurel.password = pwd

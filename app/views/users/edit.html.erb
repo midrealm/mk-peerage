@@ -4,6 +4,7 @@
     <ul class="nav nav-tabs" id="myTabs" role="tablist">
       <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
+      <li role="presentation"><a href="#peer" aria-controls="peer" role="tab" data-toggle="tab">Peer</a></li>
       <li role="presentation"><a href="#images" aria-controls="contact" role="tab" data-toggle="tab">Images</a></li>
     </ul>
     <%= semantic_form_for @user, url: users_edit_path do |f| %>
@@ -32,6 +33,8 @@
         <%= f.input :zipcode %>
         <%= f.input :phone %>
       <% end %>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="peer">
       </div>
       <div role="tabpanel" class="tab-pane" id="images">
       <%= f.inputs do %>

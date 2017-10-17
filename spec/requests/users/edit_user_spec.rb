@@ -1,8 +1,7 @@
 require "rails_helper"
 describe "Get /users/edit" do
   it "shows edit page for laurel" do
-    user = create(:user, sca_name: 'Mundugus Jones')
-    laurel = create(:peer, user: user)
+    user = create(:user)
     sign_in(user)
     get "/users/edit"
     expect(response).to have_http_status(:success)
