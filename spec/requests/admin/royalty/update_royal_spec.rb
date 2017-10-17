@@ -1,9 +1,9 @@
 require "rails_helper"
 describe "put /chambers/admin/royalty/:id" do
   it "edits royalty status for given laurel, redirects to royalty manage page" do
-    laurel = create(:user, sca_name: 'Mundungus Jones', role: 'admin')
+    admin = create(:admin)
     royal = create(:user, sca_name: 'New Royal', royalty: false)
-    sign_in(laurel)
+    sign_in(admin)
 
     expect(User.last.sca_name).to eq('New Royal')
     expect(User.last.royalty).to be_falsy

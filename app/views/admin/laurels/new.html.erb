@@ -1,7 +1,7 @@
 <h1>Add New Laurel</h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @laurel, as: :laurel, url: admin_laurels_path do |f| %>
+    <%= semantic_form_for 'laurel', url: admin_laurels_path do |f| %>
       <%= f.inputs do %>
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :vigilant, as: :radio, label: 'Status', collection: [['Vigilant',true],['Elevated',false]] %>

@@ -1,8 +1,9 @@
 require "rails_helper"
 describe "put /chambers/admin/laurels/:id" do
-  it "edits profile for signed in laurel, and redirects to profile page" do
+  it "edit profile for signed in laurel, and redirects to profile page" do
     laurel = create(:user, sca_name: 'Mundungus Jones', role: 'admin')
-    newly_deceased = create(:user, sca_name: 'Newly Deceased', active: true, deceased: false)
+    newly_deceased = create(:user, sca_name: 'Newly Deceased', deceased: false)
+    newly_deceased_peer = create(:peer, user: newly_deceased, active: true)
     sign_in(laurel)
 
     expect(User.last.sca_name).to eq('Newly Deceased')

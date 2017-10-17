@@ -11,14 +11,7 @@ describe "post /chambers/admin/royalty" do
     royal = create(:user, sca_name: 'Mundugus Jones', role: 'admin')
     sign_in(royal)
     post '/chambers/admin/royalty', params: { :royal => {sca_name: 'Dingus McDOOOGLE', email: 'dingus@doogleson.com'} }
-    expect(User.last.active).to be_truthy 
     expect(User.last.royalty).to be_truthy
-  end
-  it "handles false for vigilant for new royal" do
-    laurel = create(:user, sca_name: 'Mundugus Jones', role: 'admin')
-    sign_in(laurel)
-    post '/chambers/admin/royalty', params: { :royal => {sca_name: 'Dingus McDOOOGLE', vigilant: false, email: 'dingus@doogleson.com'} }
-    expect(User.last.vigilant).to be_falsey 
   end
   it "shows generates slug for new royal" do
     laurel = create(:user, sca_name: 'Mundugus Jones', role: 'admin')

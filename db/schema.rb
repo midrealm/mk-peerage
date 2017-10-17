@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529020145) do
+ActiveRecord::Schema.define(version: 20171016135331) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -101,6 +101,25 @@ ActiveRecord::Schema.define(version: 20170529020145) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "peers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "elevated_by"
+    t.boolean  "active"
+    t.boolean  "vigilant"
+    t.date     "elevation_date"
+    t.text     "bio",                      limit: 65535
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
+    t.string   "apprenticed_to"
+    t.boolean  "admin"
+    t.string   "specialty_detail"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_peers_on_user_id", using: :btree
   end
 
   create_table "poll_results", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -201,6 +220,7 @@ ActiveRecord::Schema.define(version: 20170529020145) do
   add_foreign_key "comments", "users"
   add_foreign_key "groups", "group_types"
   add_foreign_key "images", "candidates"
+  add_foreign_key "peers", "users"
   add_foreign_key "poll_results", "candidates"
   add_foreign_key "poll_results", "polls"
   add_foreign_key "specializations", "candidates"

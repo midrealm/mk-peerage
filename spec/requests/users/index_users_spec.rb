@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe "Get /chambers" do
-  describe "logged in laurel user" do
+  describe "logged in non-royal" do
     before(:each) do
-      laurel = create(:user, laurel: true)
-      sign_in(laurel)
+      peer = create(:user)
+      sign_in(peer)
     end
     it "shows dashboard for logged in user" do
       get "/chambers"
@@ -19,7 +19,7 @@ describe "Get /chambers" do
   end
   describe "admin user" do
     before(:each) do
-      admin = create(:user, role: :admin)
+      admin = create(:admin)
       sign_in(admin)
     end
     it "shows Admin Tasks" do
@@ -110,7 +110,7 @@ describe "Get /chambers" do
     end
     describe "for admin user" do
       before(:each) do
-        admin = create(:user, role: :admin)
+        admin = create(:admin)
         sign_in(admin)
       end
       it "shows create poll link for admin if no active or scheduled poll" do

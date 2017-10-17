@@ -12,6 +12,7 @@ describe "Get /chambers/candidates/:id/poll_comments" do
     context 'past poll result' do
       before(:each) do
         @laurel = create(:user)
+        create(:peer, user: @laurel)
         @p = build(:poll, start_date: DateTime.now - 2.days, 
           end_date: DateTime.now - 1.day)
         @p.save(validate: false)

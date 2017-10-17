@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "put /chambers/admin/poll" do
   it "updates poll, and redirects to profile page" do
-    laurel = create(:user, role: 'admin')
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     poll = create(:poll)
     start_date = (DateTime.now + 3.days).strftime('%d-%b-%Y')
     end_date = (DateTime.now + 4.days).strftime('%d-%b-%Y')
@@ -10,8 +10,8 @@ describe "put /chambers/admin/poll" do
     expect(response).to redirect_to "/chambers"
   end
   it "updates poll for current poll" do
-    laurel = create(:user, role: 'admin')
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     poll = build(:poll, start_date: DateTime.now - 1.day, end_date: DateTime.now + 1.day)
     poll.save(:validate => false)
     end_date = (DateTime.now + 4.days).strftime('%d-%b-%Y')

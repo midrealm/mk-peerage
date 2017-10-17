@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "Get /chambers/admin/laurels/new" do
   it "shows form for new user if admin user" do
-    laurel = create(:user, role: :admin)
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     get "/chambers/admin/laurels/new"
     expect(response).to have_http_status(:success)
     expect(response.body).to include('Add New Laurel')

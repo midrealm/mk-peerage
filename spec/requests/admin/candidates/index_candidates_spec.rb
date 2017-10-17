@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "Get /chambers/admin/candidates" do
   it "shows list of candidates if admin user" do
-    laurel = create(:user, role: :admin)
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     get "/chambers/admin/candidates"
     expect(response).to have_http_status(:success)
     expect(response.body).to include('Manage Candidates')

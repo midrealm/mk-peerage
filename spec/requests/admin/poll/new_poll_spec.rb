@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "Get /chambers/admin/poll/new" do
   it "shows form for new user if admin user" do
-    laurel = create(:user, role: :admin)
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     get "/chambers/admin/poll/new"
     expect(response).to have_http_status(:success)
     expect(response.body).to include('Create New Poll')
@@ -13,7 +13,7 @@ describe "Get /chambers/admin/poll/new" do
     expect(response.body).to include('redirected')
   end
   it "rasies AccessDenied Error if user is not an admin" do
-    laurel = create(:user, role: :normal)
+    laurel = create(:user)
     sign_in(laurel)
     expect{get "/chambers/admin/poll/new"}.to raise_error(CanCan::AccessDenied)
   end

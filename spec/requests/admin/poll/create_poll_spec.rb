@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "post /chambers/admin/poll" do
   before(:each) do
-    laurel = create(:user, role: 'admin')
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     @start_date = (Date.today + 1.day).strftime('%d-%b-%Y') 
     @end_date = (Date.today + 2.days).strftime('%d-%b-%Y') 
   end

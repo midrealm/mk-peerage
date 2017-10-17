@@ -3,7 +3,6 @@ module Admin
     before_action :authenticate_user!
     def new
       authorize! :manage, :all
-      @laurel = User.new
     end
     def index
       authorize! :manage, :all
@@ -17,6 +16,9 @@ module Admin
     @laurel.vigilant = true if params[:laurel][:vigilant].nil?
     @laurel.laurel = true
     if @laurel.save
+      Peer.create(user: @laurel, active: true) do |p|
+        p.vigilant = true if params[:laurel][:vigilant].nil?
+      end
       redirect_to "/laurels/#{@laurel.slug}"
       @laurel.send_reset_password_instructions
     else

@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "Get /chambers/admin/royalty/new" do
   it "shows form for new user if admin user" do
-    laurel = create(:user, role: :admin)
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     get "/chambers/admin/royalty/new"
     expect(response).to have_http_status(:success)
     expect(response.body).to include('Add New Royal')
@@ -13,8 +13,8 @@ describe "Get /chambers/admin/royalty/new" do
     expect(response.body).to include('redirected')
   end
   it "rasies AccessDenied Error if user is not an admin" do
-    laurel = create(:user, role: :normal)
-    sign_in(laurel)
+    peer = create(:user)
+    sign_in(peer)
     expect{get "/chambers/admin/royalty/new"}.to raise_error(CanCan::AccessDenied)
   end
 end

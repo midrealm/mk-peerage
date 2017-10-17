@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable 
-
+  
+  has_one :peer
   has_many :specializations
   has_many :specialties, through: :specializations
   
@@ -20,17 +21,16 @@ class User < ApplicationRecord
   #has_many :apprentice_users, through: :apprenticeships, source: :user
 
   has_attached_file :arms, styles: {large: '100x200'}, default_url: ':style/no_arms.jpg'
-  has_attached_file :profile_pic, styles: {thumb: '100x133', large: '300x400' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: ':style/frame.jpg'
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  enum role: [ :admin, :normal ]
-  after_initialize :set_defaults
+  #enum role: [ :normal, :admin ]
+  #after_initialize :set_defaults
   before_save :set_slug, :set_deceased
 
-  def set_defaults
-    self.role ||= :normal
-  end
+
+  #def set_defaults
+  #  self.role ||= :normal
+  #end
 
   def url
     return "/laurels/#{self.slug}"
@@ -75,12 +75,51 @@ class User < ApplicationRecord
     end
   end
 
+  #temporary forwarding methods
+  def elevators
+    peer.elevated_by
+  end
+  def active
+    peer.active
+  end
+  def vigilant
+    peer.vigilant
+  end
+  def elevation_date
+    peer.elevation_date
+  end
+  def bio
+    peer.bio
+  end
+  def profile_pic
+    peer.profile_pic
+  end
+  def apprenticed_to
+    peer.apprenticed_to
+  end
+  def role
+    if peer.admin
+      "admin"
+    else
+      "normal"
+    end
+  end
+  def admin?
+    peer.admin
+  end
+  def normal?
+    !peer.admin
+  end
+  def specialty_detail
+    peer.specialty_detail
+  end
+
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')
   end
 
   def set_deceased
-    self.active = false if self.deceased
+    peer.update(active: false) if deceased
   end
 end

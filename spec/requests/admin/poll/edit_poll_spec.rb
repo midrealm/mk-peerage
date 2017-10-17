@@ -2,7 +2,7 @@ require "rails_helper"
 describe "Get /chambers/admin/poll/edit" do
   describe "for logged in admin" do 
     before(:each) do
-      admin = create(:user, role: 'admin')
+      admin = create(:admin)
       sign_in(admin)
       @future_poll = build(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.days)
       @current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 2.days)

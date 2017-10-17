@@ -3,6 +3,11 @@ namespace :fake_data do
     Rake::Task['db:reset'].invoke 
     Rake::Task['db:migrate'].invoke 
   end
+  task :db_recreate => :environment do
+    Rake::Task['db:drop'].invoke 
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:migrate'].invoke 
+  end
 
   task :groups => :environment do
     Rake::Task['groups'].invoke

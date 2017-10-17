@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it { should have_one(:peer) }
   it { should have_many(:apprenticeships) }
   it { should have_many(:laurels).through(:apprenticeships) }
   
