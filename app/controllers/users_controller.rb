@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
   private 
   def user_params
-    peer_params = [:specialty_detail, :bio, :elevated_by, :active, :vigilant, :apprenticed_to, :elevation_date]
-    params.require(:user).permit(:sca_name, :modern_name, {:laurel_ids => [] }, {:specialty_ids => [] }, :specialty_detail, :street, :city, :state, :zipcode, :elevators,:phone,:user_id, :vigilant, :active, :elevation_date, :bio, :arms, :apprenticed_to, :group_id, :peer_attributes => peer_params)
+    peer_params = [:specialty_detail, :bio, :elevated_by, :active, :vigilant, :apprenticed_to, :elevation_date, :profile_pic]
+    params.require(:user).permit(:sca_name, :modern_name, {:laurel_ids => [] }, {:specialty_ids => [] }, :street, :city, :state, :zipcode, :elevators,:phone,:user_id,  :arms, :group_id, :peer_attributes => peer_params)
   end
 end
