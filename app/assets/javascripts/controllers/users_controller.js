@@ -13,12 +13,27 @@ App.createController("Users", {
     },
   },
   toggleImagePreview: function(e){
-    if(e.target.hash == '#images'){
-      $('#image_preview').removeClass('hidden')
-    }else{
-      $('#image_preview').addClass('hidden')
+    $('.image-preview-container').addClass('hidden')
+    $('.profile-pic-cache').removeClass('active')
+    $('.profile-pic-actual').removeClass('active')
+    switch(e.target.hash){
+      case '#personal':
+        $('#arms_preview_container').removeClass('hidden')
+        break
+      case '#peer':
+        this.peerImagePreview('#peer')
+        break
+      default:
     }
   },
+  peerImagePreview: function(peer){
+    $(peer + ' .profile-pic-cache').addClass('active')
+    $(peer + ' .profile-pic-actual').addClass('active')
+    var $img = $(peer +' .profile-pic-cache').clone().removeClass('hidden')
+    $('#profile_preview').html($img) 
+    $('#profile_pic_preview_container').removeClass('hidden')
+  },
+  
   validate: function(e){
     $('.has-error').removeClass('has-error')    
     $('.help-block').remove();
@@ -28,16 +43,6 @@ App.createController("Users", {
       $('#user_sca_name_input').addClass('has-error').append(msg)
       has_errors = true
     } 
-  //  if($('#candidate_group_id').val() == ''){
-  //    var msg = $('<span>').addClass('help-block').text('Need Group')
-  //    $('#candidate_group_input').addClass('has-error').append(msg)
-  //    has_errors = true
-  //  }
-  //  if(this.$profile.is(':empty')){
-  //    var msg = $('<span>').addClass('help-block').text('Need Profile Picture');
-  //    $('#candidate_profile_pic_input').addClass('has-error').append(msg)
-  //    has_errors = true;
-  //  }
     if(has_errors){
       e.preventDefault(); 
     }else if(!$('#crop').hasClass('hidden')){
@@ -93,7 +98,8 @@ App.createController("Users", {
       }).then(function(resp){
         $('#profile_preview').empty().append($('<img>',{src: resp}));
         $('#crop').addClass('hidden')
-        $('#user_profile_pic').val(resp)
+        $('.profile-pic-actual.active').first().val(resp)
+        $('.profile-pic-cache.active').first().attr('src',resp)
         $('#crop').trigger('cropped')
         resolve('Success');
       });
@@ -107,5 +113,9 @@ App.createController("Users", {
     var simplemde = new SimpleMDE();
   },
 });
+
+//function MyObj(peer)  {
+//  this.peer = peer;
+//}
 
 App.UsersController;
