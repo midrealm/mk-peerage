@@ -9,7 +9,7 @@ describe "Get /chambers/admin/royalty" do
   end
   it "shows royalty bolded" do
     admin = create(:admin)
-    royalty = create(:user, sca_name: 'Duke Ducky', royalty: true, laurel: false)
+    royal = create(:royal, sca_name: 'Duke Ducky')
     sign_in(admin)
     get "/chambers/admin/royalty"
     expect(response.body).not_to include('<strong>Default Laurel</strong>')
@@ -18,7 +18,8 @@ describe "Get /chambers/admin/royalty" do
   it "shows does not show inactive users" do
     admin = create(:admin)
     royalty = create(:royal)
-    inactive_laurel = create(:user, sca_name: 'Inactive Laurel', active: false)
+    inactive_laurel = create(:user, sca_name: 'Inactive Laurel')
+    inactive_laurel.peer.update(active: false)
     sign_in(admin)
     get "/chambers/admin/royalty"
     expect(response.body).not_to include('Inactive Laurel')

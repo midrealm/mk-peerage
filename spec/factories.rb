@@ -73,8 +73,8 @@ FactoryGirl.define do
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Jones"
     group
-    active true
-    vigilant false
+    #active true
+    #vigilant false
     laurel true
     after(:create) do |u|
       u.peer = create(:peer, user: u, active: true, vigilant: false)
@@ -86,8 +86,8 @@ FactoryGirl.define do
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Admin"
     group
-    active true
-    vigilant false
+#    active true
+    #vigilant false
     laurel true
     after(:create) do |u|
       u.peer = create(:peer, user: u, admin: true, active: true, vigilant: false)

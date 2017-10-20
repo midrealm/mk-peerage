@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016135331) do
+ActiveRecord::Schema.define(version: 20171019011433) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -150,7 +150,9 @@ ActiveRecord::Schema.define(version: 20171016135331) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "candidate_id"
+    t.integer  "peer_id"
     t.index ["candidate_id"], name: "index_specializations_on_candidate_id", using: :btree
+    t.index ["peer_id"], name: "index_specializations_on_peer_id", using: :btree
     t.index ["specialty_id"], name: "index_specializations_on_specialty_id", using: :btree
     t.index ["user_id"], name: "index_specializations_on_user_id", using: :btree
   end
@@ -162,18 +164,18 @@ ActiveRecord::Schema.define(version: 20171016135331) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                                  default: "", null: false
-    t.string   "encrypted_password",                     default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "sca_name"
     t.string   "modern_name"
     t.string   "street"
@@ -181,24 +183,12 @@ ActiveRecord::Schema.define(version: 20171016135331) do
     t.string   "state"
     t.string   "zipcode"
     t.string   "phone"
-    t.string   "elevators"
-    t.boolean  "active"
     t.boolean  "deceased"
-    t.boolean  "vigilant"
-    t.date     "elevation_date"
-    t.text     "bio",                      limit: 65535
     t.string   "arms_file_name"
     t.string   "arms_content_type"
     t.integer  "arms_file_size"
     t.datetime "arms_updated_at"
-    t.string   "profile_pic_file_name"
-    t.string   "profile_pic_content_type"
-    t.integer  "profile_pic_file_size"
-    t.datetime "profile_pic_updated_at"
-    t.string   "apprenticed_to"
-    t.integer  "role"
     t.integer  "group_id"
-    t.string   "specialty_detail"
     t.string   "slug"
     t.boolean  "royalty"
     t.boolean  "laurel"
@@ -224,6 +214,7 @@ ActiveRecord::Schema.define(version: 20171016135331) do
   add_foreign_key "poll_results", "candidates"
   add_foreign_key "poll_results", "polls"
   add_foreign_key "specializations", "candidates"
+  add_foreign_key "specializations", "peers"
   add_foreign_key "specializations", "specialties"
   add_foreign_key "specializations", "users"
   add_foreign_key "users", "groups"

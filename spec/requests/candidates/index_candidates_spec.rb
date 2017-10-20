@@ -2,7 +2,7 @@ require "rails_helper"
 describe "Get /chambers/candidates" do
   context 'signed in user' do
     before(:each) do
-      @laurel = create(:user, sca_name: 'Mundugus Jones')
+      @laurel = create(:user)
       sign_in(@laurel)
       @candidate = create(:candidate)
       
@@ -33,7 +33,7 @@ describe "Get /chambers/candidates" do
   end
 
   it "for logged in royal, shows comments from last poll" do
-      @royal = create(:user, royalty: true, laurel: false)
+      @royal = create(:royal)
       sign_in(@royal)
       @candidate = create(:candidate)
       p = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.day)
@@ -45,8 +45,8 @@ describe "Get /chambers/candidates" do
   end
 
   it "for logged in admin, should not show comments from last poll" do
-      @laurel = create(:user, royalty: false, laurel: true, role: 'admin')
-      sign_in(@laurel)
+      @admin = create(:admin)
+      sign_in(@admin)
       @candidate = create(:candidate)
       p = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.day)
       p.save(validate: false)

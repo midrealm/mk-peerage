@@ -7,7 +7,7 @@ describe "Get /laurels" do
   end
   it 'only shows laurels (not royalty)' do
     create(:user, sca_name: 'Mistress Mindy')
-    create(:user, sca_name: 'Duke Ducky', laurel: false, royalty: true)
+    create(:royal, sca_name: 'Duke Ducky')
     get '/laurels'
     expect(response.body).to include('Mistress Mindy')
     expect(response.body).not_to include('Duke Ducky')

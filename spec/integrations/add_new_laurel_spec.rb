@@ -16,6 +16,5 @@ RSpec.feature 'Add New Laurel' do
     expect(User.last.email).to eq('fake@elkiss.com')
     expect(User.last.vigilant).to eq(true)
     expect(User.last.active).to eq(true)
-    expect(User.last.laurel).to eq(true)
   end
 end

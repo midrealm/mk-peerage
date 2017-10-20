@@ -13,7 +13,6 @@
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :modern_name, label: 'Modern Name' %>
         <%= f.input :arms %>
-        <%= f.input :specialties %>
         <%= f.input :group, :as => :select, :collection => Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
         <%= f.input :laurels, label: 'Apprenticed To:', :collection => User.pluck(:sca_name, :id)%>
       <% end %>
@@ -39,6 +38,7 @@
               </div>
               <input type="hidden" class="profile-pic-actual" id="user_peer_attributes_profile_pic" name="user[peer_attributes][profile_pic]" value=<%=@user.peer.profile_pic_data_uri%>>
               <%= image_tag @user.peer.profile_pic.url(:large), class:'hidden profile-pic-cache' %>
+              <%= p.input :specialties %>
               <%= p.input :specialty_detail %>
               <%= p.input :elevated_by %>
               <%= p.input :elevation_date %>

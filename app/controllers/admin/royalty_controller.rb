@@ -7,15 +7,13 @@ module Admin
     end
     def index
       authorize! :manage, :all
-      @users = User.where(active: true)
+      @users = User.includes(:peer).where(peers: {active: [nil,true]} ).distinct 
     end
   def create
     @royal = User.new(royal_params)
     pwd = Devise.friendly_token.first(8)  
     @royal.password = pwd
-    @royal.active = true
     @royal.royalty = true 
-    @royal.laurel = false
     if @royal.save
       redirect_to admin_royalty_index_path
       @royal.send_reset_password_instructions

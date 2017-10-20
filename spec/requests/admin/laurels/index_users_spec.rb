@@ -9,7 +9,7 @@ describe "Get /chambers/admin/laurels" do
   end
   it "shows only laurels" do
     admin = create(:admin, sca_name: 'Default Laurel')
-    royalty = create(:user, sca_name: 'Duke Ducky', royalty: true, laurel: false)
+    royalty = create(:royal, sca_name: 'Duke Ducky')
     sign_in(admin)
     get "/chambers/admin/laurels"
     expect(response.body).to include('Default Laurel')

@@ -1,8 +1,8 @@
 require "rails_helper"
 describe "Get /chambers/admin/laurels/:id/edit" do
   it "shows edit page for laurel" do
-    laurel = create(:user, sca_name: 'Mundugus Jones', role: 'admin')
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     new_laurel = create(:user, sca_name: 'Dingus McDOOOGLE')
     get "/chambers/admin/laurels/#{new_laurel.id}/edit"
     expect(response).to have_http_status(:success)

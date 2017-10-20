@@ -4,8 +4,8 @@ class LaurelsController < ApplicationController
   end
 
   def index
-    @active_laurels = User.where("active = ? AND laurel = ?", true, true)
-    @inactive_laurels = User.where("active = ? AND laurel = ?", false, true)
+    @active_laurels = Peer.where(active: true)
+    @inactive_laurels = Peer.where(active: false)
   end
 
 end

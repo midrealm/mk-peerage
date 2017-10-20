@@ -45,8 +45,8 @@ describe "Get /chambers/candidates" do
   end
 
   it "for logged in admin, should not show comments from last poll" do
-      @laurel = create(:user, royalty: false, laurel: true, role: 'admin')
-      sign_in(@laurel)
+      @admin = create(:admin)
+      sign_in(@admin)
       @candidate = create(:candidate)
       p = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.day)
       p.save(validate: false)

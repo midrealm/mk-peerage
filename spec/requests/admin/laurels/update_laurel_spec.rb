@@ -1,10 +1,9 @@
 require "rails_helper"
 describe "put /chambers/admin/laurels/:id" do
   it "edit profile for signed in laurel, and redirects to profile page" do
-    laurel = create(:user, sca_name: 'Mundungus Jones', role: 'admin')
+    admin = create(:admin)
     newly_deceased = create(:user, sca_name: 'Newly Deceased', deceased: false)
-    newly_deceased_peer = create(:peer, user: newly_deceased, active: true)
-    sign_in(laurel)
+    sign_in(admin)
 
     expect(User.last.sca_name).to eq('Newly Deceased')
     expect(User.last.active).to be_truthy
@@ -15,7 +14,7 @@ describe "put /chambers/admin/laurels/:id" do
     expect(User.last.deceased).to be_truthy
   end
   it "redirects if not logged in" do
-    newly_deceased = create(:user, sca_name: 'Newly Deceased', active: true, deceased: false)
+    newly_deceased = create(:user, sca_name: 'Newly Deceased', deceased: false)
     put "/chambers/admin/laurels/#{newly_deceased.id}", params: { :laurel => {deceased: true} }
     expect(response).to have_http_status(:found)
     expect(response.body).to include('redirected')

@@ -1,6 +1,9 @@
 class Peer < ApplicationRecord
   belongs_to :user
 
+  has_many :specializations
+  has_many :specialties, through: :specializations
+
   has_attached_file :profile_pic, styles: {thumb: '100x133', large: '300x400' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: ':style/frame.jpg'
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
@@ -12,5 +15,14 @@ class Peer < ApplicationRecord
       data_uri = "data:#{profile_pic_content_type};base64,#{enc}"
     end
     data_uri
+  end
+
+  #helpers
+  def sca_name
+    user.sca_name
+  end
+
+  def url
+    user.url
   end
 end

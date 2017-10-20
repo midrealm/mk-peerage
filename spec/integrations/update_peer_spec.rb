@@ -4,10 +4,14 @@ RSpec.feature 'Update Peer info' do
   include_context 'when signed in through capybara'
   scenario 'updates peer info' do
     peer = create(:user, sca_name: 'Fake Name')
+    specialty1 = create(:specialty, name: 'Generic Specialty')
+    specialty2 = create(:specialty, name: 'Other Specialty')
     sign_in(peer)
     expect(User.last.vigilant).to eq(false)
     expect(User.last.active).to eq(true)
     visit '/users/edit' 
+    select 'Generic Specialty', from: 'Specialties'
+    select 'Other Specialty', from: 'Specialties'
     fill_in 'user_sca_name', with: 'Smarty Pants'
     fill_in 'user_peer_attributes_specialty_detail', with: 'Earwax Studies'
     fill_in 'user_peer_attributes_elevated_by', with: 'Some People'
@@ -24,5 +28,8 @@ RSpec.feature 'Update Peer info' do
     expect(User.last.vigilant).to eq(true)
     expect(User.last.active).to eq(false)
     expect(User.last.apprenticed_to).to eq('Some Person')
+    specialties = Peer.last.specialties.pluck(:name)
+    expect(specialties).to include('Generic Specialty')
+    expect(specialties).to include('Other Specialty')
   end
 end

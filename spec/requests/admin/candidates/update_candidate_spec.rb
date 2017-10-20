@@ -1,9 +1,9 @@
 require "rails_helper"
 describe "put /chambers/admin/candidates/:id" do
   it "edits profile for signed in laurel, and redirects to profile page" do
-    laurel = create(:user, sca_name: 'Mundungus Jones', role: 'admin')
+    admin = create(:admin)
     candidate = create(:candidate, sca_name: 'Dingus McDOOOOgle')
-    sign_in(laurel)
+    sign_in(admin)
 
     expect(Candidate.first.sca_name).to eq('Dingus McDOOOOgle')
     put "/chambers/admin/candidates/#{candidate.id}", params: { :candidate => {sca_name: 'Milly Snoodle'} }

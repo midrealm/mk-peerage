@@ -35,6 +35,20 @@ namespace :simple_fake do
       end
     end
 
+    elizabeth = User.create do |u|
+      u.email = 'elizabeth@example.com'
+      u.password = 'password' 
+      u.sca_name = 'Elizabeth I'
+      u.modern_name = 'Lizzy Tudor'
+      u.deceased = false
+      u.royalty = true
+      u.street = nil
+      u.city = nil
+      u.state = nil
+      u.zipcode = nil
+      u.phone = nil
+      u.group = nil
+    end
   end
   task :all => [:db_reset, :groups, :people]
 end

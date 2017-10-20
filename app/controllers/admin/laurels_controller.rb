@@ -6,16 +6,13 @@ module Admin
     end
     def index
       authorize! :manage, :all
-      @users = User.where(laurel: true)
+      @users = Peer.all
     end
   def create
     authorize! :manage, :all
     @laurel = User.new(laurel_params)
     pwd = Devise.friendly_token.first(8)  
     @laurel.password = pwd
-    @laurel.active = true
-    @laurel.vigilant = true if params[:laurel][:vigilant].nil?
-    @laurel.laurel = true
     if @laurel.save
       Peer.create(user: @laurel, active: true) do |p|
         p.vigilant = true if params[:laurel][:vigilant].nil?
@@ -39,7 +36,7 @@ module Admin
   end
     private
     def laurel_params
-      params.require(:laurel).permit(:sca_name, :email, :vigilant)
+      params.require(:laurel).permit(:sca_name, :email)
     end
     def update_laurel_params
       params.require(:laurel).permit(:deceased)

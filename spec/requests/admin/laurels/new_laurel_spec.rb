@@ -13,7 +13,7 @@ describe "Get /chambers/admin/laurels/new" do
     expect(response.body).to include('redirected')
   end
   it "rasies AccessDenied Error if user is not an admin" do
-    laurel = create(:user, role: :normal)
+    laurel = create(:user)
     sign_in(laurel)
     expect{get "/chambers/admin/laurels/new"}.to raise_error(CanCan::AccessDenied)
   end

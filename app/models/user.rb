@@ -77,13 +77,14 @@ class User < ApplicationRecord
     end
   end
 
-  #temporary forwarding methods
+  ##temporary forwarding methods
   def elevators
     peer.elevated_by
   end
   def active
     peer.active
   end
+  #screws up #inspect in console for royals
   def vigilant
     peer.vigilant
   end
@@ -99,6 +100,7 @@ class User < ApplicationRecord
   def apprenticed_to
     peer.apprenticed_to
   end
+  #also screws up inspect for royals
   def role
     if peer.admin
       "admin"
@@ -107,13 +109,16 @@ class User < ApplicationRecord
     end
   end
   def admin?
-    peer.admin
+    peer.admin unless peer.nil?
   end
   def normal?
     !peer.admin
   end
   def specialty_detail
     peer.specialty_detail
+  end
+  def specialties
+    peer.specialties
   end
 
   private

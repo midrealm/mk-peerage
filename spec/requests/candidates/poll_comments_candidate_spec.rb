@@ -42,13 +42,13 @@ describe "Get /chambers/candidates/:id/poll_comments" do
     end
   end
   it "raises AccessDenied Error for non-royal laurel" do
-    @laurel = create(:user, laurel: true)
+    @laurel = create(:user)
     sign_in(@laurel)
     expect{get "/chambers/candidates/#{@candidate.id}/poll_comments"}.to raise_error(CanCan::AccessDenied)
   end
   it "raises AccessDenied Error for non-royal admin laurel" do
-    @laurel = create(:user, laurel: true, role: 'admin')
-    sign_in(@laurel)
+    @non_royal_admin = create(:admin)
+    sign_in(@non_royal_admin)
     expect{get "/chambers/candidates/#{@candidate.id}/poll_comments"}.to raise_error(CanCan::AccessDenied)
   end
   it "redirects if not logged in" do
