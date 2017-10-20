@@ -16,7 +16,7 @@ end
 
 RSpec.describe Candidate, 'poll_entry_submitted?' do
   before(:each) do
-    @laurel = create(:user, laurel: true)
+    @laurel = create(:user)
     @candidate = create(:candidate)
     @judgement = create(:judgement)
   end

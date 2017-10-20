@@ -121,6 +121,13 @@ class User < ApplicationRecord
     peer.specialties
   end
 
+  #def laurel
+  #  peer.exist?
+  #end
+  def peer?
+    !peer.nil?
+  end
+
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')

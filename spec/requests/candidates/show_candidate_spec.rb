@@ -5,7 +5,7 @@ describe "Get /chambers/candidates/:id" do
   end
   context "logged in laurel" do
     before(:each) do
-      @laurel = create(:user, laurel: true)
+      @laurel = create(:user)
       sign_in(@laurel)
     end
     it "shows candidate" do

@@ -25,7 +25,7 @@ end
 
 RSpec.describe User, 'poll_complete?' do
   before(:each) do
-    @laurel = create(:user, laurel: true)
+    @laurel = create(:user)
     @candidate1 = create(:candidate)
     @candidate2 = create(:candidate)
     @current_poll = build(:poll, start_date: DateTime.now - 1.day)
@@ -56,7 +56,7 @@ end
 
 RSpec.describe User, 'poll_submitted_count' do
   before(:each) do
-    @laurel = create(:user, laurel: true)
+    @laurel = create(:user)
     @candidate1 = create(:candidate)
     @candidate2 = create(:candidate)
     @current_poll = build(:poll, start_date: DateTime.now - 1.day)

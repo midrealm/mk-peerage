@@ -75,7 +75,7 @@ FactoryGirl.define do
     group
     #active true
     #vigilant false
-    laurel true
+    #laurel true
     after(:create) do |u|
       u.peer = create(:peer, user: u, active: true, vigilant: false)
     end
@@ -88,7 +88,7 @@ FactoryGirl.define do
     group
 #    active true
     #vigilant false
-    laurel true
+    #laurel true
     after(:create) do |u|
       u.peer = create(:peer, user: u, admin: true, active: true, vigilant: false)
     end

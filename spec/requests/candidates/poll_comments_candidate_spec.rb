@@ -6,13 +6,12 @@ describe "Get /chambers/candidates/:id/poll_comments" do
   end
   context 'logged in royal' do
     before(:each) do
-      @royal = create(:user, laurel: false, royalty: true)
+      @royal = create(:royal)
       sign_in(@royal)
     end
     context 'past poll result' do
       before(:each) do
         @laurel = create(:user)
-        create(:peer, user: @laurel)
         @p = build(:poll, start_date: DateTime.now - 2.days, 
           end_date: DateTime.now - 1.day)
         @p.save(validate: false)

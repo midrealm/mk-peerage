@@ -9,7 +9,7 @@ class RemoveAttributesFromUser < ActiveRecord::Migration[5.0]
     remove_column :users, :apprenticed_to, :string
     remove_column :users, :role, :integer
     remove_column :users, :specialty_detail, :string
-    #remove_column :users, :laurel
+    remove_column :users, :laurel
     
   end
 end

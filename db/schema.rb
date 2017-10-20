@@ -191,7 +191,6 @@ ActiveRecord::Schema.define(version: 20171019011433) do
     t.integer  "group_id"
     t.string   "slug"
     t.boolean  "royalty"
-    t.boolean  "laurel"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["group_id"], name: "index_users_on_group_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

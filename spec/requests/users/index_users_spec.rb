@@ -39,7 +39,7 @@ describe "Get /chambers" do
     end
     describe "for signed in royal non-laurel" do
       before(:each) do
-        royal = create(:user, royalty: true, laurel: false)
+        royal = create(:royal)
         sign_in(royal)
       end
       describe "for current poll" do
@@ -55,7 +55,7 @@ describe "Get /chambers" do
     end
     context "for signed in non-admin laurel" do
       before(:each) do
-        @laurel = create(:user, laurel: true)
+        @laurel = create(:user)
         sign_in(@laurel)
       end
       describe "for current poll" do

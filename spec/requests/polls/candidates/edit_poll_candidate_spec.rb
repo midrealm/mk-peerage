@@ -10,7 +10,7 @@ describe "Get /chambers/poll/candidates/:id/new" do
     end
     describe "for logged in laurel" do
       before(:each) do
-        laurel = create(:user, laurel: true)
+        laurel = create(:user)
         sign_in(laurel)
       end
       it "shows candidate poll form" do
@@ -21,7 +21,7 @@ describe "Get /chambers/poll/candidates/:id/new" do
     end
     describe "for logged in non-laurel royal" do
       before(:each) do
-        royal = create(:user, laurel: false, royalty: true)
+        royal = create(:royal)
         sign_in(royal)
       end
       it "raises AccessDenied Error" do
@@ -47,7 +47,7 @@ describe "Get /chambers/poll/candidates/:id/new" do
     end
     describe "for logged in laurel" do
       before(:each) do
-        @laurel = create(:user, laurel: true)
+        @laurel = create(:user)
         sign_in(@laurel)
       end
       it "pulls in old poll data into active poll" do

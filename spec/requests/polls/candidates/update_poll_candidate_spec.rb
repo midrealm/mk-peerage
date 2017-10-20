@@ -11,7 +11,7 @@ describe "put /chambers/poll/candidates/:id" do
     end
     describe "for logged in laurel" do
       before(:each) do
-        @laurel = create(:user, laurel: true)
+        @laurel = create(:user)
         sign_in(@laurel)
       end
       it "saves update for given advising" do

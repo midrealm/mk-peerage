@@ -2,7 +2,7 @@ require 'rails_helper'
 describe "Get /chambers/poll" do
   describe "logged in laurel" do
     before(:each) do
-      @laurel = create(:user, laurel: true)
+      @laurel = create(:user)
       sign_in(@laurel)
     end
     describe "current poll" do
@@ -68,7 +68,7 @@ describe "Get /chambers/poll" do
   end  
   describe "logged in non-laurel royal" do
     before(:each) do
-      royal = create(:user, laurel: false, royalty: true)
+      royal = create(:royal)
       sign_in(royal)
     end
     it "raises AccessDenied Error if user is not admin" do

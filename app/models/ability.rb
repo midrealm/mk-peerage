@@ -6,7 +6,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.admin?
       can :manage, :all
-    elsif user.laurel?
+    elsif user.peer?
       can :take, Poll    
     else
       can :read, :all
