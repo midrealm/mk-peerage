@@ -7,7 +7,7 @@ module Admin
     end
     def index
       authorize! :manage, :all
-      @users = User.includes(:peer).where(peers: {active: [nil,true]} ).distinct 
+      @users = User.where(deceased: [nil, false])
     end
   def create
     @royal = User.new(royal_params)

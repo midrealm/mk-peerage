@@ -13,17 +13,25 @@ describe "Get /chambers/admin/royalty" do
     sign_in(admin)
     get "/chambers/admin/royalty"
     expect(response.body).not_to include('<strong>Default Laurel</strong>')
-    expect(response.body).to include('Duke Ducky')
+    expect(response.body).to include('<strong>Duke Ducky</strong>')
   end 
-  it "shows does not show inactive users" do
-    admin = create(:admin)
-    royalty = create(:royal)
-    inactive_laurel = create(:user, sca_name: 'Inactive Laurel')
-    inactive_laurel.peer.update(active: false)
+  it "does not show deceased users" do
+    admin = create(:admin, deceased: nil, sca_name: 'Mundungus')
+    royalty = create(:royal, deceased: false, sca_name: 'Duke Ducky')
+    dead_laurel = create(:user, sca_name: 'Dead Laurel', deceased: true)
     sign_in(admin)
     get "/chambers/admin/royalty"
-    expect(response.body).not_to include('Inactive Laurel')
+    expect(response.body).to include('Mundungus')
+    expect(response.body).to include('Duke Ducky')
+    expect(response.body).not_to include('Dead Laurel')
   end 
+  it "does not show deceased royals" do
+    royalty = create(:royal, sca_name: 'Dead Royal', deceased: true)
+    admin = create(:admin)
+    sign_in(admin)
+    get "/chambers/admin/royalty"
+    expect(response.body).not_to include('Dead Royal')
+  end
   it "redirects if not logged in" do
     get "/chambers/admin/royalty"
     expect(response).to have_http_status(:found)

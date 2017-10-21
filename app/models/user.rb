@@ -134,6 +134,6 @@ class User < ApplicationRecord
   end
 
   def set_deceased
-    peer.update(active: false) if deceased
+    peer.update(active: false) if peer? and deceased
   end
 end

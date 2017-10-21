@@ -23,6 +23,23 @@ RSpec.describe User, 'set_slug' do
   end
 end
 
+RSpec.describe User, 'set_deceased' do
+  it 'should set active to false if user is deceased' do
+    user = create(:user)
+    expect(User.last.deceased).to be_falsy
+    expect(Peer.last.active).to eq(true)
+    user.update(deceased: true)
+    expect(User.last.deceased).to eq(true)
+    expect(Peer.last.active).to eq(false)
+  end
+  it 'should handle not setting active on deceased royal' do
+   royal = create(:royal)
+   expect(User.last.deceased).to be_falsy
+   royal.update(deceased: true)
+   expect(User.last.deceased).to eq(true) 
+  end
+end
+
 RSpec.describe User, 'poll_complete?' do
   before(:each) do
     @laurel = create(:user)
