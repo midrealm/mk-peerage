@@ -17,8 +17,8 @@
       <%= spec.name %>  
       <% end %><br>
     <% end %>
-    <% if @candidate.users.count > 0 %>
-      <strong>Advocates</strong>: <% @candidate.users.each do |adv| %>
+    <% if @candidate.peers.count > 0 %>
+      <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
       <%=link_to adv.sca_name, adv.url %> 
       <% end %><br>
     <%end%>

@@ -4,8 +4,8 @@ RSpec.feature 'Add New Candidate' do
   include_context 'when signed in through capybara'
   scenario 'adds new candidate when appropriate info is filled in', js: true do
     expect(Candidate.count).to eq(0)
-    laurel = create(:user, role: :admin)
-    sign_in(laurel)
+    admin = create(:admin)
+    sign_in(admin)
     g = create(:group)
     create(:group, parent_id: g.id)
     visit '/chambers/admin/candidates/new' 

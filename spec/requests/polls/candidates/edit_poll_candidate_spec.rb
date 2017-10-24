@@ -18,6 +18,12 @@ describe "Get /chambers/poll/candidates/:id/new" do
         expect(response).to have_http_status(:success)
         expect(response.body).to include("Poll for #{@candidate.sca_name}")
       end 
+      it "shows advocates for given candidate" do
+        advocate = create(:user, sca_name: 'Molly Mindingus')
+        create(:advocacy, candidate: @candidate, peer: advocate.peer)
+        get "/chambers/poll/candidates/#{@candidate.id}"
+        expect(response.body).to include("Molly Mindingus")
+      end
     end
     describe "for logged in non-laurel royal" do
       before(:each) do

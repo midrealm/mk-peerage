@@ -2,7 +2,7 @@ class Poll::CandidatesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_laurel
   def update
-    @advising = Advising.find_by(candidate_id: params[:id], user_id: current_user.id, poll_id: Poll.last.id)
+    @advising = Advising.find_by(candidate_id: params[:id], peer_id: current_user.peer.id, poll_id: Poll.last.id)
     if @advising.update(advising_params)
       @advising.update(submitted: true)  
       redirect_to poll_path

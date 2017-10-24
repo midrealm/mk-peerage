@@ -7,13 +7,13 @@ class User < ApplicationRecord
   has_one :peer
   accepts_nested_attributes_for :peer
 
-  has_many :specializations
-  has_many :specialties, through: :specializations
+#  has_many :specializations
+#  has_many :specialties, through: :specializations
   
   has_many :comments
 
-  has_many :advocacies
-  has_many :candidates, through: :advocacies
+  #has_many :advocacies
+  #has_many :candidates, through: :advocacies
 
   has_many :apprenticeships
   has_many :laurels, through: :apprenticeships

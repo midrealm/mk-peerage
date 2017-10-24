@@ -3,7 +3,8 @@ class Candidate < ApplicationRecord
   has_many :images
 
   has_many :advocacies
-  has_many :users, through: :advocacies
+#  has_many :users, through: :advocacies
+  has_many :peers, through: :advocacies
 
   has_many :specializations
   has_many :specialties, through: :specializations

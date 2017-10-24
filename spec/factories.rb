@@ -20,6 +20,7 @@ FactoryGirl.define do
   end
   factory :advising do
     user 
+    peer
     candidate 
     poll
     judgement 
@@ -46,7 +47,7 @@ FactoryGirl.define do
     text "MyText"
   end
   factory :advocacy do
-    user 
+    peer
     candidate 
     apprenticeship false
   end
@@ -58,7 +59,7 @@ FactoryGirl.define do
   #  laurel_id 1 
   #end
   factory :specialization do
-    user 
+    peer
     specialty 
     candidate
   end

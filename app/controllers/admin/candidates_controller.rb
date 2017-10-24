@@ -39,7 +39,7 @@ module Admin
     
     private
     def candidate_params
-      params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote, :specialty_detail, {:specialty_ids => [] }, {:user_ids => [] })
+      params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote, :specialty_detail, {:specialty_ids => [] }, {:peer_ids => [] })
     end
   end
 end

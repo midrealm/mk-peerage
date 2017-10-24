@@ -12,6 +12,12 @@ describe "Get /chambers/candidates" do
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Candidates')
     end
+    it "shows advocates for given candidate" do
+      advocate = create(:user, sca_name: "Molly Mindingus")
+      create(:advocacy, candidate: @candidate, peer: advocate.peer)
+      get "/chambers/candidates"
+      expect(response.body).to include('Molly Mindingus')
+    end
 
     it "shows results from last poll in table" do
       p = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.day)
