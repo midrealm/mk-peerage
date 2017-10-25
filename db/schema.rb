@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024232952) do
+ActiveRecord::Schema.define(version: 20171025141714) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "candidate_id"
@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 20171024232952) do
     t.index ["user_id"], name: "index_advocacies_on_user_id", using: :btree
   end
 
-  create_table "apprenticeships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "laurel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["laurel_id"], name: "index_apprenticeships_on_laurel_id", using: :btree
-    t.index ["user_id", "laurel_id"], name: "index_apprenticeships_on_user_id_and_laurel_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_apprenticeships_on_user_id", using: :btree
-  end
-
   create_table "candidates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "sca_name"
     t.boolean  "vote"
@@ -64,13 +54,23 @@ ActiveRecord::Schema.define(version: 20171024232952) do
   end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
     t.integer  "candidate_id"
     t.text     "text",         limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "peer_id"
     t.index ["candidate_id"], name: "index_comments_on_candidate_id", using: :btree
-    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+    t.index ["peer_id"], name: "index_comments_on_peer_id", using: :btree
+  end
+
+  create_table "dependencies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "peer_id"
+    t.integer  "superior_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["peer_id", "superior_id"], name: "index_dependencies_on_peer_id_and_superior_id", unique: true, using: :btree
+    t.index ["peer_id"], name: "index_dependencies_on_peer_id", using: :btree
+    t.index ["superior_id"], name: "index_dependencies_on_superior_id", using: :btree
   end
 
   create_table "group_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -205,11 +205,11 @@ ActiveRecord::Schema.define(version: 20171024232952) do
   add_foreign_key "advocacies", "candidates"
   add_foreign_key "advocacies", "peers"
   add_foreign_key "advocacies", "users"
-  add_foreign_key "apprenticeships", "users"
-  add_foreign_key "apprenticeships", "users", column: "laurel_id"
   add_foreign_key "candidates", "groups"
   add_foreign_key "comments", "candidates"
-  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "peers"
+  add_foreign_key "dependencies", "peers"
+  add_foreign_key "dependencies", "peers", column: "superior_id"
   add_foreign_key "groups", "group_types"
   add_foreign_key "images", "candidates"
   add_foreign_key "peers", "users"

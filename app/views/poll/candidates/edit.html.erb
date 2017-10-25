@@ -29,7 +29,7 @@
     <% @candidate.comments.each do |comment| %>
     <div class="container" style="margin:10px;width:100%">
       <div style="width:120px;float:left">
-      <%= image_tag comment.user.profile_pic.url(:thumb) %><br><%= link_to comment.user.sca_name, comment.user.url%>
+      <%= image_tag comment.peer.profile_pic.url(:thumb) %><br><%= link_to comment.peer.sca_name, comment.peer.url%>
       </div>
       <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
       <%= markdown(comment.text) %>

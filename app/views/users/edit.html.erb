@@ -14,7 +14,6 @@
         <%= f.input :modern_name, label: 'Modern Name' %>
         <%= f.input :arms %>
         <%= f.input :group, :as => :select, :collection => Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
-        <%= f.input :laurels, label: 'Apprenticed To:', :collection => User.pluck(:sca_name, :id)%>
       <% end %>
       </div>
       <div role="tabpanel" class="tab-pane" id="contact">
@@ -44,6 +43,7 @@
               <%= p.input :elevation_date %>
               <%= p.input :active, label: "Active?" %>
               <%= p.input :vigilant, label: "Vigilant?" %>
+              <%= p.input :superiors, label: 'Apprenticed To:', :collection => Peer.joins(:user).pluck(:sca_name, :id)%>
               <%= p.input :apprenticed_to, label: 'Apprenticed To: (Not in Middle Kingdom)'  %>
               <%= p.input :bio %>
             <% end %>

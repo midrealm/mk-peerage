@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  #factory :dependency do
+  #  peer nil
+  #  superior nil
+  #end
   factory :peer do
     active true
     vigilant false
@@ -41,7 +45,7 @@ FactoryGirl.define do
     name "MyString"
   end
   factory :comment do
-    user 
+    peer
     candidate 
     text "MyText"
   end

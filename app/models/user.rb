@@ -6,21 +6,10 @@ class User < ApplicationRecord
   
   has_one :peer
   accepts_nested_attributes_for :peer
-
-#  has_many :specializations
-#  has_many :specialties, through: :specializations
   
   has_many :comments
 
-  #has_many :advocacies
-  #has_many :candidates, through: :advocacies
-
-  has_many :apprenticeships
-  has_many :laurels, through: :apprenticeships
- 
   belongs_to :group
-
-  #has_many :apprentice_users, through: :apprenticeships, source: :user
 
   has_attached_file :arms, styles: {large: '100x200'}, default_url: ':style/no_arms.jpg'
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
@@ -36,10 +25,6 @@ class User < ApplicationRecord
 
   def url
     return "/laurels/#{self.slug}"
-  end
-
-  def show_specialties
-    return self.specialties.map{|s| s.name}.to_sentence
   end
 
   def poll_complete?

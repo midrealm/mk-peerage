@@ -10,14 +10,20 @@ describe "Get /chambers/poll/candidates/:id/new" do
     end
     describe "for logged in laurel" do
       before(:each) do
-        laurel = create(:user)
-        sign_in(laurel)
+        @laurel = create(:user)
+        sign_in(@laurel)
       end
       it "shows candidate poll form" do
         get "/chambers/poll/candidates/#{@candidate.id}"
         expect(response).to have_http_status(:success)
         expect(response.body).to include("Poll for #{@candidate.sca_name}")
       end 
+      it "shows comments for given candidate" do
+        create(:comment, peer:@laurel.peer, candidate: @candidate, text: "I like this Candidate")
+        get "/chambers/poll/candidates/#{@candidate.id}"
+        expect(response.body).to include("I like this Candidate")
+        expect(response.body).to include(@laurel.sca_name)
+      end
       it "shows advocates for given candidate" do
         advocate = create(:user, sca_name: 'Molly Mindingus')
         create(:advocacy, candidate: @candidate, peer: advocate.peer)

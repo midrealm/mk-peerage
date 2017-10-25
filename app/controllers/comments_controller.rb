@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = Comment.new(comment_params)
-    @comment.user = current_user
+    @comment.peer = current_user.peer
     if @comment.save
       LaurelMailer.comment(current_user,Candidate.find(@comment.candidate_id),@comment.text).deliver
       flash[:notice] = "Successfully Submitted Comment"

@@ -47,7 +47,7 @@
   <% @candidate.comments.each do |comment| %>
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
-    <%= image_tag comment.user.profile_pic.url(:thumb) %><br/><%= link_to comment.user.sca_name, comment.user.url%><br>
+    <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, comment.peer.url%><br>
     </div>
     <div class="col-md-5">
       <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
