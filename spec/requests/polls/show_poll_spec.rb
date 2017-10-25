@@ -24,7 +24,7 @@ describe "Get /chambers/poll" do
       end
 
       it "shows OK if advising has been submitted for a given candidate" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, user: @laurel, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.peer, submitted: true)
         get '/chambers/poll'
         expect(response.body).to include('glyphicon-ok')
       end
@@ -34,14 +34,14 @@ describe "Get /chambers/poll" do
       end
 
       it "show progress bar with percent of candidates complete" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, user: @laurel, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.peer, submitted: true)
         get '/chambers/poll'
         expect(response.body).to include('width: 50%')
         expect(response.body).to include('progress-bar')
     
       end
       it "shows how many have poll entries have been submitted" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, user: @laurel, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.peer, submitted: true)
         get '/chambers/poll'
         expect(response.body).to include('1/2 Submitted')
       end

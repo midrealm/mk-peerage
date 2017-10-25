@@ -35,8 +35,8 @@
   <% @advisings.each do |adv| %>
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
-    <%= image_tag adv.user.profile_pic.url(:thumb) %><br/>
-    <%= link_to adv.user.sca_name, adv.user.url%>
+    <%= image_tag adv.peer.profile_pic.url(:thumb) %><br/>
+    <%= link_to adv.peer.sca_name, adv.peer.url%>
     </div>
     <div class="col-md-5">
     <strong>Judgement:</strong> <%=adv.judgement.name%><br/>

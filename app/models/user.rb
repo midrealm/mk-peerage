@@ -47,7 +47,7 @@ class User < ApplicationRecord
       poll = Poll.last
       incomplete = false
       Candidate.all.each do |cand|
-        advising = poll.advisings.find_by(user_id: self.id, candidate_id: cand.id, submitted: true)  
+        advising = poll.advisings.find_by(peer: self.peer, candidate_id: cand.id, submitted: true)  
         if advising.nil?
           incomplete = true
           break  
@@ -68,7 +68,7 @@ class User < ApplicationRecord
       count = 0
       poll = Poll.last
       Candidate.all.each do |cand|
-        advising = poll.advisings.find_by(user_id: self.id, candidate_id: cand.id, submitted: true)  
+        advising = poll.advisings.find_by(peer: self.peer, candidate_id: cand.id, submitted: true)  
         count = count + 1 unless advising.nil?
       end
       return count

@@ -46,11 +46,11 @@ RSpec.describe User, 'poll_complete?' do
     @current_poll.save(validate: false)
     @judgement = create(:judgement)
     @advising1 = create(:advising, candidate_id: @candidate1.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
+      poll_id: @current_poll.id, peer: @laurel.peer, comment: 'Comment', 
       judgement_id: @judgement, submitted: true)
 
     @advising2 = build(:advising, candidate_id: @candidate2.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
+      poll: @current_poll, peer: @laurel.peer, comment: 'Comment', 
       judgement_id: @judgement, submitted: true)
   end
   it 'should return true if user has completed the latest poll' do
@@ -77,11 +77,11 @@ RSpec.describe User, 'poll_submitted_count' do
     @current_poll.save(validate: false)
     @judgement = create(:judgement)
     @advising1 = create(:advising, candidate_id: @candidate1.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
+      poll_id: @current_poll.id, peer: @laurel.peer, comment: 'Comment', 
       judgement_id: @judgement, submitted: true)
 
     @advising2 = build(:advising, candidate_id: @candidate2.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
+      poll_id: @current_poll.id, peer: @laurel.peer, comment: 'Comment', 
       judgement_id: @judgement, submitted: true)
   end
 

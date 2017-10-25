@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021031423) do
+ActiveRecord::Schema.define(version: 20171024232952) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
     t.integer  "candidate_id"
     t.integer  "poll_id"
     t.integer  "judgement_id"
@@ -26,7 +25,6 @@ ActiveRecord::Schema.define(version: 20171021031423) do
     t.index ["judgement_id"], name: "index_advisings_on_judgement_id", using: :btree
     t.index ["peer_id"], name: "index_advisings_on_peer_id", using: :btree
     t.index ["poll_id"], name: "index_advisings_on_poll_id", using: :btree
-    t.index ["user_id"], name: "index_advisings_on_user_id", using: :btree
   end
 
   create_table "advocacies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -204,7 +202,6 @@ ActiveRecord::Schema.define(version: 20171021031423) do
   add_foreign_key "advisings", "judgements"
   add_foreign_key "advisings", "peers"
   add_foreign_key "advisings", "polls"
-  add_foreign_key "advisings", "users"
   add_foreign_key "advocacies", "candidates"
   add_foreign_key "advocacies", "peers"
   add_foreign_key "advocacies", "users"

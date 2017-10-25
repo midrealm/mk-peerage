@@ -19,7 +19,6 @@ FactoryGirl.define do
     fav 1.5
   end
   factory :advising do
-    user 
     peer
     candidate 
     poll

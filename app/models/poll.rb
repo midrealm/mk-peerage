@@ -1,7 +1,7 @@
 class Poll < ApplicationRecord
   has_many :advisings
   has_many :candidates, through: :advisings
-  has_many :users, through: :advisings
+  has_many :peers, through: :advisings
  
   validate :start_date_cannot_be_in_the_past, on: :create
   validate :end_date_cannot_be_before_start_date

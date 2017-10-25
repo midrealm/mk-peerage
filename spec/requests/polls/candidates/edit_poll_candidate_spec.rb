@@ -56,8 +56,15 @@ describe "Get /chambers/poll/candidates/:id/new" do
         @laurel = create(:user)
         sign_in(@laurel)
       end
+      it "creates new advising for peer and candidate when there hasn't been a created advising" do
+        expect(Advising.count).to eq(0)
+        get "/chambers/poll/candidates/#{@candidate.id}"
+        expect(Advising.count).to eq(1)
+        expect(Advising.last.peer).to eq(@laurel.peer)
+        expect(Advising.last.candidate).to eq(@candidate)
+      end
       it "pulls in old poll data into active poll" do
-        @old_advising = create(:advising, poll_id: @past_poll.id, user_id: @laurel.id, 
+        @old_advising = create(:advising, poll: @past_poll, peer: @laurel.peer, 
           candidate_id: @candidate.id, judgement_id: @judgement2.id, comment: "This is my old comment")
 
           get "/chambers/poll/candidates/#{@candidate.id}"
@@ -65,10 +72,10 @@ describe "Get /chambers/poll/candidates/:id/new" do
           expect(response.body).to include("<option selected=\"selected\" value=\"#{@judgement2.id}\">#{@judgement2.name}")
       end
       it "for pre edited poll, puts in pre edited stuff, not stuff from old poll" do
-        @old_advising = create(:advising, poll_id: @past_poll.id, user_id: @laurel.id, 
+        @old_advising = create(:advising, poll_id: @past_poll.id, peer: @laurel.peer, 
           candidate_id: @candidate.id, judgement_id: @judgement2.id, comment: "This is my old comment")
 
-        @new_advising = create(:advising, poll_id: nil, user_id: @laurel.id, 
+        @new_advising = create(:advising, poll_id: nil, peer: @laurel.peer, 
           candidate_id: @candidate.id, judgement_id: @judgement1.id, comment: "This is my new comment")
         
           get "/chambers/poll/candidates/#{@candidate.id}"
