@@ -108,8 +108,8 @@ App.createController("Users", {
   },
   form: function(){ 
     $('#user_group_id').select2();
-    $('#user_specialty_ids').select2();
-    $('#user_laurel_ids').select2();
+    $('#user_peer_attributes_specialty_ids').select2();
+    $('#user_peer_attributes_superior_ids').select2();
     var simplemde = new SimpleMDE();
   },
 });
