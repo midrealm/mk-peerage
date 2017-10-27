@@ -13,13 +13,15 @@ describe "post /chambers/admin/laurels" do
   end
   it "sets defaults for new laurel" do
     post '/chambers/admin/laurels', params: { :laurel => {sca_name: 'Dingus McDOOOGLE', email: 'dingus@doogleson.com'} }
-    expect(User.last.active).to be_truthy 
-    expect(User.last.vigilant).to be_truthy 
+    expect(Laurel.last.sca_name).to eq('Dingus McDOOOGLE') 
+    expect(Laurel.last.active).to be_truthy 
+    expect(Laurel.last.vigilant).to be_truthy 
     expect(User.last.royalty).to be_falsy
   end
   it "handles false for vigilant for new laurel" do
     post '/chambers/admin/laurels', params: { :laurel => {sca_name: 'Dingus McDOOOGLE', vigilant: false, email: 'dingus@doogleson.com'} }
-    expect(User.last.vigilant).to be_falsey 
+    expect(Laurel.last.sca_name).to eq('Dingus McDOOOGLE') 
+    expect(Laurel.last.vigilant).to be_falsey 
   end
   it "shows generates slug for new laurel" do
     post '/chambers/admin/laurels', params: { :laurel => {sca_name: 'Heregyð Ketilsdóttir', email: 'dingus@doogleson.com'} }

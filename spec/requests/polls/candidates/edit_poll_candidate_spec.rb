@@ -66,7 +66,7 @@ describe "Get /chambers/poll/candidates/:id/new" do
         expect(Advising.count).to eq(0)
         get "/chambers/poll/candidates/#{@candidate.id}"
         expect(Advising.count).to eq(1)
-        expect(Advising.last.peer).to eq(@laurel.peer)
+        expect(Advising.last.peer.id).to eq(@laurel.peer.id)
         expect(Advising.last.candidate).to eq(@candidate)
       end
       it "pulls in old poll data into active poll" do

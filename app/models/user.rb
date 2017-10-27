@@ -62,30 +62,6 @@ class User < ApplicationRecord
     end
   end
 
-  ##temporary forwarding methods
-  def elevators
-    peer.elevated_by
-  end
-  def active
-    peer.active
-  end
-  #screws up #inspect in console for royals
-  def vigilant
-    peer.vigilant
-  end
-  def elevation_date
-    peer.elevation_date
-  end
-  def bio
-    peer.bio
-  end
-  def profile_pic
-    peer.profile_pic
-  end
-  def apprenticed_to
-    peer.apprenticed_to
-  end
-  #also screws up inspect for royals
   def role
     if peer.admin
       "admin"
@@ -99,19 +75,45 @@ class User < ApplicationRecord
   def normal?
     !peer.admin
   end
-  def specialty_detail
-    peer.specialty_detail
+
+  def peer?
+    !peer.nil?
   end
-  def specialties
-    peer.specialties
-  end
+
+  ##temporary forwarding methods
+  #def elevators
+  #  peer.elevated_by
+  #end
+  #def active
+  #  peer.active
+  #end
+  #screws up #inspect in console for royals
+  #def vigilant
+  #  peer.vigilant
+  #end
+  #def elevation_date
+  #  peer.elevation_date
+  #end
+  #def bio
+  #  peer.bio
+  #end
+  #def profile_pic
+  #  peer.profile_pic
+  #end
+  #def apprenticed_to
+  #  peer.apprenticed_to
+  #end
+  #also screws up inspect for royals
+  #def specialty_detail
+  #  peer.specialty_detail
+  #end
+  #def specialties
+  #  peer.specialties
+  #end
 
   #def laurel
   #  peer.exist?
   #end
-  def peer?
-    !peer.nil?
-  end
 
   private
   def set_slug

@@ -29,11 +29,36 @@ class Peer < ApplicationRecord
     return self.specialties.map{|s| s.name}.to_sentence
   end
 
+  def url
+    user.url
+  end
+
   def sca_name
     user.sca_name
   end
+  def modern_name
+    user.modern_name
+  end
+  def street
+    user.street
+  end
+  def city
+    user.city
+  end
+  def state
+    user.state
+  end
+  def zipcode
+    user.zipcode
+  end
+  def phone
+    user.phone
+  end
+  def group
+    user.group
+  end
 
-  def url
-    user.url
+  def arms
+    user.arms
   end
 end

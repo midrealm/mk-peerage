@@ -6,11 +6,11 @@ describe "put /chambers/admin/laurels/:id" do
     sign_in(admin)
 
     expect(User.last.sca_name).to eq('Newly Deceased')
-    expect(User.last.active).to be_truthy
+    expect(Peer.last.active).to be_truthy
     expect(User.last.deceased).to be_falsy
     put "/chambers/admin/laurels/#{newly_deceased.id}", params: { :laurel => {deceased: true} }
     expect(response).to redirect_to '/chambers/admin/laurels'
-    expect(User.last.active).to be_falsy
+    expect(Peer.last.active).to be_falsy
     expect(User.last.deceased).to be_truthy
   end
   it "redirects if not logged in" do

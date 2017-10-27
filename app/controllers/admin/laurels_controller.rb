@@ -14,7 +14,7 @@ module Admin
     pwd = Devise.friendly_token.first(8)  
     @laurel.password = pwd
     if @laurel.save
-      Peer.create(user: @laurel, active: true) do |p|
+      Peer.create(user: @laurel, active: true, type: 'Laurel') do |p|
         p.vigilant = true if params[:laurel][:vigilant].nil?
       end
       redirect_to "/laurels/#{@laurel.slug}"

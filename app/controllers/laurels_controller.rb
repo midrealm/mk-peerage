@@ -1,11 +1,15 @@
 class LaurelsController < ApplicationController
   def show
-    @laurel = User.find_by(slug: params[:slug])
+    @laurel = Laurel.joins(:user).find_by(users: {slug: params[:slug]})
+    @peer = @laurel 
+    render template: "peers/show"
   end
 
   def index
-    @active_laurels = Peer.where(active: true)
-    @inactive_laurels = Peer.where(active: false)
+    @active_peers = Laurel.where(active: true)
+    @inactive_peers = Laurel.where(active: false)
+    @order_title = "Master and Mistresses of the Laurel"
+    render template: "peers/index"
   end
 
 end
