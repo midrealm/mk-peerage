@@ -10,6 +10,7 @@ RSpec.feature 'Update Peer info' do
     sign_in(peer)
     expect(User.last.vigilant).to eq(false)
     expect(User.last.active).to eq(true)
+    expect(Peer.count).to eq(2)
     visit '/users/edit' 
     select 'Generic Specialty', from: 'Specialties'
     select 'Other Specialty', from: 'Specialties'
@@ -30,6 +31,7 @@ RSpec.feature 'Update Peer info' do
     expect(User.last.vigilant).to eq(true)
     expect(User.last.active).to eq(false)
     expect(User.last.apprenticed_to).to eq('Some Person')
+    expect(Peer.count).to eq(2)
     specialties = Peer.last.specialties.pluck(:name)
     expect(specialties).to include('Generic Specialty')
     expect(specialties).to include('Other Specialty')

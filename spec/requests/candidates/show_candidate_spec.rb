@@ -16,6 +16,12 @@ describe "Get /chambers/candidates/:id" do
       expect(response.body).to include(@candidate.sca_name)
       expect(response.body).to include(advocate.sca_name)
     end
+
+    it "shows candidate without and advocate" do
+      get "/chambers/candidates/#{@candidate.id}"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include(@candidate.sca_name)
+    end
     it "shows comments" do
       create(:comment, peer: @laurel.peer, candidate: @candidate, text: "I like this candidate")
       get "/chambers/candidates/#{@candidate.id}"
