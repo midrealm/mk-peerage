@@ -10,6 +10,7 @@ namespace :simple_fake do
   end
 
   task :people => :environment do
+    Specialty.create([{name: 'Music', peerage_type: :laurel}, {name: 'Costuming', peerage_type: :laurel}, {name: 'Painting', peerage_type: :laurel}, {name: 'Calligraphy & Illumination', peerage_type: :laurel}])
     byrd = User.create do |u|
       u.email = 'byrd@example.com'
       u.password = 'password' 
@@ -34,6 +35,8 @@ namespace :simple_fake do
         p.admin = true
       end
     end
+
+    Specialization.create(user: byrd, specialty: Specialty.find_by(name: 'Music'))
 
     elizabeth = User.create do |u|
       u.email = 'elizabeth@example.com'

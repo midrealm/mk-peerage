@@ -28,6 +28,7 @@
       <div role="tabpanel" class="tab-pane" id="peer">
         <%= f.inputs do %>
           <%= f.semantic_fields_for :peer do |p| %>
+          <% peerage_type = @user.peer.type.downcase.to_sym%>
             <%= p.inputs do %>
               <div id='user_peer_attributes_profile_pic_input' class='form-group user-profile-pic-input'>
                 <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
@@ -37,7 +38,7 @@
               </div>
               <input type="hidden" class="profile-pic-actual" id="user_peer_attributes_profile_pic" name="user[peer_attributes][profile_pic]" value=<%=@user.peer.profile_pic_data_uri%>>
               <%= image_tag @user.peer.profile_pic.url(:large), class:'hidden profile-pic-cache' %>
-              <%= p.input :specialties %>
+              <%= p.input :specialties, :collection => Specialty.all.where(peerage_type: peerage_type) %>
               <%= p.input :specialty_detail %>
               <%= p.input :elevated_by %>
               <%= p.input :elevation_date %>

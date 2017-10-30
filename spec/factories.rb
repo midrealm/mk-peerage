@@ -69,6 +69,7 @@ FactoryGirl.define do
   end
   factory :specialty do
     name "MyString"
+    peerage_type :laurel
   end
   sequence :email do |n|
     "person#{n}@example.com"
