@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030135537) do
+ActiveRecord::Schema.define(version: 20171030144842) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "candidate_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20171030135537) do
     t.datetime "profile_pic_updated_at"
     t.integer  "group_id"
     t.string   "specialty_detail"
+    t.integer  "peerage_type"
     t.index ["group_id"], name: "index_candidates_on_group_id", using: :btree
   end
 

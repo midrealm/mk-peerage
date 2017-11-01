@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
   factory :image do
     image ""
-    candidate nil
+    candidate
   end
   factory :poll_result do
     candidate
@@ -57,6 +57,7 @@ FactoryGirl.define do
   end
   factory :candidate do
     sca_name "MyString"
+    peerage_type :laurel
   end
   #factory :apprenticeship do
   #  user 

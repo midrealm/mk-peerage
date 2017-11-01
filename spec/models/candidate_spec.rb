@@ -12,6 +12,8 @@ RSpec.describe Candidate, type: :model do
 
   it { should belong_to(:group) }
 
+  it { should validate_presence_of(:peerage_type) }
+
 end
 
 RSpec.describe Candidate, 'poll_entry_submitted?' do

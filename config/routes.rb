@@ -19,11 +19,16 @@ Rails.application.routes.draw do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
     resources :images, only: [:create]
+    namespace :laurel do
+      resources :candidates, only: [:index, :show]
+      get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
+      namespace :admin do
+        resources :candidates, except: :show
+      end
+    end
   end
   scope :chambers do
     resources :comments, only: [:create]
-    resources :candidates, only: [:index, :show]
-    get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
     resource :poll, only: [:show]
     namespace :poll do
       get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
@@ -31,7 +36,7 @@ Rails.application.routes.draw do
     end
     namespace :admin do
       resources :laurels
-      resources :candidates, except: :show
+      #resources :candidates, except: :show
       resources :royalty, except: [:destroy, :show] 
       resource :poll, except: [:destroy, :show]
     end 

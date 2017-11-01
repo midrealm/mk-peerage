@@ -8,7 +8,7 @@ RSpec.feature 'Add New Candidate' do
     sign_in(admin)
     g = create(:group)
     create(:group, parent_id: g.id)
-    visit '/chambers/admin/candidates/new' 
+    visit '/chambers/laurel/admin/candidates/new' 
     fill_in 'candidate_sca_name', with: 'Smarty Pants'
     all('#candidate_group_id option')[1].select_option
     attach_file 'profile_pic', Rails.root + 'spec/fixtures/images/portrait.jpg'

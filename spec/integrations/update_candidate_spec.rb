@@ -11,7 +11,7 @@ RSpec.feature 'Update Candidate info' do
     sign_in(admin)
     expect(Candidate.last.vote).to eq(false)
 
-    visit "/chambers/admin/candidates/#{candidate.id}/edit" 
+    visit "/chambers/laurel/admin/candidates/#{candidate.id}/edit" 
     fill_in 'SCA Name', with: 'Smarty Pants'
     select 'Generic Specialty', from: 'Specialties'
     select 'Other Specialty', from: 'Specialties'

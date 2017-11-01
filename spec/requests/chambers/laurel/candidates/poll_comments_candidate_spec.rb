@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe "Get /chambers/candidates/:id/poll_comments" do
+describe "Get /chambers/laurel/candidates/:id/poll_comments" do
   before(:each) do
     @candidate = create(:candidate)
     @judgement = create(:judgement)
@@ -21,13 +21,13 @@ describe "Get /chambers/candidates/:id/poll_comments" do
           judgement: @judgement)
       end
       it "shows poll comment page for candidate with poll result" do
-        get "/chambers/candidates/#{@candidate.id}/poll_comments"
+        get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"
         expect(response).to have_http_status(:success)
         expect(response.body).to include('Full Poll Results')
         expect(response.body).to include(@candidate.sca_name)
       end
       it "shows comments and judgements from submitted results" do
-        get "/chambers/candidates/#{@candidate.id}/poll_comments"
+        get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"
         expect(response.body).to include(@laurel.sca_name)
         expect(response.body).to include(@advising.comment)
         expect(response.body).to include(@advising.judgement.name)
@@ -35,23 +35,23 @@ describe "Get /chambers/candidates/:id/poll_comments" do
     end
     context 'no past poll result' do
       it "redirects to candidates index" do
-        get "/chambers/candidates/#{@candidate.id}/poll_comments"
-        expect(response).to redirect_to "/chambers/candidates"
+        get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"
+        expect(response).to redirect_to "/chambers/laurel/candidates"
       end
     end
   end
   it "raises AccessDenied Error for non-royal laurel" do
     @laurel = create(:user)
     sign_in(@laurel)
-    expect{get "/chambers/candidates/#{@candidate.id}/poll_comments"}.to raise_error(CanCan::AccessDenied)
+    expect{get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"}.to raise_error(CanCan::AccessDenied)
   end
   it "raises AccessDenied Error for non-royal admin laurel" do
     @non_royal_admin = create(:admin)
     sign_in(@non_royal_admin)
-    expect{get "/chambers/candidates/#{@candidate.id}/poll_comments"}.to raise_error(CanCan::AccessDenied)
+    expect{get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"}.to raise_error(CanCan::AccessDenied)
   end
   it "redirects if not logged in" do
-    get "/chambers/candidates/#{@candidate.id}/poll_comments"
+    get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"
     expect(response).to have_http_status(:found)
     expect(response.body).to include('redirected')
   end
