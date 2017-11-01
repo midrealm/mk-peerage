@@ -6,8 +6,7 @@ RSpec.feature 'Add New Laurel' do
     admin = create(:admin)
     expect(User.count).to eq(1)
     sign_in(admin)
-    #visit '/chambers/laurel/admin/laurels/new' 
-    visit '/chambers/admin/laurels/new' 
+    visit '/chambers/laurel/admin/laurels/new' 
     fill_in 'laurel_sca_name', with: 'Smarty Pants'
     fill_in 'laurel_email', with: 'fake@elkiss.com'
     click_on 'Create Laurel'

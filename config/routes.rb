@@ -23,10 +23,12 @@ Rails.application.routes.draw do
       resources :candidates, only: [:index, :show]
       get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
       namespace :admin do
+        resources :laurels
         resources :candidates, except: :show
       end
     end
   end
+
   scope :chambers do
     resources :comments, only: [:create]
     resource :poll, only: [:show]
@@ -35,12 +37,11 @@ Rails.application.routes.draw do
       resources :candidates, only: [:update]
     end
     namespace :admin do
-      resources :laurels
-      #resources :candidates, except: :show
       resources :royalty, except: [:destroy, :show] 
       resource :poll, except: [:destroy, :show]
     end 
   end
+
   root to: "home#index" 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
