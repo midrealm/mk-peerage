@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       namespace :admin do
         resources :laurels
         resources :candidates, except: :show
+        resource :poll, except: [:destroy, :show]
       end
     end
   end
@@ -38,7 +39,6 @@ Rails.application.routes.draw do
     end
     namespace :admin do
       resources :royalty, except: [:destroy, :show] 
-      resource :poll, except: [:destroy, :show]
     end 
   end
 

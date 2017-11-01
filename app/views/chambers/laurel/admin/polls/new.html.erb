@@ -1,7 +1,7 @@
 <h1>Create New Poll</h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @poll, url: admin_poll_path do |f| %>
+    <%= semantic_form_for @poll, url: chambers_laurel_admin_poll_path do |f| %>
       <%= f.inputs do %>
         <%= f.input :start_date, as: :string %>
         <%= f.input :end_date, as: :string %>

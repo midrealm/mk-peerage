@@ -11,6 +11,10 @@ describe "Get /chambers" do
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Edit Your Profile')
     end
+    it "shows link to candidates" do
+      get "/chambers"
+      expect(response.body).to include('/chambers/laurel/candidates')
+    end
     it "does not show Admin Tasks" do
       get "/chambers"
       expect(response).to have_http_status(:success)

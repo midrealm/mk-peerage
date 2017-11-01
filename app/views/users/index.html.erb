@@ -1,7 +1,7 @@
 <h1>Private Chambers</h1>
 <%= link_to 'View Your Profile', current_user.url %><br>
 <%= link_to 'Edit Your Profile', '/users/edit' %><br>
-<%= link_to 'View Candidates', '/chambers/candidates' %><br>
+<%= link_to 'View Candidates', chambers_laurel_candidates_path %><br>
 <%= link_to 'Browse Candidates By Group', '/chambers/groups/' %><br/>
 <% if !@poll.nil? && @poll.active? && can?(:take, Poll) %>
   <% unless current_user.poll_complete? %>
@@ -19,11 +19,11 @@
   <%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
   <% unless @poll.nil? %>
     <% if @poll.end_date.past? %>
-      <%= link_to 'Create New Poll', new_admin_poll_path %>
+      <%= link_to 'Create New Poll', new_chambers_laurel_admin_poll_path %>
     <% else  %>
-      <%= link_to 'Edit Poll', edit_admin_poll_path %> | <%= @poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= @poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
+      <%= link_to 'Edit Poll', edit_chambers_laurel_admin_poll_path %> | <%= @poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= @poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
     <% end %>
   <% else %>
-    <%= link_to 'Create New Poll', new_admin_poll_path %>
+    <%= link_to 'Create New Poll', new_chambers_laurel_admin_poll_path %>
   <% end %></br>
 <% end %>
