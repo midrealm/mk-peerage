@@ -5,7 +5,7 @@ class Poll::CandidatesController < ApplicationController
     @advising = Advising.find_by(candidate_id: params[:id], peer_id: current_user.peer.id, poll_id: Poll.last.id)
     if @advising.update(advising_params)
       @advising.update(submitted: true)  
-      redirect_to poll_path
+      redirect_to chambers_laurel_poll_path
     else
       render :edit
     end

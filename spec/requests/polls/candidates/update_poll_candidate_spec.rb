@@ -23,7 +23,7 @@ describe "put /chambers/poll/candidates/:id" do
       it "redirects to poll" do
         create(:advising, candidate: @candidate, poll: @poll, peer: @laurel.peer)
         put "/chambers/poll/candidates/#{@candidate.id}", params: { :advising => {comment: 'This is a comment', judgement_id: @judgement.id} }
-        expect(response).to redirect_to "/chambers/poll"
+        expect(response).to redirect_to "/chambers/laurel/poll"
       end
     end
   

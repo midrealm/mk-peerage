@@ -5,9 +5,9 @@
 <%= link_to 'Browse Candidates By Group', '/chambers/groups/' %><br/>
 <% if !@poll.nil? && @poll.active? && can?(:take, Poll) %>
   <% unless current_user.poll_complete? %>
-    <%= link_to 'Take Poll', poll_path %> | <%="#{current_user.poll_submitted_count}/#{Candidate.all.count}"%> Submitted |
+    <%= link_to 'Take Poll', chambers_laurel_poll_path %> | <%="#{current_user.poll_submitted_count}/#{Candidate.all.count}"%> Submitted |
   <% else  %>
-    <%= link_to 'Edit Poll', poll_path %> Finished! | 
+    <%= link_to 'Edit Poll', chambers_laurel_poll_path %> Finished! | 
   <%end %>
   Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> <br/>
 <% end %>
