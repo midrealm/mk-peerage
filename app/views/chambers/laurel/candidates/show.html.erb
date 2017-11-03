@@ -57,7 +57,7 @@
   <% end %>
   <div class="col-md-12">
   <h3>Add A Comment</h3>
-  <%= semantic_form_for @comment, url: comments_path do |f| %>
+  <%= semantic_form_for @comment, url: chambers_comments_path do |f| %>
     <%= f.inputs do %>
       <%= f.input :text, label: 'Comment' %>
       <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>

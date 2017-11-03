@@ -5,13 +5,15 @@ Rails.application.routes.draw do
   get '/users/edit' => 'users#edit'
   patch '/users/edit' => 'users#update'
 
-  get '/groups' => 'groups#index'
-  get '/groups/:name' => 'groups#show'
-
   get '/laurels/:slug' => 'laurels#show', as: :laurel
   get '/laurels' => 'laurels#index'
   get '/laurels/:slug/contact' => 'contact#new', as: :contact_laurel
   post 'laurels/:slug/contact' => 'contact#create'
+
+  namespace :laurel do
+    get '/groups' => 'groups#index'
+    get '/groups/:name' => 'groups#show', as: :group
+  end 
 
   get '/chambers' => 'users#index'
 
@@ -19,6 +21,7 @@ Rails.application.routes.draw do
     resources :groups, only: [:index]
     get '/groups/:name' => 'groups#show'
     resources :images, only: [:create]
+    resources :comments, only: [:create]
 
     namespace :laurel do
       resources :candidates, only: [:index, :show]
@@ -38,7 +41,6 @@ Rails.application.routes.draw do
   end
 
   scope :chambers do
-    resources :comments, only: [:create]
     namespace :admin do
       resources :royalty, except: [:destroy, :show] 
     end 
