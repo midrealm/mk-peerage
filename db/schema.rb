@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030144842) do
+ActiveRecord::Schema.define(version: 20171108150829) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "candidate_id"
@@ -82,10 +82,13 @@ ActiveRecord::Schema.define(version: 20171030144842) do
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.integer  "parent_id"
     t.integer  "group_type_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "ancestry"
+    t.integer  "ancestry_depth", default: 0
+    t.string   "slug"
+    t.index ["ancestry"], name: "index_groups_on_ancestry", using: :btree
     t.index ["group_type_id"], name: "index_groups_on_group_type_id", using: :btree
   end
 

@@ -24,7 +24,7 @@ namespace :simple_fake do
       u.arms = File.open('lib/assets/fake_data/byrd_coa.jpg')
       u.deceased = false
       u.group = Group.find_by(name: 'Cynnabar')
-      u.peer = Peer.create do |p|
+      u.peer = Laurel.create do |p|
         p.active = true
         p.elevation_date = Date.parse('1560-May-10')
         p.elevated_by = 'Elizabeth I'
@@ -36,7 +36,7 @@ namespace :simple_fake do
       end
     end
 
-    Specialization.create(user: byrd, specialty: Specialty.find_by(name: 'Music'))
+    Specialization.create(peer: byrd.peer, specialty: Specialty.find_by(name: 'Music'))
 
     elizabeth = User.create do |u|
       u.email = 'elizabeth@example.com'

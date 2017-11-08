@@ -6,28 +6,28 @@ describe GroupHelper do
     end
   end
 
-  describe "laurel_link(group)" do
+  describe "full_group_link(group, group_path)" do
     before(:each) do
       kingdom_type = create(:group_type, name: 'Kingdom')      
       region_type = create(:group_type, name: 'Region')      
       barony_type = create(:group_type, name: 'Barony')      
       canton_type = create(:group_type, name: 'Canton')      
-      @kingdom = create(:group, name: 'the Middle', group_type: kingdom_type)
-      @region = create(:group, name: 'North Oaken', group_type: region_type, parent_id: @kingdom.id)
-      @barony = create(:group, name: 'High Haven', group_type: barony_type, parent_id: @region.id)
-      @canton = create(:group, name: 'The Barrows', group_type: canton_type, parent_id: @barony.id)
+      @kingdom = create(:group, name: 'the Middle', slug: 'the_middle', group_type: kingdom_type)
+      @region = create(:group, name: 'North Oaken', slug: 'north_oaken', group_type: region_type, parent_id: @kingdom.id)
+      @barony = create(:group, name: 'High Haven', slug: 'high_haven', group_type: barony_type, parent_id: @region.id)
+      @canton = create(:group, name: 'The Barrows', slug: 'the_barrows', group_type: canton_type, parent_id: @barony.id)
     end 
     it "handles a Kingdom" do
-      expect(helper.laurel_link(@kingdom)).to eq('<a href="/laurel/groups/the_Middle">Kingdom of the Middle</a>')
+      expect(helper.full_group_link(@kingdom,'laurel_group_path')).to eq('<a href="/laurel/groups/the_middle">Kingdom of the Middle</a>')
     end
     it "handles a Region" do
-      expect(helper.laurel_link(@region)).to eq('<a href="/laurel/groups/North_Oaken">Region of North Oaken</a>')
+      expect(helper.full_group_link(@region,'laurel_group_path')).to eq('<a href="/laurel/groups/north_oaken">Region of North Oaken</a>')
     end
     it "handles a Barony" do
-      expect(helper.laurel_link(@barony)).to eq('<a href="/laurel/groups/High_Haven">Barony of High Haven</a>, <a href="/laurel/groups/North_Oaken">Region of North Oaken</a>')
+      expect(helper.full_group_link(@barony,'laurel_group_path')).to eq('<a href="/laurel/groups/high_haven">Barony of High Haven</a>, <a href="/laurel/groups/north_oaken">Region of North Oaken</a>')
     end
     it "handles a Canton" do
-      expect(helper.laurel_link(@canton)).to eq('<a href="/laurel/groups/The_Barrows">The Barrows</a>, <a href="/laurel/groups/High_Haven">Canton of High Haven</a>, <a href="/laurel/groups/North_Oaken">Region of North Oaken</a>')
+      expect(helper.full_group_link(@canton,'laurel_group_path')).to eq('<a href="/laurel/groups/the_barrows">The Barrows</a>, <a href="/laurel/groups/high_haven">Canton of High Haven</a>, <a href="/laurel/groups/north_oaken">Region of North Oaken</a>')
     end
   end
 end

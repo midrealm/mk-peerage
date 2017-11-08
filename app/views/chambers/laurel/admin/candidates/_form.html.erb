@@ -7,7 +7,7 @@
         <% if @candidate.persisted? %>
           <%= f.input :vote, :as => :radio, label: 'List Status', :collection => [['Vote', true],['Watch', false]]%>
         <% end %>
-        <%= f.input :group, :as => :select, :collection => Hash[Group.where.not(parent_id: nil).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
+        <%= f.input :group, :as => :select, :collection => Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
         <%= f.input :specialties %>
         <%= f.input :specialty_detail %>
         <%= f.input :peers, label: 'Advocates', collection: Peer.joins(:user).pluck(:sca_name, :id) %>

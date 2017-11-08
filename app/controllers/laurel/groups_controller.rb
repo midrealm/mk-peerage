@@ -1,6 +1,6 @@
 class Laurel::GroupsController < ApplicationController
   def index
-    @kingdoms = Group.where(parent_id:nil)
+    @kingdoms = Group.roots
   end
   def show
     name = params[:name].tr("_"," ")

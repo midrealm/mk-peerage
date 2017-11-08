@@ -38,8 +38,9 @@ FactoryGirl.define do
     end_date (DateTime.now+2.days)
   end
   factory :group do
-    name "MyString"
-    parent_id nil
+    name "My String"
+    slug "my_string"
+    ancestry nil
     group_type
   end
   factory :group_type do

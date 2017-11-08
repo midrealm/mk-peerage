@@ -9,40 +9,33 @@ module GroupHelper
     "/chambers/groups/#{slug}" 
   end
 
-  #most specific to least specific
   def laurel_link(group)
-    if group.root?
-      link_to("Kingdom of #{group.name}", laurel_group_url(group.name))
-    else 
-       case group.parent.group_type.name 
-       when 'Barony' #dealing with Cantons
-          region = group.parent.parent
-          region_link = link_to("Region of #{region.name}", laurel_group_url(region.name))
-          barony_link = link_to("#{group.group_type.name} of #{group.parent.name}", laurel_group_url(group.parent.name))
-          group_link = link_to(group.name, laurel_group_url(group.name))
-          group_link + ', '+ barony_link + ', ' + region_link
-        when 'Region' #mostly Baronies or Shires
-          link_to("#{group.group_type.name} of #{group.name}", laurel_group_url(group.name)) + ', ' + 
-          link_to("#{group.parent.group_type.name} of #{group.parent.name}", laurel_group_url(group.parent.name))
-        else #regions
-          link_to("#{group.group_type.name} of #{group.name}", laurel_group_url(group.name))
-        end
-    end  
+    full_group_link(group, group_path='laurel_group_path')
   end
 
   def candidate_link(group)
-    if group.parent.group_type.name == 'Barony'
+    full_group_link(group, group_path='chambers_group_path')
+  end
+  
+
+  #most specific to least specific
+  def full_group_link(group, group_path)
+    case group.depth
+    when 3
       region = group.parent.parent
-      region_link = link_to("Region of #{region.name}", candidate_group_url(region.name))
-      barony_link = link_to("#{group.group_type.name} of #{group.parent.name}", candidate_group_url(group.parent.name))
-      group_link = link_to(group.name, candidate_group_url(group.name))
-      group_link + ', '+ barony_link + ', ' + region_link
-    elsif group.parent.group_type.name == 'Region'
-      link_to("#{group.group_type.name} of #{group.name}", candidate_group_url(group.name)) + ', ' + 
-      link_to("Region of #{group.parent.name}", candidate_group_url(group.parent.name))
-    else
-      link_to("#{group.group_type.name} of #{group.name}", candidate_group_url(group.name))
-    end
+      barony_link = group_link(group.settlement_type, group.parent, group_path)
+      local_group_link = link_to(group.name, controller.send(group_path,[group.slug]))
+
+      "#{local_group_link}, #{barony_link}, #{group_link(region.settlement_type, region, group_path)}".html_safe
+    when 2 #Baronies or Shires
+      "#{group_link(group.settlement_type, group, group_path)}, #{group_link(group.parent.settlement_type, group.parent, group_path)}".html_safe
+    else #Kingdom or Region
+      group_link(group.settlement_type, group, group_path).html_safe
+    end  
+  end
+
+  def group_link(prefix, linked_group, group_path)
+    link_to("#{prefix} of #{linked_group.name}", controller.send(group_path,[linked_group.slug]))
   end
 
   def candidate_region_link(group)
