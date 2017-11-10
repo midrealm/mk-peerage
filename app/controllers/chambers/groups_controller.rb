@@ -5,8 +5,7 @@ module Chambers
       @middle_kingdom = Group.find_by(name: 'the Middle')
     end
     def show
-      name = params[:name].tr("_"," ")
-      @group = Group.find_by(name: name)
+      @group = Group.find_by(slug: params[:slug])
     end
   end
 end

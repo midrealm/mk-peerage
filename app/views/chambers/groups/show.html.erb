@@ -15,7 +15,7 @@
   <td><%= link_to candidate.sca_name, chambers_laurel_candidate_path(candidate.id) %></td>
   <td><%=candidate.show_specialties%></td>
   <td><%=link_to "#{candidate.group.group_type.name} of #{candidate.group.name}", 
-      candidate_group_url(candidate.group.name) %></td>
+      chambers_group_path(candidate.group.slug) %></td>
   </tr>
 <% end %>
 

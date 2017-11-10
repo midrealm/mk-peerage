@@ -12,14 +12,14 @@ Rails.application.routes.draw do
 
   namespace :laurel do
     get '/groups' => 'groups#index'
-    get '/groups/:name' => 'groups#show', as: :group
+    get '/groups/:slug' => 'groups#show', as: :group
   end 
 
   get '/chambers' => 'users#index'
 
   namespace :chambers do
     resources :groups, only: [:index]
-    get '/groups/:name' => 'groups#show', as: :group
+    get '/groups/:slug' => 'groups#show', as: :group
     resources :images, only: [:create]
     resources :comments, only: [:create]
 

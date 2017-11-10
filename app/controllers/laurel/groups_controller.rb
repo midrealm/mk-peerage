@@ -3,7 +3,6 @@ class Laurel::GroupsController < ApplicationController
     @kingdoms = Group.roots
   end
   def show
-    name = params[:name].tr("_"," ")
-    @group = Group.find_by(name: name)
+    @group = Group.find_by(slug: params[:slug])
   end
 end

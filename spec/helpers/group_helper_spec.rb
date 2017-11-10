@@ -1,11 +1,28 @@
 require 'rails_helper'
 describe GroupHelper do
-  describe "laurel_group_url(group)" do
-    it "returns the correct output" do
-      expect(helper.laurel_group_url('High Haven')).to eq('/laurel/groups/High_Haven') 
+
+  describe "candidate_region_link(group)" do
+    before(:each) do
+      kingdom_type = create(:group_type, name: 'Kingdom')      
+      region_type = create(:group_type, name: 'Region')      
+      barony_type = create(:group_type, name: 'Barony')      
+      canton_type = create(:group_type, name: 'Canton')      
+      @kingdom = create(:group, name: 'the Middle', slug: 'the_middle', group_type: kingdom_type)
+      @region = create(:group, name: 'North Oaken', slug: 'north_oaken', group_type: region_type, parent_id: @kingdom.id)
+      @barony = create(:group, name: 'High Haven', slug: 'high_haven', group_type: barony_type, parent_id: @region.id)
+      @canton = create(:group, name: 'The Barrows', slug: 'the_barrows', group_type: canton_type, parent_id: @barony.id)
+    end 
+
+    it "handles a region" do
+      expect(helper.candidate_region_link(@region)).to eq('<a href="/chambers/groups/north_oaken">North Oaken</a>')
+    end
+    it "handles a barony" do
+      expect(helper.candidate_region_link(@barony)).to eq('<a href="/chambers/groups/north_oaken">North Oaken</a>')
+    end
+    it "handles a canton" do
+      expect(helper.candidate_region_link(@canton)).to eq('<a href="/chambers/groups/north_oaken">North Oaken</a>')
     end
   end
-
   describe "full_group_link(group, group_path)" do
     before(:each) do
       kingdom_type = create(:group_type, name: 'Kingdom')      
