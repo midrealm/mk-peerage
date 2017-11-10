@@ -1,20 +1,11 @@
 module GroupHelper
-#  def laurel_group_url(name)
-#    slug = name.tr(' ', '_')
-#    #"/laurel/groups/#{slug}" 
-#    laurel_group_path(slug)
-#  end
-#  def candidate_group_url(name)
-#    slug = name.tr(' ', '_')
-#    "/chambers/groups/#{slug}" 
-#  end
 
   def laurel_link(group)
     full_group_link(group, group_path='laurel_group_path')
   end
 
   def candidate_link(group)
-    full_group_link(group, group_path='chambers_group_path')
+    full_group_link(group, group_path='chambers_laurel_group_path')
   end
   
 
@@ -40,10 +31,10 @@ module GroupHelper
 
   def candidate_region_link(group)
     if group.depth == 1
-      link_to group.name, chambers_group_path(group.slug) 
+      link_to group.name, chambers_laurel_group_path(group.slug) 
     else
       region = group.ancestors.at_depth(1).first
-      link_to region.name, chambers_group_path(region.slug) 
+      link_to region.name, chambers_laurel_group_path(region.slug) 
    end 
   end
 end

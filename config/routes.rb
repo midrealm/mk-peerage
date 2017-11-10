@@ -18,13 +18,15 @@ Rails.application.routes.draw do
   get '/chambers' => 'users#index'
 
   namespace :chambers do
-    resources :groups, only: [:index]
-    get '/groups/:slug' => 'groups#show', as: :group
+    #resources :groups, only: [:index]
+    #get '/groups/:slug' => 'groups#show', as: :group
     resources :images, only: [:create]
     resources :comments, only: [:create]
 
     namespace :laurel do
       resources :candidates, only: [:index, :show]
+      resources :groups, only: [:index]
+      get '/groups/:slug' => 'groups#show', as: :group
       get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
       namespace :poll do
         get '/' => 'candidates#index', as: :candidates

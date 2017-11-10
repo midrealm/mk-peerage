@@ -1,0 +1,22 @@
+<%= link_to 'Back to Groups', controller.send("chambers_#{@peerage}_groups_path") %><br/>
+<h1><%=@group%></h1>
+<ul>
+  <%= render 'draw_tree', node: @group %>
+</ul>
+<h3><%=@peerage.capitalize%> Candidates</h3>
+<table class="table">
+<thead>
+<th>Name</th><th>Specialty</th><th>Group</th>
+</thead>
+<tbody>
+
+<% @group.all_candidates.each do |candidate| %>
+  <tr>
+  <td><%= link_to candidate.sca_name, controller.send("chambers_#{@peerage}_candidate_path",[candidate.id]) %></td>
+  <td><%=candidate.show_specialties%></td>
+  <td><%=link_to candidate.group, controller.send("chambers_#{@peerage}_group_path", [candidate.group.slug]) %></td>
+  </tr>
+<% end %>
+
+</tbody>
+</table>
