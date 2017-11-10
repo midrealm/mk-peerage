@@ -4,7 +4,7 @@ class Group < ApplicationRecord
   has_many :candidates
   has_ancestry cache_depth: true
 
-  def titled_name
+  def to_s
     if ancestry_depth == 3
       "#{name}, #{settlement_type} of #{self.parent.name}"
     else

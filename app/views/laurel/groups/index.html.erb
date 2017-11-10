@@ -4,7 +4,7 @@
   <% laurel_total = kingdom.all_laurels.count %>
   <% if laurel_total > 0 %>
   <li>
-    <%= link_to kingdom.titled_name, laurel_group_path(kingdom.slug) %> (<%=laurel_total%>)
+    <%= link_to kingdom, laurel_group_path(kingdom.slug) %> (<%=laurel_total%>)
     <ul><%= render 'draw_tree', node: kingdom %></ul>
   </li>
   <% end %>
