@@ -5,7 +5,7 @@ describe "patch /users/edit" do
     expect(User.first.sca_name).to eq('Mundungus Jones')
     sign_in(laurel)
     patch "/users/edit", params: { :user => {sca_name: 'Mundingus Janes'} }
-    expect(response).to redirect_to '/laurels/mundingus_janes'
+    expect(response).to redirect_to '/laurel/mundingus_janes'
     expect(User.first.sca_name).to eq('Mundingus Janes')
   end
   it "redirects if not logged in" do

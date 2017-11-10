@@ -19,7 +19,7 @@ module Chambers
           Peer.create(user: @laurel, active: true, type: 'Laurel') do |p|
             p.vigilant = true if params[:laurel][:vigilant].nil?
           end
-          redirect_to "/laurels/#{@laurel.slug}"
+          redirect_to laurel_path(@laurel.slug)
           @laurel.send_reset_password_instructions
         else
           render :new

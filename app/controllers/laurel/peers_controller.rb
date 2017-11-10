@@ -1,4 +1,4 @@
-class LaurelsController < ApplicationController
+class Laurel::PeersController < ApplicationController
   def show
     @laurel = Laurel.joins(:user).find_by(users: {slug: params[:slug]})
     @peer = @laurel 

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
   def update
     if current_user.update(user_params)
-      redirect_to current_user.url
+      redirect_to laurel_path(current_user.slug)
     else
       render :edit
     end
