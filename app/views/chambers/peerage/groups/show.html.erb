@@ -1,7 +1,7 @@
 <%= link_to 'Back to Groups', controller.send("chambers_#{@peerage}_groups_path") %><br/>
 <h1><%=@group%></h1>
 <ul>
-  <%= render 'draw_tree', node: @group %>
+  <%= render '/chambers/peerage/groups/draw_tree', node: @group %>
 </ul>
 <h3><%=@peerage.capitalize%> Candidates</h3>
 <table class="table">

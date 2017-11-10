@@ -1,0 +1,12 @@
+<h1><%=@peerage.capitalize%>s by Location</h1>
+<ul>
+<% @kingdoms.each do |kingdom| %>
+  <% peer_total = kingdom.send("all_#{@peerage}s").count %>
+  <% if peer_total > 0 %>
+  <li>
+    <%= link_to kingdom, controller.send("#{@peerage}_group_path",[kingdom.slug]) %> (<%=peer_total%>)
+    <ul><%= render '/peerage/groups/draw_tree', node: kingdom %></ul>
+  </li>
+  <% end %>
+<% end %>
+</ul>

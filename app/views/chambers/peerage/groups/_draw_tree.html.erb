@@ -3,7 +3,7 @@
   <% if cand_total > 0 %>
     <li><%= link_to child, controller.send("chambers_#{@peerage}_group_path",[child.slug]) %> (<%=cand_total%>)
     <% if child.children.any?  %>
-      <ul><%= render 'draw_tree', node: child  %></ul>
+      <ul><%= render '/chambers/peerage/groups/draw_tree', node: child  %></ul>
     <% end  %>
    </li>
   <% end %>
