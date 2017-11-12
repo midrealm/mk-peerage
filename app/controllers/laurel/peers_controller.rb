@@ -1,7 +1,8 @@
 class Laurel::PeersController < ApplicationController
   def show
-    @laurel = Laurel.joins(:user).find_by(users: {slug: params[:slug]})
-    @peer = @laurel 
+    @peer = Laurel.joins(:user).find_by(users: {slug: params[:slug]})
+    @peerage = 'laurel'
+    
     render template: "peerage/peers/show"
   end
 

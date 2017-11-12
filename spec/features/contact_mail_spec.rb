@@ -1,5 +1,5 @@
-require 'rails_helper'
-TEST_SUBJECT = 'Test subject'
+#require 'rails_helper'
+#TEST_SUBJECT = 'Test subject'
 #RSpec.feature 'Contact email' do
 #  def send_mail(body = nil)
 #    subject = TEST_SUBJECT
@@ -21,7 +21,7 @@ TEST_SUBJECT = 'Test subject'
 #
 #  def setup_contact
 #    laurel = create(:user, sca_name: 'Mundungus Smith')
-#    visit "/laurels/#{laurel.slug}/contact"
+#    visit "/laurel/#{laurel.slug}/contact"
 #    laurel
 #  end
 #

@@ -25,12 +25,20 @@ class Peer < ApplicationRecord
     data_uri
   end
 
+  def peerage
+    #parent definition
+  end
+
   def show_specialties
-    return self.specialties.map{|s| s.name}.to_sentence
+    specialties.where(peerage_type: peerage).map{|s| s.name}.to_sentence
   end
 
   def url
-    user.url
+    #Parent Definition
+  end
+
+  def slug
+    user.slug
   end
 
   def sca_name

@@ -1,6 +1,7 @@
-class ContactController < ApplicationController
+class Laurel::ContactController < ApplicationController
   def new
     @laurel = User.find_by(slug:params[:slug])
+    render '/peerage/contact/new'
   end
 
   def create
@@ -13,10 +14,10 @@ class ContactController < ApplicationController
         redirect_to laurel_path
       else
         flash.alert = "not sending email - message must be present"
-        render 'new'
+        render '/peerage/contact/new'
       end
     else
-      render 'new'
+      render '/peerage/contact/new'
     end
   end
 

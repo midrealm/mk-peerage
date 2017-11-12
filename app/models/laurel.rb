@@ -1,5 +1,10 @@
 class Laurel < Peer
-  #def url
-  #  return "/laurels/#{self.slug}"
-  #end
+  def url
+    Rails.application.routes.url_helpers.laurel_path(slug)
+  end
+
+  def peerage
+    'laurel'
+  end
+
 end

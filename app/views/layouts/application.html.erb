@@ -29,21 +29,19 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rolls of Honor <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Order of the Chivalry</a></li>
-            <li><a href="/laurels">Order of the Laurel</a></li>
-            <li><a href="#">Order of the Pelican</a></li>
-            <li><a href="#">Order of the Masters of Defense</a></li>
-            <li><a href="/groups">Laurels by Group</a></li>
+            <li><%= link_to 'Order of the Chivalry', '/#' %></li>
+            <li><%= link_to 'Order of the Laurel', laurel_roll_of_honor_path %></li>
+            <li><%= link_to 'Order of the Pelican', '/#'%></li>
+            <li><%= link_to 'Order of the Masters of Defense', '/#'%></li>
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Orders by Group <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Knights by Group</a></li>
-            <li><a href="/groups">Laurels by Group</a></li>
-            <li><a href="#">Pelicans by Group</a></li>
-            <li><a href="#">Masters of Defense by Group</a></li>
-            <li><a href="/groups">Laurels by Group</a></li>
+            <li><%= link_to 'Knights by Group', '/#'%></li> 
+            <li><%= link_to 'Laurels by Group', laurel_groups_path %></li> 
+            <li><%= link_to 'Pelicans by Group', '/#'%></li> 
+            <li><%= link_to 'Masters of Defense by Group', '/#'%></li> 
           </ul>
         </li>
         <li class="dropdown">

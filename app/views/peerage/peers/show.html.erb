@@ -4,17 +4,17 @@
 <%= image_tag @peer.profile_pic.url(:large), class: 'pull-right'%>
 <div class="container">
   <%= image_tag @peer.arms.url(:large)%>
-  <h1><%=@peer.sca_name%> <small><%=@laurel.show_specialties%></h1>
-  <%= link_to "Send #{@peer.sca_name} a Message", contact_laurel_path, class: "btn btn-primary" %><br/>
+  <h1><%=@peer.sca_name%> <small><%=@peer.show_specialties%></h1>
+  <%= link_to "Send #{@peer.sca_name} a Message", controller.send("#{@peerage}_contact_path"), class: "btn btn-primary" %><br/>
   <strong>Modern Name:</strong> <%=@peer.modern_name%><br>
-  <strong>Specialties:</strong><%=@peer.show_specialties%> (<%=@laurel.specialty_detail%>)<br/>
+  <strong>Specialties:</strong><%=@peer.show_specialties%> (<%=@peer.specialty_detail%>)<br/>
   <% unless @peer.group.nil? %>
     <strong>Group:</strong> <%=laurel_link @peer.group %> <br>
   <% end %>
   <strong>Contact Info</strong><br>
   <address>
     <%=@peer.street%><br>
-    <%=@peer.city%>, <%=@laurel.state%> <%=@laurel.zipcode%><br>
+    <%=@peer.city%>, <%=@peer.state%> <%=@peer.zipcode%><br>
     Phone: <%=@peer.phone%>
   </address>
   <strong>Elevated by:</strong> <%=@peer.elevated_by%><br>

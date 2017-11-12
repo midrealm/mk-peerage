@@ -5,23 +5,18 @@ Rails.application.routes.draw do
   get '/users/edit' => 'users#edit'
   patch '/users/edit' => 'users#update'
 
-  get '/laurels/:slug/contact' => 'contact#new', as: :contact_laurel
-  post 'laurels/:slug/contact' => 'contact#create'
-
   namespace :laurel do
     get '/groups' => 'groups#index'
     get '/groups/:slug' => 'groups#show', as: :group
     get '/roll_of_honor' => 'peers#index'
     get ':slug' => 'peers#show'
-  #  get ':slug/contact' => 'contact#new', as: :contact_laurel
-  #  post ':slug/contact' => 'contact#create'
+    get ':slug/contact' => 'contact#new', as: :contact
+    post ':slug/contact' => 'contact#create'
   end 
 
   get '/chambers' => 'users#index'
 
   namespace :chambers do
-    #resources :groups, only: [:index]
-    #get '/groups/:slug' => 'groups#show', as: :group
     resources :images, only: [:create]
     resources :comments, only: [:create]
 

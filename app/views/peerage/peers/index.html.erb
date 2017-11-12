@@ -1,17 +1,17 @@
 <h1>Roll of Honor</h1>
 <h3><%=@order_title%><br><small>Active in the Kingdom</small></h3>
 <ul>
-<% @active_peers.each do |l| %>
+<% @active_peers.each do |p| %>
  
-  <% name = l.sca_name %>
-  <% if l.specialties.count > 0 %>
-    <% name = "#{l.sca_name} (#{l.show_specialties})" %>
+  <% name = p.sca_name %>
+  <% if p.specialties.count > 0 %>
+    <% name = "#{p.sca_name} (#{p.show_specialties})" %>
   <% end %>
-  <% if l.vigilant? %> 
-  <li><b><%= link_to(name, l.url) %></b></li>
+  <% if p.vigilant? %> 
+  <li><b><%= link_to(name, p.url) %></b></li>
   <% else %>
   
-  <li><%= link_to(name, l.url) %></li>
+  <li><%= link_to(name, p.url) %></li>
   <% end %>
 <%end %>
 </ul>
