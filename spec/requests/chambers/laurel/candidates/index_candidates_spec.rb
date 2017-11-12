@@ -12,6 +12,13 @@ describe "Get /chambers/laurel/candidates" do
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Candidates')
     end
+    it "only shows laurel candidates" do
+      pelican_candidate = create(:candidate, sca_name: 'Penny Pelican', vote: false, peerage_type: :pelican)
+      pelican_candidate = create(:candidate, sca_name: 'Peter Pelican', vote: true, peerage_type: :pelican)
+      get "/chambers/laurel/candidates"
+      expect(response.body).not_to include('Penny Pelican')
+      expect(response.body).not_to include('Peter Pelican')
+    end
     it "shows advocates for given candidate" do
       advocate = create(:user, sca_name: "Molly Mindingus")
       create(:advocacy, candidate: @candidate, peer: advocate.peer)
