@@ -24,11 +24,7 @@ module Chambers
           redirect_to chambers_laurel_candidates_path
         end
       end
-#      
-#      private
-#      def candidate_params
-#        params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote, :specialty_detail, {:specialty_ids => [] }, {:user_ids => [] })
-#      end
+
     end
   end
 end
