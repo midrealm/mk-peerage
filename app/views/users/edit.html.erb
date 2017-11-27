@@ -4,7 +4,9 @@
     <ul class="nav nav-tabs" id="myTabs" role="tablist">
       <li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
-      <li role="presentation"><a href="#peer" aria-controls="peer" role="tab" data-toggle="tab">Peer</a></li>
+      <% @user.peers.each do |p| %>
+        <li role="presentation"><%= link_to p.peerage_name, "##{p.peerage_type}", role: 'tab', 'data-toggle': 'tab' %></li>
+      <% end %>
     </ul>
     <%= semantic_form_for @user, url: users_edit_path do |f| %>
     <div class="tab-content">
@@ -25,20 +27,20 @@
         <%= f.input :phone %>
       <% end %>
       </div>
-      <div role="tabpanel" class="tab-pane" id="peer">
+      <% @user.peers.each do |peer| %>
+      <div role="tabpanel" class="tab-pane" id="<%=peer.peerage_type%>">
         <%= f.inputs do %>
-          <%= f.semantic_fields_for :peer do |p| %>
-          <% peerage_type = @user.peer.type.downcase.to_sym%>
+          <%= f.semantic_fields_for peer.peerage_type.to_sym do |p| %>
             <%= p.inputs do %>
-              <div id='user_peer_attributes_profile_pic_input' class='form-group user-profile-pic-input'>
+              <div id='user_<%=peer.peerage_type%>_attributes_profile_pic_input' class='form-group user-profile-pic-input'>
                 <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
                 <span class="form-wrapper">
-                  <input id="profile_pic" type="file" name="not_included">
+                  <input class="profile-pic" type="file" name="not_included">
                 </span>
               </div>
-              <input type="hidden" class="profile-pic-actual" id="user_peer_attributes_profile_pic" name="user[peer_attributes][profile_pic]" value=<%=@user.peer.profile_pic_data_uri%>>
-              <%= image_tag @user.peer.profile_pic.url(:large), class:'hidden profile-pic-cache' %>
-              <%= p.input :specialties, :collection => Specialty.all.where(peerage_type: peerage_type) %>
+              <input type="hidden" class="profile-pic-actual" id="user_<%=peer.peerage_type%>_attributes_profile_pic" name="user[<%=peer.peerage_type%>_attributes][profile_pic]" value=<%=peer.profile_pic_data_uri%>>
+              <%= image_tag peer.profile_pic.url(:large), class:'hidden profile-pic-cache' %>
+              <%= p.input :specialties, :collection => Specialty.all.where(peerage_type: peer.peerage_type) %>
               <%= p.input :specialty_detail %>
               <%= p.input :elevated_by %>
               <%= p.input :elevation_date %>
@@ -51,6 +53,7 @@
           <% end %>
         <% end %>
       </div>
+    <%end %>
       
       <%= f.button class: 'btn btn-default', id: 'submit' %>
     <% end %>

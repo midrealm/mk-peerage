@@ -1,7 +1,7 @@
-<h1>Contact <%=@laurel.sca_name%></h1>
+<h1>Contact <%=@user.sca_name%></h1>
 <div class="containter">
   <div class="col-md-6">
-    <%= semantic_form_for 'contact', url: laurel_contact_path do |f| %>
+    <%= semantic_form_for 'contact', url: controller.send("#{@peerage}_contact_path",[@user.slug]) do |f| %>
       <%= f.inputs do %>
         <%= f.input :subject %>
         <%= f.input :from_name, label: 'Your Name' %> 

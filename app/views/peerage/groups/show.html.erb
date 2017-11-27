@@ -9,7 +9,7 @@
 </thead>
 <tbody>
 
-<% @group.send("all_#{@peerage}s").each do |user|%>
+<% @group.all_peers(@peerage).each do |user|%>
   <tr>
   <td><%= link_to user.sca_name, user.url %></td>
   <td><%=user.peer.show_specialties%></td>

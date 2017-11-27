@@ -6,7 +6,7 @@ App.createController("Users", {
     edit: {
       profile: '#profile_preview',
       clickTab: ["#myTabs a", { click: 'toggleImagePreview' }],
-      loadNewPic: ['#profile_pic', { change: 'openCroppie' }], 
+      loadNewPic: ['.profile-pic', { change: 'openCroppie' }], 
       loadNewArms: ['#user_arms', {change: 'previewArms' }],
       cropPicButton: ['#crop', { click: 'cropPicture' }],
       clickSubmitButton: ['#submit', { click: 'validate' }], 
@@ -20,8 +20,11 @@ App.createController("Users", {
       case '#personal':
         $('#arms_preview_container').removeClass('hidden')
         break
-      case '#peer':
-        this.peerImagePreview('#peer')
+      case '#laurel':
+        this.peerImagePreview('#laurel')
+        break
+      case '#pelican':
+        this.peerImagePreview('#pelican')
         break
       default:
     }
@@ -107,10 +110,13 @@ App.createController("Users", {
     return promise;
   },
   form: function(){ 
+    peerage = ['laurel', 'pelican']
+    for(var i in peerage){
+      $('#user_' + peerage[i] + '_attributes_specialty_ids').select2();
+      $('#user_' + peerage[i]  + '_attributes_superior_ids').select2();
+      new SimpleMDE({element: $('#user_'+peerage[i]+'_attributes_bio')[0]});
+    }
     $('#user_group_id').select2();
-    $('#user_peer_attributes_specialty_ids').select2();
-    $('#user_peer_attributes_superior_ids').select2();
-    var simplemde = new SimpleMDE();
   },
 });
 

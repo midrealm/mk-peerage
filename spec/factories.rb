@@ -81,24 +81,29 @@ FactoryGirl.define do
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Jones"
     group
-    #active true
-    #vigilant false
-    #laurel true
     after(:create) do |u|
-      u.peer = create(:peer, user: u, active: true, vigilant: false, type: 'Laurel')
+      create(:peer, user: u, active: true, vigilant: false, type: 'Laurel')
     end
   end
 
+  factory :pelican, class: User do
+    email {generate :email}
+    password Devise.friendly_token.first(8)  
+    sca_name "Penny Pelican"
+    group
+    after(:create) do |u|
+      create(:peer, user: u, active: true, vigilant: false, type: 'Pelican')
+    end
+  end
+
+  
   factory :admin, class: User do
     email {generate :email}
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Admin"
     group
-#    active true
-    #vigilant false
-    #laurel true
     after(:create) do |u|
-      u.peer = create(:peer, user: u, admin: true, active: true, vigilant: false, type: 'Laurel')
+       create(:peer, user: u, admin: true, active: true, vigilant: false, type: 'Laurel')
     end
      
   end

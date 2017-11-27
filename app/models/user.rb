@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable 
   
-  has_one :peer
-  accepts_nested_attributes_for :peer
+  has_many :peers
+  has_one :laurel
+  has_one :pelican
+  accepts_nested_attributes_for :laurel
+  accepts_nested_attributes_for :pelican
   
   has_many :comments
 
@@ -62,6 +65,10 @@ class User < ApplicationRecord
     end
   end
 
+  def peer
+    peers.first
+  end
+
   def role
     if peer.admin
       "admin"
@@ -80,40 +87,6 @@ class User < ApplicationRecord
     !peer.nil?
   end
 
-  ##temporary forwarding methods
-  #def elevators
-  #  peer.elevated_by
-  #end
-  #def active
-  #  peer.active
-  #end
-  #screws up #inspect in console for royals
-  #def vigilant
-  #  peer.vigilant
-  #end
-  #def elevation_date
-  #  peer.elevation_date
-  #end
-  #def bio
-  #  peer.bio
-  #end
-  #def profile_pic
-  #  peer.profile_pic
-  #end
-  #def apprenticed_to
-  #  peer.apprenticed_to
-  #end
-  #also screws up inspect for royals
-  #def specialty_detail
-  #  peer.specialty_detail
-  #end
-  #def specialties
-  #  peer.specialties
-  #end
-
-  #def laurel
-  #  peer.exist?
-  #end
 
   private
   def set_slug
@@ -121,6 +94,10 @@ class User < ApplicationRecord
   end
 
   def set_deceased
-    peer.update(active: false) if peer? and deceased
+    if deceased
+      peers.each do |p|
+        p.update(active: false)
+      end
+    end
   end
 end

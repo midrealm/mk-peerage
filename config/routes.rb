@@ -4,14 +4,24 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   get '/users/edit' => 'users#edit'
   patch '/users/edit' => 'users#update'
+  
+  
 
   namespace :laurel do
     get '/groups' => 'groups#index'
     get '/groups/:slug' => 'groups#show', as: :group
     get '/roll_of_honor' => 'peers#index'
     get ':slug' => 'peers#show'
-    get ':slug/contact' => 'contact#new', as: :contact
-    post ':slug/contact' => 'contact#create'
+    get ':slug/contact' => '/users/contact#new', as: :contact
+    post ':slug/contact' => '/users/contact#create'
+  end 
+  namespace :pelican do
+    get '/groups' => 'groups#index'
+    get '/groups/:slug' => 'groups#show', as: :group
+    get '/roll_of_honor' => 'peers#index'
+    get ':slug' => 'peers#show'
+    get ':slug/contact' => '/users/contact#new', as: :contact
+    post ':slug/contact' => '/users/contact#create'
   end 
 
   get '/chambers' => 'users#index'

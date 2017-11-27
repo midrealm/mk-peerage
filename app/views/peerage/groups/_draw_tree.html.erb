@@ -1,5 +1,5 @@
 <% node.children.each do |child|  %>
-    <% peer_total = child.send("all_#{@peerage}s").count %>
+    <% peer_total = child.all_peers(@peerage).count %>
     <% if peer_total > 0 %>
     <li><%= link_to child, controller.send("#{@peerage}_group_path",[child.slug]) %> (<%=peer_total%>)
     <% if child.children.any? %>

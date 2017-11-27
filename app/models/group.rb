@@ -12,9 +12,11 @@ class Group < ApplicationRecord
     end
   end
 
-  def all_laurels 
-    users.joins(:peer).where(peers: {type: 'Laurel'}) + children.flat_map { |grp| grp.all_laurels}
+
+  def all_peers(peerage_type) 
+    users.joins(:peers).where(peers: {type: peerage_type.capitalize}) + children.flat_map { |grp| grp.all_peers(peerage_type)}
   end
+
 
   def all_candidates
     candidates + children.flat_map { |grp| grp.all_candidates}

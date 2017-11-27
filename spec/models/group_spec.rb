@@ -6,7 +6,7 @@ RSpec.describe Group, type: :model do
   it { should have_many(:candidates) }
 end
 
-RSpec.describe Group, 'all_laurels' do
+RSpec.describe Group, 'all_peers(peerage_type)' do
   before(:each) do
     @group = create(:group, name: 'High Haven')
     @child = create(:group, name: 'The Barrows', parent_id: @group.id)
@@ -18,7 +18,7 @@ RSpec.describe Group, 'all_laurels' do
   end
 
   it 'lists all laurels in descendent groups' do
-    expect(@group.all_laurels.count).to eq(3)
+    expect(@group.all_peers('laurel').count).to eq(3)
   end 
 
 end

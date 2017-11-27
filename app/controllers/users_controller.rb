@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   end
   def update
     if current_user.update(user_params)
-      redirect_to laurel_path(current_user.slug)
+      redirect_to chambers_path
+      flash.notice = 'Profile Successfully Updated'
     else
       render :edit
     end
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
   def user_params
     peer_params = [:id, {:specialty_ids => [] }, :specialty_detail, :bio, :elevated_by, :active, :vigilant, :apprenticed_to, :elevation_date, :profile_pic, {:superior_ids => []}]
 
-    params.require(:user).permit(:sca_name, :modern_name, :street, :city, :state, :zipcode, :elevators,:phone,:user_id,  :arms, :group_id, :peer_attributes => peer_params)
+    params.require(:user).permit(:sca_name, :modern_name, :street, :city, :state, :zipcode, :elevators,:phone,:user_id,  :arms, :group_id, 
+      :laurel_attributes => peer_params, :pelican_attributes => peer_params)
   end
 end

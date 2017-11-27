@@ -25,12 +25,16 @@ class Peer < ApplicationRecord
     data_uri
   end
 
-  def peerage
-    #parent definition
+  def peerage_type
+    #parent definition; how peerage is refered to in app
+  end
+
+  def peerage_name
+    #parent definition; how peerage name should be displayed
   end
 
   def show_specialties
-    specialties.where(peerage_type: peerage).map{|s| s.name}.to_sentence
+    specialties.where(peerage_type: peerage_name).map{|s| s.name}.to_sentence
   end
 
   def url

@@ -3,8 +3,12 @@ class Laurel < Peer
     Rails.application.routes.url_helpers.laurel_path(slug)
   end
 
-  def peerage
+  def peerage_type
     'laurel'
+  end
+
+  def peerage_name
+    'Laurel'
   end
 
 end
