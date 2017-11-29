@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe 'Get /chambers/groups' do
+describe 'Get /chambers/pelican/groups' do
   before(:each) do
     @group = create(:group, name: 'the Middle', slug: 'the_middle')
     @child = create(:group, name: 'High Haven', slug: 'high_haven', parent_id: @group.id)
@@ -26,5 +26,14 @@ describe 'Get /chambers/groups' do
     expect(response.body).not_to include('/chambers/pelican/groups/the_middle')
     expect(response.body).to include('/chambers/pelican/groups/high_haven')
     expect(response.body).to include('/chambers/pelican/groups/poopland')
+  end
+  context "logged in laurel (non-pelican)" do
+    before(:each) do
+      @laurel = create(:user)
+      sign_in(@laurel)
+    end
+    it "shows not authorized error for non-pelican user" do
+      expect{get "/chambers/pelican/groups/"}.to raise_error(CanCan::AccessDenied)
+    end
   end
 end
