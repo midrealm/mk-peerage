@@ -18,8 +18,8 @@ class Group < ApplicationRecord
   end
 
 
-  def all_candidates
-    candidates + children.flat_map { |grp| grp.all_candidates}
+  def all_candidates(peerage_type)
+    candidates.where(peerage_type: peerage_type.to_sym) + children.flat_map { |grp| grp.all_candidates(peerage_type.to_sym)}
   end
 
   def settlement_type

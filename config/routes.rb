@@ -30,6 +30,12 @@ Rails.application.routes.draw do
     resources :images, only: [:create]
     resources :comments, only: [:create]
 
+    namespace :pelican do
+      resources :candidates, only: [:index, :show]
+      resources :groups, only: [:index]
+      get '/groups/:slug' => 'groups#show', as: :group
+    end
+
     namespace :laurel do
       resources :candidates, only: [:index, :show]
       resources :groups, only: [:index]

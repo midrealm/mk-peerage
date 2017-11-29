@@ -108,6 +108,16 @@ FactoryGirl.define do
      
   end
 
+  factory :pelican_admin, class: User do
+    email {generate :email}
+    password Devise.friendly_token.first(8)  
+    sca_name "Mundingus Admin"
+    group
+    after(:create) do |u|
+       create(:peer, user: u, admin: true, active: true, vigilant: false, type: 'Pelican')
+    end
+  end
+
   factory :royal, class: User do
     email {generate :email}
     password Devise.friendly_token.first(8)  

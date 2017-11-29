@@ -29,6 +29,15 @@ describe "Get /chambers/laurel/candidates/:id" do
       expect(response.body).to include("I like this candidate")
     end
   end
+  context "logged in Pelican" do
+    before(:each) do
+      @pelican = create(:pelican)
+      sign_in(@pelican)
+    end
+    it "shows not authorized error for non-laurel user" do
+      expect{get "/chambers/laurel/candidates/#{@candidate.id}"}.to raise_error(CanCan::AccessDenied)
+    end 
+  end
   it "redirects if not logged in" do
     get "/chambers/laurel/candidates/#{@candidate.id}"
     expect(response).to have_http_status(:found)

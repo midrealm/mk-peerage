@@ -1,0 +1,16 @@
+<h1>Candidates</h1>
+<h3>Vote List</h3>
+
+<%= render 'chambers/peerage/candidates/table', candidates: @candidates.where(vote: true)%>
+
+<h3>Watch List</h3>
+<%= render 'chambers/peerage/candidates/table', candidates: @candidates.where(vote: false)%>
+<script>
+$(document).ready( function () {
+    $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>

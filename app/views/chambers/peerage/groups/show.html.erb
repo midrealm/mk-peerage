@@ -10,7 +10,7 @@
 </thead>
 <tbody>
 
-<% @group.all_candidates.each do |candidate| %>
+<% @group.all_candidates(@peerage).each do |candidate| %>
   <tr>
   <td><%= link_to candidate.sca_name, controller.send("chambers_#{@peerage}_candidate_path",[candidate.id]) %></td>
   <td><%=candidate.show_specialties%></td>

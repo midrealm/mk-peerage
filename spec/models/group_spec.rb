@@ -35,7 +35,7 @@ RSpec.describe Group, 'all_candidates' do
   end
 
   it 'lists all laurels in descendent groups' do
-    expect(@group.all_candidates.count).to eq(3)
+    expect(@group.all_candidates('laurel').count).to eq(3)
   end 
 
 end

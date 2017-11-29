@@ -1,5 +1,5 @@
 <% node.children.each do |child|  %>
-  <% cand_total = child.all_candidates.count %>
+  <% cand_total = child.all_candidates(@peerage).count %>
   <% if cand_total > 0 %>
     <li><%= link_to child, controller.send("chambers_#{@peerage}_group_path",[child.slug]) %> (<%=cand_total%>)
     <% if child.children.any?  %>
