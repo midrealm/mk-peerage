@@ -34,6 +34,12 @@ Rails.application.routes.draw do
       resources :candidates, only: [:index, :show]
       resources :groups, only: [:index]
       get '/groups/:slug' => 'groups#show', as: :group
+
+      namespace :admin do
+#        resources :laurels
+        resources :candidates, except: :show
+#        resource :poll, except: [:destroy, :show]
+      end
     end
 
     namespace :laurel do

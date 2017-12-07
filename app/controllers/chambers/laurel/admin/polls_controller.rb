@@ -40,7 +40,7 @@ module Chambers
           params.require(:poll).permit(:start_date, :end_date)
         end
         def authorize_admin
-          authorize! :manage, :all
+          authorize! :manage, :laurel
         end
       end
     end

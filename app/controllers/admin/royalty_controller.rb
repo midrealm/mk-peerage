@@ -2,11 +2,11 @@ module Admin
   class RoyaltyController < ApplicationController
     before_action :authenticate_user!
     def new
-      authorize! :manage, :all
+      authorize! :manage, :royalty
       @royal = User.new
     end
     def index
-      authorize! :manage, :all
+      authorize! :manage, :royalty
       @users = User.where(deceased: [nil, false])
     end
   def create

@@ -10,7 +10,7 @@ class Users::ContactController < ApplicationController
     if verify_recaptcha
       if params['contact']['message'].present?
         # *contact_params.values explodes items out of the array
-        LaurelMailer.contact_user(@user, *contact_params.values).deliver 
+        PeerageMailer.contact_user(@user, *contact_params.values).deliver 
         flash.notice = "email successfully sent"
         redirect_to Rails.application.routes.url_helpers.send("#{@peerage}_path",params[:slug])
       else

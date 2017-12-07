@@ -2,7 +2,7 @@
 <%# current_user.peers.each do |peer| 
 %>
   <%= render 'normal', peerage: 'laurel' %>
-  <% if can? :manage, :all %>
+  <% if can? :manage, :laurel %>
     <%= render 'admin', peerage: 'laurel' %>
   <% end %>
 <%# end 

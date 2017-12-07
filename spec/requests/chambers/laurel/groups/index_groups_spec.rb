@@ -22,4 +22,13 @@ describe 'Get /chambers/groups' do
     expect(response.body).to include('/chambers/laurel/groups/the_barrows')
     expect(response.body).to include('/chambers/laurel/groups/poopland')
   end
+  context "logged in pelican (non-laurel)" do
+    before(:each) do
+      @pelican = create(:pelican)
+      sign_in(@pelican)
+    end
+    it "shows not authorized error for non-pelican user" do
+      expect{get "/chambers/laurel/groups/"}.to raise_error(CanCan::AccessDenied)
+    end
+  end
 end

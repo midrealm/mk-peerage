@@ -33,6 +33,28 @@ describe "post /chambers/laurel/admin/laurels" do
     expect(email.to[0]).to eq('dingus@doogleson.com')
     expect(email.body).to include('Welcome to the Order of the Laurel')
   end
+  context 'for existing pelican,' do
+    before(:each) do
+      @pelican = create(:pelican, sca_name: 'Peter Pelican', email: 'peter_pelican@example.com')
+    end
+    it "adds laurel peerage to existing pelican" do
+      expect(@pelican.peers.count).to eq(1)
+      post '/chambers/laurel/admin/laurels', params: { :laurel => {sca_name: 'Peter Pelican', email: 'peter_pelican@example.com'} }
+      expect(@pelican.peers.count).to eq(2)
+    end  
+
+    it "keeps exisitng peer's password when adding new peerage" do 
+      old_encrypted_password = User.last.encrypted_password
+      post '/chambers/laurel/admin/laurels', params: { :laurel => {sca_name: 'Peter Pelican', email: 'peter_pelican@example.com'} }
+      expect(User.last.encrypted_password).to eq(old_encrypted_password)
+    end
+    it "sends welcome note to new pelican/laurel" do
+      post '/chambers/laurel/admin/laurels', params: { :laurel => {sca_name: 'Peter Pelican', email: 'peter_pelican@example.com'} }
+      email = ActionMailer::Base.deliveries.last
+      expect(email.to[0]).to eq('peter_pelican@example.com')
+      expect(email.body).to include('have access to Laurelate content.')
+    end
+  end
   it "doesn't allow non admins to create new users" do
     non_admin = create(:user)
     sign_in(non_admin)    

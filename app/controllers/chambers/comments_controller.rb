@@ -5,7 +5,7 @@ module Chambers
       @comment = Comment.new(comment_params)
       @comment.peer = current_user.peer
       if @comment.save
-        LaurelMailer.comment(current_user,Candidate.find(@comment.candidate_id),@comment.text).deliver
+        PeerageMailer.comment(current_user,Candidate.find(@comment.candidate_id),@comment.text).deliver
         flash[:notice] = "Successfully Submitted Comment"
         redirect_to "/chambers/candidates/#{params['comment']['candidate_id']}"
       else
