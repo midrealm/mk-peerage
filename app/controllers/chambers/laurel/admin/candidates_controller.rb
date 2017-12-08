@@ -5,11 +5,9 @@ class Chambers::Laurel::Admin::CandidatesController < ApplicationController
 
   def index
     @candidates = Candidate.where(peerage_type: :laurel)
-    render  template: 'chambers/peerage/admin/candidates/index'
   end
   def new
     @candidate = Candidate.new(peerage_type: :laurel)
-    render  template: 'chambers/peerage/admin/candidates/new'
   end
   def create
     @candidate = Candidate.new(candidate_params)
@@ -23,7 +21,6 @@ class Chambers::Laurel::Admin::CandidatesController < ApplicationController
   end
   def edit
     @candidate = Candidate.find(params[:id])
-    render  template: 'chambers/peerage/admin/candidates/edit'
   end
   def update
     @candidate = Candidate.find(params[:id])
@@ -38,15 +35,22 @@ class Chambers::Laurel::Admin::CandidatesController < ApplicationController
     @candidate.destroy
     redirect_to chambers_laurel_candidates_path
   end
+
   
   private
   def candidate_params
     params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote, :peerage_type, :specialty_detail, {:specialty_ids => [] }, {:peer_ids => [] })
   end
+
   def authorize_admin
     authorize! :manage, :laurel
   end
+
   def peerage
     'laurel'
+  end
+
+  def self.controller_path
+    'chambers/peerage/admin/candidates'
   end
 end

@@ -5,11 +5,9 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
 
   def index
     @candidates = Candidate.where(peerage_type: :pelican)
-    render  template: 'chambers/peerage/admin/candidates/index'
   end
   def new
     @candidate = Candidate.new(peerage_type: :pelican)
-    render  template: 'chambers/peerage/admin/candidates/new'
   end
   def create
     @candidate = Candidate.new(candidate_params)
@@ -22,12 +20,11 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
   end
   def edit
     @candidate = Candidate.find(params[:id])
-    render  template: 'chambers/peerage/admin/candidates/edit'
   end
   def update
     @candidate = Candidate.find(params[:id])
     if @candidate.update(candidate_params)
-      redirect_to chambers_laurel_candidate_path(@candidate)
+      redirect_to chambers_pelican_candidate_path(@candidate)
     else
       render :edit
     end
@@ -35,7 +32,7 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
   def destroy
     @candidate = Candidate.find(params[:id])
     @candidate.destroy
-    redirect_to chambers_laurel_candidates_path
+    redirect_to chambers_pelican_admin_candidates_path
   end
   
   private
@@ -47,5 +44,8 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
   end
   def peerage
     'pelican'
+  end
+  def self.controller_path
+    'chambers/peerage/admin/candidates'
   end
 end
