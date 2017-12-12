@@ -21,9 +21,11 @@ class Chambers::Laurel::Admin::CandidatesController < ApplicationController
   end
   def edit
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.laurel?
   end
   def update
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.laurel?
     if @candidate.update(candidate_params)
       redirect_to chambers_laurel_candidate_path(@candidate)
     else
@@ -32,6 +34,7 @@ class Chambers::Laurel::Admin::CandidatesController < ApplicationController
   end
   def destroy
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.laurel?
     @candidate.destroy
     redirect_to chambers_laurel_candidates_path
   end

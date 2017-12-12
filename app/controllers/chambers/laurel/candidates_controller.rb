@@ -9,6 +9,7 @@ class Chambers::Laurel::CandidatesController < ApplicationController
   def show
     authorize! :read, :laurel
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.laurel?
     @pr = @candidate.poll_results.last
     @comment = Comment.new
     @image = Image.new

@@ -9,6 +9,7 @@ class Chambers::Pelican::CandidatesController < ApplicationController
   def show
     authorize! :read, :pelican
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.pelican?
     @pr = @candidate.poll_results.last
     @comment = Comment.new
     @image = Image.new

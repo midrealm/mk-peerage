@@ -28,6 +28,10 @@ describe "Get /chambers/pelican/candidates/:id" do
       expect(response.body).to include(@pelican.sca_name)
       expect(response.body).to include("I like this candidate")
     end
+    it "throws error for showing non-pelican candidate" do
+      laurel_candidate = create(:laurel_candidate)
+      expect{get "/chambers/pelican/candidates/#{laurel_candidate.id}"}.to raise_error("Access Denied")
+    end
   end
   context "logged in laurel (non-pelican)" do
     before(:each) do

@@ -20,9 +20,11 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
   end
   def edit
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.pelican?
   end
   def update
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.pelican?
     if @candidate.update(candidate_params)
       redirect_to chambers_pelican_candidate_path(@candidate)
     else
@@ -31,6 +33,7 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
   end
   def destroy
     @candidate = Candidate.find(params[:id])
+    raise "Access Denied" unless @candidate.pelican?
     @candidate.destroy
     redirect_to chambers_pelican_admin_candidates_path
   end

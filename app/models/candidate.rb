@@ -1,15 +1,16 @@
 class Candidate < ApplicationRecord
   after_initialize :set_defaults
-  has_many :images
+  has_many :images, dependent: :destroy
 
-  has_many :advocacies
+  has_many :advocacies, dependent: :destroy
   has_many :peers, through: :advocacies
 
-  has_many :specializations
+  has_many :specializations, dependent: :destroy
   has_many :specialties, through: :specializations
 
-  has_many :comments
-  has_many :poll_results
+  has_many :comments, dependent: :destroy
+  has_many :poll_results, dependent: :destroy
+  has_many :advisings, dependent: :destroy
 
   belongs_to :group
 

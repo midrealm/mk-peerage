@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "post /chambers/admin/candidates" do
+describe "post /chambers/laurel/admin/candidates" do
   it "creates new candidate" do
     admin = create(:admin)
     sign_in(admin)

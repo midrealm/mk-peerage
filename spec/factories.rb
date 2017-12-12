@@ -60,6 +60,15 @@ FactoryGirl.define do
     sca_name "MyString"
     peerage_type :laurel
   end
+  #same as :candidate
+  factory :laurel_candidate, class: Candidate do
+    sca_name "MyString"
+    peerage_type :laurel
+  end
+  factory :pelican_candidate, class: Candidate do
+    sca_name "MyString"
+    peerage_type :pelican
+  end
   #factory :apprenticeship do
   #  user 
   #  laurel_id 1 
