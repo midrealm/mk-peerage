@@ -1,14 +1,13 @@
 class Chambers::Laurel::Admin::LaurelsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_admin
+  helper_method :peerage
   def new
-    authorize! :manage, :laurel
   end
   def index
-    authorize! :manage, :laurel
     @users = Laurel.all
   end
   def create
-    authorize! :manage, :laurel
     @laurel = User.find_or_initialize_by(laurel_params)
     if @laurel.id.nil?
       pwd = Devise.friendly_token.first(8)  
@@ -29,7 +28,8 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
     end
   end
   def edit
-    @laurel = User.find(params[:id])
+    @peer = Peer.find(params[:id])
+    raise "Access Denied" unless @peer.type == "Laurel"
   end
   def update
     @user = User.find(params[:id])
@@ -45,5 +45,14 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
   end
   def update_laurel_params
     params.require(:laurel).permit(:deceased)
+  end
+  def authorize_admin
+    authorize! :manage, :laurel
+  end
+  def peerage
+    'laurel'
+  end
+  def self.controller_path
+    'chambers/peerage/admin/peers'
   end
 end

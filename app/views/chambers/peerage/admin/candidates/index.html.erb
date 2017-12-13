@@ -1,5 +1,5 @@
 <h1>Manage Candidates</h1>
-<%= link_to 'Add New Candidate', new_chambers_laurel_admin_candidate_path %>
+<%= link_to 'Add New Candidate', controller.send("new_chambers_#{peerage}_admin_candidate_path") %>
 <table class='table'>
   <thead>
     <th>Name</th><th>Show</th><th>Edit</th><th>Remove</th>

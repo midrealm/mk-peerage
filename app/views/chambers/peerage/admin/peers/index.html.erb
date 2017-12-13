@@ -1,0 +1,16 @@
+<h1>Manage <%=peerage.capitalize%>s</h1>
+<%= link_to "Add New #{peerage.capitalize}", controller.send("new_chambers_#{peerage}_admin_#{peerage}_path") %>
+<table class='table'>
+  <thead>
+    <th>Name</th><th>Show</th><th>Edit</th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+      <td><%=user.sca_name%></td>
+      <td><%=link_to 'Show', user.url%></td>
+      <td><%=link_to 'Edit', controller.send("edit_chambers_#{peerage}_admin_#{peerage}_path",[user.id])%></td>
+      </tr>
+    <% end %>
+  </tbody
+</table>

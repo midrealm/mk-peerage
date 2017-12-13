@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       get '/groups/:slug' => 'groups#show', as: :group
 
       namespace :admin do
-#        resources :laurels
+        resources :pelicans, except: :destroy
         resources :candidates, except: :show
 #        resource :poll, except: [:destroy, :show]
       end

@@ -73,4 +73,7 @@ class Peer < ApplicationRecord
   def arms
     user.arms
   end
+  def deceased
+    user.deceased
+  end
 end
