@@ -1,6 +1,8 @@
 class Chambers::Laurel::Poll::CandidatesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_laurel
+  helper_method :peerage
+
   def index
     @candidates = Candidate.order(vote: :desc)
     @poll = Poll.last
@@ -43,14 +45,15 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
     end 
   end
   
+  
+  private
   def advising_params
     params.require(:advising).permit(:judgement_id, :comment)
   end
   def authorize_laurel
     authorize! :take, Poll
   end
-  
-  private
+
   def judgement(old_advising)
     if old_advising
       old_advising.judgement
@@ -61,6 +64,14 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
     if old_advising
       old_advising.comment
     end
+  end
+
+  def peerage
+    'laurel'
+  end
+
+  def self.controller_path
+    'chambers/peerage/poll/candidates'
   end
 end
 
