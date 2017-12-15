@@ -17,7 +17,7 @@
 $(document).ready(function(){
 
  $('#<%=peerage%>_id').change(function(){
-    var selected = $('#laurel_id option:selected').text()
+    var selected = $('#<%=peerage%>_id option:selected').text()
     if (selected == ''){
       $('#<%=peerage%>_sca_name').prop('disabled',false);
       $('#<%=peerage%>_email').prop('disabled',false);
