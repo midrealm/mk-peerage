@@ -17,6 +17,8 @@ class PeerageMailer < Devise::Mailer
     case peerage
     when :laurel
       @names = {collection: 'laurelate', name: 'Laurel' } 
+    when :pelican
+      @names = {collection: 'pelicanate', name: 'Pelican' } 
     end
     subject = "Welcome to the Middle Kingdom #{@names[:collection].capitalize}"
     mail(to: @user.email, subject: subject, from: self.class.no_reply)

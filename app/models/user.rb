@@ -3,7 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable 
-  
+ 
+  #for adding new peers 
+  attr_accessor :vigilant
+
   has_many :peers
   has_one :laurel
   has_one :pelican
@@ -16,15 +19,12 @@ class User < ApplicationRecord
 
   has_attached_file :arms, styles: {large: '100x200'}, default_url: ':style/no_arms.jpg'
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates :email, format: /.+@.+\..+/i
+  validates_presence_of :sca_name
 
-  #enum role: [ :normal, :admin ]
-  #after_initialize :set_defaults
   before_save :set_slug, :set_deceased
 
-
-  #def set_defaults
-  #  self.role ||= :normal
-  #end
+  scope :all_except_peerage, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
 
   def url
     return "/laurels/#{self.slug}"

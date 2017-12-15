@@ -3,18 +3,20 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
   before_action :authorize_admin
   helper_method :peerage
   def new
+    @users = User.all_except_peerage(:laurel)
   end
   def index
     @users = Laurel.all
   end
   def create
-    @laurel = User.find_or_initialize_by(laurel_params)
+    @laurel = User.find_or_initialize_by(id: laurel_params['id'])
     if @laurel.id.nil?
       pwd = Devise.friendly_token.first(8)  
       @laurel.password = pwd 
+      @laurel.assign_attributes(laurel_params)
     end
     if @laurel.save
-      Peer.create(user: @laurel, active: true, type: 'Laurel') do |p|
+      Peer.create(user: @laurel, active: true, vigilant: params[:laurel][:vigilant], type: 'Laurel') do |p|
         p.vigilant = true if params[:laurel][:vigilant].nil?
       end
       redirect_to laurel_path(@laurel.slug)
@@ -24,6 +26,8 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
         PeerageMailer.add_to_peerage(@laurel,:laurel).deliver
       end
     else
+      flash.alert = @laurel.errors.full_messages.to_sentence
+      @laurel.vigilant = params[:laurel][:vigilant]
       render :new
     end
   end
@@ -32,8 +36,10 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
     raise "Access Denied" unless @peer.type == "Laurel"
   end
   def update
-    @user = User.find(params[:id])
-    if @user.update(update_laurel_params)
+    @peer = Peer.find(params[:id])
+    raise "Access Denied" unless @peer.type == "Laurel"
+    user = @peer.user
+    if user.update(update_laurel_params)
       redirect_to chambers_laurel_admin_laurels_path  
     else
       render :edit
@@ -41,7 +47,7 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
   end
   private
   def laurel_params
-    params.require(:laurel).permit(:sca_name, :email)
+    params.require(:laurel).permit(:id, :sca_name, :email)
   end
   def update_laurel_params
     params.require(:laurel).permit(:deceased)
