@@ -20,7 +20,6 @@ RSpec.describe Candidate, 'poll_entry_submitted?' do
   before(:each) do
     @laurel = create(:user)
     @candidate = create(:candidate)
-    @judgement = create(:judgement)
   end
   context 'for current poll' do
     before(:each) do
@@ -28,7 +27,7 @@ RSpec.describe Candidate, 'poll_entry_submitted?' do
       @current_poll.save(validate: false)
       @advising = build(:advising, candidate: @candidate, 
         poll: @current_poll, peer: @laurel.peer, comment: 'Comment', 
-        judgement: @judgement, submitted: true)
+        judgement: :elevate, submitted: true)
     end
     it "returns true if user has a submitted advising for given poll" do
       @advising.save
@@ -52,7 +51,7 @@ RSpec.describe Candidate, 'poll_entry_submitted?' do
       @past_poll.save(validate: false)
       @advising = create(:advising, candidate: @candidate,
         poll: @past_poll, peer: @laurel.peer, comment: 'Comment', 
-        judgement: @judgement, submitted: true)
+        judgement: :elevate, submitted: true)
 
       expect(@candidate.poll_entry_submitted?(@laurel)).to be_falsey
     end

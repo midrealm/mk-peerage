@@ -1,8 +1,7 @@
 require 'rails_helper'
 describe "Get /chambers/laurel/candidates/:id/poll_comments" do
   before(:each) do
-    @candidate = create(:candidate)
-    @judgement = create(:judgement)
+    @candidate = create(:candidate, vote: true)
   end
   context 'logged in royal' do
     before(:each) do
@@ -18,7 +17,7 @@ describe "Get /chambers/laurel/candidates/:id/poll_comments" do
         @pr = create(:poll_result, candidate: @candidate, poll: @p, wait: 1)
         @advising = create(:advising, poll: @p, peer: @laurel.peer, candidate: @candidate,
           comment: 'I like this candidate, but not ready yet', submitted: true, 
-          judgement: @judgement)
+          judgement: :elevate)
       end
       it "shows poll comment page for candidate with poll result" do
         get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"
@@ -30,7 +29,7 @@ describe "Get /chambers/laurel/candidates/:id/poll_comments" do
         get "/chambers/laurel/candidates/#{@candidate.id}/poll_comments"
         expect(response.body).to include(@laurel.sca_name)
         expect(response.body).to include(@advising.comment)
-        expect(response.body).to include(@advising.judgement.name)
+        expect(response.body).to include(@advising.judgement_name)
       end
     end
     context 'no past poll result' do

@@ -3,10 +3,6 @@ require 'results_calculator'
 describe "calculate" do
   before(:each) do
     @candidate = create(:candidate)
-    @wait = create(:judgement, name: 'Wait')
-    @elevate = create(:judgement, name: 'Elevate')
-    @no_strong_opinion = create(:judgement, name: 'No Strong Opinion')
-    @drop = create(:judgement, name: 'Drop')
     @rc = ResultsCalculator.new
   end
   it "does not create PollResults for if Poll results already exist" do
@@ -69,9 +65,9 @@ describe "calculate" do
       
     end
     it "computes result calculations for given candidate" do
-      @advising1.judgement = @elevate
+      @advising1.judgement = :elevate
       @advising1.save
-      @advising2.judgement = @elevate
+      @advising2.judgement = :elevate
       @advising2.save
 
       calculations = @rc.calculate
@@ -83,12 +79,12 @@ describe "calculate" do
     end
 
     it "computes calculations for multiple candidates" do
-      @advising1.judgement = @wait
+      @advising1.judgement = :wait
       @advising1.save
       
       candidate2 = create(:candidate)
       @advising2.candidate = candidate2
-      @advising2.judgement = @elevate
+      @advising2.judgement = :elevate
       @advising2.save
 
       calculations = @rc.calculate

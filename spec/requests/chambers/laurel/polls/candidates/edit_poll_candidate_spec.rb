@@ -1,7 +1,7 @@
 require 'rails_helper'
 describe "Get /chambers/laurel/poll/candidates/:id/new" do
   before(:each) do
-    @candidate = create(:candidate)
+    @candidate = create(:candidate, vote: true)
   end
   describe "for active poll" do
     before(:each) do
@@ -31,6 +31,15 @@ describe "Get /chambers/laurel/poll/candidates/:id/new" do
         expect(response.body).to include("Molly Mindingus")
       end
     end
+    context "for logged in non-laurel pelican" do
+      before(:each) do
+        pelican = create(:pelican)
+        sign_in(pelican)
+      end
+      it "raises AccessDenied Error" do
+        expect{get "/chambers/laurel/poll/candidates/#{@candidate.id}"}.to raise_error(CanCan::AccessDenied)
+      end
+    end
     describe "for logged in non-laurel royal" do
       before(:each) do
         royal = create(:royal)
@@ -54,8 +63,6 @@ describe "Get /chambers/laurel/poll/candidates/:id/new" do
       @past_poll.save(validate: false)
       @current_poll = build(:poll, start_date: DateTime.now - 1.day, end_date: DateTime.now + 1.day)
       @current_poll.save(validate: false)
-      @judgement1 = create(:judgement)
-      @judgement2 = create(:judgement, name: "some other judgement")
     end
     describe "for logged in laurel" do
       before(:each) do
@@ -71,22 +78,22 @@ describe "Get /chambers/laurel/poll/candidates/:id/new" do
       end
       it "pulls in old poll data into active poll" do
         @old_advising = create(:advising, poll: @past_poll, peer: @laurel.peer, 
-          candidate_id: @candidate.id, judgement_id: @judgement2.id, comment: "This is my old comment")
+          candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
 
           get "/chambers/laurel/poll/candidates/#{@candidate.id}"
           expect(response.body).to include("This is my old comment")
-          expect(response.body).to include("<option selected=\"selected\" value=\"#{@judgement2.id}\">#{@judgement2.name}")
+          expect(response.body).to include("<option selected=\"selected\" value=\"elevate\">Elevate to Peerage")
       end
       it "for pre edited poll, puts in pre edited stuff, not stuff from old poll" do
         @old_advising = create(:advising, poll_id: @past_poll.id, peer: @laurel.peer, 
-          candidate_id: @candidate.id, judgement_id: @judgement2.id, comment: "This is my old comment")
+          candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
 
         @new_advising = create(:advising, poll_id: nil, peer: @laurel.peer, 
-          candidate_id: @candidate.id, judgement_id: @judgement1.id, comment: "This is my new comment")
+          candidate_id: @candidate.id, judgement: :drop, comment: "This is my new comment")
         
           get "/chambers/laurel/poll/candidates/#{@candidate.id}"
           expect(response.body).to include("This is my new comment")
-          expect(response.body).to include("<option selected=\"selected\" value=\"#{@judgement1.id}\">#{@judgement1.name}")
+          expect(response.body).to include("<option selected=\"selected\" value=\"drop\">Drop to Watch List")
       end
     end
   end

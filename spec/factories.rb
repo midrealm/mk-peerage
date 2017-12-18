@@ -27,11 +27,8 @@ FactoryGirl.define do
     peer
     candidate 
     poll
-    judgement 
+    judgement nil 
     comment "My Advice to the Crown on this Candidate is... Yay"
-  end
-  factory :judgement do
-    name "MyString"
   end
   factory :poll do
     start_date (DateTime.now + 1.days)

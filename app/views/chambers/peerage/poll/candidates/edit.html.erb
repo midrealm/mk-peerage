@@ -4,7 +4,11 @@
   <div class="col-md-4">
     <%= semantic_form_for @advising, url: chambers_laurel_poll_candidate_path(@candidate)  do |f| %>
       <%= f.inputs do %>
-        <%= f.input :judgement %>
+        <% if @candidate.vote? %>
+          <%= f.input :judgement, :collection => Advising.vote_list_judgements  %>
+        <% else %>
+          <%= f.input :judgement, :collection => Advising.watch_list_judgements  %>
+        <% end %>
         <%= f.input :comment %>
       <% end %>
       <%= f.action :submit, as: :button, label: 'Submit Advising', button_html: {class: 'btn btn-default'}, id: 'submit' %>

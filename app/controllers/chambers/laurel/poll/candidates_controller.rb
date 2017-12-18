@@ -48,10 +48,10 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
   
   private
   def advising_params
-    params.require(:advising).permit(:judgement_id, :comment)
+    params.require(:advising).permit(:judgement, :comment)
   end
   def authorize_laurel
-    authorize! :take, Poll
+    authorize! :take_poll, :laurel
   end
 
   def judgement(old_advising)

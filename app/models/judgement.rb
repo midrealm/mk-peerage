@@ -1,2 +1,0 @@
-class Judgement < ApplicationRecord
-end
