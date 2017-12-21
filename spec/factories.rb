@@ -31,6 +31,7 @@ FactoryGirl.define do
     comment "My Advice to the Crown on this Candidate is... Yay"
   end
   factory :poll do
+    peerage_type :laurel
     start_date (DateTime.now + 1.days)
     end_date (DateTime.now+2.days)
   end

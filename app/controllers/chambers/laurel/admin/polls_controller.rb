@@ -17,6 +17,7 @@ module Chambers
       
         def create
           @poll = Poll.new(poll_params)
+          @poll.peerage_type = :laurel
           @poll.end_date = @poll.end_date + 23.hours + 59.minutes + 59.seconds unless @poll.end_date.nil?
           if @poll.save
             redirect_to chambers_path
@@ -26,7 +27,7 @@ module Chambers
         end
       
         def update
-          @poll = Poll.last
+          @poll = Poll.last_for_peerage(:laurel)
           @poll.assign_attributes(poll_params)
           @poll.end_date = @poll.end_date + 23.hours + 59.minutes + 59.seconds unless @poll.end_date.nil?
           if @poll.save
