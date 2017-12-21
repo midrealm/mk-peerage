@@ -1,7 +1,4 @@
-module Chambers
-  module Laurel
-    module Admin
-      class PollsController < ApplicationController
+      class Chambers::Laurel::Admin::PollsController < ApplicationController
         before_action :authenticate_user!
         before_action :authorize_admin
         def new
@@ -9,8 +6,8 @@ module Chambers
         end
       
         def edit
-          @poll = Poll.last
-          if @poll.end_date < DateTime.now
+          @poll = Poll.last_for_peerage(:laurel)
+          if @poll.end_date < DateTime.now #if last poll has already ended
             redirect_to chambers_path
           end
         end
@@ -44,6 +41,3 @@ module Chambers
           authorize! :manage, :laurel
         end
       end
-    end
-  end
-end

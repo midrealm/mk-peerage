@@ -1,12 +1,13 @@
+<% poll = Poll.last_for_peerage(peerage.to_sym) %>
 <%= link_to 'View Your Profile', controller.send("#{peerage}_path", [current_user.slug]) %><br>
 <%= link_to 'Edit Your Profile', '/users/edit' %><br>
 <%= link_to 'View Candidates', controller.send("chambers_#{peerage}_candidates_path") %><br>
 <%= link_to 'Browse Candidates By Group', controller.send("chambers_#{peerage}_groups_path") %><br/>
-<% if !@poll.nil? && @poll.active? && can?(:take_poll, peerage.to_sym) %>
+<% if !poll.nil? && poll.active? && can?(:take_poll, peerage.to_sym) %>
   <% unless current_user.poll_complete? %>
     <%= link_to 'Take Poll', controller.send("chambers_#{peerage}_poll_candidates_path") %> | <%="#{current_user.poll_submitted_count}/#{Candidate.where(peerage_type: peerage).count}"%> Submitted |
   <% else  %>
     <%= link_to 'Edit Poll', controller.send("chambers_#{peerage}_poll_candidates_path") %> Finished! | 
   <%end %>
-  Open Until Midnight on: <%= @poll.end_date.strftime('%d-%b-%Y') %> <br/>
+  Open Until Midnight on: <%= poll.end_date.strftime('%d-%b-%Y') %> <br/>
 <% end %>

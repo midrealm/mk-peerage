@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   end
   def index
     @user = current_user
-    @poll = Poll.last
   end
   def update
     if current_user.update(user_params)
