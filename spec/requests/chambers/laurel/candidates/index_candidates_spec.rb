@@ -21,7 +21,7 @@ describe "Get /chambers/laurel/candidates" do
     end
     it "shows advocates for given candidate" do
       advocate = create(:user, sca_name: "Molly Mindingus")
-      create(:advocacy, candidate: @candidate, peer: advocate.peer)
+      create(:advocacy, candidate: @candidate, peer: advocate.laurel)
       get "/chambers/laurel/candidates"
       expect(response.body).to include('Molly Mindingus')
     end

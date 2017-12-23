@@ -76,7 +76,7 @@ describe "Get /chambers" do
           expect(response.body).to include(@current_poll.end_date.strftime('%d-%b-%Y'))  
         end
         it "shows if user has completed the poll" do
-          @advising = create(:advising, candidate: @candidate, peer: @laurel.peer, poll: @current_poll, submitted: true)
+          @advising = create(:advising, candidate: @candidate, peer: @laurel.laurel, poll: @current_poll, submitted: true)
           get "/chambers"
           expect(response.body).to include('Finished')  
           expect(response.body).to include('Edit Poll')  
@@ -125,8 +125,9 @@ describe "Get /chambers" do
       end
       describe "active poll" do
         before(:each) do
-          current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
-          current_poll.save(:validate => false)
+          #current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
+          #current_poll.save(:validate => false)
+          current_poll = create(:current_poll)
           get "/chambers"
         end
         it "does not show polling link for admin if there is an active poll" do

@@ -19,7 +19,7 @@ describe "calculate" do
       @current_poll.save(validate: false)
       @user = create(:user)
 
-      @advising = create(:advising, candidate: @candidate, peer: @user.peer, poll: @current_poll, submitted: true, judgement: @elevate) 
+      @advising = create(:advising, candidate: @candidate, peer: @user.laurel, poll: @current_poll, submitted: true, judgement: @elevate) 
       @rc.calculate
       expect(PollResult.count).to eq(0)    
   end
@@ -29,7 +29,7 @@ describe "calculate" do
       @user = create(:user)
 
       #this is advising isn't possible anyway)
-      @advising = create(:advising, candidate: @candidate, peer: @user.peer, poll: @future_poll, submitted: true, judgement: @elevate) 
+      @advising = create(:advising, candidate: @candidate, peer: @user.laurel, poll: @future_poll, submitted: true, judgement: @elevate) 
       @rc.calculate
       expect(PollResult.count).to eq(0)    
   end
@@ -43,11 +43,11 @@ describe "calculate" do
       @user3 = create(:user)
       @user4 = create(:user)
       @user5 = create(:user)
-      @advising1 = build(:advising, candidate: @candidate, peer: @user1.peer, poll: @past_poll, submitted: true) 
-      @advising2 = build(:advising, candidate: @candidate, peer: @user2.peer, poll: @past_poll, submitted: true) 
-      @advising3 = build(:advising, candidate: @candidate, peer: @user3.peer, poll: @past_poll, submitted: true) 
-      @advising4 = build(:advising, candidate: @candidate, peer: @user4.peer, poll: @past_poll, submitted: true) 
-      @advising5 = build(:advising, candidate: @candidate, peer: @user5.peer, poll: @past_poll, submitted: true) 
+      @advising1 = build(:advising, candidate: @candidate, peer: @user1.laurel, poll: @past_poll, submitted: true) 
+      @advising2 = build(:advising, candidate: @candidate, peer: @user2.laurel, poll: @past_poll, submitted: true) 
+      @advising3 = build(:advising, candidate: @candidate, peer: @user3.laurel, poll: @past_poll, submitted: true) 
+      @advising4 = build(:advising, candidate: @candidate, peer: @user4.laurel, poll: @past_poll, submitted: true) 
+      @advising5 = build(:advising, candidate: @candidate, peer: @user5.laurel, poll: @past_poll, submitted: true) 
       
     end
 

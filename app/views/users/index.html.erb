@@ -1,9 +1,9 @@
 <h1>Private Chambers</h1>
 <%# current_user.peers.each do |peer| 
 %>
-  <%= render 'normal', peerage: 'laurel' %>
+  <%= render 'normal', peerage: :laurel %>
   <% if can? :manage, :laurel %>
-    <%= render 'admin', peerage: 'laurel' %>
+    <%= render 'admin', peerage: :laurel %>
   <% end %>
 <%# end 
 %>

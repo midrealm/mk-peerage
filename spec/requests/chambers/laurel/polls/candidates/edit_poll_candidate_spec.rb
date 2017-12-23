@@ -19,14 +19,14 @@ describe "Get /chambers/laurel/poll/candidates/:id/new" do
         expect(response.body).to include("Poll for #{@candidate.sca_name}")
       end 
       it "shows comments for given candidate" do
-        create(:comment, peer:@laurel.peer, candidate: @candidate, text: "I like this Candidate")
+        create(:comment, peer:@laurel.laurel, candidate: @candidate, text: "I like this Candidate")
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
         expect(response.body).to include("I like this Candidate")
         expect(response.body).to include(@laurel.sca_name)
       end
       it "shows advocates for given candidate" do
         advocate = create(:user, sca_name: 'Molly Mindingus')
-        create(:advocacy, candidate: @candidate, peer: advocate.peer)
+        create(:advocacy, candidate: @candidate, peer: advocate.laurel)
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
         expect(response.body).to include("Molly Mindingus")
       end
@@ -73,11 +73,11 @@ describe "Get /chambers/laurel/poll/candidates/:id/new" do
         expect(Advising.count).to eq(0)
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
         expect(Advising.count).to eq(1)
-        expect(Advising.last.peer.id).to eq(@laurel.peer.id)
+        expect(Advising.last.peer.id).to eq(@laurel.laurel.id)
         expect(Advising.last.candidate).to eq(@candidate)
       end
       it "pulls in old poll data into active poll" do
-        @old_advising = create(:advising, poll: @past_poll, peer: @laurel.peer, 
+        @old_advising = create(:advising, poll: @past_poll, peer: @laurel.laurel, 
           candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
 
           get "/chambers/laurel/poll/candidates/#{@candidate.id}"
@@ -85,10 +85,10 @@ describe "Get /chambers/laurel/poll/candidates/:id/new" do
           expect(response.body).to include("<option selected=\"selected\" value=\"elevate\">Elevate to Peerage")
       end
       it "for pre edited poll, puts in pre edited stuff, not stuff from old poll" do
-        @old_advising = create(:advising, poll_id: @past_poll.id, peer: @laurel.peer, 
+        @old_advising = create(:advising, poll_id: @past_poll.id, peer: @laurel.laurel, 
           candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
 
-        @new_advising = create(:advising, poll_id: nil, peer: @laurel.peer, 
+        @new_advising = create(:advising, poll_id: nil, peer: @laurel.laurel, 
           candidate_id: @candidate.id, judgement: :drop, comment: "This is my new comment")
         
           get "/chambers/laurel/poll/candidates/#{@candidate.id}"

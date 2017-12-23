@@ -34,5 +34,45 @@ RSpec.describe Poll, 'last_for_peerage(:peerage)' do
       expect(Poll.last_for_peerage(:laurel)).to eq(@laurel_poll)
     end
   end
+end
   
+RSpec.describe Poll, 'current(:peerage)' do
+  context 'for current laurel poll and pelican poll' do 
+    before(:each) do
+      @laurel_poll = create(:current_poll, peerage_type: :laurel)
+      @pelican_poll = create(:current_poll, peerage_type: :pelican)
+    end 
+    it "returns pelican poll" do
+      expect(Poll.current(:pelican)).to eq(@pelican_poll)
+    end
+    it "returns laurel poll" do
+      expect(Poll.current(:laurel)).to eq(@laurel_poll)
+    end
+  end
+  context 'for past laurel poll and pelican poll' do 
+    before(:each) do
+      @laurel_poll = create(:past_poll, peerage_type: :laurel)
+      @pelican_poll = create(:past_poll, peerage_type: :pelican)
+    end 
+    it "returns nil for pelican poll" do
+      expect(Poll.current(:pelican)).to eq(nil)
+    end
+    it "returns nil for laurel poll" do
+      expect(Poll.current(:laurel)).to eq(nil)
+    end
+  end
+  context 'for future and current laurel poll and pelican poll' do 
+    before(:each) do
+      @current_l_poll = create(:current_poll, peerage_type: :laurel)
+      @current_p_poll = create(:current_poll, peerage_type: :pelican)
+      create(:future_poll, peerage_type: :laurel)
+      create(:future_poll, peerage_type: :pelican)
+    end 
+    it "returns pelican poll" do
+      expect(Poll.current(:pelican)).to eq(@current_p_poll)
+    end
+    it "returns laurel poll" do
+      expect(Poll.current(:laurel)).to eq(@current_l_poll)
+    end
+  end
 end

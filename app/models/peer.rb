@@ -14,6 +14,9 @@ class Peer < ApplicationRecord
   has_attached_file :profile_pic, styles: {thumb: '100x133', large: '300x400' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: ':style/frame.jpg'
   validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+  def order
+    type.downcase.to_sym
+  end
   #helpers
   def profile_pic_data_uri
     data_uri = nil 

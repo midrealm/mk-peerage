@@ -12,7 +12,7 @@
 <% @group.all_peers(@peerage).each do |user|%>
   <tr>
   <td><%= link_to user.sca_name, user.url %></td>
-  <td><%=user.peer.show_specialties%></td>
+  <td><%=user.peer(@peerage).show_specialties%></td>
   <td><%=link_to user.group, controller.send("#{@peerage}_group_path",[user.group.slug]) %></td>
   </tr>
 <% end %>

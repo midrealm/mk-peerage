@@ -10,7 +10,7 @@ describe "Get /chambers/laurel/candidates/:id" do
     end
     it "shows candidate and their advocate" do
       advocate = create(:user, sca_name: 'Missy Examplemas')
-      create(:advocacy, peer: advocate.peer, candidate: @candidate)
+      create(:advocacy, peer: advocate.laurel, candidate: @candidate)
       get "/chambers/laurel/candidates/#{@candidate.id}"
       expect(response).to have_http_status(:success)
       expect(response.body).to include(@candidate.sca_name)
@@ -23,7 +23,7 @@ describe "Get /chambers/laurel/candidates/:id" do
       expect(response.body).to include(@candidate.sca_name)
     end
     it "shows comments" do
-      create(:comment, peer: @laurel.peer, candidate: @candidate, text: "I like this candidate")
+      create(:comment, peer: @laurel.laurel, candidate: @candidate, text: "I like this candidate")
       get "/chambers/laurel/candidates/#{@candidate.id}"
       expect(response.body).to include(@laurel.sca_name)
       expect(response.body).to include("I like this candidate")

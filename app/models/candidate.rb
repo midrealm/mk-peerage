@@ -30,7 +30,7 @@ class Candidate < ApplicationRecord
 
   def poll_entry_submitted?(user)
     if(Poll.last.active?)
-      advising = Advising.find_by(candidate: self, peer: user.peer, 
+      advising = Advising.find_by(candidate: self, peer: user.peers.first, 
         poll: Poll.last, submitted: true)
       if advising.nil?
         return false

@@ -10,8 +10,19 @@ class Poll < ApplicationRecord
   validates_presence_of(:peerage_type)
   enum peerage_type: [:laurel, :pelican] 
 
-  def self.last_for_peerage(peerage) 
+  def self.current(peerage)
+    Poll.where(peerage_type: peerage).each do |p|
+     return p if p.active?
+    end    
+    return nil
+  end
+
+  def self.last_for(peerage) 
     Poll.where(peerage_type: peerage).last    
+  end
+
+  def self.last_for_peerage(peerage) 
+   Poll.where(peerage_type: peerage).last    
   end
 
   def start_date_cannot_be_in_the_past

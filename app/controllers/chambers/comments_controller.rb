@@ -3,9 +3,10 @@ module Chambers
     before_action :authenticate_user!
     def create
       @comment = Comment.new(comment_params)
-      @comment.peer = current_user.peer
+      candidate = Candidate.find(@comment.candidate_id)
+      @comment.peer = current_user.peer(candidate.peerage_type)
       if @comment.save
-        PeerageMailer.comment(current_user,Candidate.find(@comment.candidate_id),@comment.text).deliver
+        PeerageMailer.comment(current_user,candidate,@comment.text).deliver
         flash[:notice] = "Successfully Submitted Comment"
         redirect_to "/chambers/candidates/#{params['comment']['candidate_id']}"
       else

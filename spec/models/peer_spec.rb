@@ -13,3 +13,14 @@ RSpec.describe Peer, type: :model do
   it { should have_many(:dependencies) }
   it { should have_many(:superiors).through(:dependencies) }
 end
+
+RSpec.describe Peer, "order" do
+  it "returns :laurel for a Laurel Peer" do
+    create(:user)
+    expect(Peer.first.order).to eq(:laurel) 
+  end
+  it "returns :pelican for a Pelican Peer" do
+    create(:pelican)
+    expect(Peer.first.order).to eq(:pelican) 
+  end
+end

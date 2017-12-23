@@ -35,6 +35,23 @@ FactoryGirl.define do
     start_date (DateTime.now + 1.days)
     end_date (DateTime.now+2.days)
   end
+  factory :future_poll, class: Poll do 
+    peerage_type :laurel
+    start_date (DateTime.now + 1.days)
+    end_date (DateTime.now+2.days)
+  end
+  factory :past_poll, class: Poll do 
+    to_create {|instance| instance.save(validate: false) }
+    peerage_type :laurel
+    start_date (DateTime.now - 5.days)
+    end_date (DateTime.now-2.days)
+  end
+  factory :current_poll, class: Poll do 
+    to_create {|instance| instance.save(validate: false) }
+    peerage_type :laurel
+    start_date (DateTime.now - 2.days)
+    end_date (DateTime.now+2.days)
+  end
   factory :group do
     name "My String"
     slug "my_string"

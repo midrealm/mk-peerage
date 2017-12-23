@@ -15,7 +15,7 @@ describe "Get /chambers/laurel/candidates/:id/poll_comments" do
           end_date: DateTime.now - 1.day)
         @p.save(validate: false)
         @pr = create(:poll_result, candidate: @candidate, poll: @p, wait: 1)
-        @advising = create(:advising, poll: @p, peer: @laurel.peer, candidate: @candidate,
+        @advising = create(:advising, poll: @p, peer: @laurel.laurel, candidate: @candidate,
           comment: 'I like this candidate, but not ready yet', submitted: true, 
           judgement: :elevate)
       end

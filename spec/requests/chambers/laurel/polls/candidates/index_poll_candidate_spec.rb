@@ -22,9 +22,14 @@ describe "Get /chambers/laurel/poll" do
         expect(response.body).to include(@candidate1.sca_name)
         expect(response.body).to include(@candidate2.sca_name)
       end
+      it "only shows laurel candidates" do
+        pelican_candidate = create(:candidate, peerage_type: :pelican, sca_name: 'Peter Pelican')
+        get '/chambers/laurel/poll'
+        expect(response.body).not_to include(pelican_candidate.sca_name)
+      end
 
       it "shows OK if advising has been submitted for a given candidate" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.peer, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.laurel, submitted: true)
         get '/chambers/laurel/poll'
         expect(response.body).to include('glyphicon-ok')
       end
@@ -34,14 +39,14 @@ describe "Get /chambers/laurel/poll" do
       end
 
       it "show progress bar with percent of candidates complete" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.peer, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.laurel, submitted: true)
         get '/chambers/laurel/poll'
         expect(response.body).to include('width: 50%')
         expect(response.body).to include('progress-bar')
     
       end
       it "shows how many have poll entries have been submitted" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.peer, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @laurel.laurel, submitted: true)
         get '/chambers/laurel/poll'
         expect(response.body).to include('1/2 Submitted')
       end
