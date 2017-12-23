@@ -4,15 +4,11 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
   helper_method :peerage
 
   def index
-    @candidates = Candidate.where(peerage_type: :laurel).order(vote: :desc)
-    @poll = Poll.last_for_peerage(:laurel)
-    if @poll.end_date < DateTime.now || @poll.start_date >DateTime.now 
+    poll = Poll.current(:laurel)
+    if poll.nil?
       redirect_to chambers_path
-    end
-    if @candidates.count > 0
-      @percent_complete = current_user.poll_submitted_count * 100 / @candidates.count
     else
-      @percent_complete = 0
+      @ballot = Ballot.new(current_user.peer(peerage)) 
     end
   end
   def update
@@ -67,7 +63,7 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
   end
 
   def peerage
-    'laurel'
+    :laurel
   end
 
   def self.controller_path

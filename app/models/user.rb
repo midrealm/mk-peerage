@@ -30,42 +30,6 @@ class User < ApplicationRecord
     return "/laurels/#{self.slug}"
   end
 
-  
-  def polle_complete?
-    if Poll.last.active?
-      poll = Poll.last
-      incomplete = false
-      Candidate.all.each do |cand|
-        advising = poll.advisings.find_by(peer: self.peer, candidate_id: cand.id, submitted: true)  
-        if advising.nil?
-          incomplete = true
-          break  
-        end 
-      end
-      if incomplete
-        return false
-      else
-        return true
-      end
-    else
-      return false
-    end
-  end
-
-  def poll_submitted_count
-    if Poll.last.active?
-      count = 0
-      poll = Poll.last
-      Candidate.all.each do |cand|
-        advising = poll.advisings.find_by(peer: self.peers.first, candidate_id: cand.id, submitted: true)  
-        count = count + 1 unless advising.nil?
-      end
-      return count
-    else
-      return 0
-    end
-  end
-
   def peer(peerage)
     p_type = peerage.to_s.capitalize
     peers.find_by(type: p_type) 

@@ -125,8 +125,6 @@ describe "Get /chambers" do
       end
       describe "active poll" do
         before(:each) do
-          #current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
-          #current_poll.save(:validate => false)
           current_poll = create(:current_poll)
           get "/chambers"
         end

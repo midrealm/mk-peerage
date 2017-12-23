@@ -26,4 +26,12 @@ class Ballot
   def submission_for?(candidate)
     Advising.find_by(candidate: candidate, peer: @peer, poll: @poll, submitted: true).present?
   end
+
+  def percent_complete
+    if @candidates.count > 0
+      submission_count * 100 / @candidates.count
+    else
+      0
+    end
+  end
 end

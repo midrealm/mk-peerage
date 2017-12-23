@@ -104,3 +104,44 @@ describe Ballot, "submission_for(candidate)" do
     expect(@ballot.submission_for?(@candidate)).to be_falsey
   end
 end
+describe Ballot, 'percent_complete' do
+  context "at least 2 candidates" do
+    before(:each) do
+      @laurel = create(:user)
+      @poll = create(:current_poll)
+      @candidate1 = create(:candidate, sca_name: "Candidate1")
+      @candidate2 = create(:candidate, sca_name: "Candidate2")
+      @advising1 = build(:advising, candidate: @candidate1, 
+        poll: @poll, peer: @laurel.laurel, comment: 'Comment', 
+        judgement: :elevate, submitted: true)
+
+      @advising2 = build(:advising, candidate: @candidate2, 
+        poll: @poll, peer: @laurel.laurel, comment: 'Comment', 
+        judgement: :elevate, submitted: true)
+      @ballot = Ballot.new(@laurel.laurel)
+    end
+    it "shows 0% complete for 0 of 2 completed submissions" do
+      expect(@ballot.percent_complete).to eq(0)
+    end
+    it "shows 50% complete for 1 of 2 completed submissions" do
+      @advising1.save
+      expect(@ballot.percent_complete).to eq(50)
+    end
+    it "shows 100% complete for 2 of 2 completed submissions" do
+      @advising1.save
+      @advising2.save
+      expect(@ballot.percent_complete).to eq(100)
+    end
+    it "shows 33% compete for 1 of 3 completed submissions" do
+      @advising1.save
+      create(:candidate, sca_name: 'candidate3') 
+      expect(@ballot.percent_complete).to eq(33)
+    end
+  end
+  it "shows 0 for no candidates" do
+    create(:current_poll)
+    user = create(:user)
+    ballot = Ballot.new(user.laurel)
+    expect(ballot.percent_complete).to eq(0)
+  end
+end

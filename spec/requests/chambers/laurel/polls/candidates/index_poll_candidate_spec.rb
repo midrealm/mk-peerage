@@ -7,8 +7,7 @@ describe "Get /chambers/laurel/poll" do
     end
     describe "current poll" do
       before(:each) do
-        @poll = build(:poll, start_date: DateTime.now - 1.day, end_date: DateTime.now + 1.day)
-        @poll.save(validate: false)
+        @poll = create(:current_poll)
         @candidate1 = create(:candidate, sca_name: "Candidate1")
         @candidate2 = create(:candidate, sca_name: "Candidate2")
       end

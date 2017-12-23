@@ -28,15 +28,4 @@ class Candidate < ApplicationRecord
     return self.specialties.map{|s| s.name}.to_sentence
   end
 
-  def poll_entry_submitted?(user)
-    if(Poll.last.active?)
-      advising = Advising.find_by(candidate: self, peer: user.peers.first, 
-        poll: Poll.last, submitted: true)
-      if advising.nil?
-        return false
-      else
-        return true
-      end
-    end  
-  end
 end
