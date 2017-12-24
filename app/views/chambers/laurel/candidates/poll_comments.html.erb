@@ -32,7 +32,7 @@
   </table>
   
   <h3>Comments</h3>
-  <% @advisings.each do |adv| %>
+  <% @pr.advisings.each do |adv| %>
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
     <%= image_tag adv.peer.profile_pic.url(:thumb) %><br/>
