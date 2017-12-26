@@ -3,7 +3,6 @@ class Chambers::Laurel::CandidatesController < ApplicationController
   def index
     authorize! :read, :laurel
     @candidates = Candidate.where(peerage_type: :laurel)
-    render template: 'chambers/peerage/candidates/index'
   end
 
   def show
@@ -13,7 +12,6 @@ class Chambers::Laurel::CandidatesController < ApplicationController
     @pr = @candidate.poll_results.last
     @comment = Comment.new
     @image = Image.new
-    render template: 'chambers/peerage/candidates/show'
   end
 
   def poll_comments
@@ -23,5 +21,9 @@ class Chambers::Laurel::CandidatesController < ApplicationController
     if @pr.nil? 
       redirect_to chambers_laurel_candidates_path
     end
+  end
+  private
+  def self.controller_path
+    'chambers/peerage/candidates'
   end
 end
