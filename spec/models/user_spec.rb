@@ -21,12 +21,12 @@ RSpec.describe User, 'set_slug' do
   end
 end
 
-RSpec.describe User, 'all_except_peerage(peerage)' do
+RSpec.describe User, 'all_except(peerage)' do
   context "for :laurel" do
     it 'returns all non-laurel users' do
       laurel = create(:user, sca_name: 'Lucy Laurel')
       pelican = create(:pelican, sca_name: 'Peter Pelican')
-      users = User.all_except_peerage(:laurel)
+      users = User.all_except(:laurel)
       expect(users.exists?(sca_name: 'Lucy Laurel')).to be_falsy
       expect(users.exists?(sca_name: 'Peter Pelican')).to be_truthy
     end

@@ -16,3 +16,13 @@ RSpec.describe Candidate, type: :model do
 
 end
 
+RSpec.describe Candidate, "order" do
+  it "returns :laurel for a Laurel Peer" do
+    create(:candidate)
+    expect(Candidate.first.order).to eq(:laurel) 
+  end
+  it "returns :pelican for a Pelican Peer" do
+    create(:candidate, peerage_type: :pelican)
+    expect(Candidate.first.order).to eq(:pelican) 
+  end
+end

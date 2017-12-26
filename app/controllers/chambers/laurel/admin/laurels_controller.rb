@@ -3,7 +3,6 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
   before_action :authorize_admin
   helper_method :peerage
   def new
-    @users = User.all_except_peerage(:laurel)
   end
   def index
     @users = Laurel.all
@@ -56,7 +55,7 @@ class Chambers::Laurel::Admin::LaurelsController < ApplicationController
     authorize! :manage, :laurel
   end
   def peerage
-    'laurel'
+    :laurel
   end
   def self.controller_path
     'chambers/peerage/admin/peers'

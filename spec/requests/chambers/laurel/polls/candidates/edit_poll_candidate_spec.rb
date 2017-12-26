@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe "Get /chambers/laurel/poll/candidates/:id/new" do
+describe "Get /chambers/laurel/poll/candidates/:id" do
   before(:each) do
     @candidate = create(:candidate, vote: true)
   end

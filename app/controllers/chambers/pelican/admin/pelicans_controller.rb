@@ -55,7 +55,7 @@ class Chambers::Pelican::Admin::PelicansController < ApplicationController
     authorize! :manage, :pelican
   end
   def peerage
-    'pelican'
+    :pelican
   end
   def self.controller_path
     'chambers/peerage/admin/peers'

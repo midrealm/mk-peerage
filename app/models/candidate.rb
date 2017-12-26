@@ -28,4 +28,8 @@ class Candidate < ApplicationRecord
     return self.specialties.map{|s| s.name}.to_sentence
   end
 
+  def order
+    peerage_type.to_sym
+  end
+
 end

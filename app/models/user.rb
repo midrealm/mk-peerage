@@ -24,35 +24,12 @@ class User < ApplicationRecord
 
   before_save :set_slug, :set_deceased
 
-  scope :all_except_peerage, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
-
-  def url
-    return "/laurels/#{self.slug}"
-  end
+  scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
 
   def peer(peerage)
     p_type = peerage.to_s.capitalize
     peers.find_by(type: p_type) 
   end
-
-  def role
-    if peer.admin
-      "admin"
-    else
-      "normal"
-    end
-  end
-  def admin?
-    peer.admin unless peer.nil?
-  end
-  def normal?
-    !peer.admin
-  end
-
-  def peer?
-    !peer.nil?
-  end
-
 
   private
   def set_slug

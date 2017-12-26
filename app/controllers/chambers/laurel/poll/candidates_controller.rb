@@ -4,15 +4,14 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
   helper_method :peerage
 
   def index
-    poll = Poll.current(:laurel)
-    if poll.nil?
+    if Poll.current(:laurel).nil?
       redirect_to chambers_path
     else
       @ballot = Ballot.new(current_user.peer(peerage)) 
     end
   end
   def update
-    @advising = Advising.find_by(candidate_id: params[:id], peer: current_user.laurel, poll: Poll.current(:laurel))
+    @advising = BallotEntry.new(candidate: Candidate.find(params[:id]), peer: current_user.laurel).advising
     if @advising.update(advising_params)
       @advising.update(submitted: true)  
       redirect_to action: :index
@@ -23,22 +22,7 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
   
   def edit
     @candidate = Candidate.find(params[:id]) 
-    
-    last_advising = Advising.where(candidate: @candidate, peer:current_user.laurel).last
-    poll = 'NoPoll'
-    if last_advising
-      poll = last_advising.poll
-    end
-    @advising = last_advising
-  
-    case poll
-    when Poll.last
-    when nil
-      @advising.update(poll: Poll.last)
-    else
-      @advising = Advising.create(candidate_id: params[:id], peer: current_user.laurel, poll: Poll.last, 
-          judgement: judgement(last_advising), comment: comment(last_advising))
-    end 
+    @advising = BallotEntry.new(candidate: @candidate, peer: current_user.laurel).advising
   end
   
   
@@ -50,17 +34,6 @@ class Chambers::Laurel::Poll::CandidatesController < ApplicationController
     authorize! :take_poll, :laurel
   end
 
-  def judgement(old_advising)
-    if old_advising
-      old_advising.judgement
-    end
-  end
-  
-  def comment(old_advising)
-    if old_advising
-      old_advising.comment
-    end
-  end
 
   def peerage
     :laurel

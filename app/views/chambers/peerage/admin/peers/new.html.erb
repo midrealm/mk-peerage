@@ -3,7 +3,7 @@
   <div class="col-md-4">
     <%= semantic_form_for peerage, url: controller.send("chambers_#{peerage}_admin_#{peerage}s_path") do |f| %>
       <%= f.inputs do %>
-        <%= f.input :id, label: 'Existing User', :collection => User.all_except_peerage(peerage.to_sym).pluck(Arel.sql("Concat(`sca_name`, ';', `email`)"), :id)%>
+        <%= f.input :id, label: 'Existing User', :collection => User.all_except(peerage).pluck(Arel.sql("Concat(`sca_name`, ';', `email`)"), :id)%>
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :email %>
         <%= f.input :vigilant, as: :radio, label: 'Status', collection: [['Vigilant',true, {checked: true}],['Elevated',false]] %>
