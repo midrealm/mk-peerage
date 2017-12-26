@@ -12,7 +12,7 @@ describe "Get /chambers/laurel/admin/poll/edit" do
       @future_poll.save
       get "/chambers/laurel/admin/poll/edit"
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('Edit Poll')
+      expect(response.body).to include('Edit Laurel Poll')
     end
     it "shows fields for start_date and end_date for future poll" do
       @future_poll.save
@@ -25,7 +25,7 @@ describe "Get /chambers/laurel/admin/poll/edit" do
       @current_poll.save(:validate => false)
       get "/chambers/laurel/admin/poll/edit"
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('Edit Poll')
+      expect(response.body).to include('Edit Laurel Poll')
     end
     it "does not show start_date for current poll" do
       @current_poll.save(:validate => false)

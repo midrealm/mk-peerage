@@ -1,7 +1,7 @@
-<h1>Edit Poll</h1>
+<h1>Edit <%=peerage.capitalize%> Poll</h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @poll, url: chambers_laurel_admin_poll_path(@poll) do |f| %>
+    <%= semantic_form_for @poll, url: controller.send("chambers_#{peerage}_admin_poll_path",(@poll)) do |f| %>
       <%= f.inputs do %>
         <% if @poll.start_date > DateTime.now %>
           <%= f.input  :start_date, as: :string, input_html: { value: @poll.start_date.strftime('%d-%b-%Y') } %>

@@ -21,10 +21,6 @@ class Poll < ApplicationRecord
     Poll.where(peerage_type: peerage).last    
   end
 
-  def self.last_for_peerage(peerage) 
-   Poll.where(peerage_type: peerage).last    
-  end
-
   def start_date_cannot_be_in_the_past
     if !start_date.nil? and start_date < Date.today.to_datetime
         errors.add(:start_date, 'start_date cannot be in the past')

@@ -21,17 +21,17 @@ RSpec.describe Poll, type: :model do
 
 end
 
-RSpec.describe Poll, 'last_for_peerage(:peerage)' do
+RSpec.describe Poll, 'last_for(:peerage)' do
   context 'for laurel poll and pelican poll' do 
     before(:each) do
       @laurel_poll = create(:poll, peerage_type: :laurel)
       @pelican_poll = create(:poll, peerage_type: :pelican)
     end 
     it "returns pelican poll" do
-      expect(Poll.last_for_peerage(:pelican)).to eq(@pelican_poll)
+      expect(Poll.last_for(:pelican)).to eq(@pelican_poll)
     end
     it "returns laurel poll" do
-      expect(Poll.last_for_peerage(:laurel)).to eq(@laurel_poll)
+      expect(Poll.last_for(:laurel)).to eq(@laurel_poll)
     end
   end
 end

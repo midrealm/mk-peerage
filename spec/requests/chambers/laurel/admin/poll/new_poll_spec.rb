@@ -5,7 +5,7 @@ describe "Get /chambers/laurel/admin/poll/new" do
     sign_in(admin)
     get "/chambers/laurel/admin/poll/new"
     expect(response).to have_http_status(:success)
-    expect(response.body).to include('Create New Poll')
+    expect(response.body).to include('Create New Laurel Poll')
   end
   it "redirects if not logged in" do
     get "/chambers/laurel/admin/poll/new"
