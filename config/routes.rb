@@ -36,10 +36,16 @@ Rails.application.routes.draw do
       get '/groups/:slug' => 'groups#show', as: :group
       get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
 
+      namespace :poll do
+        get '/' => 'candidates#index', as: :candidates
+        get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
+        resources :candidates, only: [:update]
+      end
+
       namespace :admin do
         resources :pelicans, except: :destroy
         resources :candidates, except: :show
-#        resource :poll, except: [:destroy, :show]
+        resource :poll, except: [:destroy, :show]
       end
     end
 
