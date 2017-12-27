@@ -2,7 +2,7 @@ require "rails_helper"
 describe "Get /users/edit" do
   context "for logged in user" do
     before (:each) do
-      @user = create(:user)
+      @user = create(:user, sca_name: 'Mundungus Smith')
       sign_in(@user)
     end
     it "shows edit page for laurel" do
@@ -16,6 +16,13 @@ describe "Get /users/edit" do
       get "/users/edit"
       expect(response.body).to include('Laurel Specialty')
       expect(response.body).not_to include('Pelican Specialty')
+    end
+    it "shows only peers of given peerage as apprenticed to options" do
+      create(:pelican, sca_name: 'Peter Pelican')
+      create(:user, sca_name: 'Lucy Laurel')
+      get "/users/edit"
+      expect(response.body).to include('Lucy Laurel')
+      expect(response.body).not_to include('Peter Pelican')
     end
   end
   context "for logged in pelican" do

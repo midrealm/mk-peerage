@@ -10,5 +10,6 @@ describe "on comment submission" do
     expect(email.subject).to include("Candidate ##{candidate.id} Comment")
     expect(email.body).to include(admin.sca_name)
     expect(email.body).to include('I like this candidate')
+    expect(response).to redirect_to("/chambers/laurel/candidates/#{candidate.id}")
   end
 end

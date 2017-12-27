@@ -1,9 +1,12 @@
 <h1>Private Chambers</h1>
 <% current_user.peers.each do |peer| 
 %>
-  <%= render 'normal', peerage: peer.order %>
-  <% if can? :manage, :laurel %>
-    <%= render 'admin', peerage: peer.order %>
-  <% end %>
+  <div class='col-md-3'>
+    <h3><%= peer.peerage_name %></h3>
+    <%= render 'normal', peerage: peer.order %>
+    <% if can? :manage, :laurel %>
+      <%= render 'admin', peerage: peer.order %>
+    <% end %>
+  </div>
 <% end 
 %>

@@ -8,7 +8,7 @@ module Chambers
       if @comment.save
         PeerageMailer.comment(current_user,candidate,@comment.text).deliver
         flash[:notice] = "Successfully Submitted Comment"
-        redirect_to "/chambers/candidates/#{params['comment']['candidate_id']}"
+        redirect_to Rails.application.routes.url_helpers.send("chambers_#{candidate.order}_candidate_path",candidate)
       else
         flash[:notice] = "Comment Submission Unsuccessful"
       end

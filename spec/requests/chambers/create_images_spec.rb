@@ -7,5 +7,6 @@ describe "post /chambers/images" do
     expect(Image.count).to eq(0)
     post '/chambers/images', params: { :image => {candidate_id: cand.id, image: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'} }
     expect(Image.count).to eq(1)
+    expect(response).to redirect_to("/chambers/laurel/candidates/#{cand.id}")
   end
 end

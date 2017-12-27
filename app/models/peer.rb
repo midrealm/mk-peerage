@@ -28,6 +28,10 @@ class Peer < ApplicationRecord
     data_uri
   end
 
+  def potential_superiors
+    Peer.where(type: type).where.not(id: id)   
+  end
+
   def peerage_type
     #parent definition; how peerage is refered to in app
   end

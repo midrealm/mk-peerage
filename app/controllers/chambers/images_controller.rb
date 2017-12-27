@@ -3,9 +3,11 @@ module Chambers
     before_action :authenticate_user!
     def create
       @image = Image.new(image_params)
+      
       if @image.save
         flash[:notice] = "Image Upload Successful"
-        redirect_to "/chambers/candidates/#{params['image']['candidate_id']}"
+        candidate = Candidate.find(params['image']['candidate_id'])
+        redirect_to Rails.application.routes.url_helpers.send("chambers_#{candidate.order}_candidate_path",candidate)
       else
         flash[:notice] = "Image Upload Unsuccessful"
       end
