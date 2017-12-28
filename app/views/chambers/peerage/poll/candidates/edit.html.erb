@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @advising, url: chambers_laurel_poll_candidate_path(@candidate)  do |f| %>
+    <%= semantic_form_for @advising, url: controller.send("chambers_#{peerage}_poll_candidate_path",@candidate)  do |f| %>
       <%= f.inputs do %>
         <% if @candidate.vote? %>
           <%= f.input :judgement, :collection => Advising.vote_list_judgements  %>

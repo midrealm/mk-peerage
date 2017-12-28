@@ -2,6 +2,7 @@ require 'i18n'
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def edit
+    @peerage = params['peerage']
     @user = current_user
     @specialties = Specialty.all
   end

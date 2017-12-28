@@ -1,6 +1,8 @@
+<%= link_to "<- #{peerage.capitalize} Candidates", controller.send("chambers_#{peerage}_candidates_path")%>
 <div class ="row">
 <div class="col-md-8">
   <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+  <strong><%= @candidate.vote ? 'Vote' : 'Watch' %> List</strong></br>
   <% if @candidate.specialties.count > 0 %>
     <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
     <%= spec.name %>  
@@ -12,7 +14,7 @@
     <% end %><br>
   <%end%>
   <% if @candidate.group %>
-  <strong>Group</strong>: <%= candidate_link @candidate.group %><br>
+  <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
   <% end %>
   <% if @candidate.images %>
     <%= render 'chambers/peerage/candidates/gallery', images: @candidate.images %>

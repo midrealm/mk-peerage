@@ -13,7 +13,7 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
     @candidate = Candidate.new(candidate_params)
     @candidate.vote = false;
     if @candidate.save
-      redirect_to chambers_laurel_candidate_path(@candidate)
+      redirect_to chambers_pelican_candidate_path(@candidate)
     else
       render :new
     end
@@ -46,7 +46,7 @@ class Chambers::Pelican::Admin::CandidatesController < ApplicationController
     authorize! :manage, :pelican
   end
   def peerage
-    'pelican'
+    :pelican
   end
   def self.controller_path
     'chambers/peerage/admin/candidates'

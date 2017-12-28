@@ -17,7 +17,7 @@
   <% else %>
     <tr >
   <%end%>
-    <td><%= link_to cand.sca_name, chambers_laurel_poll_edit_candidate_path(cand.id) %></td>
+    <td><%= link_to cand.sca_name, controller.send("chambers_#{peerage}_poll_edit_candidate_path",cand.id) %></td>
     <td><%= cand.vote ? 'Vote List' : 'Watch List' %></td>
   <% if @ballot.submission_for?(cand)%>
     <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>

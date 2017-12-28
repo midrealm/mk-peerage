@@ -12,6 +12,10 @@ describe "Get /chambers/pelican/candidates" do
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Candidates')
     end
+    it "has link to candidate's page" do
+      get "/chambers/pelican/candidates"
+      expect(response.body).to include("/chambers/pelican/candidates/#{@candidate.id}")
+    end
     it "only shows pelican candidates" do
       laurel_candidate = create(:candidate, sca_name: 'Penny Laurel', vote: false, peerage_type: :laurel)
       pelican_candidate = create(:candidate, sca_name: 'Peter Pelican', vote: true, peerage_type: :pelican)

@@ -1,5 +1,6 @@
 class Chambers::Laurel::CandidatesController < ApplicationController
   before_action :authenticate_user!
+  helper_method :peerage
   def index
     authorize! :read, :laurel
     @candidates = Candidate.where(peerage_type: :laurel)
@@ -25,5 +26,8 @@ class Chambers::Laurel::CandidatesController < ApplicationController
   private
   def self.controller_path
     'chambers/peerage/candidates'
+  end
+  def peerage
+    :laurel
   end
 end

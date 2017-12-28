@@ -9,7 +9,7 @@
   <strong>Modern Name:</strong> <%=@peer.modern_name%><br>
   <strong>Specialties:</strong><%=@peer.show_specialties%> (<%=@peer.specialty_detail%>)<br/>
   <% unless @peer.group.nil? %>
-    <strong>Group:</strong> <%=laurel_link @peer.group %> <br>
+    <strong>Group:</strong> <%=peer_link(@peer.group, @peerage) %> <br>
   <% end %>
   <strong>Contact Info</strong><br>
   <address>

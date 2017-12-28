@@ -1,6 +1,6 @@
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for([:chambers, peerage.to_sym, :admin, @candidate]) do |f| %>
+    <%= semantic_form_for([:chambers, peerage, :admin, @candidate]) do |f| %>
       <%= f.inputs do %>
         <%= f.input :peerage_type, :as => :hidden %>
         <%= f.input :sca_name, label: 'SCA Name' %>

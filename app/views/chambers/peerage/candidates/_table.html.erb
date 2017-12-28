@@ -13,11 +13,11 @@
    <tr>
     <td>
 <%= image_tag cand.profile_pic.url(:thumb), class: 'pull-left' %>
-<%= link_to "#{cand.sca_name} (#{cand.show_specialties})", chambers_laurel_candidate_path(cand.id) %>
+<%= link_to "#{cand.sca_name} (#{cand.show_specialties})", controller.send("chambers_#{peerage}_candidate_path",cand.id) %>
 </td>
     <% unless pr.nil? %>
     <% if can?(:read, PollResult) %>
-        <td><%= link_to 'Comments', chambers_laurel_poll_comments_path(cand.id) %></td>
+        <td><%= link_to 'Comments', controller.send("chambers_#{peerage}_poll_comments_path",cand.id) %></td>
     <% end %>
       <td><%=pr.elevate%></td>
       <td><%=pr.wait%></td>

@@ -1,5 +1,6 @@
 class Chambers::Pelican::CandidatesController < ApplicationController
   before_action :authenticate_user!
+  helper_method :peerage
   def index
     authorize! :read, :pelican
     @candidates = Candidate.where(peerage_type: :pelican)
@@ -27,5 +28,8 @@ class Chambers::Pelican::CandidatesController < ApplicationController
   private
   def self.controller_path
     'chambers/peerage/candidates'
+  end
+  def peerage
+    :pelican
   end
 end

@@ -1,11 +1,11 @@
 module GroupHelper
 
-  def laurel_link(group)
-    full_group_link(group, group_path='laurel_group_path')
+  def peer_link(group, peerage='laurel')
+    full_group_link(group, group_path="#{peerage}_group_path")
   end
 
-  def candidate_link(group)
-    full_group_link(group, group_path='chambers_laurel_group_path')
+  def candidate_link(group, peerage='laurel')
+    full_group_link(group, group_path="chambers_#{peerage}_group_path")
   end
   
 
