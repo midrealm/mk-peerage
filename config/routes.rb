@@ -6,24 +6,6 @@ Rails.application.routes.draw do
   patch '/users/edit' => 'users#update'
   
   
-
-  namespace :laurel do
-    get '/groups' => 'groups#index'
-    get '/groups/:slug' => 'groups#show', as: :group
-    get '/roll_of_honor' => 'peers#index'
-    get ':slug' => 'peers#show'
-    get ':slug/contact' => '/users/contact#new', as: :contact
-    post ':slug/contact' => '/users/contact#create'
-  end 
-  namespace :pelican do
-    get '/groups' => 'groups#index'
-    get '/groups/:slug' => 'groups#show', as: :group
-    get '/roll_of_honor' => 'peers#index'
-    get ':slug' => 'peers#show'
-    get ':slug/contact' => '/users/contact#new', as: :contact
-    post ':slug/contact' => '/users/contact#create'
-  end 
-
   get '/chambers' => 'users#index'
 
   namespace :chambers do
@@ -73,6 +55,24 @@ Rails.application.routes.draw do
       resources :royalty, except: [:destroy, :show] 
     end 
   end
+
+  namespace :laurel do
+    get '/groups' => 'groups#index'
+    get '/groups/:slug' => 'groups#show', as: :group
+    get '/roll_of_honor' => 'peers#index'
+    get ':slug' => 'peers#show'
+    get ':slug/contact' => '/users/contact#new', as: :contact
+    post ':slug/contact' => '/users/contact#create'
+  end 
+  namespace :pelican do
+    get '/groups' => 'groups#index'
+    get '/groups/:slug' => 'groups#show', as: :group
+    get '/roll_of_honor' => 'peers#index'
+    get ':slug' => 'peers#show'
+    get ':slug/contact' => '/users/contact#new', as: :contact
+    post ':slug/contact' => '/users/contact#create'
+  end 
+
 
   root to: "home#index" 
 

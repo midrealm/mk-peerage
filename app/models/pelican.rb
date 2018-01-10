@@ -3,12 +3,5 @@ class Pelican < Peer
     Rails.application.routes.url_helpers.pelican_path(slug)
   end
 
-  def peerage_type
-    'pelican'
-  end
-
-  def peerage_name
-    'Pelican'
-  end
 
 end

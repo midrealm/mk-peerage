@@ -1,4 +1,4 @@
-class Laurel::GroupsController < GarbageController
+class GarbageController < ApplicationController
   def index
     @kingdoms = Group.roots
     @peerage = :laurel

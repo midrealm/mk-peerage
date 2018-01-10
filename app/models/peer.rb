@@ -32,14 +32,21 @@ class Peer < ApplicationRecord
     Peer.where(type: type).where.not(id: id)   
   end
 
+  def self.peerage_type
+    peerage_name.downcase
+  end
+
+  def self.peerage_name
+    self.to_s 
+  end
+
   def peerage_type
-    #parent definition; how peerage is refered to in app
+    self.class.peerage_type
   end
 
   def peerage_name
-    #parent definition; how peerage name should be displayed
+    self.class.peerage_name
   end
-
   def show_specialties
     specialties.where(peerage_type: peerage_name).map{|s| s.name}.to_sentence
   end
