@@ -1,12 +1,5 @@
-class Laurel::GroupsController < GarbageController
-  def index
-    @kingdoms = Group.roots
-    @peerage = :laurel
-    render template: "peerage/groups/index"
-  end
-  def show
-    @group = Group.find_by(slug: params[:slug])
-    @peerage = :laurel
-    render template: "peerage/groups/show"
+class Laurel::GroupsController < GroupsController
+  def peerage_type
+    :laurel
   end
 end

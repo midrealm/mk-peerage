@@ -1,0 +1,10 @@
+<% node.children.each do |child|  %>
+    <% laurel_total = child.all_peers.count %>
+    <% if laurel_total > 0 %>
+    <li><%= link_to child.titled_name, laurel_group_url(child.name) %> (<%=laurel_total%>)
+    <% if child.children.any? %>
+      <ul><%= render 'draw_tree', node: child  %></ul>
+    <% end  %>
+   </li>
+    <% end %>
+<% end %>
