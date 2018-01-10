@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  peerages = [:laurel, :pelican]
   mount MagicLamp::Genie, at: "/magic_lamp" if defined?(MagicLamp)
   devise_for :users
   resources :users, only: [:create]
@@ -12,40 +13,26 @@ Rails.application.routes.draw do
     resources :images, only: [:create]
     resources :comments, only: [:create]
 
-    namespace :pelican do
-      resources :candidates, only: [:index, :show]
-      resources :groups, only: [:index]
-      get '/groups/:slug' => 'groups#show', as: :group
-      get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
+    peerages.each do |peerage|
 
-      namespace :poll do
-        get '/' => 'candidates#index', as: :candidates
-        get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
-        resources :candidates, only: [:update]
-      end
+      namespace peerage do
+        resources :candidates, only: [:index, :show]
+        resources :groups, only: [:index]
+        get '/groups/:slug' => 'groups#show', as: :group
+        get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
 
-      namespace :admin do
-        resources :pelicans, except: :destroy
-        resources :candidates, except: :show
-        resource :poll, except: [:destroy, :show]
-      end
-    end
+        namespace :poll do
+          get '/' => 'candidates#index', as: :candidates
+          get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
+          resources :candidates, only: [:update]
+        end
 
-    namespace :laurel do
-      resources :candidates, only: [:index, :show]
-      resources :groups, only: [:index]
-      get '/groups/:slug' => 'groups#show', as: :group
-      get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
-      namespace :poll do
-        get '/' => 'candidates#index', as: :candidates
-        get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
-        resources :candidates, only: [:update]
-      end
+        namespace :admin do
+          resources peerage.to_s.pluralize.to_sym, except: :destroy
+          resources :candidates, except: :show
+          resource :poll, except: [:destroy, :show]
+        end
 
-      namespace :admin do
-        resources :laurels
-        resources :candidates, except: :show
-        resource :poll, except: [:destroy, :show]
       end
     end
   end
@@ -56,22 +43,16 @@ Rails.application.routes.draw do
     end 
   end
 
-  namespace :laurel do
-    get '/groups' => 'groups#index'
-    get '/groups/:slug' => 'groups#show', as: :group
-    get '/roll_of_honor' => 'peers#index'
-    get ':slug' => 'peers#show'
-    get ':slug/contact' => '/users/contact#new', as: :contact
-    post ':slug/contact' => '/users/contact#create'
-  end 
-  namespace :pelican do
-    get '/groups' => 'groups#index'
-    get '/groups/:slug' => 'groups#show', as: :group
-    get '/roll_of_honor' => 'peers#index'
-    get ':slug' => 'peers#show'
-    get ':slug/contact' => '/users/contact#new', as: :contact
-    post ':slug/contact' => '/users/contact#create'
-  end 
+  peerages.each do |peerage| 
+    namespace peerage do
+      get '/groups' => 'groups#index'
+      get '/groups/:slug' => 'groups#show', as: :group
+      get '/roll_of_honor' => 'peers#index'
+      get ':slug' => 'peers#show'
+      get ':slug/contact' => '/users/contact#new', as: :contact
+      post ':slug/contact' => '/users/contact#create'
+    end 
+  end
 
 
   root to: "home#index" 
