@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.0.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
@@ -32,17 +32,13 @@ gem 'jbuilder', '~> 2.5'
 gem 'capistrano-rails', group: :development
 gem 'capistrano-rbenv', group: :development
 
-gem 'devise'
+gem 'devise', '~> 4.4.0'
 gem 'bootstrap-sass'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'paperclip'
 gem 'select2-rails'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
-gem 'rails-assets-datatables', source: 'https://rails-assets.org'
-gem 'rails-assets-simplemde', source: 'https://rails-assets.org'
-gem 'rails-assets-croppie', source: 'https://rails-assets.org'
-gem 'rails-assets-blueimp-gallery', source: 'https://rails-assets.org'
 gem 'redcarpet'
 gem 'cancancan'
 gem 'rails_jskit'
@@ -50,6 +46,13 @@ gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'bootstrap-datepicker-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-datatables'
+  gem 'rails-assets-simplemde'
+  gem 'rails-assets-croppie'
+  gem 'rails-assets-blueimp-gallery'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -65,10 +68,10 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
-  gem 'listen', '~> 3.0.5'
+  #gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  #gem 'spring'
+  #gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'guard-rspec', require: false
 end
 

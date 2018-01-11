@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20171221173658) do
     t.datetime "updated_at",                 null: false
     t.boolean  "submitted"
     t.integer  "peer_id"
-    t.integer  "judgement"
     t.index ["candidate_id"], name: "index_advisings_on_candidate_id", using: :btree
     t.index ["peer_id"], name: "index_advisings_on_peer_id", using: :btree
     t.index ["poll_id"], name: "index_advisings_on_poll_id", using: :btree
@@ -100,12 +99,6 @@ ActiveRecord::Schema.define(version: 20171221173658) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.index ["candidate_id"], name: "index_images_on_candidate_id", using: :btree
-  end
-
-  create_table "judgements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "peers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
