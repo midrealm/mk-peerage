@@ -27,6 +27,9 @@ class Peer < ApplicationRecord
     end
     data_uri
   end
+  def self.where_order(peerage)
+    Peer.where(type: peerage.to_s.upcase)
+  end
 
   def potential_superiors
     Peer.where(type: type).where.not(id: id)   

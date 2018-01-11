@@ -38,3 +38,23 @@ RSpec.describe Peer, "order" do
     expect(Peer.first.order).to eq(:pelican) 
   end
 end
+RSpec.describe Peer, "self.where_order(peerage)" do
+  it "returns only Laurels when :laurel submitted as peerage" do
+    create(:user)
+    create(:user, sca_name: "Other Laurel")
+    create(:pelican)
+    peers = Peer.where_order(:laurel)
+    expect(peers.count).to eq(2) 
+    expect(peers.first.order).to eq(:laurel)
+    expect(peers.second.order).to eq(:laurel)
+  end
+  it "returns only Pelicans when :pelican submitted as peerage" do
+    create(:pelican)
+    create(:pelican, sca_name: "Other Pelican")
+    create(:user)
+    peers = Peer.where_order(:pelican)
+    expect(peers.count).to eq(2) 
+    expect(peers.first.order).to eq(:pelican)
+    expect(peers.second.order).to eq(:pelican)
+  end
+end
