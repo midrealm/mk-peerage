@@ -8,6 +8,10 @@ describe "delete /chambers/laurel/admin/candidates/:id" do
       @admin = create(:admin)
       sign_in(@admin)
     end
+    it "redirects to candidates admin path" do
+      delete "/chambers/laurel/admin/candidates/#{@candidate.id}"
+      expect(response).to redirect_to('/chambers/laurel/admin/candidates')
+    end
     it "destroys candidate" do
       expect(Candidate.count).to eq(1)
       delete "/chambers/laurel/admin/candidates/#{@candidate.id}"
