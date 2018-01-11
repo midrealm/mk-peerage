@@ -27,7 +27,7 @@ FactoryGirl.define do
     peer
     candidate 
     poll
-    judgement nil 
+    judgement nil
     comment "My Advice to the Crown on this Candidate is... Yay"
   end
   factory :poll do

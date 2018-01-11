@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221173658) do
+ActiveRecord::Schema.define(version: 20180111034210) do
 
   create_table "advisings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "candidate_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20171221173658) do
     t.datetime "updated_at",                 null: false
     t.boolean  "submitted"
     t.integer  "peer_id"
+    t.integer  "judgement"
     t.index ["candidate_id"], name: "index_advisings_on_candidate_id", using: :btree
     t.index ["peer_id"], name: "index_advisings_on_peer_id", using: :btree
     t.index ["poll_id"], name: "index_advisings_on_poll_id", using: :btree
