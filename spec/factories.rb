@@ -122,7 +122,7 @@ FactoryGirl.define do
   end
 
   
-  factory :admin, class: User do
+  factory :admin, aliases: [:laurel_admin], class: User do
     email {generate :email}
     password Devise.friendly_token.first(8)  
     sca_name "Mundugus Admin"

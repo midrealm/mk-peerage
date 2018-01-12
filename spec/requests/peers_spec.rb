@@ -1,6 +1,6 @@
 require "rails_helper"
 
 describe "peers requests" do
-  it_behaves_like "the outside world's view of a peerage", "laurel"
-  it_behaves_like "the outside world's view of a peerage", "pelican"
+  it_behaves_like "a peerage", "laurel", "pelican"
+  it_behaves_like "a peerage", "pelican", "laurel"
 end
