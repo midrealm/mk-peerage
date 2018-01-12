@@ -13,13 +13,7 @@ class PeerageMailer < Devise::Mailer
   end
   def add_to_peerage(user, peerage)
     @user = user 
-    @names = Hash.new
-    case peerage
-    when :laurel
-      @names = {collection: 'laurelate', name: 'Laurel' } 
-    when :pelican
-      @names = {collection: 'pelicanate', name: 'Pelican' } 
-    end
+    @names = self.class.names(peerage)
     subject = "Welcome to the Middle Kingdom #{@names[:collection].capitalize}"
     mail(to: @user.email, subject: subject, from: self.class.no_reply)
  end
@@ -29,6 +23,7 @@ class PeerageMailer < Devise::Mailer
       if record.royalty?
         devise_mail(record, :royal_welcome, opts)
       else
+        @names = self.class.names(record.peers.first.order)
         devise_mail(record, :welcome, opts)
       end
     else
@@ -49,5 +44,12 @@ class PeerageMailer < Devise::Mailer
   def self.mailing_list
     { laurel: 'laurel@laurelist.org', pelican: 'pelican@pelicanlist.org'}
   end
-
+  def self.names(peerage)
+    case peerage
+    when :laurel
+      {collection: 'laurelate', name: 'Laurel' } 
+    when :pelican
+      {collection: 'pelicanate', name: 'Pelican' } 
+    end
+  end
 end

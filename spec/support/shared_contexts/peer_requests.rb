@@ -10,6 +10,12 @@ shared_examples_for "a peerage" do |peerage, other_peerage|
   it_behaves_like "put /chambers/PEERAGE/admin/candidates/:id", peerage, other_peerage
   it_behaves_like "get /chambers/PEERAGE/admin/candidates/new", peerage, other_peerage
 
+  it_behaves_like "get /chambers/PEERAGE/admin/PEERS/new", peerage, other_peerage
+  it_behaves_like "post /chambers/PEERAGE/admin/PEERS", peerage, other_peerage
+  it_behaves_like "get /chambers/PEERAGE/admin/PEERS/:id/edit", peerage, other_peerage
+  it_behaves_like "get /chambers/PEERAGE/admin/PEERS", peerage, other_peerage
+  it_behaves_like "put /chambers/PEERAGE/admin/PEERS/:id", peerage, other_peerage
+
   #it_behaves_like , peerage, other_peerage
 end
 
