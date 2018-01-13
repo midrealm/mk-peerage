@@ -21,8 +21,11 @@ shared_examples_for "a peerage" do |peerage, other_peerage|
   #it_behaves_like "get /chambers/PEERAGE/admin/poll/new", peerage, other_peerage
   #it_behaves_like "put /chambers/PEERAGE/admin/poll", peerage, other_peerage
 
-  it_behaves_like "get /chambers/PEERAGE/candidates/:id", peerage, other_peerage
-  it_behaves_like "get /chambers/PEERAGE/candidates/:id/poll_comments", peerage, other_peerage
-  it_behaves_like "get /chambers/PEERAGE/candidates", peerage, other_peerage
+  #it_behaves_like "get /chambers/PEERAGE/candidates/:id", peerage, other_peerage
+  #it_behaves_like "get /chambers/PEERAGE/candidates/:id/poll_comments", peerage, other_peerage
+  #it_behaves_like "get /chambers/PEERAGE/candidates", peerage, other_peerage
+
+  it_behaves_like "get /chambers/PEERAGE/groups/:slug", peerage, other_peerage
+  it_behaves_like "get /chambers/PEERAGE/groups", peerage, other_peerage
 end
 
