@@ -1,7 +1,7 @@
 <% node.children.each do |child|  %>
   <% cand_total = child.all_candidates(@peerage).count %>
   <% if cand_total > 0 %>
-    <li><%= link_to child, controller.send("chambers_#{@peerage}_group_path",[child.slug]) %> (<%=cand_total%>)
+    <li><%= link_to child, chambers_group_path(@peerage,child.slug) %> (<%=cand_total%>)
     <% if child.children.any?  %>
       <ul><%= render '/chambers/peerage/groups/draw_tree', node: child  %></ul>
     <% end  %>

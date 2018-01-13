@@ -4,7 +4,7 @@
   <% peer_total = kingdom.all_peers(@peerage).count %>
   <% if peer_total > 0 %>
   <li>
-    <%= link_to kingdom, controller.send("#{@peerage}_group_path",[kingdom.slug]) %> (<%=peer_total%>)
+    <%= link_to kingdom, group_path(@peerage,kingdom.slug) %> (<%=peer_total%>)
     <ul><%= render '/peerage/groups/draw_tree', node: kingdom %></ul>
   </li>
   <% end %>
