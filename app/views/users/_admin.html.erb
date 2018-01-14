@@ -1,6 +1,6 @@
 <h3>Admin Tasks</h3>
 <% poll = Poll.last_for(peerage) %>
-<%= link_to 'Manage Candidates', controller.send("chambers_#{peerage}_admin_candidates_path") %><br>
+<%= link_to 'Manage Candidates', chambers_admin_candidates_path(peerage) %><br>
 <%= link_to 'Manage Laurels', controller.send("chambers_#{peerage}_admin_#{peerage}s_path") %><br>
 <%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
 <% unless poll.nil? %>

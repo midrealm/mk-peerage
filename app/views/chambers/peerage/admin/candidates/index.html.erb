@@ -1,5 +1,5 @@
 <h1>Manage Candidates</h1>
-<%= link_to 'Add New Candidate', controller.send("new_chambers_#{peerage}_admin_candidate_path") %>
+<%= link_to 'Add New Candidate', chambers_admin_new_candidate_path(peerage)%>
 <table class='table'>
   <thead>
     <th>Name</th><th>Show</th><th>Edit</th><th>Remove</th>
@@ -9,8 +9,8 @@
       <tr>
       <td><%=candidate.sca_name%></td>
       <td><%=link_to 'Show', chambers_candidate_path(peerage,candidate.id)%></td>
-      <td><%=link_to 'Edit', controller.send("edit_chambers_#{peerage}_admin_candidate_path",[candidate.id])%></td>
-      <td><%=link_to 'Remove', controller.send("chambers_#{peerage}_admin_candidate_path",[candidate.id]), method: :delete, data: { confirm: 'Are you Sure?' }%></td>
+      <td><%=link_to 'Edit', chambers_admin_edit_candidate_path(peerage,candidate.id)%></td>
+      <td><%=link_to 'Remove', chambers_admin_delete_candidate_path(peerage,candidate.id), data: { confirm: 'Are you Sure?' }%></td>
       </tr>
     <% end %>
   </tbody

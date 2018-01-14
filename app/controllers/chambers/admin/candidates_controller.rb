@@ -36,7 +36,7 @@ class Chambers::Admin::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     check_candidate_order 
     @candidate.destroy
-    redirect_to send("chambers_#{peerage}_admin_candidates_path")
+    redirect_to chambers_admin_candidates_path(peerage)
   end
 
   
@@ -54,6 +54,7 @@ class Chambers::Admin::CandidatesController < ApplicationController
   end
 
   def peerage
+    params[:peerage].to_sym
   end
 
   def self.controller_path
