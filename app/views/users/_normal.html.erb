@@ -6,9 +6,9 @@
 <% if poll.present? && can?(:take_poll, peerage) %>
   <% ballot = Ballot.new(current_user.peer(peerage)) %>
   <% unless ballot.complete? %>
-    <%= link_to 'Take Poll', controller.send("chambers_#{peerage}_poll_candidates_path") %> | <%="#{ballot.submission_count}/#{ballot.candidates.count}"%> Submitted |
+    <%= link_to 'Take Poll', chambers_ballot_path(peerage)%> | <%="#{ballot.submission_count}/#{ballot.candidates.count}"%> Submitted |
   <% else  %>
-    <%= link_to 'Edit Poll', controller.send("chambers_#{peerage}_poll_candidates_path") %> Finished! | 
+    <%= link_to 'Edit Poll', chambers_ballot_path(peerage)%> Finished! | 
   <%end %>
   Open Until Midnight on: <%= poll.end_date.strftime('%d-%b-%Y') %> <br/>
 <% end %>

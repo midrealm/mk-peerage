@@ -15,19 +15,18 @@ Rails.application.routes.draw do
 
     get '/:peerage/groups/:slug' => 'groups#show', as: :group
     get '/:peerage/groups' => 'groups#index', as: :groups
+
     get '/:peerage/candidates/:id' => 'candidates#show', as: :candidate
     get '/:peerage/candidates' => 'candidates#index', as: :candidates
     get '/:peerage/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
 
+    get '/:peerage/poll' => 'ballot#index', as: :ballot
+    get '/:peerage/poll/candidates/:id' => 'ballot#edit', as: :edit_ballot_candidate
+    put '/:peerage/poll/candidates/:id' => 'ballot#update'
+
     peerages.each do |peerage|
 
       namespace peerage do
-
-        namespace :poll do
-          get '/' => 'candidates#index', as: :candidates
-          get '/candidates/:id' => 'candidates#edit', as: :edit_candidate
-          resources :candidates, only: [:update]
-        end
 
         namespace :admin do
           resources peerage.to_s.pluralize.to_sym, except: :destroy

@@ -35,6 +35,7 @@ class Chambers::BallotController < ApplicationController
   end
 
   def peerage
+    params[:peerage].to_sym
   end
 
   def self.controller_path
