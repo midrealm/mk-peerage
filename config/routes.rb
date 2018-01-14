@@ -48,14 +48,8 @@ Rails.application.routes.draw do
   get '/:peerage/groups/:slug' => 'groups#show', as: :group
   get '/:peerage/roll_of_honor' => 'peers#index', as: :roll_of_honor
   get '/:peerage/:slug' => 'peers#show', as: :peer
-
-  peerages.each do |peerage| 
-    namespace peerage do
-      get ':slug/contact' => '/users/contact#new', as: :contact
-      post ':slug/contact' => '/users/contact#create'
-    end 
-  end
-
+  get '/:peerage/:slug/contact' => 'contact#new', as: :contact
+  post '/:peerage/:slug/contact' => 'contact#create'
 
   root to: "home#index" 
 

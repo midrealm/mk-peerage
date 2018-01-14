@@ -8,7 +8,7 @@
     <% @users.each do |user| %>
       <tr>
       <td><%=user.sca_name%></td>
-      <td><%=link_to 'Show', user.url%></td>
+      <td><%=link_to 'Show', peer_path(peerage,user.slug)%></td>
       <td><%=link_to 'Edit', controller.send("edit_chambers_#{peerage}_admin_#{peerage}_path",[user.id])%></td>
       </tr>
     <% end %>

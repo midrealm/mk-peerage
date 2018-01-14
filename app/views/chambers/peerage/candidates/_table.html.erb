@@ -43,7 +43,7 @@
     </td>
     <td>
       <% cand.peers.each do |u| %>
-        <%= link_to u.sca_name, u.url%> 
+        <%= link_to u.sca_name, peer_path(peerage, u.slug)%> 
       <% end %>
    <td>
    </tr> 

@@ -12,7 +12,7 @@ class Users::ContactController < ApplicationController
         # *contact_params.values explodes items out of the array
         PeerageMailer.contact_user(@user, *contact_params.values).deliver 
         flash.notice = "email successfully sent"
-        redirect_to Rails.application.routes.url_helpers.send("#{@peerage}_path",params[:slug])
+        redirect_to peer_path(@peerage,params[:slug])
       else
         flash.alert = "not sending email - message must be present"
         render :new

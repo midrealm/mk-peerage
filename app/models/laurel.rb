@@ -1,6 +1,6 @@
 class Laurel < Peer
   def url
-    Rails.application.routes.url_helpers.laurel_path(slug)
+    Rails.application.routes.url_helpers.peer_path('laurel',slug)
   end
 
 

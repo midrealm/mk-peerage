@@ -18,7 +18,7 @@ class Chambers::Admin::PeersController < ApplicationController
       Peer.create(user: user, active: true, vigilant: params[peerage][:vigilant], type: peerage.to_s.capitalize) do |p|
         p.vigilant = true if params[peerage][:vigilant].nil?
       end
-      redirect_to send("#{peerage}_path",user.slug)
+      redirect_to peer_path(peerage,user.slug)
       if user.peers.count == 1
         user.send_reset_password_instructions
       else

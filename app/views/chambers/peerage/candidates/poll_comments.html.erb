@@ -8,7 +8,7 @@
   <% end %>
   <% if @candidate.peers.count > 0 %>
     <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
-    <%=link_to adv.sca_name, adv.url %> 
+    <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
     <% end %><br>
   <%end%>
   <% if @candidate.group %>
@@ -36,7 +36,7 @@
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
     <%= image_tag adv.peer.profile_pic.url(:thumb) %><br/>
-    <%= link_to adv.peer.sca_name, adv.peer.url%>
+    <%= link_to adv.peer.sca_name, peer_path(peerage,adv.peer.slug)%>
     </div>
     <div class="col-md-5">
     <strong>Judgement:</strong> <%=adv.judgement_name%><br/>

@@ -10,7 +10,7 @@
   <% end %>
   <% if @candidate.peers.count > 0 %>
     <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
-    <%=link_to adv.sca_name, adv.url %> 
+    <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
     <% end %><br>
   <%end%>
   <% if @candidate.group %>
@@ -49,7 +49,7 @@
   <% @candidate.comments.each do |comment| %>
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
-    <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, comment.peer.url%><br>
+    <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
     </div>
     <div class="col-md-5">
       <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
