@@ -1,4 +1,4 @@
-<%= link_to 'Back to Groups', controller.send("chambers_#{@peerage}_groups_path") %><br/>
+<%= link_to 'Back to Groups', chambers_groups_path(@peerage) %><br/>
 <h1><%=@group%></h1>
 <ul>
   <%= render '/chambers/peerage/groups/draw_tree', node: @group %>
@@ -14,7 +14,7 @@
   <tr>
   <td><%= link_to candidate.sca_name, controller.send("chambers_#{@peerage}_candidate_path",[candidate.id]) %></td>
   <td><%=candidate.show_specialties%></td>
-  <td><%=link_to candidate.group, controller.send("chambers_#{@peerage}_group_path", [candidate.group.slug]) %></td>
+  <td><%=link_to candidate.group, chambers_group_path(@peerage, candidate.group.slug) %></td>
   </tr>
 <% end %>
 

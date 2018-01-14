@@ -14,12 +14,12 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
 
     get '/:peerage/groups/:slug' => 'groups#show', as: :group
+    get '/:peerage/groups' => 'groups#index', as: :groups
 
     peerages.each do |peerage|
 
       namespace peerage do
         resources :candidates, only: [:index, :show]
-        resources :groups, only: [:index]
         get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
 
         namespace :poll do
