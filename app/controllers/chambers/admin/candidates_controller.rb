@@ -13,7 +13,7 @@ class Chambers::Admin::CandidatesController < ApplicationController
     @candidate = Candidate.new(candidate_params)
     @candidate.vote = false;
     if @candidate.save
-      redirect_to send("chambers_#{peerage}_candidate_path",@candidate)
+      redirect_to chambers_candidate_path(peerage,@candidate)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Chambers::Admin::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     check_candidate_order
     if @candidate.update(candidate_params)
-      redirect_to send("chambers_#{peerage}_candidate_path",@candidate)
+      redirect_to chambers_candidate_path(peerage,@candidate)
     else
       render :edit
     end

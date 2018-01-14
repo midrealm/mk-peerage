@@ -8,7 +8,7 @@
     <% @candidates.each do |candidate| %>
       <tr>
       <td><%=candidate.sca_name%></td>
-      <td><%=link_to 'Show', controller.send("chambers_#{peerage}_candidate_path",[candidate.id])%></td>
+      <td><%=link_to 'Show', chambers_candidate_path(peerage,candidate.id)%></td>
       <td><%=link_to 'Edit', controller.send("edit_chambers_#{peerage}_admin_candidate_path",[candidate.id])%></td>
       <td><%=link_to 'Remove', controller.send("chambers_#{peerage}_admin_candidate_path",[candidate.id]), method: :delete, data: { confirm: 'Are you Sure?' }%></td>
       </tr>

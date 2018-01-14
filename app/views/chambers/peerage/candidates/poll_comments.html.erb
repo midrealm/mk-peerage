@@ -1,6 +1,6 @@
 <h3>Full Poll Results for</h3>
 <div class="col-md-8">
-  <h1><%= link_to @candidate.sca_name, controller.send("chambers_#{peerage}_candidate_path",@candidate.id)%></h1>
+  <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
   <% if @candidate.specialties.count > 0 %>
     <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
     <%= spec.name %>  

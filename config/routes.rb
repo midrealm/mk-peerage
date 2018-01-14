@@ -15,12 +15,13 @@ Rails.application.routes.draw do
 
     get '/:peerage/groups/:slug' => 'groups#show', as: :group
     get '/:peerage/groups' => 'groups#index', as: :groups
+    get '/:peerage/candidates/:id' => 'candidates#show', as: :candidate
+    get '/:peerage/candidates' => 'candidates#index', as: :candidates
+    get '/:peerage/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
 
     peerages.each do |peerage|
 
       namespace peerage do
-        resources :candidates, only: [:index, :show]
-        get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
 
         namespace :poll do
           get '/' => 'candidates#index', as: :candidates

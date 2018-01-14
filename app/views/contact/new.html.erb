@@ -1,0 +1,15 @@
+<h1>Contact <%=@user.sca_name%></h1>
+<div class="containter">
+  <div class="col-md-6">
+    <%= semantic_form_for 'contact', url: contact_path(@peerage,@user.slug) do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :subject %>
+        <%= f.input :from_name, label: 'Your Name' %> 
+        <%= f.input :from_email, label: 'Your Email Address', as: :email %>
+        <%= f.input :message, label: 'Your message', as: :text %>
+        <%= recaptcha_tags %>
+      <% end %>
+      <%= f.action :submit, label: 'Send Message', button_html: {class: 'btn btn-default'} %>
+    <% end %>
+  </div>
+</div> 

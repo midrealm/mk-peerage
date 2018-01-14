@@ -1,4 +1,4 @@
-<%= link_to "<- #{peerage.capitalize} Candidates", controller.send("chambers_#{peerage}_candidates_path")%>
+<%= link_to "<- #{peerage.capitalize} Candidates", chambers_candidates_path(peerage)%>
 <div class ="row">
 <div class="col-md-8">
   <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>

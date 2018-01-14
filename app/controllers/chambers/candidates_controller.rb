@@ -20,7 +20,7 @@ class Chambers::CandidatesController < ApplicationController
     @candidate = Candidate.find(params[:id])
     @pr = @candidate.poll_results.last
     if @pr.nil? 
-      redirect_to send("chambers_#{peerage}_candidates_path")
+      redirect_to chambers_candidates_path(peerage)
     end
   end
   private
@@ -28,5 +28,6 @@ class Chambers::CandidatesController < ApplicationController
     'chambers/peerage/candidates'
   end
   def peerage
+    params[:peerage].to_sym
   end
 end

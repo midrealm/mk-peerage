@@ -7,7 +7,7 @@ module Chambers
       if @image.save
         flash[:notice] = "Image Upload Successful"
         candidate = Candidate.find(params['image']['candidate_id'])
-        redirect_to Rails.application.routes.url_helpers.send("chambers_#{candidate.order}_candidate_path",candidate)
+        redirect_to chambers_candidate_path(candidate.order,candidate)
       else
         flash[:notice] = "Image Upload Unsuccessful"
       end
