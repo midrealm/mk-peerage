@@ -1,19 +1,18 @@
 class PeersController < ApplicationController
+  helper_method :peerage
   def show
-    @peer = peer_class.joins(:user).find_by(users: {slug: params[:slug]})
-    @peerage = peer_class.peerage_type
+    @peer = Peer.where_order(peerage).joins(:user).find_by(users: {slug: params[:slug]})
     
     render template: "peerage/peers/show"
   end
 
   def index
-    @active_peers = peer_class.where(active: true)
-    @inactive_peers = peer_class.where(active: false)
-    @order_title = "Master and Mistresses of the #{peer_class.peerage_name}"
+    @active_peers = Peer.where_order(peerage).where(active: true)
+    @inactive_peers = Peer.where_order(peerage).where(active: false)
+    @order_title = "Master and Mistresses of the #{peerage.capitalize}"
     render template: "peerage/peers/index"
   end
-
-  def peer_class
-    raise "Don't do this"
+  def peerage
+    params[:peerage]
   end
 end

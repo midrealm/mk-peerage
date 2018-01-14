@@ -8,10 +8,9 @@
     <% name = "#{p.sca_name} (#{p.show_specialties})" %>
   <% end %>
   <% if p.vigilant? %> 
-  <li><b><%= link_to(name, p.url) %></b></li>
+  <li><b><%= link_to(name, peer_path(peerage,p.slug)) %></b></li>
   <% else %>
-  
-  <li><%= link_to(name, p.url) %></li>
+  <li><%= link_to(name, peer_path(peerage,p.slug)) %></li>
   <% end %>
 <%end %>
 </ul>
@@ -24,9 +23,9 @@
     <% name = "#{p.sca_name} (#{p.show_specialties})" %>
   <% end %>
   <% if p.deceased? %> 
-  <li><strike><%= link_to(name, p.url) %></strike></li>
+  <li><strike><%= link_to(name, peer_path(peerage,p.slug)) %></strike></li>
   <% else %>
-  <li><%= link_to(name, p.url) %></li>
+  <li><%= link_to(name, peer_path(peerage,p.slug)) %></li>
   <% end %>
 <% end %>
 </ul>
