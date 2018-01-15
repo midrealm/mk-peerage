@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  peerages = [:laurel, :pelican]
   mount MagicLamp::Genie, at: "/magic_lamp" if defined?(MagicLamp)
   devise_for :users
   resources :users, only: [:create]
@@ -38,19 +37,14 @@ Rails.application.routes.draw do
     patch '/:peerage/admin/poll' => 'admin/polls#update', as: :admin_update_poll
     put '/:peerage/admin/poll' => 'admin/polls#update'
 
+    get '/:peerage/admin/peers' => 'admin/peers#index', as: :admin_peers
+    get '/:peerage/admin/peers/new' => 'admin/peers#new', as: :admin_new_peer
+    post '/:peerage/admin/peers' => 'admin/peers#create', as: :admin_create_peer
+    get '/:peerage/admin/peers/:id/edit' => 'admin/peers#edit', as: :admin_edit_peer
+    patch '/:peerage/admin/peers/:id' => 'admin/peers#update', as: :admin_update_peer
+    put '/:peerage/admin/peers/:id' => 'admin/peers#update'
 
-    peerages.each do |peerage|
-
-      namespace peerage do
-
-        namespace :admin do
-          resources peerage.to_s.pluralize.to_sym, except: :destroy
-        end
-
-      end
-    end
   end
-
   scope :chambers do
     namespace :admin do
       resources :royalty, except: [:destroy, :show] 

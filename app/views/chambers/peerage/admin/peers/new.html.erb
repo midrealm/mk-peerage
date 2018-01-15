@@ -1,7 +1,7 @@
 <h1>Add New <%=peerage.capitalize%></h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for peerage, url: controller.send("chambers_#{peerage}_admin_#{peerage}s_path") do |f| %>
+    <%= semantic_form_for peerage, url: chambers_admin_create_peer_path(peerage) do |f| %>
       <%= f.inputs do %>
         <%= f.input :id, label: 'Existing User', :collection => User.all_except(peerage).pluck(Arel.sql("Concat(`sca_name`, ';', `email`)"), :id)%>
         <%= f.input :sca_name, label: 'SCA Name' %>
@@ -12,7 +12,6 @@
     <%end%> 
   </div>
 </div>
-
 <script>
 $(document).ready(function(){
 

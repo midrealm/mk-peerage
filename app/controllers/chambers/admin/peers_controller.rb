@@ -39,7 +39,7 @@ class Chambers::Admin::PeersController < ApplicationController
     raise "Access Denied" unless @peer.order == peerage
     user = @peer.user
     if user.update(update_user_params)
-      redirect_to send("chambers_#{peerage}_admin_#{peerage}s_path")
+      redirect_to chambers_admin_peers_path(peerage)
     else
       render :edit
     end
@@ -55,6 +55,7 @@ class Chambers::Admin::PeersController < ApplicationController
     authorize! :manage, peerage
   end
   def peerage
+    params[:peerage].to_sym
   end
   def self.controller_path
     'chambers/peerage/admin/peers'
