@@ -26,8 +26,9 @@ Rails.application.routes.draw do
 
     get '/:peerage/admin/candidates' => 'admin/candidates#index', as: :admin_candidates
     get '/:peerage/admin/candidates/new' => 'admin/candidates#new', as: :admin_new_candidate
-    post '/:peerage/admin/candidates' => 'admin/candidates#create'
+    post '/:peerage/admin/candidates' => 'admin/candidates#create', as: :admin_create_candidate
     get '/:peerage/admin/candidates/:id/edit' => 'admin/candidates#edit', as: :admin_edit_candidate
+    patch '/:peerage/admin/candidates/:id' => 'admin/candidates#update', as: :admin_update_candidate
     put '/:peerage/admin/candidates/:id' => 'admin/candidates#update'
     delete '/:peerage/admin/candidates/:id' => 'admin/candidates#destroy', as: :admin_delete_candidate
 
@@ -37,7 +38,6 @@ Rails.application.routes.draw do
 
         namespace :admin do
           resources peerage.to_s.pluralize.to_sym, except: :destroy
-          #resources :candidates, except: :show
           resource :poll, except: [:destroy, :show]
         end
 
