@@ -53,12 +53,6 @@ Rails.application.routes.draw do
         put '/peers/:id' => 'peers#update'
       end
     end
-
-  end
-  scope :chambers do
-    namespace :admin do
-#      resources :royalty, except: [:destroy, :show] 
-    end 
   end
 
   scope '/:peerage/' do
@@ -71,6 +65,4 @@ Rails.application.routes.draw do
   end
 
   root to: "home#index" 
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
