@@ -32,13 +32,19 @@ Rails.application.routes.draw do
     put '/:peerage/admin/candidates/:id' => 'admin/candidates#update'
     delete '/:peerage/admin/candidates/:id' => 'admin/candidates#destroy', as: :admin_delete_candidate
 
+    get '/:peerage/admin/poll/new' => 'admin/polls#new', as: :admin_new_poll
+    post '/:peerage/admin/poll' => 'admin/polls#create', as: :admin_create_poll
+    get '/:peerage/admin/poll/edit' => 'admin/polls#edit', as: :admin_edit_poll
+    patch '/:peerage/admin/poll' => 'admin/polls#update', as: :admin_update_poll
+    put '/:peerage/admin/poll' => 'admin/polls#update'
+
+
     peerages.each do |peerage|
 
       namespace peerage do
 
         namespace :admin do
           resources peerage.to_s.pluralize.to_sym, except: :destroy
-          resource :poll, except: [:destroy, :show]
         end
 
       end

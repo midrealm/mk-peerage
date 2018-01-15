@@ -42,7 +42,7 @@ class Chambers::Admin::PollsController < ApplicationController
     authorize! :manage, peerage
   end
   def peerage
-    :laurel
+    params[:peerage].to_sym
   end
   def self.controller_path
     'chambers/peerage/admin/polls'

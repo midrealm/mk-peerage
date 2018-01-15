@@ -5,10 +5,10 @@
 <%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
 <% unless poll.nil? %>
   <% if poll.end_date.past? %>
-    <%= link_to 'Create New Poll', controller.send("new_chambers_#{peerage}_admin_poll_path") %>
+    <%= link_to 'Create New Poll', chambers_admin_new_poll_path(peerage)%>
   <% else  %>
-    <%= link_to 'Edit Poll', controller.send("edit_chambers_#{peerage}_admin_poll_path") %> | <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
+    <%= link_to 'Edit Poll', chambers_admin_edit_poll_path(peerage,poll.id)%> | <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
   <% end %>
 <% else %>
-  <%= link_to 'Create New Poll', controller.send("new_chambers_#{peerage}_admin_poll_path") %>
+  <%= link_to 'Create New Poll', chambers_admin_new_poll_path(peerage)%>
 <% end %></br>
