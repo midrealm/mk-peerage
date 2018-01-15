@@ -2,7 +2,7 @@
 <% poll = Poll.last_for(peerage) %>
 <%= link_to 'Manage Candidates', chambers_admin_candidates_path(peerage) %><br>
 <%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage) %><br>
-<%= link_to 'Manage Royalty', admin_royalty_index_path %><br>
+<%= link_to 'Manage Royalty', chambers_admin_royalty_index_path %><br>
 <% unless poll.nil? %>
   <% if poll.end_date.past? %>
     <%= link_to 'Create New Poll', chambers_admin_new_poll_path(peerage)%>
