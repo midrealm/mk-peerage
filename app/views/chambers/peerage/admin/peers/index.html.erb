@@ -1,5 +1,5 @@
 <h1>Manage <%=peerage.capitalize%>s</h1>
-<%= link_to "Add New #{peerage.capitalize}", chambers_admin_new_peer_path(peerage) %>
+<%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %>
 <table class='table'>
   <thead>
     <th>Name</th><th>Show</th><th>Edit</th>
@@ -9,7 +9,7 @@
       <tr>
       <td><%=user.sca_name%></td>
       <td><%=link_to 'Show', peer_path(peerage,user.slug)%></td>
-      <td><%=link_to 'Edit', chambers_admin_edit_peer_path(peerage,user.id)%></td>
+      <td><%=link_to 'Edit', edit_chambers_admin_peer_path(peerage,user.id)%></td>
       </tr>
     <% end %>
   </tbody

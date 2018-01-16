@@ -33,13 +33,7 @@ Rails.application.routes.draw do
 
         resources :candidates, except: [:show]
         resource :poll, except: [:show, :delete]
-
-        get '/peers' => 'peers#index', as: :peers
-        get '/peers/new' => 'peers#new', as: :new_peer
-        post '/peers' => 'peers#create', as: :create_peer
-        get '/peers/:id/edit' => 'peers#edit', as: :edit_peer
-        patch '/peers/:id' => 'peers#update', as: :update_peer
-        put '/peers/:id' => 'peers#update'
+        resources :peers, except: [:show, :delete]
       end
     end
   end

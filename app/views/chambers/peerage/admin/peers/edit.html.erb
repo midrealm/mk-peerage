@@ -1,7 +1,7 @@
 <h1>Edit <%=peerage.capitalize%> <%=@peer.sca_name%></h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @peer, as: peerage.to_sym, url: chambers_admin_update_peer_path(peerage,@peer.id) do |f| %>
+    <%= semantic_form_for @peer, as: peerage.to_sym, url: chambers_admin_peer_path(peerage,@peer.id) do |f| %>
       <%= f.inputs do %>
         <%= f.input :deceased %>
       <% end %>
