@@ -8,10 +8,10 @@ class User < ApplicationRecord
   attr_accessor :vigilant
 
   has_many :peers
-  has_one :laurel
-  has_one :pelican
-  accepts_nested_attributes_for :laurel
-  accepts_nested_attributes_for :pelican
+  Peer.orders.each do |peerage|
+    has_one peerage
+    accepts_nested_attributes_for peerage
+  end
   
   has_many :comments
 

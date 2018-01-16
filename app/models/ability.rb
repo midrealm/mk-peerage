@@ -8,21 +8,12 @@ class Ability
 
     user.peers.each do |peer| 
       can :manage, :royalty if peer.admin?
-      case peer.type
-      when 'Laurel'
-        can :take_poll, :laurel 
-        if peer.admin?
-          can :manage, :laurel
-        else
-          can :read, :laurel
-        end
-      when 'Pelican'
-        can :take_poll, :pelican 
-        if peer.admin?
-          can :manage, :pelican
-        else
-          can :read, :pelican
-        end
+
+      can :take_poll, peer.order
+      if peer.admin?
+        can :manage, peer.order
+      else
+        can :read, peer.order
       end
     end
    
