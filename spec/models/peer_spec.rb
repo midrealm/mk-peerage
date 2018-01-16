@@ -58,3 +58,8 @@ RSpec.describe Peer, "self.where_order(peerage)" do
     expect(peers.second.order).to eq(:pelican)
   end
 end
+RSpec.describe Peer, "self.orders" do
+  it "returns array of all the orders" do
+    expect(Peer.orders).to contain_exactly(:laurel, :pelican)
+  end 
+end

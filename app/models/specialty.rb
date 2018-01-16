@@ -6,6 +6,6 @@ class Specialty < ApplicationRecord
   has_many :candidates, through: :specializations
 
   validates_presence_of(:peerage_type)
-  enum peerage_type: [:laurel, :pelican] 
+  enum peerage_type: Peer.orders
 
 end

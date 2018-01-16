@@ -27,6 +27,9 @@ class Peer < ApplicationRecord
     end
     data_uri
   end
+  def self.orders
+    Peer.subclasses.map{|x| x.name.downcase.to_sym}
+  end 
   def self.where_order(peerage)
     Peer.where(type: peerage.to_s.upcase)
   end
@@ -94,3 +97,5 @@ class Peer < ApplicationRecord
     user.deceased
   end
 end
+require_dependency 'laurel'
+require_dependency 'pelican'

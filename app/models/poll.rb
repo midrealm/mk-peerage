@@ -8,7 +8,7 @@ class Poll < ApplicationRecord
   validates :start_date, :end_date, presence: true
 
   validates_presence_of(:peerage_type)
-  enum peerage_type: [:laurel, :pelican] 
+  enum peerage_type: Peer.orders
 
   def self.current(peerage)
     Poll.where(peerage_type: peerage).each do |p|
