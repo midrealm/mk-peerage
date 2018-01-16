@@ -20,10 +20,8 @@ Rails.application.routes.draw do
       get '/groups/:slug' => 'groups#show', as: :group
       get '/groups' => 'groups#index', as: :groups
 
-      get '/candidates/:id' => 'candidates#show', as: :candidate
-      get '/candidates' => 'candidates#index', as: :candidates
+      resources :candidates, only: [:index, :show]
       get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
-
       
       get '/poll' => 'ballot#index', as: :ballot
       get '/poll/candidates/:id' => 'ballot#edit', as: :edit_ballot_candidate
