@@ -31,13 +31,7 @@ Rails.application.routes.draw do
 
       namespace :admin do
 
-        get '/candidates' => 'candidates#index', as: :candidates
-        get '/candidates/new' => 'candidates#new', as: :new_candidate
-        post '/candidates' => 'candidates#create', as: :create_candidate
-        get '/candidates/:id/edit' => 'candidates#edit', as: :edit_candidate
-        patch '/candidates/:id' => 'candidates#update', as: :update_candidate
-        put '/candidates/:id' => 'candidates#update'
-        delete '/candidates/:id' => 'candidates#destroy', as: :delete_candidate
+        resources :candidates, except: [:show]
 
         get '/poll/new' => 'polls#new', as: :new_poll
         post '/poll' => 'polls#create', as: :create_poll
