@@ -32,12 +32,7 @@ Rails.application.routes.draw do
       namespace :admin do
 
         resources :candidates, except: [:show]
-
-        get '/poll/new' => 'polls#new', as: :new_poll
-        post '/poll' => 'polls#create', as: :create_poll
-        get '/poll/edit' => 'polls#edit', as: :edit_poll
-        patch '/poll' => 'polls#update', as: :update_poll
-        put '/poll' => 'polls#update'
+        resource :poll, except: [:show, :delete]
 
         get '/peers' => 'peers#index', as: :peers
         get '/peers/new' => 'peers#new', as: :new_peer
