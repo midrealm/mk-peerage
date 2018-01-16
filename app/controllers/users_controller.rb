@@ -18,10 +18,12 @@ class UsersController < ApplicationController
     end
   end
   private 
+  
   def user_params
     peer_params = [:id, {:specialty_ids => [] }, :specialty_detail, :bio, :elevated_by, :active, :vigilant, :apprenticed_to, :elevation_date, :profile_pic, {:superior_ids => []}]
+    all_peer_params =  Peer.orders.map{|x| {"#{x}_attributes".to_sym => peer_params}}
 
     params.require(:user).permit(:sca_name, :modern_name, :street, :city, :state, :zipcode, :elevators,:phone,:user_id,  :arms, :group_id, 
-      :laurel_attributes => peer_params, :pelican_attributes => peer_params)
+      *all_peer_params)
   end
 end

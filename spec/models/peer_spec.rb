@@ -63,3 +63,8 @@ RSpec.describe Peer, "self.orders" do
     expect(Peer.orders).to contain_exactly(:laurel, :pelican)
   end 
 end
+RSpec.describe Peer, "self.subclass(:peerage)" do
+  it "returns subclass" do
+    expect(Peer.subclass(:laurel)).to eq(Laurel)
+  end 
+end

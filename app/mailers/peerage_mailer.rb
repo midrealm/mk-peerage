@@ -9,7 +9,7 @@ class PeerageMailer < Devise::Mailer
     @comment = comment
     peerage = @candidate.peerage_type.to_sym
     subject = "Candidate ##{candidate.id} Comment"
-    mail(to: self.class.mailing_list[peerage], subject: subject, from: self.class.no_reply)
+    mail(to: Peer.subclass(peerage).mailing_list, subject: subject, from: self.class.no_reply)
   end
   def add_to_peerage(user, peerage)
     @user = user 
@@ -41,15 +41,8 @@ class PeerageMailer < Devise::Mailer
   def self.no_reply
     'no_reply@peerage.org'
   end
-  def self.mailing_list
-    { laurel: 'laurel@laurelist.org', pelican: 'pelican@pelicanlist.org'}
-  end
   def self.names(peerage)
-    case peerage
-    when :laurel
-      {collection: 'laurelate', name: 'Laurel' } 
-    when :pelican
-      {collection: 'pelicanate', name: 'Pelican' } 
-    end
+    peerage_class = Peer.subclass(peerage)
+    {collection: peerage_class.collection, name: peerage_class.peerage_name}
   end
 end

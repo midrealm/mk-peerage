@@ -1,10 +1,10 @@
 module GroupHelper
 
-  def peer_link(group, peerage='laurel')
+  def peer_link(group, peerage)
     full_group_link(group, "group_path", peerage)
   end
 
-  def candidate_link(group, peerage='laurel')
+  def candidate_link(group, peerage)
     full_group_link(group, "chambers_group_path", peerage)
   end
   
@@ -29,12 +29,12 @@ module GroupHelper
     link_to("#{prefix} of #{linked_group.name}", controller.send(group_path,peerage, linked_group.slug))
   end
 
-  def candidate_region_link(group)
+  def candidate_region_link(group, peerage)
     if group.depth == 1
-      link_to group.name, chambers_group_path("laurel",group.slug) 
+      link_to group.name, chambers_group_path(peerage.to_s,group.slug) 
     else
       region = group.ancestors.at_depth(1).first
-      link_to region.name, chambers_group_path("laurel",region.slug) 
+      link_to region.name, chambers_group_path(peerage.to_s,region.slug) 
    end 
   end
 end

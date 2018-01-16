@@ -4,7 +4,7 @@
   <div class='col-md-3'>
     <h3><%= peer.peerage_name %></h3>
     <%= render 'normal', peerage: peer.order %>
-    <% if can? :manage, :laurel %>
+    <% if can? :manage, peer.order %>
       <%= render 'admin', peerage: peer.order %>
     <% end %>
   </div>

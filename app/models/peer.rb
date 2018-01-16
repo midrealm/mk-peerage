@@ -27,6 +27,9 @@ class Peer < ApplicationRecord
     end
     data_uri
   end
+  def self.subclass(peerage) 
+    peerage.to_s.capitalize.constantize
+  end
   def self.orders
     Peer.subclasses.map{|x| x.name.downcase.to_sym}
   end 
@@ -46,6 +49,13 @@ class Peer < ApplicationRecord
     self.to_s 
   end
 
+  def self.mailing_list
+    #parent definition
+  end
+
+  def self.collection
+    #parent definition
+  end
   def peerage_type
     self.class.peerage_type
   end
@@ -55,10 +65,6 @@ class Peer < ApplicationRecord
   end
   def show_specialties
     specialties.where(peerage_type: peerage_name).map{|s| s.name}.to_sentence
-  end
-
-  def url
-    #Parent Definition
   end
 
   def slug

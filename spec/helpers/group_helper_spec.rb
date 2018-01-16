@@ -1,7 +1,7 @@
 require 'rails_helper'
 describe GroupHelper do
 
-  describe "candidate_region_link(group)" do
+  describe "candidate_region_link(group, peerage)" do
     before(:each) do
       kingdom_type = create(:group_type, name: 'Kingdom')      
       region_type = create(:group_type, name: 'Region')      
@@ -14,16 +14,16 @@ describe GroupHelper do
     end 
 
     it "handles a region" do
-      expect(helper.candidate_region_link(@region)).to eq('<a href="/chambers/laurel/groups/north_oaken">North Oaken</a>')
+      expect(helper.candidate_region_link(@region, :laurel)).to eq('<a href="/chambers/laurel/groups/north_oaken">North Oaken</a>')
     end
     it "handles a barony" do
-      expect(helper.candidate_region_link(@barony)).to eq('<a href="/chambers/laurel/groups/north_oaken">North Oaken</a>')
+      expect(helper.candidate_region_link(@barony, :laurel)).to eq('<a href="/chambers/laurel/groups/north_oaken">North Oaken</a>')
     end
     it "handles a canton" do
-      expect(helper.candidate_region_link(@canton)).to eq('<a href="/chambers/laurel/groups/north_oaken">North Oaken</a>')
+      expect(helper.candidate_region_link(@canton, :laurel)).to eq('<a href="/chambers/laurel/groups/north_oaken">North Oaken</a>')
     end
   end
-  describe "full_group_link(group, group_path)" do
+  describe "full_group_link(group, group_path, peerage)" do
     before(:each) do
       kingdom_type = create(:group_type, name: 'Kingdom')      
       region_type = create(:group_type, name: 'Region')      

@@ -362,7 +362,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   select2-rails
-  selenium-webdriver (= 2.53.4)
+  selenium-webdriver
   shoulda-matchers
   simplecov
   teaspoon-mocha

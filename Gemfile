@@ -78,7 +78,7 @@ end
 group :test do
   gem "shoulda-matchers"
   gem 'database_cleaner'
-  gem 'selenium-webdriver', '2.53.4'
+  gem 'selenium-webdriver'
   gem 'simplecov'
 end
 
