@@ -22,7 +22,7 @@
   <% if p.specialties.count > 0 %>
     <% name = "#{p.sca_name} (#{p.show_specialties})" %>
   <% end %>
-  <% if p.deceased? %> 
+  <% if p.deceased %> 
   <li><strike><%= link_to(name, peer_path(peerage,p.slug)) %></strike></li>
   <% else %>
   <li><%= link_to(name, peer_path(peerage,p.slug)) %></li>

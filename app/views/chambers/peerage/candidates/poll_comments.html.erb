@@ -12,7 +12,7 @@
     <% end %><br>
   <%end%>
   <% if @candidate.group %>
-  <strong>Group</strong>: <%= candidate_link @candidate.group %>
+  <strong>Group</strong>: <%= candidate_link(@candidate.group,peerage) %>
   <% end %>
   <table class="table">
   <thead>

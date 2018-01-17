@@ -1,4 +1,7 @@
 <h1>Private Chambers</h1>
+<% if can? :read, PollResult %>
+<%= render 'royalty' %>
+<% end %>
 <% current_user.peers.each do |peer| 
 %>
   <div class='col-md-3'>
