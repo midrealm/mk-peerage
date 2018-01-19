@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Poll, type: :model do
-  it {should have_many(:advisings)}
-  it {should have_many(:candidates).through(:advisings)}
-  it {should have_many(:peers).through(:advisings)}
-
-  it { should validate_presence_of(:peerage_type) }
-  it { should validate_presence_of(:start_date) }
-  it { should validate_presence_of(:end_date) }
-
   it 'does not accept end_dates after start_dates' do
     poll = build(:poll, start_date: DateTime.now + 2.days, end_date: DateTime.now + 1.days)
     expect(poll.valid?).to be_falsey
@@ -21,7 +13,7 @@ RSpec.describe Poll, type: :model do
 
 end
 
-RSpec.describe Poll, 'last_for(:peerage)' do
+RSpec.describe Poll, 'self.last_for(:peerage)' do
   context 'for laurel poll and pelican poll' do 
     before(:each) do
       @laurel_poll = create(:poll, peerage_type: :laurel)
@@ -36,7 +28,7 @@ RSpec.describe Poll, 'last_for(:peerage)' do
   end
 end
   
-RSpec.describe Poll, 'current(:peerage)' do
+RSpec.describe Poll, 'self.current(:peerage)' do
   context 'for current laurel poll and pelican poll' do 
     before(:each) do
       @laurel_poll = create(:current_poll, peerage_type: :laurel)
