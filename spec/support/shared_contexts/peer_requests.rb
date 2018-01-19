@@ -2,7 +2,6 @@ require "rails_helper"
 
 shared_examples_for "a peerage" do |peerage, other_peerage|
 
-  it_behaves_like "post /chambers/PEERAGE/admin/candidates", peerage
   it_behaves_like "delete /chambers/PEERAGE/admin/candidates/:id", peerage, other_peerage
   it_behaves_like "get /chambers/PEERAGE/admin/candidates/:id/edit", peerage, other_peerage
   it_behaves_like "get /chambers/PEERAGE/admin/candidates", peerage, other_peerage
