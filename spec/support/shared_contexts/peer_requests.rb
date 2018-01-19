@@ -29,7 +29,6 @@ shared_examples_for "a peerage" do |peerage, other_peerage|
 
   it_behaves_like "get /chambers/PEERAGE/poll/candidates/:id", peerage, other_peerage
   it_behaves_like "get /chambers/PEERAGE/poll", peerage, other_peerage
-  it_behaves_like "put /chambers/PEERAGE/poll/candidates/:id", peerage, other_peerage
 
   it_behaves_like "post /chambers/admin/royalty", peerage
   it_behaves_like "get /chambers/admin/royalty/:id/edit", peerage
