@@ -2,38 +2,36 @@ require 'rails_helper'
 require 'ballot'
 describe Ballot, 'initialize' do
   before(:each) do
-    @candidate = create(:candidate)
-    @laurel = create(:user)
+    @laurel = build(:laurel_peer)
     @past_poll = create(:past_poll)
     @current_poll = create(:current_poll)
   end
   it "initializes with current poll" do
-    b = Ballot.new(@laurel.laurel)
+    b = Ballot.new(@laurel)
     expect(b.poll).to eq(@current_poll)
   end
 end
 
 describe Ballot, 'validations' do
   it "rejects ballots with past poll" do
-    @candidate = create(:candidate)
-    @laurel = create(:user)
+    @laurel = build(:laurel_peer)
     @past_poll = create(:past_poll)
-    expect{Ballot.new(@laurel.laurel)}.to raise_error(ArgumentError)
+    expect{Ballot.new(@laurel)}.to raise_error(ArgumentError)
   end
 end
 describe Ballot, "complete?" do
   before(:each) do
-    @laurel = create(:user)
+    @laurel = create(:laurel_peer)
     @candidate1 = create(:candidate)
     @candidate2 = create(:candidate)
     @current_poll = create(:current_poll)
     @advising1 = create(:advising, candidate: @candidate1, 
-      poll: @current_poll, peer: @laurel.laurel, comment: 'Comment', 
+      poll: @current_poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate, submitted: true)
     @advising2 = build(:advising, candidate: @candidate2, 
-      poll: @current_poll, peer: @laurel.laurel, comment: 'Comment', 
+      poll: @current_poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate, submitted: true)
-    @ballot = Ballot.new(@laurel.laurel)
+    @ballot = Ballot.new(@laurel)
   end
 
   it "returns true if the peer has completed the ballot for a given poll" do

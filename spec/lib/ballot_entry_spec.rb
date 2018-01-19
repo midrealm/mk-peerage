@@ -15,16 +15,16 @@ end
 
 describe BallotEntry, 'validations' do
   it "rejects ballot entries where there is no current poll for candidate's peerage" do
-    candidate = create(:candidate)
-    laurel = create(:user)
+    candidate = build(:candidate)
+    laurel = build(:laurel_peer)
     past_poll = create(:past_poll)
-    expect{BallotEntry.new(peer: laurel.laurel, candidate: candidate)}.to raise_error(ArgumentError)
+    expect{BallotEntry.new(peer: laurel, candidate: candidate)}.to raise_error(ArgumentError)
   end
   it "rejects ballot entries where peerage and candidate order don't match" do
-    candidate = create(:candidate)
-    pelican = create(:pelican)
+    candidate = build(:laurel_candidate)
+    pelican = build(:pelican_peer)
     current_poll = create(:current_poll)
-    expect{BallotEntry.new(peer: pelican.pelican, candidate: candidate)}.to raise_error(ArgumentError)
+    expect{BallotEntry.new(peer: pelican, candidate: candidate)}.to raise_error(ArgumentError)
   end
 end
 describe BallotEntry, "advising" do
