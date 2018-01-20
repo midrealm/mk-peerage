@@ -16,7 +16,7 @@ describe "get /chambers/PEERAGE/groups/:slug" do
     child = create(:group, name: "The Barrows", slug: "the_barrows", parent_id: group.id)
     grand_child = create(:group, name: "Poopland", slug: "poopland", parent_id: child.id)
     create(:candidate, group: grand_child, peerage_type: :laurel)
-    get "/chambers/laurel/groups/High_Haven"
+    get "/chambers/laurel/groups/high_haven"
     expect(response.body).not_to include("/chambers/laurel/groups/high_haven")
     expect(response.body).to include("chambers/laurel/groups/the_barrows")
     expect(response.body).to include("chambers/laurel/groups/poopland")

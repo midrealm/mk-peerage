@@ -34,7 +34,7 @@ class Peer < ApplicationRecord
     Peer.subclasses.map{|x| x.name.downcase.to_sym}
   end 
   def self.where_order(peerage)
-    Peer.where(type: peerage.to_s.upcase)
+    Peer.where(type: peerage.to_s.capitalize)
   end
 
   def potential_superiors
