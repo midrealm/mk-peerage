@@ -31,6 +31,20 @@ class User < ApplicationRecord
     peers.find_by(type: p_type) 
   end
 
+  def self.add_new(id:, sca_name:, email:, vigilant: true, peerage:)
+    vigilant = true if vigilant.nil?
+    user = User.find_or_initialize_by(id: id)
+    if user.id.nil?
+      pwd = Devise.friendly_token.first(8)  
+      user.password = pwd 
+      user.assign_attributes(sca_name: sca_name, email: email)
+    end
+    if user.save
+      Peer.subclass(peerage).create(user: user, active: true, vigilant: vigilant) 
+      user
+    end
+  end
+
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')

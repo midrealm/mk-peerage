@@ -8,16 +8,8 @@ class Chambers::Admin::PeersController < ApplicationController
     @users = Peer.where_order(peerage)
   end
   def create
-    user = User.find_or_initialize_by(id: user_params['id'])
-    if user.id.nil?
-      pwd = Devise.friendly_token.first(8)  
-      user.password = pwd 
-      user.assign_attributes(user_params)
-    end
-    if user.save
-      Peer.create(user: user, active: true, vigilant: params[peerage][:vigilant], type: peerage.to_s.capitalize) do |p|
-        p.vigilant = true if params[peerage][:vigilant].nil?
-      end
+    user = User.add_new(user_params)
+    if user
       redirect_to peer_path(peerage,user.slug)
       if user.peers.count == 1
         user.send_reset_password_instructions
@@ -46,7 +38,7 @@ class Chambers::Admin::PeersController < ApplicationController
   end
   private
   def user_params
-    params.require(peerage).permit(:id, :sca_name, :email)
+    params.require(peerage).permit(:id, :sca_name, :email, :vigilant).merge(peerage: peerage).to_hash.symbolize_keys
   end
   def update_user_params
     params.require(peerage).permit(:deceased)

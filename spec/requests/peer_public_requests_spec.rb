@@ -1,6 +1,7 @@
 require "rails_helper"
 describe "outside world's view of peerage" do
 
+#contact page for peer
   describe "Get /laurel/LAUREL_NAME/contact" do
       it "shows contact page for given laurel" do
           peer = create(:laurel_user, sca_name: "Mundungus Smith")
@@ -10,6 +11,7 @@ describe "outside world's view of peerage" do
       end
   end
 
+#groups index
   describe "Get /laurel/groups" do
       it "shows list of groups and link to specific group" do
           group = create(:group, name: "High Haven", slug: "high_haven")
@@ -30,7 +32,8 @@ describe "outside world's view of peerage" do
       end
   end
 
-  describe "Get /laurel/groups" do
+#groups show
+  describe "Get /laurel/groups/:slug" do
       it "shows list of groups and link to specific group" do
           group = create(:group, name: "High Haven", slug: "high_haven")
           peer = create(:laurel_user, group: group)
@@ -57,8 +60,9 @@ describe "outside world's view of peerage" do
       end
   end
 
+#peers index
   describe "Get /laurel/roll_of_honor" do
-      it "shows list of laurel" do
+      it "shows list of laurels" do
           get "/laurel/roll_of_honor"
           expect(response).to have_http_status(:success)
           expect(response.body).to include("Roll of Honor")
@@ -72,6 +76,7 @@ describe "outside world's view of peerage" do
       end
   end
 
+#peers show
   describe "Get /laurel/LAUREL_NAME" do
       it "shows laurel page" do
           create(:laurel_user, sca_name: "Mundungus Smith")
