@@ -2,14 +2,15 @@ class Chambers::Admin::PeersController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
   helper_method :peerage
-  def new
+  def new()
+    @vigilant = true
   end
   def index
     @users = Peer.where_order(peerage)
   end
   def create
     user = User.add_new(user_params)
-    if user
+    unless user.id.nil?
       redirect_to peer_path(peerage,user.slug)
       if user.peers.count == 1
         user.send_reset_password_instructions
@@ -18,7 +19,7 @@ class Chambers::Admin::PeersController < ApplicationController
       end
     else
       flash.alert = user.errors.full_messages.to_sentence
-      user.vigilant = params[peerage][:vigilant]
+      @vigilant = ActiveModel::Type::Boolean.new.cast(params[peerage][:vigilant])
       render :new
     end
   end

@@ -46,20 +46,20 @@ RSpec.feature 'Contact email' do
     expect { send_mail('') }.not_to change(ActionMailer::Base.deliveries, :count)
   end
 
-  context "with recaptcha enabled" do
-    before(:each) do
-      Recaptcha.configuration.skip_verify_env << "test"
-    end
-
-    scenario 'does not send email without recaptcha' do
-      Recaptcha.configuration.skip_verify_env.delete('test')
-      setup_pelican_contact
-      expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
-    end
-
-    after(:each) do
-      Recaptcha.configuration.skip_verify_env << "test"
-    end
-  end
+#  context "with recaptcha enabled" do
+#    before(:each) do
+#      Recaptcha.configuration.skip_verify_env << "test"
+#    end
+#
+#    scenario 'does not send email without recaptcha' do
+#      Recaptcha.configuration.skip_verify_env.delete('test')
+#      setup_pelican_contact
+#      expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
+#    end
+#
+#    after(:each) do
+#      Recaptcha.configuration.skip_verify_env << "test"
+#    end
+#  end
 
 end

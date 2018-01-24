@@ -39,10 +39,10 @@ class User < ApplicationRecord
       user.password = pwd 
       user.assign_attributes(sca_name: sca_name, email: email)
     end
-    if user.save
+    if user.save and user.peer(peerage).nil?
       Peer.subclass(peerage).create(user: user, active: true, vigilant: vigilant) 
-      user
     end
+    user
   end
 
   private

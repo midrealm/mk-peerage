@@ -18,6 +18,54 @@ RSpec.describe User, 'set_slug' do
   end
 end
 
+RSpec.describe User, 'self.add_new(id, sca_name, email, vigilant, peerage)' do
+  context 'for totally new user' do
+    it 'should return user with given associated peer on successful save' do
+      user = User.add_new(id: nil, sca_name: 'Default User', email: 'example@example.com', vigilant: true, peerage: :laurel)
+      expect(user.class.name).to eq('User') 
+      expect(user).to eq(User.last)
+      expect(user.laurel).to eq(Laurel.last)
+    end
+
+    it 'should set defaults for new laurel' do
+      user = User.add_new(id: nil, sca_name: 'Default User', email: 'example@example.com', vigilant: nil, peerage: :laurel)
+      laurel = user.laurel
+      expect(laurel.active).to be_truthy
+      expect(laurel.vigilant).to be_truthy 
+      expect(user.royalty).to be_falsy
+      expect(user.deceased).to be_falsy
+    end
+
+    it 'should set vigilant false on peer when vigilant set to false' do
+      user = User.add_new(id: nil, sca_name: 'Default User', email: 'example@example.com', vigilant: false, peerage: :laurel)
+      expect(user.laurel.vigilant).to be_falsy
+    end
+
+    it 'returns user with id nil for bad input' do
+      user = User.add_new(id: nil, sca_name: '', email: '', vigilant: false, peerage: :laurel)
+      expect(user.id).to be_nil
+    end
+
+  end
+
+  context 'for adding new peerage to existing user' do
+    it 'should return exisiting user on successful save' do
+      existing_user = create(:my_user)
+      user = User.add_new(id: existing_user.id, sca_name: existing_user.sca_name, email: existing_user.email, vigilant: true, peerage: :laurel)
+      expect(user).to eq(existing_user)
+    end 
+
+    it 'does not duplicate peerages if user is already a given peerage' do
+      existing_laurel = create(:laurel_peer, bio: 'I have a bio')
+      existing_user = existing_laurel.user
+
+      user = User.add_new(id: existing_user.id, sca_name: existing_user.sca_name, email: existing_user.email, vigilant: true, peerage: :laurel)
+      expect(user.peers.count).to eq(1)
+      expect(user.laurel.bio).to eq('I have a bio')
+    end
+  end
+end
+
 RSpec.describe User, 'self.all_except(peerage)' do
   context "for :laurel" do
     it 'returns all non-laurel users' do

@@ -8,7 +8,7 @@
         <%= f.input :id, label: 'Existing User', :collection => User.all_except(peerage).pluck(:sca_name, :email, :id).map{|x| ["#{x[0]};#{x[1]}", x[2]]}%>
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :email %>
-        <%= f.input :vigilant, as: :radio, label: 'Status', collection: [['Vigilant',true, {checked: true}],['Elevated',false]] %>
+        <%= f.input :vigilant, as: :radio, label: 'Status', collection: [['Vigilant',true, {checked: @vigilant}],['Elevated',false, {checked: !@vigilant}]] %>
       <% end %>
       <%= f.action :submit, as: :button,  label: "Create #{peerage.capitalize}", button_html: {class: 'btn btn-default'}, id: 'submit'%>
     <%end%> 
