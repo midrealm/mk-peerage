@@ -16,6 +16,7 @@ production: &production
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
   socket: /var/run/mysqld/mysqld.sock
+  database: laurel
 
 default: &default
   adapter: sqlite3
