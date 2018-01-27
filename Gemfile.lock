@@ -169,6 +169,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.1)
     multi_json (1.12.1)
+    mysql2 (0.4.10)
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -336,6 +337,7 @@ DEPENDENCIES
   jquery-rails
   lodash-rails
   magic_lamp
+  mysql2 (>= 0.3.18, < 0.5)
   paperclip
   puma (~> 3.0)
   rails (~> 5.0.2)
