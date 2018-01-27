@@ -16,10 +16,15 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Laurel
+module Peerage
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.autoload_paths << Rails.root.join('lib')
+
+    #so .to_hash only converts permitted params  
+    config.action_controller.raise_on_unfiltered_parameters = true
   end
 end

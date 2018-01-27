@@ -1,0 +1,17 @@
+<h1>Manage Candidates</h1>
+<%= link_to 'Add New Candidate', new_chambers_admin_candidate_path(peerage)%>
+<table class='table'>
+  <thead>
+    <th>Name</th><th>Show</th><th>Edit</th><th>Remove</th>
+  </thead>
+  <tbody>
+    <% @candidates.each do |candidate| %>
+      <tr>
+      <td><%=candidate.sca_name%></td>
+      <td><%=link_to 'Show', chambers_candidate_path(peerage,candidate.id)%></td>
+      <td><%=link_to 'Edit', edit_chambers_admin_candidate_path(peerage,candidate.id)%></td>
+      <td><%=link_to 'Remove', chambers_admin_candidate_path(peerage,candidate.id), method: :delete, data: { confirm: 'Are you Sure?' }%></td>
+      </tr>
+    <% end %>
+  </tbody
+</table>

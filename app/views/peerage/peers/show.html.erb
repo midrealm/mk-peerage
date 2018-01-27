@@ -1,0 +1,25 @@
+<% if signed_in? && current_user.sca_name == @peer.sca_name %>
+  <%= link_to('Edit Profile', '/users/edit') %>
+<% end %>
+<%= image_tag @peer.profile_pic.url(:large), class: 'pull-right'%>
+<div class="container">
+  <%= image_tag @peer.arms.url(:large)%>
+  <h1><%=@peer.sca_name%> <small><%=@peer.show_specialties%></h1>
+  <%= link_to "Send #{@peer.sca_name} a Message", contact_path(peerage, @peer.slug), class: "btn btn-primary" %><br/>
+  <strong>Modern Name:</strong> <%=@peer.modern_name%><br>
+  <strong>Specialties:</strong><%=@peer.show_specialties%> (<%=@peer.specialty_detail%>)<br/>
+  <% unless @peer.group.nil? %>
+    <strong>Group:</strong> <%=peer_link(@peer.group, peerage) %> <br>
+  <% end %>
+  <strong>Contact Info</strong><br>
+  <address>
+    <%=@peer.street%><br>
+    <%=@peer.city%>, <%=@peer.state%> <%=@peer.zipcode%><br>
+    Phone: <%=@peer.phone%>
+  </address>
+  <strong>Elevated by:</strong> <%=@peer.elevated_by%><br>
+  <strong>Elevation Date:</strong> <%=@peer.elevation_date%>
+  <div style="margin-top:10px">
+  <%= markdown(@peer.bio) %>
+  </div>
+</div>

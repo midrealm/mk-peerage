@@ -2,7 +2,7 @@
 lock '3.6.1'
 
 set :application, 'laurel'
-set :repo_url, 'mrio@caroso.elkiss.com:/srv/repos/laurel.git'
+set :repo_url, 'git@github.com:niquerio/mk-peerage.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

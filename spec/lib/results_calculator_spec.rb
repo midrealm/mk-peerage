@@ -3,10 +3,6 @@ require 'results_calculator'
 describe "calculate" do
   before(:each) do
     @candidate = create(:candidate)
-    @wait = create(:judgement, name: 'Wait')
-    @elevate = create(:judgement, name: 'Elevate')
-    @no_strong_opinion = create(:judgement, name: 'No Strong Opinion')
-    @drop = create(:judgement, name: 'Drop')
     @rc = ResultsCalculator.new
   end
   it "does not create PollResults for if Poll results already exist" do
@@ -23,7 +19,7 @@ describe "calculate" do
       @current_poll.save(validate: false)
       @user = create(:user)
 
-      @advising = create(:advising, candidate: @candidate, user: @user, poll: @current_poll, submitted: true, judgement: @elevate) 
+      @advising = create(:advising, candidate: @candidate, peer: @user.laurel, poll: @current_poll, submitted: true, judgement: @elevate) 
       @rc.calculate
       expect(PollResult.count).to eq(0)    
   end
@@ -33,7 +29,7 @@ describe "calculate" do
       @user = create(:user)
 
       #this is advising isn't possible anyway)
-      @advising = create(:advising, candidate: @candidate, user: @user, poll: @future_poll, submitted: true, judgement: @elevate) 
+      @advising = create(:advising, candidate: @candidate, peer: @user.laurel, poll: @future_poll, submitted: true, judgement: @elevate) 
       @rc.calculate
       expect(PollResult.count).to eq(0)    
   end
@@ -45,12 +41,13 @@ describe "calculate" do
       @user1 = create(:user)
       @user2 = create(:user)
       @user3 = create(:user)
+      @user4 = create(:user)
       @user5 = create(:user)
-      @advising1 = build(:advising, candidate: @candidate, user: @user1, poll: @past_poll, submitted: true) 
-      @advising2 = build(:advising, candidate: @candidate, user: @user2, poll: @past_poll, submitted: true) 
-      @advising3 = build(:advising, candidate: @candidate, user: @user3, poll: @past_poll, submitted: true) 
-      @advising4 = build(:advising, candidate: @candidate, user: @user4, poll: @past_poll, submitted: true) 
-      @advising5 = build(:advising, candidate: @candidate, user: @user5, poll: @past_poll, submitted: true) 
+      @advising1 = build(:advising, candidate: @candidate, peer: @user1.laurel, poll: @past_poll, submitted: true) 
+      @advising2 = build(:advising, candidate: @candidate, peer: @user2.laurel, poll: @past_poll, submitted: true) 
+      @advising3 = build(:advising, candidate: @candidate, peer: @user3.laurel, poll: @past_poll, submitted: true) 
+      @advising4 = build(:advising, candidate: @candidate, peer: @user4.laurel, poll: @past_poll, submitted: true) 
+      @advising5 = build(:advising, candidate: @candidate, peer: @user5.laurel, poll: @past_poll, submitted: true) 
       
     end
 
@@ -68,9 +65,9 @@ describe "calculate" do
       
     end
     it "computes result calculations for given candidate" do
-      @advising1.judgement = @elevate
+      @advising1.judgement = :elevate
       @advising1.save
-      @advising2.judgement = @elevate
+      @advising2.judgement = :elevate
       @advising2.save
 
       calculations = @rc.calculate
@@ -82,12 +79,12 @@ describe "calculate" do
     end
 
     it "computes calculations for multiple candidates" do
-      @advising1.judgement = @wait
+      @advising1.judgement = :wait
       @advising1.save
       
       candidate2 = create(:candidate)
       @advising2.candidate = candidate2
-      @advising2.judgement = @elevate
+      @advising2.judgement = :elevate
       @advising2.save
 
       calculations = @rc.calculate

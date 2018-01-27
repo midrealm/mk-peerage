@@ -1,0 +1,77 @@
+<%= link_to "<- #{peerage.capitalize} Candidates", chambers_candidates_path(peerage)%>
+<div class ="row">
+<div class="col-md-8">
+  <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+  <strong><%= @candidate.vote ? 'Vote' : 'Watch' %> List</strong></br>
+  <% if @candidate.specialties.count > 0 %>
+    <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
+    <%= spec.name %>  
+    <% end %><br>
+  <% end %>
+  <% if @candidate.peers.count > 0 %>
+    <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
+    <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
+    <% end %><br>
+  <%end%>
+  <% if @candidate.group %>
+  <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
+  <% end %>
+  <% if @candidate.images %>
+    <%= render 'chambers/peerage/candidates/gallery', images: @candidate.images %>
+  <% end %>
+  <h3>Add An Image</h3>
+  <%= semantic_form_for @image, url: chambers_images_path do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :image, label: 'Image', as: :file %>
+      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
+    <% end %>
+    <%= f.button class: 'btn btn-default' %>
+  <% end %> 
+  <% unless @pr.nil? %>
+    <table class="table">
+    <thead>
+    <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+    <th>Rec%</th><th>Fav%</th>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%=@pr.elevate%></td>
+      <td><%=@pr.wait%></td>
+      <td><%=@pr.no_strong_opinion%></td>
+      <td><%=@pr.drop%></td>
+      <td><%=@pr.rec%></td>
+      <td><%=@pr.fav%></td>
+    </tr>
+    </tbody>
+    </table>
+  <% end%>
+  <h3>Comments</h3>
+  <% @candidate.comments.each do |comment| %>
+  <div class="container" style="padding: 10px">
+    <div class="col-md-2" style="text-align:center">
+    <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+    </div>
+    <div class="col-md-5">
+      <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
+      <%= markdown(comment.text) %>
+    </div>
+  </div>
+  <% end %>
+  <div class="col-md-12">
+  <h3>Add A Comment</h3>
+  <%= semantic_form_for @comment, url: chambers_comments_path do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :text, label: 'Comment' %>
+      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
+    <% end %>
+    <%= f.button class: 'btn btn-default' %>
+  <% end %> 
+  </div>
+</div>
+<div class="col-md-4">
+<%= image_tag @candidate.profile_pic.url(:large) %>
+</div>
+</div>
+<script>
+  var simplemde = new SimpleMDE();
+</script>

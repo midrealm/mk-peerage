@@ -1,11 +1,25 @@
 class Poll < ApplicationRecord
   has_many :advisings
   has_many :candidates, through: :advisings
-  has_many :users, through: :advisings
+  has_many :peers, through: :advisings
  
   validate :start_date_cannot_be_in_the_past, on: :create
   validate :end_date_cannot_be_before_start_date
   validates :start_date, :end_date, presence: true
+
+  validates_presence_of(:peerage_type)
+  enum peerage_type: Peer.orders
+
+  def self.current(peerage)
+    Poll.where(peerage_type: peerage).each do |p|
+     return p if p.active?
+    end    
+    return nil
+  end
+
+  def self.last_for(peerage) 
+    Poll.where(peerage_type: peerage).last    
+  end
 
   def start_date_cannot_be_in_the_past
     if !start_date.nil? and start_date < Date.today.to_datetime

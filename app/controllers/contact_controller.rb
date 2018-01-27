@@ -1,22 +1,24 @@
 class ContactController < ApplicationController
   def new
-    @laurel = User.find_by(slug:params[:slug])
+    @user = User.find_by(slug:params[:slug])
+    @peerage = params[:peerage]
   end
 
   def create
-    @laurel = User.find_by(slug:params[:slug])
+    @user = User.find_by(slug:params[:slug])
+    @peerage = params[:peerage]
     if verify_recaptcha
       if params['contact']['message'].present?
         # *contact_params.values explodes items out of the array
-        LaurelMailer.contact_laurel(@laurel, *contact_params.values).deliver 
+        PeerageMailer.contact_user(@user, *contact_params.values).deliver 
         flash.notice = "email successfully sent"
-        redirect_to laurel_path
+        redirect_to peer_path(@peerage,params[:slug])
       else
         flash.alert = "not sending email - message must be present"
-        render 'new'
+        render :new
       end
     else
-      render 'new'
+      render :new
     end
   end
 

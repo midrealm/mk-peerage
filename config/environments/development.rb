@@ -27,7 +27,7 @@ Rails.application.configure do
   end
 
   #For Devise
-  config.action_mailer.default_url_options = { host: '192.168.58.101', port: 3000 }
+  config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3333 }
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -52,5 +52,6 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # niquerio: commented out because of WSL
+#  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end

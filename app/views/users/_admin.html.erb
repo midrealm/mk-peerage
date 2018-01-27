@@ -1,0 +1,14 @@
+<h3>Admin Tasks</h3>
+<% poll = Poll.last_for(peerage) %>
+<%= link_to 'Manage Candidates', chambers_admin_candidates_path(peerage) %><br>
+<%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage) %><br>
+<%= link_to 'Manage Royalty', chambers_admin_royalty_index_path %><br>
+<% unless poll.nil? %>
+  <% if poll.end_date.past? %>
+    <%= link_to 'Create New Poll', new_chambers_admin_poll_path(peerage)%>
+  <% else  %>
+    <%= link_to 'Edit Poll', edit_chambers_admin_poll_path(peerage,poll.id)%> | <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
+  <% end %>
+<% else %>
+  <%= link_to 'Create New Poll', new_chambers_admin_poll_path(peerage)%>
+<% end %></br>

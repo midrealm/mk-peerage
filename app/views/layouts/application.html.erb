@@ -20,28 +20,35 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Laurel</a>
+      <a class="navbar-brand" href="/">Middle Kingdom Peerage</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Roll of Honor <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rolls of Honor <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/laurels">Roll of Honor</a></li>
-            <li><a href="/groups">Laurels by Group</a></li>
+            <li><%= link_to 'Order of the Chivalry', '/#' %></li>
+            <li><%= link_to 'Order of the Laurel', roll_of_honor_path('laurel') %></li>
+            <li><%= link_to 'Order of the Pelican', roll_of_honor_path('pelican')%></li>
+            <li><%= link_to 'Order of the Masters of Defense', '/#'%></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Orders by Group <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Knights by Group', '/#'%></li> 
+            <li><%= link_to 'Laurels by Group', groups_path('laurel') %></li> 
+            <li><%= link_to 'Pelicans by Group', groups_path('pelican') %></li> 
+            <li><%= link_to 'Masters of Defense by Group', '/#'%></li> 
           </ul>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Links <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="http://midrealm.org">Middle Kingdom</a></li>
+            <li><a href="http://midrealm.org">Middle Kingdom Website</a></li>
             <li><a href="http://sca.org">SCA.org</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Middle Kingdom Chivalry</a></li>
-            <li><a href="#">Middle Kingdom Pelican</a></li>
-            <li><a href="#">Middle Kingdom Defense</a></li>
           </ul>
         </li>
         <li class="dropdown">

@@ -1,17 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { should have_many(:apprenticeships) }
-  it { should have_many(:laurels).through(:apprenticeships) }
+  it { should validate_presence_of(:sca_name)}
   
-  it { should have_many(:advocacies) }
-  it { should have_many(:candidates).through(:advocacies) }
-  it { should have_many(:specializations) }
-
-  it { should have_many(:specialties).through(:specializations) }
-  it { should have_many(:comments) }
-
-  it { should belong_to(:group) }
+  it "rejects bad emails" do
+    user = build(:user, email: 'bademail')
+    user.save
+    expect(User.count).to eq(0)
+  end
 end
 
 RSpec.describe User, 'set_slug' do
@@ -22,65 +18,81 @@ RSpec.describe User, 'set_slug' do
   end
 end
 
-RSpec.describe User, 'poll_complete?' do
-  before(:each) do
-    @laurel = create(:user, laurel: true)
-    @candidate1 = create(:candidate)
-    @candidate2 = create(:candidate)
-    @current_poll = build(:poll, start_date: DateTime.now - 1.day)
-    @current_poll.save(validate: false)
-    @judgement = create(:judgement)
-    @advising1 = create(:advising, candidate_id: @candidate1.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
-      judgement_id: @judgement, submitted: true)
+RSpec.describe User, 'self.add_new(id, sca_name, email, vigilant, peerage)' do
+  context 'for totally new user' do
+    it 'should return user with given associated peer on successful save' do
+      user = User.add_new(id: nil, sca_name: 'Default User', email: 'example@example.com', vigilant: true, peerage: :laurel)
+      expect(user.class.name).to eq('User') 
+      expect(user).to eq(User.last)
+      expect(user.laurel).to eq(Laurel.last)
+    end
 
-    @advising2 = build(:advising, candidate_id: @candidate2.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
-      judgement_id: @judgement, submitted: true)
-  end
-  it 'should return true if user has completed the latest poll' do
-    @advising2.save
-    expect(@laurel.poll_complete?).to be_truthy
-  end
-  it 'should return false if user has not completed the latest poll' do
-    expect(@laurel.poll_complete?).to be_falsey
+    it 'should set defaults for new laurel' do
+      user = User.add_new(id: nil, sca_name: 'Default User', email: 'example@example.com', vigilant: nil, peerage: :laurel)
+      laurel = user.laurel
+      expect(laurel.active).to be_truthy
+      expect(laurel.vigilant).to be_truthy 
+      expect(user.royalty).to be_falsy
+      expect(user.deceased).to be_falsy
+    end
+
+    it 'should set vigilant false on peer when vigilant set to false' do
+      user = User.add_new(id: nil, sca_name: 'Default User', email: 'example@example.com', vigilant: false, peerage: :laurel)
+      expect(user.laurel.vigilant).to be_falsy
+    end
+
+    it 'returns user with id nil for bad input' do
+      user = User.add_new(id: nil, sca_name: '', email: '', vigilant: false, peerage: :laurel)
+      expect(user.id).to be_nil
+    end
+
   end
 
-  it 'should return false if entry has been started but not submitted' do
-    @advising2.submitted = false
-    @advising2.save
-    expect(@laurel.poll_complete?).to be_falsey
+  context 'for adding new peerage to existing user' do
+    it 'should return exisiting user on successful save' do
+      existing_user = create(:my_user)
+      user = User.add_new(id: existing_user.id, sca_name: existing_user.sca_name, email: existing_user.email, vigilant: true, peerage: :laurel)
+      expect(user).to eq(existing_user)
+    end 
+
+    it 'does not duplicate peerages if user is already a given peerage' do
+      existing_laurel = create(:laurel_peer, bio: 'I have a bio')
+      existing_user = existing_laurel.user
+
+      user = User.add_new(id: existing_user.id, sca_name: existing_user.sca_name, email: existing_user.email, vigilant: true, peerage: :laurel)
+      expect(user.peers.count).to eq(1)
+      expect(user.laurel.bio).to eq('I have a bio')
+    end
   end
 end
 
-RSpec.describe User, 'poll_submitted_count' do
-  before(:each) do
-    @laurel = create(:user, laurel: true)
-    @candidate1 = create(:candidate)
-    @candidate2 = create(:candidate)
-    @current_poll = build(:poll, start_date: DateTime.now - 1.day)
-    @current_poll.save(validate: false)
-    @judgement = create(:judgement)
-    @advising1 = create(:advising, candidate_id: @candidate1.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
-      judgement_id: @judgement, submitted: true)
-
-    @advising2 = build(:advising, candidate_id: @candidate2.id, 
-      poll_id: @current_poll.id, user_id: @laurel.id, comment: 'Comment', 
-      judgement_id: @judgement, submitted: true)
-  end
-
-  it 'returns number of submitted poll entries for current poll if all submitted' do
-    @advising2.save
-    expect(@laurel.poll_submitted_count).to eq(2) 
-  end
-
-  it 'returns number of submitted poll entries for incomplete poll where an entry exists but has not been submitted' do
-    @advising2.submitted = false
-    @advising2.save 
-    expect(@laurel.poll_submitted_count).to eq(1) 
-  end
-  it 'returns number of submitted poll entries for incomplete poll where a candidate advising does not exist' do
-    expect(@laurel.poll_submitted_count).to eq(1) 
+RSpec.describe User, 'self.all_except(peerage)' do
+  context "for :laurel" do
+    it 'returns all non-laurel users' do
+      laurel = create(:laurel_user, sca_name: 'Lucy Laurel')
+      pelican = create(:pelican_user, sca_name: 'Peter Pelican')
+      users = User.all_except(:laurel)
+      expect(users.exists?(sca_name: 'Lucy Laurel')).to be_falsy
+      expect(users.exists?(sca_name: 'Peter Pelican')).to be_truthy
+    end
   end
 end
+
+RSpec.describe User, 'set_deceased' do
+  it 'should set active to false if user is deceased' do
+    user = create(:laurel_user)
+    expect(User.last.deceased).to be_falsy
+    expect(Peer.last.active).to eq(true)
+    user.update(deceased: true)
+    expect(User.last.deceased).to eq(true)
+    expect(Peer.last.active).to eq(false)
+  end
+  it 'should handle not setting active on deceased royal' do
+   royal = create(:royal)
+   expect(User.last.deceased).to be_falsy
+   royal.update(deceased: true)
+   expect(User.last.deceased).to eq(true) 
+  end
+end
+
+

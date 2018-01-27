@@ -1,15 +1,19 @@
 require "rails_helper"
 
 describe "Get /chambers" do
-  describe "logged in laurel user" do
+  describe "logged in non-royal" do
     before(:each) do
-      laurel = create(:user, laurel: true)
-      sign_in(laurel)
+      peer = create(:user)
+      sign_in(peer)
     end
     it "shows dashboard for logged in user" do
       get "/chambers"
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Edit Your Profile')
+    end
+    it "shows link to candidates" do
+      get "/chambers"
+      expect(response.body).to include('/chambers/laurel/candidates')
     end
     it "does not show Admin Tasks" do
       get "/chambers"
@@ -19,7 +23,7 @@ describe "Get /chambers" do
   end
   describe "admin user" do
     before(:each) do
-      admin = create(:user, role: :admin)
+      admin = create(:admin)
       sign_in(admin)
     end
     it "shows Admin Tasks" do
@@ -39,7 +43,7 @@ describe "Get /chambers" do
     end
     describe "for signed in royal non-laurel" do
       before(:each) do
-        royal = create(:user, royalty: true, laurel: false)
+        royal = create(:royal)
         sign_in(royal)
       end
       describe "for current poll" do
@@ -55,7 +59,7 @@ describe "Get /chambers" do
     end
     context "for signed in non-admin laurel" do
       before(:each) do
-        @laurel = create(:user, laurel: true)
+        @laurel = create(:user)
         sign_in(@laurel)
       end
       describe "for current poll" do
@@ -72,7 +76,7 @@ describe "Get /chambers" do
           expect(response.body).to include(@current_poll.end_date.strftime('%d-%b-%Y'))  
         end
         it "shows if user has completed the poll" do
-          @advising = create(:advising, candidate: @candidate, user: @laurel, poll: @current_poll, submitted: true)
+          @advising = create(:advising, candidate: @candidate, peer: @laurel.laurel, poll: @current_poll, submitted: true)
           get "/chambers"
           expect(response.body).to include('Finished')  
           expect(response.body).to include('Edit Poll')  
@@ -110,7 +114,7 @@ describe "Get /chambers" do
     end
     describe "for admin user" do
       before(:each) do
-        admin = create(:user, role: :admin)
+        admin = create(:admin)
         sign_in(admin)
       end
       it "shows create poll link for admin if no active or scheduled poll" do
@@ -121,8 +125,7 @@ describe "Get /chambers" do
       end
       describe "active poll" do
         before(:each) do
-          current_poll = build(:poll, start_date: DateTime.now - 1.days, end_date: DateTime.now + 1.days)
-          current_poll.save(:validate => false)
+          current_poll = create(:current_poll)
           get "/chambers"
         end
         it "does not show polling link for admin if there is an active poll" do

@@ -1,0 +1,10 @@
+<% node.children.each do |child|  %>
+    <% peer_total = child.all_peers(@peerage).count %>
+    <% if peer_total > 0 %>
+    <li><%= link_to child, group_path(@peerage,child.slug) %> (<%=peer_total%>)
+    <% if child.children.any? %>
+      <ul><%= render '/peerage/groups/draw_tree', node: child  %></ul>
+    <% end  %>
+   </li>
+    <% end %>
+<% end %>

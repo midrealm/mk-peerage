@@ -3,76 +3,46 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable 
+ 
+  #for adding new peers 
+  attr_accessor :vigilant
 
-  has_many :specializations
-  has_many :specialties, through: :specializations
+  has_many :peers
+  Peer.orders.each do |peerage|
+    has_one peerage
+    accepts_nested_attributes_for peerage
+  end
   
   has_many :comments
 
-  has_many :advocacies
-  has_many :candidates, through: :advocacies
-
-  has_many :apprenticeships
-  has_many :laurels, through: :apprenticeships
- 
   belongs_to :group
 
-  #has_many :apprentice_users, through: :apprenticeships, source: :user
-
   has_attached_file :arms, styles: {large: '100x200'}, default_url: ':style/no_arms.jpg'
-  has_attached_file :profile_pic, styles: {thumb: '100x133', large: '300x400' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: ':style/frame.jpg'
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
-  validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  validates :email, format: /.+@.+\..+/i
+  validates_presence_of :sca_name
 
-  enum role: [ :admin, :normal ]
-  after_initialize :set_defaults
   before_save :set_slug, :set_deceased
 
-  def set_defaults
-    self.role ||= :normal
+  scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
+
+  def peer(peerage)
+    p_type = peerage.to_s.capitalize
+    peers.find_by(type: p_type) 
   end
 
-  def url
-    return "/laurels/#{self.slug}"
-  end
-
-  def show_specialties
-    return self.specialties.map{|s| s.name}.to_sentence
-  end
-
-  def poll_complete?
-    if Poll.last.active?
-      poll = Poll.last
-      incomplete = false
-      Candidate.all.each do |cand|
-        advising = poll.advisings.find_by(user_id: self.id, candidate_id: cand.id, submitted: true)  
-        if advising.nil?
-          incomplete = true
-          break  
-        end 
-      end
-      if incomplete
-        return false
-      else
-        return true
-      end
-    else
-      return false
+  def self.add_new(id:, sca_name:, email:, vigilant: true, peerage:)
+    vigilant = true if vigilant.nil?
+    user = User.find_or_initialize_by(id: id)
+    if user.id.nil?
+      pwd = Devise.friendly_token.first(8)  
+      user.password = pwd 
+      user.assign_attributes(sca_name: sca_name, email: email)
     end
-  end
-
-  def poll_submitted_count
-    if Poll.last.active?
-      count = 0
-      poll = Poll.last
-      Candidate.all.each do |cand|
-        advising = poll.advisings.find_by(user_id: self.id, candidate_id: cand.id, submitted: true)  
-        count = count + 1 unless advising.nil?
-      end
-      return count
-    else
-      return 0
+    if user.save and user.peer(peerage).nil?
+      Peer.subclass(peerage).create(user: user, active: true, vigilant: vigilant) 
     end
+    user
   end
 
   private
@@ -81,6 +51,10 @@ class User < ApplicationRecord
   end
 
   def set_deceased
-    self.active = false if self.deceased
+    if deceased
+      peers.each do |p|
+        p.update(active: false)
+      end
+    end
   end
 end

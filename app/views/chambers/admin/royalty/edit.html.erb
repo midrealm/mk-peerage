@@ -1,0 +1,11 @@
+<h1>Edit Royalty Status of <%=@royal.sca_name%></h1>
+<div class="container">
+  <div class="col-md-4">
+    <%= semantic_form_for @royal, as: :royal, url: chambers_admin_royalty_path(@royal) do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :royalty %>
+      <% end %>
+      <%= f.action :submit, as: :button, label: 'Update Royal', button_html: {class: 'btn btn-default'}, id: 'submit' %>
+    <%end %>
+  </div>
+</div>
