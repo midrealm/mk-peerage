@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get '/poll' => 'ballot#index', as: :ballot
       get '/poll/candidates/:id' => 'ballot#edit', as: :edit_ballot_candidate
       put '/poll/candidates/:id' => 'ballot#update'
+      patch '/poll/candidates/:id' => 'ballot#update'
 
       namespace :admin do
 

@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe "put /chambers/laurel/poll/candidates/:id" do
+describe "patch /chambers/laurel/poll/candidates/:id" do
   before(:each) do
     @candidate = create(:candidate, peerage_type: :laurel)
   end
@@ -14,14 +14,14 @@ describe "put /chambers/laurel/poll/candidates/:id" do
       end
       it "saves update for given advising" do
         create(:advising, candidate: @candidate, poll: @poll, peer: @peer)
-        put "/chambers/laurel/poll/candidates/#{@candidate.id}", params: { :advising => {comment: 'This is a comment', judgement: :elevate} }
+        patch "/chambers/laurel/poll/candidates/#{@candidate.id}", params: { :advising => {comment: 'This is a comment', judgement: :elevate} }
         expect(Advising.last.comment).to include('This is a comment')
         expect(Advising.last.elevate?).to be_truthy
         expect(Advising.last.submitted).to be_truthy
       end
       it "redirects to poll" do
         create(:advising, candidate: @candidate, poll: @poll, peer: @peer)
-        put "/chambers/laurel/poll/candidates/#{@candidate.id}", params: { :advising => {comment: 'This is a comment', judgement: :elevate} }
+        patch "/chambers/laurel/poll/candidates/#{@candidate.id}", params: { :advising => {comment: 'This is a comment', judgement: :elevate} }
         expect(response).to redirect_to "/chambers/laurel/poll"
       end
     end
