@@ -36,7 +36,7 @@ gem 'capistrano-rbenv', group: :development
 gem 'devise', '~> 4.4.0'
 gem 'bootstrap-sass'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
-gem 'paperclip'
+gem 'paperclip', '~> 5.2.1'
 gem 'select2-rails'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
