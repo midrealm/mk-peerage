@@ -3,23 +3,21 @@ class Chambers::Admin::PeersController < ApplicationController
   before_action :authorize_admin
   helper_method :peerage
   def new()
-    @vigilant = true
+    @peer = UserAdder.new(peerage: peerage)
   end
   def index
     @users = Peer.where_order(peerage)
   end
   def create
-    user = User.add_new(user_params)
-    unless user.id.nil?
+    adder = UserAdder.new(user_params)
+    success = adder.add
+    user = adder.user
+    if success
       redirect_to peer_path(peerage,user.slug)
-      if user.peers.count == 1
-        user.send_reset_password_instructions
-      else
-        PeerageMailer.add_to_peerage(user,peerage).deliver
-      end
+      adder.send_email
     else
       flash.alert = user.errors.full_messages.to_sentence
-      @vigilant = ActiveModel::Type::Boolean.new.cast(params[peerage][:vigilant])
+      @peer = adder
       render :new
     end
   end

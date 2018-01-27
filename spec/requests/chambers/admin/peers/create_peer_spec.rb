@@ -13,16 +13,11 @@ describe "post /chambers/laurel/admin/peers" do
       expect(User.count).to eq(2)
       expect(Peer.count).to eq(2)
     end
-    it "sends welcome and change password email to new laurel" do
-      post "/chambers/laurel/admin/peers", params: { :laurel => {id: "", sca_name: "Dingus McDOOOGLE", email: "dingus@doogleson.com"} }
-      email = ActionMailer::Base.deliveries.last
-      expect(email.to[0]).to eq("dingus@doogleson.com")
-      expect(email.body).to include("Welcome to the Order of the Laurel")
-    end
     it 'handles bad user input' do
-      post "/chambers/laurel/admin/peers", params: { :laurel => {id: "", sca_name: "", email: "", vigilant:false} }
+      post "/chambers/laurel/admin/peers", params: { :laurel => {id: "", sca_name: "Blah Blah", email: "", vigilant:false} }
       expect(response.body).to include('Email is invalid')
-      expect(response.body).to include("<input id=\"laurel_vigilant_false\" type=\"radio\" value=\"true\" checked=\"checked\"")
+      expect(response.body).to include("value=\"Blah Blah\" name=\"laurel[sca_name]\"")
+      expect(response.body).to include("<input id=\"laurel_vigilant_false\" type=\"radio\" value=\"false\" checked=\"checked\"")
     end
   end
   it "doesn't allow non admins to create new users" do
