@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   namespace :chambers do
     resources :images, only: [:create]
+    resources :documents, only: [:create]
+
     resources :comments, only: [:create]
 
     namespace :admin do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180111034210) do
+ActiveRecord::Schema.define(version: 20180128150839) do
 
   create_table "advisings", force: :cascade do |t|
     t.integer  "candidate_id"
@@ -71,6 +71,19 @@ ActiveRecord::Schema.define(version: 20180111034210) do
     t.index ["peer_id", "superior_id"], name: "index_dependencies_on_peer_id_and_superior_id", unique: true
     t.index ["peer_id"], name: "index_dependencies_on_peer_id"
     t.index ["superior_id"], name: "index_dependencies_on_superior_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "peer_id"
+    t.integer  "candidate_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["candidate_id"], name: "index_documents_on_candidate_id"
+    t.index ["peer_id"], name: "index_documents_on_peer_id"
   end
 
   create_table "group_types", force: :cascade do |t|

@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :document do
+    peer nil
+    candidate nil
+  end
   #factory :dependency do
   #  peer nil
   #  superior nil
