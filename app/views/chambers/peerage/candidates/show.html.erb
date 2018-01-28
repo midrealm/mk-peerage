@@ -16,13 +16,13 @@
   <% if @candidate.group %>
   <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
   <% end %>
-  <% if @candidate.images %>
-    <%= render 'chambers/peerage/candidates/gallery', images: @candidate.images %>
+  <% if @candidate.documents %>
+    <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents, images: @candidate.images %>
   <% end %>
   <h3>Add An Image</h3>
-  <%= semantic_form_for @image, url: chambers_images_path do |f| %>
+  <%= semantic_form_for @document, url: chambers_documents_path do |f| %>
     <%= f.inputs do %>
-      <%= f.input :image, label: 'Image', as: :file %>
+      <%= f.input :document, label: 'File', as: :file %>
       <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
     <% end %>
     <%= f.button class: 'btn btn-default' %>

@@ -13,6 +13,7 @@ class Chambers::CandidatesController < ApplicationController
     @pr = @candidate.poll_results.last
     @comment = Comment.new
     @image = Image.new
+    @document = Document.new
   end
 
   def poll_comments

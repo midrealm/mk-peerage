@@ -7,7 +7,7 @@ class Chambers::DocumentsController < ApplicationController
       candidate = Candidate.find(params['document']['candidate_id'])
       redirect_to chambers_candidate_path(candidate.order,candidate)
     else
-      flash[:notice] = "Document Upload Unsuccessful"
+      flash[:alert] = "Document Upload Unsuccessful: #{document.errors.full_messages.to_sentence}"
     end
   end
   private
