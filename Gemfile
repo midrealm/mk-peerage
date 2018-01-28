@@ -53,7 +53,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'
   gem 'rails-assets-simplemde'
   gem 'rails-assets-croppie'
-  gem 'rails-assets-blueimp-gallery'
 end
 
 group :development, :test do

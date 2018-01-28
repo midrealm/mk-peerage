@@ -104,17 +104,6 @@ ActiveRecord::Schema.define(version: 20180128150839) do
     t.index ["group_type_id"], name: "index_groups_on_group_type_id"
   end
 
-  create_table "images", force: :cascade do |t|
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.integer  "candidate_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["candidate_id"], name: "index_images_on_candidate_id"
-  end
-
   create_table "peers", force: :cascade do |t|
     t.string   "elevated_by"
     t.boolean  "active"

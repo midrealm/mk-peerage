@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :document do
-    peer nil
-    candidate nil
+    peer
+    candidate
   end
   #factory :dependency do
   #  peer nil
@@ -15,10 +15,6 @@ FactoryGirl.define do
   end
   factory :pelican_peer, parent: :peer  do
     type 'Pelican'
-  end
-  factory :image do
-    image ""
-    candidate
   end
   factory :poll_result do
     candidate

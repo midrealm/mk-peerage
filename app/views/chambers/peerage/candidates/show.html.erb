@@ -17,9 +17,9 @@
   <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
   <% end %>
   <% if @candidate.documents %>
-    <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents, images: @candidate.images %>
+    <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
   <% end %>
-  <h3>Add An Image</h3>
+  <h3>Add An Image/Document</h3>
   <%= semantic_form_for @document, url: chambers_documents_path do |f| %>
     <%= f.inputs do %>
       <%= f.input :document, label: 'File', as: :file %>

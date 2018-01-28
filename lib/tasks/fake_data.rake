@@ -162,8 +162,8 @@ namespace :fake_data do
       u.group = Group.find_by(name: 'Roaring Wastes')
       u.peerage_type = :laurel
     end    
-    Image.create(candidate:oliver, image: File.open('lib/assets/fake_data/oliver_1.jpg'))
-    Image.create(candidate:oliver, image: File.open('lib/assets/fake_data/oliver_2.jpg'))
+    Document.create(candidate:oliver, peer: byrd.laurel, document: File.open('lib/assets/fake_data/oliver_1.jpg'))
+    Document.create(candidate:oliver, peer: byrd.laurel, document: File.open('lib/assets/fake_data/oliver_2.jpg'))
 
     Specialization.create(candidate: oliver, specialty: Specialty.find_by(name: 'Painting'))
     Advocacy.create(candidate: oliver, peer: hilliard.laurel)

@@ -12,7 +12,6 @@ class Chambers::CandidatesController < ApplicationController
     raise "Access Denied" unless @candidate.peerage_type == peerage.to_s
     @pr = @candidate.poll_results.last
     @comment = Comment.new
-    @image = Image.new
     @document = Document.new
   end
 
