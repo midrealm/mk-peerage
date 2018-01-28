@@ -181,7 +181,7 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    paperclip (5.2.1)
+    paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -338,7 +338,7 @@ DEPENDENCIES
   lodash-rails
   magic_lamp
   mysql2 (>= 0.3.18, < 0.5)
-  paperclip (~> 5.2.1)
+  paperclip (~> 5.1.0)
   puma (~> 3.0)
   rails (~> 5.0.2)
   rails-assets-blueimp-gallery!

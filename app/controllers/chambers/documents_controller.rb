@@ -2,7 +2,6 @@ class Chambers::DocumentsController < ApplicationController
   before_action :authenticate_user!
   def create
     document = Document.new(document_params)
-    
     if document.save
       flash[:notice] = "Document Upload Successful"
       candidate = Candidate.find(params['document']['candidate_id'])
