@@ -1,10 +1,12 @@
 <table class="table">
 <thead>
-<th>Document</th><th>Submission Date</th><th>Submitted By</th>
+<th>Document</th><th>Name</th><th>Description</th><th>Submission Date</th><th>Submitted By</th>
 </thead>
 <% documents.each do |doc| %>
   <tr>
     <td><%= link_to image_tag(doc.document.url(:thumb)), doc.document.url%></td>
+    <td><%= doc.name %></td>
+    <td><%= doc.description %></td>
     <td><%= doc.created_at.strftime('%b %-d, %Y')%></td>
     <td><%= link_to doc.peer.sca_name, peer_path(peerage, doc.peer.slug)%></td>
   </tr>

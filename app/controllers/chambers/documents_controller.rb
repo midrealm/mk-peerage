@@ -14,6 +14,6 @@ class Chambers::DocumentsController < ApplicationController
   def document_params
     peerage = Candidate.find(params['document']['candidate_id']).peerage_type 
     peer = current_user.peer(peerage)
-    params.require(:document).permit(:candidate_id, :document).merge(peer_id: peer.id)
+    params.require(:document).permit(:candidate_id, :document, :name, :description).merge(peer_id: peer.id)
   end
 end

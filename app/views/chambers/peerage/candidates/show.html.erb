@@ -2,6 +2,12 @@
 <div class ="row">
 <div class="col-md-8">
   <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+<ul class="nav nav-tabs" id="myTabs" role="tablist">
+      <li role="presentation" class="active"><a href="#info" aria-controls="contact" role="tab" data-toggle="tab">Info</a></li>
+      <li role="presentation"><a href="#gallery" aria-controls="contact" role="tab" data-toggle="tab">Gallery</a></li>
+</ul>
+  <div class="tab-content">
+  <div role="tabpanel" class="tab-pane active " id="info">
   <strong><%= @candidate.vote ? 'Vote' : 'Watch' %> List</strong></br>
   <% if @candidate.specialties.count > 0 %>
     <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
@@ -16,17 +22,6 @@
   <% if @candidate.group %>
   <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
   <% end %>
-  <% if @candidate.documents %>
-    <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
-  <% end %>
-  <h3>Add An Image/Document</h3>
-  <%= semantic_form_for @document, url: chambers_documents_path do |f| %>
-    <%= f.inputs do %>
-      <%= f.input :document, label: 'File', as: :file %>
-      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
-    <% end %>
-    <%= f.button class: 'btn btn-default' %>
-  <% end %> 
   <% unless @pr.nil? %>
     <table class="table">
     <thead>
@@ -67,6 +62,23 @@
     <%= f.button class: 'btn btn-default' %>
   <% end %> 
   </div>
+  </div>
+  <div role="tabpanel" class="tab-pane active " id="gallery">
+  <% if @candidate.documents %>
+    <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
+  <% end %>
+  <h3>Add An Image/Document</h3>
+  <%= semantic_form_for @document, url: chambers_documents_path do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :document, label: 'File', as: :file %>
+      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
+      <%= f.input :name %>
+      <%= f.input :description %>
+    <% end %>
+    <%= f.button class: 'btn btn-default' %>
+  <% end %> 
+  </div>
+</div>
 </div>
 <div class="col-md-4">
 <%= image_tag @candidate.profile_pic.url(:large) %>

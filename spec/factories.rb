@@ -1,7 +1,9 @@
 FactoryGirl.define do
   factory :document do
+    name 'String'
     peer
     candidate
+    document { File.new("#{Rails.root}/spec/fixtures/images/portrait.jpg") }
   end
   #factory :dependency do
   #  peer nil
