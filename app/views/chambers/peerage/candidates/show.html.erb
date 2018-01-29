@@ -64,9 +64,7 @@
   </div>
   </div>
   <div role="tabpanel" class="tab-pane active " id="gallery">
-  <% if @candidate.documents %>
-    <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
-  <% end %>
+  <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
   <h3>Add An Image/Document</h3>
   <%= semantic_form_for @document, url: chambers_documents_path do |f| %>
     <%= f.inputs do %>

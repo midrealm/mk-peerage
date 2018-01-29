@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128175607) do
+ActiveRecord::Schema.define(version: 20180128221841) do
 
   create_table "advisings", force: :cascade do |t|
     t.integer  "candidate_id"
@@ -106,6 +106,17 @@ ActiveRecord::Schema.define(version: 20180128175607) do
     t.index ["group_type_id"], name: "index_groups_on_group_type_id"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "candidate_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["candidate_id"], name: "index_images_on_candidate_id"
+  end
+
   create_table "peers", force: :cascade do |t|
     t.string   "elevated_by"
     t.boolean  "active"
@@ -167,6 +178,7 @@ ActiveRecord::Schema.define(version: 20180128175607) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "peerage_type"
+    t.string   "slug"
   end
 
   create_table "users", force: :cascade do |t|

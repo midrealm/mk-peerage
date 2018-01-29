@@ -1,7 +1,8 @@
 class Chambers::DocumentsController < ApplicationController
   before_action :authenticate_user!
   def create
-    document = Document.new(document_params)
+    document = Document.new(candidate_id: document_params['candidate_id'], document: document_params['document'],
+       name: document_params['name'], description: document_params['description'], peer_id: peer.id)
     if document.save
       flash[:notice] = "Document Upload Successful"
       candidate = Candidate.find(params['document']['candidate_id'])
@@ -12,8 +13,10 @@ class Chambers::DocumentsController < ApplicationController
   end
   private
   def document_params
+    params['document']
+  end 
+  def peer
     peerage = Candidate.find(params['document']['candidate_id']).peerage_type 
-    peer = current_user.peer(peerage)
-    params.require(:document).permit(:candidate_id, :document, :name, :description).merge(peer_id: peer.id)
+    current_user.peer(peerage)
   end
 end
