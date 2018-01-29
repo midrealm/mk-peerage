@@ -1,6 +1,6 @@
 require "rails_helper"
 describe "post /chambers/documents" do
-  it "creates new image for candidate" do
+  it "creates new document for candidate" do
     document = fixture_file_upload("#{fixture_path}/images/portrait.jpg", 'image/jpg')
     laurel = create(:laurel_peer)
     sign_in(laurel.user)
