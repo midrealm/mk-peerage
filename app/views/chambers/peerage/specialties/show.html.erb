@@ -1,0 +1,27 @@
+<h1><%=@specialty.name.capitalize%></h1>
+<h3><%=peerage.capitalize%> Candidates</h3>
+<table class="table">
+<thead>
+<th>Name</th><th>Specialty</th><th>Group</th>
+</thead>
+<% @specialty.candidates.each do |cand| %>
+<tr>
+  <td><%= link_to cand.sca_name, chambers_candidate_path(peerage, cand.id)%></td>
+  <td><%=cand.show_specialties%></td>
+  <td>
+    <% unless cand.group.nil? %>
+    <%= link_to cand.group, chambers_group_path(peerage,cand.group.slug) %>
+    <% end %>
+  </td>
+</tr>
+<% end %>
+</table>
+<script>
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>

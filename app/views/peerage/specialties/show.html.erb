@@ -1,0 +1,27 @@
+<h1><%=@specialty.name.capitalize%></h1>
+<h3><%=peerage.capitalize%>s</h3>
+<table class="table">
+<thead>
+<th>Name</th><th>Specialty</th><th>Group</th>
+</thead>
+<% @specialty.peers.each do |peer| %>
+<tr>
+  <td><%= link_to peer.sca_name, peer_path(peerage, peer.slug)%></td>
+  <td><%=peer.show_specialties%></td>
+  <td>
+    <% unless peer.group.nil? %>
+    <%= link_to peer.group, group_path(peerage,peer.group.slug) %>
+    <% end %>
+  </td>
+</tr>
+<% end %>
+</table>
+<script>
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>
