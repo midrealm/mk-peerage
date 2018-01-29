@@ -23,11 +23,11 @@ describe "delete /chambers/PEERAGE/admin/candidates/:id" do
       delete "/chambers/laurel/admin/candidates/#{@candidate.id}"
       expect(Comment.count).to eq(0)
     end
-    it "destroys images related to candidate" do
-      image = create(:image, candidate: @candidate) 
-      expect(Image.count).to eq(1)
+    it "destroys documents related to candidate" do
+      document = create(:document, candidate: @candidate) 
+      expect(Document.count).to eq(1)
       delete "/chambers/laurel/admin/candidates/#{@candidate.id}"
-      expect(Image.count).to eq(0)
+      expect(Document.count).to eq(0)
     end
 
     it "destroys advocacies related to candidate" do

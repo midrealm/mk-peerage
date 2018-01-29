@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :document do
+    name 'String'
+    peer
+    candidate
+    document { File.new("#{Rails.root}/spec/fixtures/images/portrait.jpg") }
+  end
   #factory :dependency do
   #  peer nil
   #  superior nil
@@ -11,10 +17,6 @@ FactoryGirl.define do
   end
   factory :pelican_peer, parent: :peer  do
     type 'Pelican'
-  end
-  factory :image do
-    image ""
-    candidate
   end
   factory :poll_result do
     candidate

@@ -1,6 +1,6 @@
 class Candidate < ApplicationRecord
   after_initialize :set_defaults
-  has_many :images, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   has_many :advocacies, dependent: :destroy
   has_many :peers, through: :advocacies
