@@ -1,26 +1,18 @@
-<div id="blueimp-gallery" class="blueimp-gallery">
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
-</div>
-
-<div id="gallery"> 
-<% images.each do |img| %>
- <%= link_to image_tag(img.image.url(:thumb), alt: img.created_at.strftime('%b %-d, %Y')), img.image.url, title:  img.created_at.strftime('%b %-d, %Y')%>
+<% if documents.count > 0 %>
+  <table class="table">
+  <thead>
+  <th>Document</th><th>Name</th><th>Description</th><th>Submission Date</th><th>Submitted By</th>
+  </thead>
+  <% documents.each do |doc| %>
+    <tr>
+      <td><%= link_to image_tag(doc.document.url(:thumb)), doc.document.url%></td>
+      <td><%= doc.name %></td>
+      <td><%= doc.description %></td>
+      <td><%= doc.created_at.strftime('%b %-d, %Y')%></td>
+      <td><%= link_to doc.peer.sca_name, peer_path(peerage, doc.peer.slug)%></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  There are currently no documents. You can upload one below.
 <% end %>
-</div>
-
-<script>
-document.getElementById('gallery').onclick = function (event) {
-    event = event || window.event;
-    var target = event.target || event.srcElement,
-        link = target.src ? target.parentNode : target,
-        options = {index: link, event: event},
-        links = this.getElementsByTagName('a');
-    blueimp.Gallery(links, options);
-};
-</script>

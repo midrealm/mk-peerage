@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180111034210) do
+ActiveRecord::Schema.define(version: 20180128175607) do
 
   create_table "advisings", force: :cascade do |t|
     t.integer  "candidate_id"
@@ -73,6 +73,21 @@ ActiveRecord::Schema.define(version: 20180111034210) do
     t.index ["superior_id"], name: "index_dependencies_on_superior_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.integer  "peer_id"
+    t.integer  "candidate_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "name"
+    t.text     "description"
+    t.index ["candidate_id"], name: "index_documents_on_candidate_id"
+    t.index ["peer_id"], name: "index_documents_on_peer_id"
+  end
+
   create_table "group_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -89,17 +104,6 @@ ActiveRecord::Schema.define(version: 20180111034210) do
     t.string   "slug"
     t.index ["ancestry"], name: "index_groups_on_ancestry"
     t.index ["group_type_id"], name: "index_groups_on_group_type_id"
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.integer  "candidate_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["candidate_id"], name: "index_images_on_candidate_id"
   end
 
   create_table "peers", force: :cascade do |t|

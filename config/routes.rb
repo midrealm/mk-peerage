@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get '/chambers' => 'users#index'
 
   namespace :chambers do
-    resources :images, only: [:create]
+    resources :documents, only: [:create]
+
     resources :comments, only: [:create]
 
     namespace :admin do
