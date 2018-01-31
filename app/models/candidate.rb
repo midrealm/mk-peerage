@@ -28,4 +28,12 @@ class Candidate < ApplicationRecord
     peerage_type.to_sym
   end
 
+  def list
+    if vote
+      'Vote'
+    else
+      'Watch'
+    end
+  end
+
 end
