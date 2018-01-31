@@ -31,11 +31,14 @@ describe "outside world's view of peerage" do
   describe "get /laurel/specialties/:slug" do
     it "shows list of users with given specialty" do
       spec = create(:specialty, name: 'Earwax Studies', peerage_type: :laurel)
+      spec2 = create(:specialty, name: 'Music', peerage_type: :laurel)
       laurel_user = create(:laurel_user, sca_name: 'Lucy Laurel')
       create(:specialization, peer: laurel_user.laurel, specialty: spec)
+      create(:specialization, peer: laurel_user.laurel, specialty: spec2)
       get "/laurel/specialties/earwax_studies"
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Earwax studies')
+      expect(response.body).to include('Music')
       expect(response.body).to include('Lucy Laurel')
     end
   end

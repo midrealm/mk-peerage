@@ -20,4 +20,12 @@ module ApplicationHelper
     
     markdown.render(text).html_safe if text
   end
+
+  def peer_specialties_link(peer)
+    peer.specialties.map{|x| link_to(x.name, specialty_path(peer.order, x.slug))}.join(', ').html_safe
+  end 
+
+  def candidate_specialties_link(candidate)
+    candidate.specialties.map{|x| link_to(x.name, chambers_specialty_path(candidate.peerage_type, x.slug))}.join(', ').html_safe
+  end
 end

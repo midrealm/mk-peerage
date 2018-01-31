@@ -5,7 +5,7 @@
  
   <% name = p.sca_name %>
   <% if p.specialties.count > 0 %>
-    <% name = "#{p.sca_name} (#{p.show_specialties})" %>
+    <% name = "#{p.sca_name} (#{p.specialties.to_sentence})" %>
   <% end %>
   <% if p.vigilant? %> 
   <li><b><%= link_to(name, peer_path(peerage,p.slug)) %></b></li>
@@ -20,7 +20,7 @@
 <% @inactive_peers.each do |p| %>
   <% name = p.sca_name %>
   <% if p.specialties.count > 0 %>
-    <% name = "#{p.sca_name} (#{p.show_specialties})" %>
+    <% name = "#{p.sca_name} (#{p.specialties.to_sentence})" %>
   <% end %>
   <% if p.deceased %> 
   <li><strike><%= link_to(name, peer_path(peerage,p.slug)) %></strike></li>

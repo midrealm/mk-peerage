@@ -1,8 +1,9 @@
 <h1><%=peerage.capitalize%> Specialties</h1>
 <ul>
 <% @specialties.each do |spec| %>
-  <% if spec.peers.count > 0 %>
-  <li><%=link_to spec.name.capitalize, specialty_path(peerage, spec.slug)%></li>
+  <% count = spec.peers.count%>
+  <% if count > 0 %>
+  <li><%=link_to spec.name.capitalize, specialty_path(peerage, spec.slug)%> (<%=count%>)</li>
   <% end %>
 <%end %>
 </ul>

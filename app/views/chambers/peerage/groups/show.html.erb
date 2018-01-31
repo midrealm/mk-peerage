@@ -13,7 +13,7 @@
 <% @group.all_candidates(@peerage).each do |candidate| %>
   <tr>
   <td><%= link_to candidate.sca_name, chambers_candidate_path(@peerage,candidate.id)%></td>
-  <td><%=candidate.show_specialties%></td>
+  <td><%=candidate_specialties_link(candidate)%></td>
   <td><%=link_to candidate.group, chambers_group_path(@peerage, candidate.group.slug) %></td>
   </tr>
 <% end %>

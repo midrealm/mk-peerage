@@ -7,7 +7,7 @@
 <% @specialty.peers.each do |peer| %>
 <tr>
   <td><%= link_to peer.sca_name, peer_path(peerage, peer.slug)%></td>
-  <td><%=peer.show_specialties%></td>
+  <td><%= peer_specialties_link(peer)%></td>
   <td>
     <% unless peer.group.nil? %>
     <%= link_to peer.group, group_path(peerage,peer.group.slug) %>

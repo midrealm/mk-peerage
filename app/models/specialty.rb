@@ -11,4 +11,8 @@ class Specialty < ApplicationRecord
   def set_slug
     self.slug = I18n.transliterate(self.name).downcase.tr(' ','_')
   end
+
+  def to_s
+    name
+  end
 end
