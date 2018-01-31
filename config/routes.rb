@@ -21,6 +21,9 @@ Rails.application.routes.draw do
       get '/groups/:slug' => 'groups#show', as: :group
       get '/groups' => 'groups#index', as: :groups
 
+      get '/specialties' => 'specialties#index', as: :specialties
+      get '/specialties/:slug' => 'specialties#show', as: :specialty
+
       resources :candidates, only: [:index, :show]
       get '/candidates/:id/poll_comments' => 'candidates#poll_comments', as: :poll_comments
       
@@ -39,6 +42,8 @@ Rails.application.routes.draw do
   end
 
   scope '/:peerage/' do
+    get '/specialties' => 'specialties#index', as: :specialties
+    get '/specialties/:slug' => 'specialties#show', as: :specialty
     get '/groups' => 'groups#index', as: :groups
     get '/groups/:slug' => 'groups#show', as: :group
     get '/roll_of_honor' => 'peers#index', as: :roll_of_honor

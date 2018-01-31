@@ -24,12 +24,16 @@ class Candidate < ApplicationRecord
     self.vote ||= false
   end
 
-  def show_specialties
-    return self.specialties.map{|s| s.name}.to_sentence
-  end
-
   def order
     peerage_type.to_sym
+  end
+
+  def list
+    if vote
+      'Vote'
+    else
+      'Watch'
+    end
   end
 
 end

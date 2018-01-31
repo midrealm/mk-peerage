@@ -3,20 +3,5 @@
 <ul>
   <%= render '/chambers/peerage/groups/draw_tree', node: @group %>
 </ul>
-<h3><%=@peerage.capitalize%> Candidates</h3>
-<table class="table">
-<thead>
-<th>Name</th><th>Specialty</th><th>Group</th>
-</thead>
-<tbody>
 
-<% @group.all_candidates(@peerage).each do |candidate| %>
-  <tr>
-  <td><%= link_to candidate.sca_name, chambers_candidate_path(@peerage,candidate.id)%></td>
-  <td><%=candidate.show_specialties%></td>
-  <td><%=link_to candidate.group, chambers_group_path(@peerage, candidate.group.slug) %></td>
-  </tr>
-<% end %>
-
-</tbody>
-</table>
+<%= render '/shared/candidates_table', peerage: @peerage, candidates: @group.all_candidates(@peerage) %>

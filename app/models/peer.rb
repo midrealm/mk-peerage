@@ -63,9 +63,6 @@ class Peer < ApplicationRecord
   def peerage_name
     self.class.peerage_name
   end
-  def show_specialties
-    specialties.where(peerage_type: peerage_name).map{|s| s.name}.to_sentence
-  end
 
   def slug
     user.slug

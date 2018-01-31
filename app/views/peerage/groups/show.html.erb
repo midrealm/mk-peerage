@@ -2,28 +2,4 @@
 <ul>
 <%= render '/peerage/groups/draw_tree', node: @group %>
 </ul>
-<h3><%=@peerage.capitalize%>s</h3>
-<table class="table">
-<thead>
-<th>Name</th><th>Specialty</th><th>Group</th>
-</thead>
-<tbody>
-
-<% @group.all_peers(@peerage).each do |user|%>
-  <tr>
-  <td><%= link_to user.sca_name, peer_path(@peerage,user.slug)%></td>
-  <td><%=user.peer(@peerage).show_specialties%></td>
-  <td><%=link_to user.group, group_path(@peerage,user.group.slug) %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
-<script>
-$(document).ready( function () {
-    var table = $('.table').DataTable(
-      {
-        "pageLength": 25, 
-        "saveState": true,
-      });
-});
-</script>
+<%= render '/shared/peers_table', peers: @group.all_peers(@peerage), peerage: @peerage %>

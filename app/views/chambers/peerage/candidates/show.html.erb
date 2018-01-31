@@ -1,7 +1,7 @@
 <%= link_to "<- #{peerage.capitalize} Candidates", chambers_candidates_path(peerage)%>
 <div class ="row">
 <div class="col-md-8">
-  <h1><%=@candidate.sca_name%> <small><%=@candidate.show_specialties%></small></h1>
+  <h1><%=@candidate.sca_name%> <small><%=candidate_specialties_link(@candidate)%></small></h1>
 <ul class="nav nav-tabs" id="myTabs" role="tablist">
       <li role="presentation" class="active"><a href="#info" aria-controls="contact" role="tab" data-toggle="tab">Info</a></li>
       <li role="presentation"><a href="#gallery" aria-controls="contact" role="tab" data-toggle="tab">Gallery</a></li>

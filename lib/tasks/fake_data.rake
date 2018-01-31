@@ -14,7 +14,7 @@ namespace :fake_data do
   end
 
   task :people => :environment do
-    Specialty.create([{name: 'Music', peerage_type: :laurel}, {name: 'Costuming', peerage_type: :laurel}, {name: 'Painting', peerage_type: :laurel}, {name: 'Calligraphy & Illumination', peerage_type: :laurel}])
+    Specialty.create([{name: 'Music', peerage_type: :laurel, slug: 'music'}, {name: 'Costuming', peerage_type: :laurel, slug: 'costuming'}, {name: 'Painting', peerage_type: :laurel, slug: 'painting'}, {name: 'Calligraphy & Illumination', peerage_type: :laurel, slug: 'calligraphy_and_illumination'}])
 
     byrd = User.create do |u|
       u.email = 'byrd@example.com'

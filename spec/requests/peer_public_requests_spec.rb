@@ -11,6 +11,37 @@ describe "outside world's view of peerage" do
       end
   end
 
+#specialties index
+  describe "Get /laurel/specialties" do
+    it "shows list of specialties for given peerage where number of peers is greater than 0" do
+      peer = create(:laurel_peer)
+      spec = create(:specialty, name: 'Earwax Studies', peerage_type: :laurel)
+      create(:specialization, peer: peer, specialty: spec) 
+      create(:specialty, name: 'Music', peerage_type: :laurel)
+      create(:specialty, name: 'Sleeping', peerage_type: :pelican)
+      get "/laurel/specialties"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('Earwax studies')
+      expect(response.body).not_to include('Music')
+      expect(response.body).not_to include('Sleeping')
+    end
+  end
+
+#specialties show
+  describe "get /laurel/specialties/:slug" do
+    it "shows list of users with given specialty" do
+      spec = create(:specialty, name: 'Earwax Studies', peerage_type: :laurel)
+      spec2 = create(:specialty, name: 'Music', peerage_type: :laurel)
+      laurel_user = create(:laurel_user, sca_name: 'Lucy Laurel')
+      create(:specialization, peer: laurel_user.laurel, specialty: spec)
+      create(:specialization, peer: laurel_user.laurel, specialty: spec2)
+      get "/laurel/specialties/earwax_studies"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('Earwax studies')
+      expect(response.body).to include('Music')
+      expect(response.body).to include('Lucy Laurel')
+    end
+  end
 #groups index
   describe "Get /laurel/groups" do
       it "shows list of groups and link to specific group" do
