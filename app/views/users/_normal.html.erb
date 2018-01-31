@@ -3,6 +3,7 @@
 <%= link_to 'Edit Your Profile', users_edit_path( peerage: peerage ) %><br>
 <%= link_to 'View Candidates', chambers_candidates_path(peerage) %><br>
 <%= link_to 'Browse Candidates By Group', chambers_groups_path(peerage) %><br/>
+<%= link_to 'Browse Candidates By Specialty', chambers_specialties_path(peerage) %><br/>
 <% if poll.present? && can?(:take_poll, peerage) %>
   <% ballot = Ballot.new(current_user.peer(peerage)) %>
   <% unless ballot.complete? %>

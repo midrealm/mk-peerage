@@ -93,6 +93,7 @@ FactoryGirl.define do
   factory :specialty do
     name "MyString"
     peerage_type :laurel
+    slug 'my_string'
   end
   sequence :email do |n|
     "person#{n}@example.com"

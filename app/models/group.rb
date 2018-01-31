@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   has_many :users
   has_many :candidates
   has_ancestry cache_depth: true
+  has_many :peers, through: :users
 
   def to_s
     if ancestry_depth == 3
@@ -13,8 +14,11 @@ class Group < ApplicationRecord
   end
 
 
+  def peers_of(peerage_type)
+    peers.where(type: peerage_type.capitalize) 
+  end
   def all_peers(peerage_type) 
-    users.joins(:peers).where(peers: {type: peerage_type.capitalize}) + children.flat_map { |grp| grp.all_peers(peerage_type)}
+    peers_of(peerage_type) + children.flat_map { |grp| grp.all_peers(peerage_type)}
   end
 
 

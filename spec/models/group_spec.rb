@@ -3,6 +3,23 @@ require 'rails_helper'
 RSpec.describe Group, type: :model do
 end
 
+RSpec.describe Group, 'peers_of(peerage_type)' do
+  before(:each) do
+    @group = create(:group, name: 'High Haven')
+    @laurel1 = create(:laurel_user, group_id: @group.id)
+    @laurel2 = create(:laurel_user, sca_name: 'The Second', group_id: @group.id)
+    @pelican = create(:pelican_user, sca_name: 'Token Pelican', group_id: @group.id)
+  end
+
+  it "returns only peers of given peerage for given group" do
+    peers = @group.peers_of(:laurel)
+    expect(peers.count).to eq(2)
+    expect(peers.first.order).to eq(:laurel)
+    expect(peers.second.order).to eq(:laurel)
+    expect(@group.peers.count).to eq(3)
+  end
+  
+end
 RSpec.describe Group, 'all_peers(peerage_type)' do
   before(:each) do
     @group = create(:group, name: 'High Haven')
@@ -15,8 +32,12 @@ RSpec.describe Group, 'all_peers(peerage_type)' do
   end
 
   it 'lists all laurels in descendent groups' do
-    expect(@group.all_peers('laurel').count).to eq(3)
+    expect(@group.all_peers(:laurel).count).to eq(3)
   end 
+
+  it 'is a list of laurels' do
+    expect(@group.all_peers(:laurel).first.order).to eq(:laurel)
+  end
 
 end
 

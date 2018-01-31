@@ -1,0 +1,25 @@
+<h3><%=peerage.capitalize%>s</h3>
+<table class="table">
+<thead>
+<th>Name</th><th>Specialty</th><th>Group</th>
+</thead>
+<tbody>
+
+<% peers.each do |peer|%>
+  <tr>
+  <td><%= link_to peer.sca_name, peer_path(peerage,peer.slug)%></td>
+  <td><%=peer_specialties_link(peer)%></td>
+  <td><%=link_to peer.group, group_path(peerage,peer.group.slug) unless peer.group.nil?%></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<script>
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>
