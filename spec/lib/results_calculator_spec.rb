@@ -15,21 +15,20 @@ describe "calculate" do
   end
 
   it "does not create Poll Results for current poll" do
-      @current_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now + 1.day)
-      @current_poll.save(validate: false)
-      @user = create(:user)
+      current_poll = create(:current_poll)
+      laurel = create(:laurel_peer)
 
-      @advising = create(:advising, candidate: @candidate, peer: @user.laurel, poll: @current_poll, submitted: true, judgement: @elevate) 
+      @advising = create(:advising, candidate: @candidate, peer: laurel, poll: current_poll, submitted: true, judgement: :elevate) 
       @rc.calculate
       expect(PollResult.count).to eq(0)    
   end
 
   it "does not create Poll Results for future poll" do
-      @future = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.day)
-      @user = create(:user)
+      future = create(:future_poll)
+      laurel = create(:laurel_peer)
 
       #this is advising isn't possible anyway)
-      @advising = create(:advising, candidate: @candidate, peer: @user.laurel, poll: @future_poll, submitted: true, judgement: @elevate) 
+      create(:advising, candidate: @candidate, peer: laurel, poll: future, submitted: true, judgement: :elevate) 
       @rc.calculate
       expect(PollResult.count).to eq(0)    
   end
@@ -38,16 +37,16 @@ describe "calculate" do
     before(:each) do
       @past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.day)
       @past_poll.save(validate: false)
-      @user1 = create(:user)
-      @user2 = create(:user)
-      @user3 = create(:user)
-      @user4 = create(:user)
-      @user5 = create(:user)
-      @advising1 = build(:advising, candidate: @candidate, peer: @user1.laurel, poll: @past_poll, submitted: true) 
-      @advising2 = build(:advising, candidate: @candidate, peer: @user2.laurel, poll: @past_poll, submitted: true) 
-      @advising3 = build(:advising, candidate: @candidate, peer: @user3.laurel, poll: @past_poll, submitted: true) 
-      @advising4 = build(:advising, candidate: @candidate, peer: @user4.laurel, poll: @past_poll, submitted: true) 
-      @advising5 = build(:advising, candidate: @candidate, peer: @user5.laurel, poll: @past_poll, submitted: true) 
+      @laurel1 = create(:laurel_peer)
+      @laurel2 = create(:laurel_peer)
+      @laurel3 = create(:laurel_peer)
+      @laurel4 = create(:laurel_peer)
+      @laurel5 = create(:laurel_peer)
+      @advising1 = build(:advising, candidate: @candidate, peer: @laurel1, poll: @past_poll, submitted: true) 
+      @advising2 = build(:advising, candidate: @candidate, peer: @laurel2, poll: @past_poll, submitted: true) 
+      @advising3 = build(:advising, candidate: @candidate, peer: @laurel3, poll: @past_poll, submitted: true) 
+      @advising4 = build(:advising, candidate: @candidate, peer: @laurel4, poll: @past_poll, submitted: true) 
+      @advising5 = build(:advising, candidate: @candidate, peer: @laurel5, poll: @past_poll, submitted: true) 
       
     end
 

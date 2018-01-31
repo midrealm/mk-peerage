@@ -2,7 +2,7 @@ shared_examples_for "get /chambers/PEERAGE/poll" do |peerage,other_peerage|
   describe "get /chambers/#{peerage}/poll" do
     context "logged in #{peerage}" do
       before(:each) do
-        @peer = create(peerage)
+        @peer = create("#{peerage}_user".to_sym)
         sign_in(@peer)
       end
       describe "current poll" do

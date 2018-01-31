@@ -50,18 +50,18 @@ end
 describe Ballot, "submission_count" do
   
   before(:each) do
-    @laurel = create(:user)
+    @laurel = create(:laurel_peer)
     @candidate1 = create(:candidate)
     @candidate2 = create(:candidate)
     @current_poll = create(:current_poll)
     @advising1 = create(:advising, candidate: @candidate1, 
-      poll: @current_poll, peer: @laurel.laurel, comment: 'Comment', 
+      poll: @current_poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate, submitted: true)
 
     @advising2 = build(:advising, candidate: @candidate2, 
-      poll: @current_poll, peer: @laurel.laurel, comment: 'Comment', 
+      poll: @current_poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate, submitted: true)
-    @ballot = Ballot.new(@laurel.laurel)
+    @ballot = Ballot.new(@laurel)
   end
   it 'returns number of submitted poll entries for current poll if all submitted' do
     @advising2.save
@@ -79,12 +79,12 @@ describe Ballot, "submission_count" do
 end
 describe Ballot, "submission_for(candidate)" do
   before(:each) do
-    @laurel = create(:user)
+    @laurel = create(:laurel_peer)
     @candidate = create(:candidate)
     @poll = create(:current_poll)
-    @ballot = Ballot.new(@laurel.laurel)
+    @ballot = Ballot.new(@laurel)
     @advising = build(:advising, candidate: @candidate, 
-      poll: @poll, peer: @laurel.laurel, comment: 'Comment', 
+      poll: @poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate, submitted: true)
   end
   it "returns true if user has a submitted advising for given poll" do
@@ -105,18 +105,18 @@ end
 describe Ballot, 'percent_complete' do
   context "at least 2 candidates" do
     before(:each) do
-      @laurel = create(:user)
+      @laurel = create(:laurel_peer)
       @poll = create(:current_poll)
       @candidate1 = create(:candidate, sca_name: "Candidate1")
       @candidate2 = create(:candidate, sca_name: "Candidate2")
       @advising1 = build(:advising, candidate: @candidate1, 
-        poll: @poll, peer: @laurel.laurel, comment: 'Comment', 
+        poll: @poll, peer: @laurel, comment: 'Comment', 
         judgement: :elevate, submitted: true)
 
       @advising2 = build(:advising, candidate: @candidate2, 
-        poll: @poll, peer: @laurel.laurel, comment: 'Comment', 
+        poll: @poll, peer: @laurel, comment: 'Comment', 
         judgement: :elevate, submitted: true)
-      @ballot = Ballot.new(@laurel.laurel)
+      @ballot = Ballot.new(@laurel)
     end
     it "shows 0% complete for 0 of 2 completed submissions" do
       expect(@ballot.percent_complete).to eq(0)
@@ -138,8 +138,8 @@ describe Ballot, 'percent_complete' do
   end
   it "shows 0 for no candidates" do
     create(:current_poll)
-    user = create(:user)
-    ballot = Ballot.new(user.laurel)
+    laurel = create(:laurel_peer)
+    ballot = Ballot.new(laurel)
     expect(ballot.percent_complete).to eq(0)
   end
 end

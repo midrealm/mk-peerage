@@ -80,7 +80,7 @@ describe UserAdder, 'add' do
       expect(adder.peerage).to eq(:laurel)
     end
     it 'should return exisiting user on successful save' do
-      existing_user = create(:my_user)
+      existing_user = create(:user)
       adder = UserAdder.new(id: existing_user.id, sca_name: existing_user.sca_name, email: existing_user.email, vigilant: true, peerage: :laurel)
       adder.add
       user = adder.user

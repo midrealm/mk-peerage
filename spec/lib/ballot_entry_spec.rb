@@ -3,12 +3,12 @@ require 'ballot'
 describe BallotEntry, 'initialize' do
   before(:each) do
     @candidate = create(:candidate)
-    @laurel = create(:user)
+    @laurel = create(:laurel_peer)
     @past_poll = create(:past_poll)
     @current_poll = create(:current_poll)
   end
   it "initializes with current poll" do
-    b = BallotEntry.new(peer: @laurel.laurel, candidate:@candidate)
+    b = BallotEntry.new(peer: @laurel, candidate:@candidate)
     expect(b.poll).to eq(@current_poll)
   end
 end
@@ -30,8 +30,7 @@ end
 describe BallotEntry, "advising" do
   before(:each) do
     @candidate = create(:candidate, vote: true)
-    @user = create(:user)
-    @laurel = @user.laurel
+    @laurel = create(:laurel_peer)
   end
   context "for active poll and past poll" do
     before(:each) do

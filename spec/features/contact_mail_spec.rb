@@ -20,12 +20,12 @@ RSpec.feature 'Contact email' do
   end
 
   def setup_pelican_contact
-    pelican = create(:pelican, sca_name: 'Mundungus Smith')
+    pelican = create(:pelican_user, sca_name: 'Mundungus Smith')
     visit "/pelican/#{pelican.slug}/contact"
     pelican
   end
   def setup_laurel_contact
-    laurel = create(:user, sca_name: 'Mundungus Smith')
+    laurel = create(:laurel_user, sca_name: 'Mundungus Smith')
     visit "/laurel/#{laurel.slug}/contact"
     laurel
   end

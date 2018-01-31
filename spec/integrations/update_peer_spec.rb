@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature 'Update Peer info' do
   include_context 'when signed in through capybara'
   scenario 'updates peer info' do
-    superior = create(:user, sca_name: 'My Laurel')
-    peer = create(:user, sca_name: 'Fake Name')
+    superior = create(:laurel_user, sca_name: 'My Laurel')
+    peer = create(:laurel_user, sca_name: 'Fake Name')
     specialty1 = create(:specialty, name: 'Generic Specialty')
     specialty2 = create(:specialty, name: 'Other Specialty')
     sign_in(peer)

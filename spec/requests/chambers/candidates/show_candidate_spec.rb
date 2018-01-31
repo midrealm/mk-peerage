@@ -5,11 +5,11 @@ describe "Get /chambers/laurel/candidates/:id" do
   end
   context "logged in laurel" do
     before(:each) do
-      @peer = create(:laurel)
-      sign_in(@peer)
+      @peer = create(:laurel_peer)
+      sign_in(@peer.user)
     end
     it "shows candidate and their advocate" do
-      advocate = create(:laurel, sca_name: 'Missy Examplemas')
+      advocate = create(:laurel_user, sca_name: 'Missy Examplemas')
       create(:advocacy, peer: advocate.public_send(:laurel.to_s), candidate: @candidate)
       get "/chambers/laurel/candidates/#{@candidate.id}"
       expect(response).to have_http_status(:success)
@@ -23,7 +23,7 @@ describe "Get /chambers/laurel/candidates/:id" do
       expect(response.body).to include(@candidate.sca_name)
     end
     it "shows comments" do
-      create(:comment, peer: @peer.public_send(:laurel.to_s), candidate: @candidate, text: "I like this candidate")
+      create(:comment, peer: @peer, candidate: @candidate, text: "I like this candidate")
       get "/chambers/laurel/candidates/#{@candidate.id}"
       expect(response.body).to include(@peer.sca_name)
       expect(response.body).to include("I like this candidate")

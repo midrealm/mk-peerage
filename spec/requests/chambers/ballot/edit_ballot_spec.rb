@@ -9,8 +9,8 @@ describe "get /chambers/laurel/poll/candidates/:id" do
     end
     describe "for logged in laurel" do
       before(:each) do
-        @peer = create(:laurel)
-        sign_in(@peer)
+        @peer = create(:laurel_peer)
+        sign_in(@peer.user)
       end
       it "shows candidate poll form" do
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
@@ -18,13 +18,13 @@ describe "get /chambers/laurel/poll/candidates/:id" do
         expect(response.body).to include("Poll for #{@candidate.sca_name}")
       end 
       it "shows comments for given candidate" do
-        create(:comment, peer:@peer.public_send(:laurel.to_s), candidate: @candidate, text: "I like this Candidate")
+        create(:comment, peer:@peer, candidate: @candidate, text: "I like this Candidate")
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
         expect(response.body).to include("I like this Candidate")
         expect(response.body).to include(@peer.sca_name)
       end
       it "shows advocates for given candidate" do
-        advocate = create(:laurel, sca_name: 'Molly Mindingus')
+        advocate = create(:laurel_user, sca_name: 'Molly Mindingus')
         create(:advocacy, candidate: @candidate, peer: advocate.public_send(:laurel.to_s))
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
         expect(response.body).to include("Molly Mindingus")
@@ -54,18 +54,18 @@ describe "get /chambers/laurel/poll/candidates/:id" do
     end
     describe "for logged in laurel" do
       before(:each) do
-        @peer = create(:laurel)
-        sign_in(@peer)
+        @peer = create(:laurel_peer)
+        sign_in(@peer.user)
       end
       it "creates new advising for peer and candidate when there hasn't been a created advising" do
         expect(Advising.count).to eq(0)
         get "/chambers/laurel/poll/candidates/#{@candidate.id}"
         expect(Advising.count).to eq(1)
-        expect(Advising.last.peer.id).to eq(@peer.public_send(:laurel.to_s).id)
+        expect(Advising.last.peer.id).to eq(@peer.id)
         expect(Advising.last.candidate).to eq(@candidate)
       end
       it "pulls in old poll data into active poll" do
-        @old_advising = create(:advising, poll: @past_poll, peer: @peer.public_send(:laurel.to_s), 
+        @old_advising = create(:advising, poll: @past_poll, peer: @peer, 
           candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
 
           get "/chambers/laurel/poll/candidates/#{@candidate.id}"
@@ -73,10 +73,10 @@ describe "get /chambers/laurel/poll/candidates/:id" do
           expect(response.body).to include("<option selected=\"selected\" value=\"elevate\">Elevate to Peerage")
       end
       it "for pre edited poll, puts in pre edited stuff, not stuff from old poll" do
-        @old_advising = create(:advising, poll_id: @past_poll.id, peer: @peer.public_send(:laurel.to_s), 
+        @old_advising = create(:advising, poll_id: @past_poll.id, peer: @peer, 
           candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
 
-        @new_advising = create(:advising, poll_id: nil, peer: @peer.public_send(:laurel.to_s), 
+        @new_advising = create(:advising, poll_id: nil, peer: @peer, 
           candidate_id: @candidate.id, judgement: :drop, comment: "This is my new comment")
         
           get "/chambers/laurel/poll/candidates/#{@candidate.id}"

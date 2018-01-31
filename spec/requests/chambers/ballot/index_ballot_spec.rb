@@ -2,8 +2,8 @@ require 'rails_helper'
 describe "get /chambers/laurel/poll" do
   context "logged in laurel" do
     before(:each) do
-      @peer = create(:laurel)
-      sign_in(@peer)
+      @peer = create(:laurel_peer)
+      sign_in(@peer.user)
     end
     describe "current poll" do
       before(:each) do
@@ -22,7 +22,7 @@ describe "get /chambers/laurel/poll" do
         expect(response.body).to include(@candidate2.sca_name)
       end
       it "shows OK if advising has been submitted for a given candidate" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer.public_send('laurel'), submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
         get "/chambers/laurel/poll"
         expect(response.body).to include("glyphicon-ok")
       end
@@ -32,14 +32,14 @@ describe "get /chambers/laurel/poll" do
       end
 
       it "show progress bar with percent of candidates complete" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer.public_send(:laurel.to_s), submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
         get "/chambers/laurel/poll"
         expect(response.body).to include("width: 50%")
         expect(response.body).to include("progress-bar")
     
       end
       it "shows how many have poll entries have been submitted" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer.public_send(:laurel.to_s), submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
         get "/chambers/laurel/poll"
         expect(response.body).to include("1/2 Submitted")
       end

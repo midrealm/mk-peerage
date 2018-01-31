@@ -5,15 +5,11 @@ FactoryGirl.define do
     candidate
     document { File.new("#{Rails.root}/spec/fixtures/images/portrait.jpg") }
   end
-  #factory :dependency do
-  #  peer nil
-  #  superior nil
-  #end
   factory :peer, aliases: [:laurel_peer]  do
     active true
     vigilant false
     type "Laurel"
-    association :user, factory: :my_user
+    association :user
   end
   factory :pelican_peer, parent: :peer  do
     type 'Pelican'
@@ -98,37 +94,26 @@ FactoryGirl.define do
     "person#{n}@example.com"
   end
 
-  factory :my_user, class: User do
-    email {generate :email}
-    password Devise.friendly_token.first(8)  
-    group
-    sca_name 'Mundungus Jones'
-  end
-
-  factory :laurel_user, parent: :my_user do
+  factory :laurel_user, parent: :user do
     sca_name 'Lester Laurel'
     after(:create) do |u|
       create(:peer, user: u, active: true, vigilant: false, type: 'Laurel')
     end
   end
-  factory :pelican_user, parent: :my_user do
+  factory :pelican_user, parent: :user do
       sca_name 'Peter Pelican'
       after(:create) do |u|
         create(:peer, user: u, active: true, vigilant: false, type: 'Pelican')
       end
   end
 
-
-  factory :user, aliases: [:laurel] do
+  factory :user do
     email {generate :email}
     password Devise.friendly_token.first(8)  
-    sca_name "Mundugus Jones"
     group
-    after(:create) do |u|
-      create(:peer, user: u, active: true, vigilant: false, type: 'Laurel')
-    end
+    sca_name 'Mundungus Jones'
   end
-
+ 
   factory :pelican, class: User do
     email {generate :email}
     password Devise.friendly_token.first(8)  
@@ -139,7 +124,6 @@ FactoryGirl.define do
     end
   end
 
-  
   factory :admin, aliases: [:laurel_admin], class: User do
     email {generate :email}
     password Devise.friendly_token.first(8)  
