@@ -15,8 +15,12 @@ RSpec.describe Group, 'all_peers(peerage_type)' do
   end
 
   it 'lists all laurels in descendent groups' do
-    expect(@group.all_peers('laurel').count).to eq(3)
+    expect(@group.all_peers(:laurel).count).to eq(3)
   end 
+
+  it 'is a list of laurels' do
+    expect(@group.all_peers(:laurel).first.order).to eq(:laurel)
+  end
 
 end
 
