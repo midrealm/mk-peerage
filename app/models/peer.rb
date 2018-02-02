@@ -56,6 +56,9 @@ class Peer < ApplicationRecord
   def self.collection
     #parent definition
   end
+  def self.dependent_name
+    #parent definition
+  end
   def peerage_type
     self.class.peerage_type
   end

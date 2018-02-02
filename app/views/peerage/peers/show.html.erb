@@ -18,7 +18,9 @@
     Phone: <%=@peer.phone%>
   </address>
   <strong>Elevated by:</strong> <%=@peer.elevated_by%><br>
-  <strong>Elevation Date:</strong> <%=@peer.elevation_date%>
+  <strong>Elevation Date:</strong> <%=@peer.elevation_date%><br>
+  <strong><%=@peer.class.dependent_name.capitalize%> of:</strong> <%=@peer.superiors.map{|x| link_to x.sca_name, peer_path(peerage, x.slug)}.join(', ').html_safe%><br>
+  <strong><%=@peer.class.dependent_name.capitalize%> of (Not in Middle Kingdom):</strong> <%=@peer.apprenticed_to %> 
   <div style="margin-top:10px">
   <%= markdown(@peer.bio) %>
   </div>
