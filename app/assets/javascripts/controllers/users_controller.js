@@ -114,7 +114,9 @@ App.createController("Users", {
     for(var i in peerage){
       $('#user_' + peerage[i] + '_attributes_specialty_ids').select2();
       $('#user_' + peerage[i]  + '_attributes_superior_ids').select2();
-      new SimpleMDE({element: $('#user_'+peerage[i]+'_attributes_bio')[0]});
+      if($('#user_'+peerage[i]+'_attributes_bio')[0]){
+        new SimpleMDE({element: $('#user_'+peerage[i]+'_attributes_bio')[0]});
+      }
     }
     $('#user_group_id').select2();
   },
