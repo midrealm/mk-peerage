@@ -2,7 +2,7 @@ require 'rails_helper'
 describe "post /chambers/laurel/admin/peers" do
   context "for signed in admin laurel" do
     before(:each) do
-      admin = create("laurel_admin".to_sym)
+      admin = create(:laurel_admin)
       sign_in(admin)
       @params = { :laurel => {id: "", sca_name: "Dingus McDOOOGLE", email: "dingus@doogleson.com"} }
     end
@@ -21,7 +21,7 @@ describe "post /chambers/laurel/admin/peers" do
     end
   end
   it "doesn't allow non admins to create new users" do
-    non_admin = create("laurel".to_sym)
+    non_admin = create(:laurel_user)
     sign_in(non_admin)    
     expect{post "/chambers/laurel/admin/peers", params: { :laurel => {sca_name: "Dingus McDOOOGLE", email: "dingus@doogleson.com"} } }.to raise_error(CanCan::AccessDenied)
   end

@@ -9,8 +9,8 @@ shared_examples_for "get /chambers/PEERAGE/admin/candidates/:id/edit" do |peerag
         sign_in(admin)
       end
       it "only shows potential #{peerage}s as advocates" do
-        create(peerage.to_sym, sca_name: 'Peter Peer') 
-        create(other_peerage.to_sym, sca_name: 'Octavia Other-Peer') 
+        create("#{peerage}_user".to_sym, sca_name: 'Peter Peer') 
+        create("#{other_peerage}_user".to_sym, sca_name: 'Octavia Other-Peer') 
         get "/chambers/#{peerage}/admin/candidates/#{@candidate.id}/edit"
         expect(response.body).to include('Peter Peer')
         expect(response.body).not_to include('Octavia Other-Peer')

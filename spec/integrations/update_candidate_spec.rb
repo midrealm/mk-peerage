@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature 'Update Candidate info' do
   include_context 'when signed in through capybara'
   scenario 'updates candidate info' do
-    admin = create(:admin, sca_name: 'Laurel1')
-    peer = create(:user, sca_name: 'Laurel2')
+    admin = create(:laurel_admin, sca_name: 'Laurel1')
+    peer = create(:laurel_user, sca_name: 'Laurel2')
     candidate = create(:candidate)
     specialty1 = create(:specialty, name: 'Generic Specialty')
     specialty2 = create(:specialty, name: 'Other Specialty')

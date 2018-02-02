@@ -3,7 +3,7 @@ require "rails_helper"
 describe "Get /chambers" do
   describe "logged in non-royal" do
     before(:each) do
-      peer = create(:user)
+      peer = create(:laurel_user)
       sign_in(peer)
     end
     it "shows dashboard for logged in user" do
@@ -59,8 +59,8 @@ describe "Get /chambers" do
     end
     context "for signed in non-admin laurel" do
       before(:each) do
-        @laurel = create(:user)
-        sign_in(@laurel)
+        @laurel = create(:laurel_peer)
+        sign_in(@laurel.user)
       end
       describe "for current poll" do
         before(:each) do
@@ -76,7 +76,7 @@ describe "Get /chambers" do
           expect(response.body).to include(@current_poll.end_date.strftime('%d-%b-%Y'))  
         end
         it "shows if user has completed the poll" do
-          @advising = create(:advising, candidate: @candidate, peer: @laurel.laurel, poll: @current_poll, submitted: true)
+          @advising = create(:advising, candidate: @candidate, peer: @laurel, poll: @current_poll, submitted: true)
           get "/chambers"
           expect(response.body).to include('Finished')  
           expect(response.body).to include('Edit Poll')  

@@ -3,8 +3,8 @@ describe "get /chambers/laurel/groups" do
   before(:each) do
     @group = create(:group, name: "the Middle", slug: "the_middle")
     @child = create(:group, name: "High Haven", slug: "high_haven", parent_id: @group.id)
-    @peer = create(:laurel, sca_name: "Mundugus Jones", group: @group)
-    sign_in(@peer)
+    laurel_user = create(:laurel_user, group: @group)
+    sign_in(laurel_user)
   end
   it "shows list of groups and link to specific group" do
     candidate = create(:candidate, group: @child, peerage_type: :laurel)

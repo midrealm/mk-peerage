@@ -99,7 +99,7 @@ describe "Get /chambers/laurel/admin/poll/new" do
     expect(response.body).to include("redirected")
   end
   it "rasies AccessDenied Error if user is not an admin" do
-    peer = create(:laurel)
+    peer = create(:laurel_user)
     sign_in(peer)
     expect{get "/chambers/laurel/admin/poll/new"}.to raise_error(CanCan::AccessDenied)
   end

@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:sca_name)}
   
   it "rejects bad emails" do
-    user = build(:user, email: 'bademail')
+    user = build(:laurel_user, email: 'bademail')
     user.save
     expect(User.count).to eq(0)
   end
@@ -12,7 +12,7 @@ end
 
 RSpec.describe User, 'set_slug' do
   it 'should save slug' do
-    user = build(:user, sca_name: 'Heregyð Ketilsdóttir')
+    user = build(:laurel_user, sca_name: 'Heregyð Ketilsdóttir')
     user.save 
     expect(User.last.slug).to eq('heregyd_ketilsdottir')
   end
@@ -50,7 +50,7 @@ RSpec.describe User, 'self.add_new(id, sca_name, email, vigilant, peerage)' do
 
   context 'for adding new peerage to existing user' do
     it 'should return exisiting user on successful save' do
-      existing_user = create(:my_user)
+      existing_user = create(:user)
       user = User.add_new(id: existing_user.id, sca_name: existing_user.sca_name, email: existing_user.email, vigilant: true, peerage: :laurel)
       expect(user).to eq(existing_user)
     end 

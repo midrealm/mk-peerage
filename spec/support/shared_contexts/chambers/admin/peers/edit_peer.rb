@@ -6,7 +6,7 @@ shared_examples_for "get /chambers/PEERAGE/admin/peers/:id/edit" do |peerage, ot
         sign_in(admin)
       end
       it "raises Access Denied when editing non-#{peerage} user" do
-        other_peer = create(other_peerage)
+        other_peer = create("#{other_peerage}_user".to_sym)
         expect{get "/chambers/#{peerage}/admin/peers/#{other_peer.peers.first.id}/edit"}.to raise_error("Access Denied")
   
       end

@@ -25,9 +25,9 @@ RSpec.describe Group, 'all_peers(peerage_type)' do
     @group = create(:group, name: 'High Haven')
     @child = create(:group, name: 'The Barrows', parent_id: @group.id)
     @grand_child = create(:group, name: 'The Corner', parent_id: @child.id) 
-    @laurel1 = create(:user, group_id: @group.id)
-    @laurel2 = create(:user, sca_name: 'The Second', group_id: @child.id)
-    @laurel3 = create(:user, sca_name: 'The Third', group_id: @grand_child.id)
+    @laurel1 = create(:laurel_user, group_id: @group.id)
+    @laurel2 = create(:laurel_user, sca_name: 'The Second', group_id: @child.id)
+    @laurel3 = create(:laurel_user, sca_name: 'The Third', group_id: @grand_child.id)
     @candidate = create(:candidate, group_id: @group.id)
   end
 
@@ -49,7 +49,7 @@ RSpec.describe Group, 'all_candidates' do
     @cand1 = create(:candidate, group_id: @group.id)
     @cand2 = create(:candidate, sca_name: 'The Second', group_id: @child.id)
     @cand3 = create(:candidate, sca_name: 'The Third', group_id: @grand_child.id)
-    @laurel = create(:user, group_id: @group.id)
+    @laurel = create(:laurel_user, group_id: @group.id)
   end
 
   it 'lists all laurels in descendent groups' do

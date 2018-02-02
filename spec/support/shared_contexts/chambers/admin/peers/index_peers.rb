@@ -6,7 +6,7 @@ shared_examples_for "get /chambers/PEERAGE/admin/peers" do |peerage, other_peera
         sign_in(admin)
       end
       it "does not show non-#{peerage} peers" do
-        create(other_peerage, sca_name: 'Octavia OtherPeer')
+        create("#{other_peerage}_user".to_sym, sca_name: 'Octavia OtherPeer')
         get "/chambers/#{peerage}/admin/peers"
         expect(response.body).to include('Peter Peer')
         expect(response.body).not_to include('Octavia OtherPeer')

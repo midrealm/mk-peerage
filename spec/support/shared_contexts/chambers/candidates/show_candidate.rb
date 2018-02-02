@@ -5,7 +5,7 @@ shared_examples_for "get /chambers/PEERAGE/candidates/:id" do |peerage, other_pe
     end
     context "logged in #{peerage}" do
       before(:each) do
-        @peer = create(peerage)
+        @peer = create("#{peerage}_user".to_sym)
         sign_in(@peer)
       end
       it "throws error for showing non-#{peerage} candidate" do
@@ -15,7 +15,7 @@ shared_examples_for "get /chambers/PEERAGE/candidates/:id" do |peerage, other_pe
     end
     context "logged in #{other_peerage} (non-#{peerage})" do
       before(:each) do
-        other_peer = create(other_peerage)
+        other_peer = create("#{other_peerage}_user".to_sym)
         sign_in(other_peer)
       end
       it "shows not authorized error for non-#{peerage} user" do
