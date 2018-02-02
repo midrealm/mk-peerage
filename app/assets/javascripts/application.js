@@ -16,7 +16,6 @@
 //= require bootstrap-sprockets
 //= require select2
 //= require simplemde
-//= require turbolinks
 //= require croppie
 //= require bootstrap-datepicker
 //= require datatables
