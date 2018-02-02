@@ -1,5 +1,5 @@
 <% if signed_in? && current_user.sca_name == @peer.sca_name %>
-  <%= link_to('Edit Profile', '/users/edit') %>
+  <%= link_to('Edit Profile', users_edit_path(peerage: peerage)) %>
 <% end %>
 <%= image_tag @peer.profile_pic.url(:large), class: 'pull-right'%>
 <div class="container">
