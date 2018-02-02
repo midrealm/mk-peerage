@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128221841) do
+ActiveRecord::Schema.define(version: 20180202225541) do
 
   create_table "advisings", force: :cascade do |t|
     t.integer  "candidate_id"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20180128221841) do
     t.string   "profile_pic_content_type"
     t.integer  "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
-    t.string   "apprenticed_to"
+    t.string   "dependent_of"
     t.boolean  "admin"
     t.string   "specialty_detail"
     t.datetime "created_at",               null: false
