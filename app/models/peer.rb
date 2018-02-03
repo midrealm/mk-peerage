@@ -59,6 +59,9 @@ class Peer < ApplicationRecord
   def self.dependent_name
     #parent definition
   end
+  def dependent_name
+    self.class.dependent_name.capitalize
+  end
   def peerage_type
     self.class.peerage_type
   end

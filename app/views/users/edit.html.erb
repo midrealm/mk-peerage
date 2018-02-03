@@ -46,8 +46,8 @@
               <%= p.input :elevation_date %>
               <%= p.input :active, label: "Active?" %>
               <%= p.input :vigilant, label: "Vigilant?" %>
-              <%= p.input :superiors, as: :select, label: "#{peer.class.dependent_name.capitalize} of: ", :collection => peer.potential_superiors.joins(:user).pluck(:sca_name, :id)%>
-              <%= p.input :dependent_of, label: "#{peer.class.dependent_name.capitalize} of: (Not in Middle Kingdom)"  %>
+              <%= p.input :superiors, as: :select, label: "#{peer.dependent_name} of: ", :collection => peer.potential_superiors.joins(:user).pluck(:sca_name, :id)%>
+              <%= p.input :dependent_of, label: "#{peer.dependent_name} of: (Not in Middle Kingdom)"  %>
               <%= p.input :bio %>
             <% end %>
           <% end %>
