@@ -15,7 +15,7 @@ RSpec.describe "users/_image_preview.html.erb" do
   end
   context "if peerage params" do
     it "shows peerage profile pic" do
-      render partial: "users/image_preview", locals: { user: @laurel_peer.user, peerage: 'laurel' }
+      render partial: "users/image_preview", locals: { user: @laurel_peer.user, peerage: :laurel }
       expect(rendered).to have_css('#arms_preview_container.hidden')
       expect(rendered).to have_css('#profile_preview img')
       expect(rendered).not_to have_selector('#arms_preview img')
