@@ -45,21 +45,19 @@ RSpec.feature 'Contact email' do
     setup_pelican_contact
     expect { send_mail('') }.not_to change(ActionMailer::Base.deliveries, :count)
   end
-
-#  context "with recaptcha enabled" do
-#    before(:each) do
-#      Recaptcha.configuration.skip_verify_env << "test"
-#    end
-#
-#    scenario 'does not send email without recaptcha' do
-#      Recaptcha.configuration.skip_verify_env.delete('test')
-#      setup_pelican_contact
-#      expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
-#    end
-#
-#    after(:each) do
-#      Recaptcha.configuration.skip_verify_env << "test"
-#    end
-#  end
+  
+  context 'recaptcha verfication unsuccessful' do
+    before(:each) do
+      Recaptcha.configuration.skip_verify_env << "test"
+      allow_any_instance_of(Recaptcha::Verify).to receive(:verify_recaptcha).and_return(false)
+    end
+    scenario 'does not send email with failed recaptcha' do
+      setup_laurel_contact
+      expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
+    end
+    after(:each) do
+      Recaptcha.configuration.skip_verify_env << "test"
+    end
+  end
 
 end
