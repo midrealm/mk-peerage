@@ -45,9 +45,6 @@ class Chambers::Admin::PeersController < ApplicationController
   def authorize_admin
     authorize! :manage, peerage
   end
-  def peerage
-    params[:peerage].to_sym
-  end
   def self.controller_path
     'chambers/peerage/admin/peers'
   end

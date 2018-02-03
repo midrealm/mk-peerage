@@ -27,7 +27,4 @@ class Chambers::CandidatesController < ApplicationController
   def self.controller_path
     'chambers/peerage/candidates'
   end
-  def peerage
-    params[:peerage].to_sym
-  end
 end

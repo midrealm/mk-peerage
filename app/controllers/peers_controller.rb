@@ -12,7 +12,4 @@ class PeersController < ApplicationController
     @order_title = "Master and Mistresses of the #{peerage.capitalize}"
     render template: "peerage/peers/index"
   end
-  def peerage
-    params[:peerage]
-  end
 end

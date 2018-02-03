@@ -6,9 +6,6 @@ class SpecialtiesController < ApplicationController
   def show
     @specialty = Specialty.find_by(peerage_type: peerage, slug: params[:slug])
   end
-  def peerage
-    params[:peerage].to_sym
-  end
   def self.controller_path
     'peerage/specialties'
   end
