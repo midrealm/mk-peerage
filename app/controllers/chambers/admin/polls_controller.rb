@@ -1,7 +1,7 @@
 class Chambers::Admin::PollsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
-  helper_method :peerage
+
   def new
     @poll = Poll.new
   end

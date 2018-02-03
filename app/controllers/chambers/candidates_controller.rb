@@ -1,6 +1,5 @@
 class Chambers::CandidatesController < ApplicationController
   before_action :authenticate_user!
-  helper_method :peerage
   def index
     authorize! :read, peerage
     @candidates = Candidate.where(peerage_type: peerage)

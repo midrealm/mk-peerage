@@ -1,7 +1,6 @@
 class Chambers::BallotController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_peer
-  helper_method :peerage
 
   def index
     if Poll.current(peerage).nil?

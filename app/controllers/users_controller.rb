@@ -1,7 +1,6 @@
 require 'i18n'
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  helper_method :peerage
   def edit
     @peerage = params['peerage']
     @user = current_user

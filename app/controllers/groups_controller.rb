@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  helper_method :peerage
   def index
     @kingdoms = Group.roots
     render template: "peerage/groups/index"

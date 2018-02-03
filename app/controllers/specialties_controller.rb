@@ -1,5 +1,4 @@
 class SpecialtiesController < ApplicationController
-  helper_method :peerage
   def index
     @specialties = Specialty.where(peerage_type: peerage)
   end

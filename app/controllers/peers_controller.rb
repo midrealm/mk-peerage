@@ -1,5 +1,4 @@
 class PeersController < ApplicationController
-  helper_method :peerage
   def show
     @peer = Peer.where_order(peerage).joins(:user).find_by(users: {slug: params[:slug]})
     

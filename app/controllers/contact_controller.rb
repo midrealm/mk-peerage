@@ -1,5 +1,4 @@
 class ContactController < ApplicationController
-  helper_method :peerage 
   def new
     @user = User.find_by(slug:params[:slug])
   end

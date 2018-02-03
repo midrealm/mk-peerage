@@ -1,7 +1,6 @@
 class Chambers::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_peer
-  helper_method :peerage
 
   def index
     @middle_kingdom = Group.find_by(name: 'the Middle')
