@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   end
 
   def peerage
-    params[:peerage].to_sym
+    PeerageParamHandler.new(params[:peerage]).peerage
   end
 end

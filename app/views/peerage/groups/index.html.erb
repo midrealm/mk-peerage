@@ -1,10 +1,10 @@
-<h1><%=@peerage.capitalize%>s by Location</h1>
+<h1><%=peerage.capitalize%>s by Location</h1>
 <ul>
 <% @kingdoms.each do |kingdom| %>
-  <% peer_total = kingdom.all_peers(@peerage).count %>
+  <% peer_total = kingdom.all_peers(peerage).count %>
   <% if peer_total > 0 %>
   <li>
-    <%= link_to kingdom, group_path(@peerage,kingdom.slug) %> (<%=peer_total%>)
+    <%= link_to kingdom, group_path(peerage,kingdom.slug) %> (<%=peer_total%>)
     <ul><%= render '/peerage/groups/draw_tree', node: kingdom %></ul>
   </li>
   <% end %>

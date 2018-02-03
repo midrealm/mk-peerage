@@ -2,4 +2,4 @@
 <ul>
 <%= render '/peerage/groups/draw_tree', node: @group %>
 </ul>
-<%= render '/shared/peers_table', peers: @group.all_peers(@peerage), peerage: @peerage %>
+<%= render '/shared/peers_table', peers: @group.all_peers(peerage), peerage: peerage %>

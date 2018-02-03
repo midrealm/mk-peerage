@@ -1,7 +1,7 @@
 <h1>Contact <%=@user.sca_name%></h1>
 <div class="containter">
   <div class="col-md-6">
-    <%= semantic_form_for 'contact', url: contact_path(@peerage,@user.slug) do |f| %>
+    <%= semantic_form_for 'contact', url: contact_path(peerage,@user.slug) do |f| %>
       <%= f.inputs do %>
         <%= f.input :subject %>
         <%= f.input :from_name, label: 'Your Name' %> 
