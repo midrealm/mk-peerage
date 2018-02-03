@@ -51,7 +51,7 @@ RSpec.feature 'Contact email' do
       Recaptcha.configuration.skip_verify_env << "test"
       allow_any_instance_of(Recaptcha::Verify).to receive(:verify_recaptcha).and_return(false)
     end
-    scenario 'does not send email with failed recaptcha' do
+    scenario 'does not send email' do
       setup_laurel_contact
       expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
     end
