@@ -1,5 +1,5 @@
 <% if signed_in? && current_user.sca_name == @peer.sca_name %>
-  <%= link_to('Edit Profile', '/users/edit') %>
+  <%= link_to('Edit Profile', users_edit_path(peerage: peerage)) %>
 <% end %>
 <%= image_tag @peer.profile_pic.url(:large), class: 'pull-right'%>
 <div class="container">
@@ -7,7 +7,7 @@
   <h1><%=@peer.sca_name%> <small><%=@peer.specialties.to_sentence%></h1>
   <%= link_to "Send #{@peer.sca_name} a Message", contact_path(peerage, @peer.slug), class: "btn btn-primary" %><br/>
   <strong>Modern Name:</strong> <%=@peer.modern_name%><br>
-  <strong>Specialties:</strong><%=peer_specialties_link(@peer)%> (<%=@peer.specialty_detail%>)<br/>
+  <strong>Specialties:</strong> <%=peer_specialties_link(@peer)%> (<%=@peer.specialty_detail%>)<br/>
   <% unless @peer.group.nil? %>
     <strong>Group:</strong> <%=peer_link(@peer.group, peerage) %> <br>
   <% end %>
@@ -18,7 +18,9 @@
     Phone: <%=@peer.phone%>
   </address>
   <strong>Elevated by:</strong> <%=@peer.elevated_by%><br>
-  <strong>Elevation Date:</strong> <%=@peer.elevation_date%>
+  <strong>Elevation Date:</strong> <%=@peer.elevation_date%><br>
+  <strong><%=@peer.dependent_name%> of:</strong> <%=@peer.superiors.map{|x| link_to x.sca_name, peer_path(peerage, x.slug)}.join(', ').html_safe%><br>
+  <strong><%=@peer.dependent_name%> of (Not in Middle Kingdom):</strong> <%=@peer.dependent_of %> 
   <div style="margin-top:10px">
   <%= markdown(@peer.bio) %>
   </div>

@@ -6,4 +6,8 @@ class Laurel < Peer
   def self.collection
     'laurelate'
   end
+
+  def self.dependent_name
+    'apprentice'
+  end
 end

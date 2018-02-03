@@ -1,0 +1,25 @@
+<% if peerage.nil? %>
+  <div class="col-md-4 image-preview-container" id="arms_preview_container">
+    <div id="arms_preview">
+        <%= image_tag user.arms.url(:large) %>
+    </div>
+  </div>
+  <div class="col-md-4 image-preview-container hidden" id="profile_pic_preview_container">
+
+    <div id="profile_preview">
+        
+    </div>
+    <button class="btn btn-default hidden" id="crop">Finish</button>
+  </div>
+<% else %>
+  <div class="col-md-4 image-preview-container hidden" id="arms_preview_container">
+    <div id="arms_preview">
+    </div>
+  </div>
+  <div class="col-md-4 image-preview-container" id="profile_pic_preview_container">
+    <div id="profile_preview">
+      <%= image_tag user.peer(peerage).profile_pic.url(:large)%> 
+    </div>
+    <button class="btn btn-default hidden" id="crop">Finish</button>
+  </div>
+<% end %>

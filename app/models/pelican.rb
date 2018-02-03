@@ -7,4 +7,7 @@ class Pelican < Peer
     'pelicanate'
   end
 
+  def self.dependent_name
+    'protege'
+  end
 end

@@ -19,8 +19,8 @@ RSpec.feature 'Update Peer info' do
     fill_in 'user_laurel_attributes_specialty_detail', with: 'Earwax Studies'
     fill_in 'user_laurel_attributes_elevated_by', with: 'Some People'
     fill_in 'user_laurel_attributes_bio', with: 'Some Text'
-    select 'My Laurel', from: 'Apprenticed To'
-    fill_in 'user_laurel_attributes_apprenticed_to', with: 'Some Person'
+    select 'My Laurel', from: 'Apprentice of'
+    fill_in 'user_laurel_attributes_dependent_of', with: 'Some Person'
     uncheck 'user_laurel_attributes_active'
     check 'user_laurel_attributes_vigilant'
     click_on 'submit'
@@ -31,7 +31,7 @@ RSpec.feature 'Update Peer info' do
     expect(Laurel.last.elevated_by).to eq('Some People')
     expect(Laurel.last.vigilant).to eq(true)
     expect(Laurel.last.active).to eq(false)
-    expect(Laurel.last.apprenticed_to).to eq('Some Person')
+    expect(Laurel.last.dependent_of).to eq('Some Person')
     expect(Peer.count).to eq(2)
     specialties = Laurel.last.specialties.pluck(:name)
     expect(specialties).to include('Generic Specialty')

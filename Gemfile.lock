@@ -207,9 +207,9 @@ GEM
       railties (= 5.0.6)
       sprockets-rails (>= 2.0.0)
     rails-assets-croppie (2.4.1)
-    rails-assets-datatables (1.10.12)
+    rails-assets-datatables (1.10.16)
       rails-assets-jquery (>= 1.7.0)
-    rails-assets-jquery (3.1.0)
+    rails-assets-jquery (3.3.1)
     rails-assets-simplemde (1.10.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
@@ -290,9 +290,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.6)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
     uglifier (3.0.4)
@@ -353,7 +350,6 @@ DEPENDENCIES
   simplecov
   sqlite3
   teaspoon-mocha
-  turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   validates_email_format_of
