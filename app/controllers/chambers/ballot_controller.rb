@@ -1,7 +1,6 @@
 class Chambers::BallotController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_peer
-  helper_method :peerage
 
   def index
     if Poll.current(peerage).nil?
@@ -33,11 +32,6 @@ class Chambers::BallotController < ApplicationController
   def authorize_peer
     authorize! :take_poll, peerage
   end
-
-  def peerage
-    params[:peerage].to_sym
-  end
-
   def self.controller_path
     'chambers/peerage/poll/candidates'
   end

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'ballot'
 describe BallotEntry, 'initialize' do
   before(:each) do
     @candidate = create(:candidate)

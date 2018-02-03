@@ -1,7 +1,6 @@
 class Chambers::Admin::CandidatesController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
-  helper_method :peerage
 
   def index
     @candidates = Candidate.where(peerage_type: peerage)
@@ -51,10 +50,6 @@ class Chambers::Admin::CandidatesController < ApplicationController
 
   def authorize_admin
     authorize! :manage, peerage
-  end
-
-  def peerage
-    params[:peerage].to_sym
   end
 
   def self.controller_path

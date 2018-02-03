@@ -1,7 +1,7 @@
-<%= link_to 'Back to Groups', chambers_groups_path(@peerage) %><br/>
+<%= link_to 'Back to Groups', chambers_groups_path(peerage) %><br/>
 <h1><%=@group%></h1>
 <ul>
   <%= render '/chambers/peerage/groups/draw_tree', node: @group %>
 </ul>
 
-<%= render '/shared/candidates_table', peerage: @peerage, candidates: @group.all_candidates(@peerage) %>
+<%= render '/shared/candidates_table', candidates: @group.all_candidates(peerage) %>

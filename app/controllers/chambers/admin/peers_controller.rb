@@ -1,7 +1,7 @@
 class Chambers::Admin::PeersController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
-  helper_method :peerage
+
   def new()
     @peer = UserAdder.new(peerage: peerage)
   end
@@ -44,9 +44,6 @@ class Chambers::Admin::PeersController < ApplicationController
   end
   def authorize_admin
     authorize! :manage, peerage
-  end
-  def peerage
-    params[:peerage].to_sym
   end
   def self.controller_path
     'chambers/peerage/admin/peers'

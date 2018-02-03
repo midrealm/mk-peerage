@@ -12,8 +12,7 @@ class Chambers::GroupsController < ApplicationController
   private
 
   def authorize_peer
-    @peerage = params[:peerage]
-    authorize! :read, @peerage.to_sym
+    authorize! :read, peerage
   end
 
   def self.controller_path

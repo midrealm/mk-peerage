@@ -2,15 +2,15 @@
 <div class="container">
   <div class="col-md-6">
     <ul class="nav nav-tabs" id="myTabs" role="tablist">
-      <li role="presentation" class="<%= 'active' if @peerage.nil? %>"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
+      <li role="presentation" class="<%= 'active' if peerage.nil? %>"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
       <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
       <% @user.peers.each do |p| %>
-        <li role="presentation" class="<%= 'active' if @peerage == p.peerage_type %>"><%= link_to p.peerage_name, "##{p.peerage_type}", role: 'tab', 'data-toggle': 'tab' %></li>
+        <li role="presentation" class="<%= 'active' if peerage == p.peerage_type %>"><%= link_to p.peerage_name, "##{p.peerage_type}", role: 'tab', 'data-toggle': 'tab' %></li>
       <% end %>
     </ul>
     <%= semantic_form_for @user, url: users_edit_path do |f| %>
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane <%= 'active' if @peerage.nil? %>  " id="personal">
+      <div role="tabpanel" class="tab-pane <%= 'active' if peerage.nil? %>  " id="personal">
       <%= f.inputs do %>
         <%= f.input :sca_name, label: 'SCA Name' %>
         <%= f.input :modern_name, label: 'Modern Name' %>
@@ -28,7 +28,7 @@
       <% end %>
       </div>
       <% @user.peers.each do |peer| %>
-      <div role="tabpanel" class="tab-pane <%= 'active' if @peerage == peer.peerage_type %>" id="<%=peer.peerage_type%>">
+      <div role="tabpanel" class="tab-pane <%= 'active' if peerage == peer.peerage_type %>" id="<%=peer.peerage_type%>">
         <%= f.inputs do %>
           <%= f.semantic_fields_for peer.peerage_type.to_sym do |p| %>
             <%= p.inputs do %>
@@ -60,6 +60,6 @@
     </div>
   </div>
 
-  <%= render 'image_preview', user: @user, peerage: @peerage %>
+  <%= render 'image_preview', user: @user %>
   
 </div>

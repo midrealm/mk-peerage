@@ -1,7 +1,7 @@
 class Chambers::Admin::PollsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
-  helper_method :peerage
+
   def new
     @poll = Poll.new
   end
@@ -40,9 +40,6 @@ class Chambers::Admin::PollsController < ApplicationController
   end
   def authorize_admin
     authorize! :manage, peerage
-  end
-  def peerage
-    params[:peerage].to_sym
   end
   def self.controller_path
     'chambers/peerage/admin/polls'
