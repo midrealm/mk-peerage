@@ -7,7 +7,7 @@
   <% if poll.end_date.past? %>
     <%= link_to 'Create New Poll', new_chambers_admin_poll_path(peerage)%>
   <% else  %>
-    <%= link_to 'Edit Poll', edit_chambers_admin_poll_path(peerage,poll.id)%> | <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
+    <%= link_to 'Edit Poll', edit_chambers_admin_poll_path(peerage)%> | <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
   <% end %>
 <% else %>
   <%= link_to 'Create New Poll', new_chambers_admin_poll_path(peerage)%>
