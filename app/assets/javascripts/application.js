@@ -22,3 +22,5 @@
 //= require datatables
 //= require rails_jskit
 //= require_tree ./controllers
+
+$.fn.select2.defaults.set( "theme", "bootstrap4" );

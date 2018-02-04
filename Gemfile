@@ -35,6 +35,9 @@ gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #gem 'paperclip', '~> 5.2.1'
 gem 'paperclip', '~> 5.1.0' #so data urls work
 gem 'select2-rails'
+gem "bootstrap_form",
+    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
+    branch: "master"
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 gem 'redcarpet'
