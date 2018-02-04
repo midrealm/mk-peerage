@@ -12,6 +12,7 @@
 //
 //= require lodash
 //= require jquery
+//= require popper
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require select2
@@ -21,4 +22,3 @@
 //= require datatables
 //= require rails_jskit
 //= require_tree ./controllers
-
