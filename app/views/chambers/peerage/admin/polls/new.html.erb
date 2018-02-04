@@ -1,12 +1,10 @@
 <h1>Create New <%=peerage.capitalize%> Poll</h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @poll, url: chambers_admin_poll_path(peerage) do |f| %>
-      <%= f.inputs do %>
-        <%= f.input :start_date, as: :string %>
-        <%= f.input :end_date, as: :string %>
-      <% end %>
-      <%= f.action :submit, as: :button, button_html: {class: 'btn btn-default'}, id: 'submit'%>
+    <%= bootstrap_form_for @poll, url: chambers_admin_poll_path(peerage) do |f| %>
+      <%= f.text_field :start_date %>
+      <%= f.text_field :end_date %>
+      <%= f.submit "Create Poll" %>
     <%end%> 
   </div>
 
