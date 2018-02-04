@@ -1,11 +1,11 @@
 @import "bootstrap";
-//@import "select2";
+@import "dataTables.bootstrap4.min.css";
+//@import "select2.css";
 //@import "select2-bootstrap";
 //@import "formtastic-bootstrap";
-//@import "simplemde";
-//@import "croppie";
-//@import "bootstrap-datepicker3";
-//@import "dataTables.bootstrap.min";
+@import "simplemde.css";
+@import "croppie.css";
+@import "bootstrap-datepicker.css";
 
 .new_user{
     max-width: 330px;
