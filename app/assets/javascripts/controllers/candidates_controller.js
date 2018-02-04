@@ -38,7 +38,7 @@ App.createController("Candidates", {
     }
     if(has_errors){
       e.preventDefault(); 
-    }else if(!$('#crop').hasClass('hidden')){
+    }else if(!$('#crop').hasClass('d-none')){
       var promise = this.cropPicture();
       promise.then(function(){
         console.log('promise success')
@@ -66,7 +66,7 @@ App.createController("Candidates", {
       })
     }   
     reader.readAsDataURL(e.target.files[0]);
-    $('#crop').removeClass('hidden')
+    $('#crop').removeClass('d-none')
   },
   cropPicture: function(){
     var self = this
@@ -76,7 +76,7 @@ App.createController("Candidates", {
         size: 'viewport'
       }).then(function(resp){
         $('#profile-preview').empty().append($('<img>',{src: resp}));
-        $('#crop').addClass('hidden')
+        $('#crop').addClass('d-none')
         $('#candidate_profile_pic').val(resp)
         $('#crop').trigger('cropped')
         resolve('Success');

@@ -1,5 +1,5 @@
-<h1>Add New <%=peerage.capitalize%></h1>
 <div class="container">
+  <h1>Add New <%=peerage.capitalize%></h1>
   <div class="col-md-4">
     <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peers_path(peerage) do |f| %>
       <%= f.select :id, User.all_except(peerage).pluck(:sca_name, :email, :id).map{|x| ["#{x[0]} (#{x[1]})", x[2]]}, {label: 'Existing User', include_blank: true } %>
