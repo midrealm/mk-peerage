@@ -1,0 +1,23 @@
+<div role="tabpanel" class="tab-pane <%= 'active' if peerage == peer.peerage_type %>" id="<%=peer.peerage_type%>">
+  <%= f.fields_for peer.order do |p| %>
+
+    <div class="form-group">
+      <div id="user_<%=peer.order%>_attributes_profile_pic_input" class="custom-file">
+        <input type="file" class="custom-file-input profile-pic" id="profile_pic" name="not_included">
+        <label class="custom-file-label" for="profile_pic">Choose Profile Pic</label>
+      </div>
+    </div>
+    <input type="hidden" class="profile-pic-actual" id="user_<%=peer.order%>_attributes_profile_pic" name="user[<%=peer.peerage_type%>_attributes][profile_pic]" value=<%=peer.profile_pic_data_uri%>>
+
+    <%= image_tag peer.profile_pic.url(:large), class:'d-none profile-pic-cache' %>
+    <%= p.select :specialty_ids, Specialty.all.where(peerage_type: peer.peerage_type).pluck(:name, :id), {label: 'Specialties', include_blank: true}, multiple: true %>
+    <%= p.text_field :specialty_detail %>
+    <%= p.text_field :elevated_by %>
+    <%= p.date_field :elevation_date %>
+    <%= p.check_box :active, label: "Active?" %>
+    <%= p.check_box :vigilant, label: "Vigilant?" %>
+    <%= p.select :superior_ids, peer.potential_superiors.joins(:user).pluck(:sca_name, :id), {label: "#{peer.dependent_name} of: ", include_blank: true}, multiple: true %>
+    <%= p.text_field :dependent_of, label: "#{peer.dependent_name} of: (Not in Middle Kingdom)"  %>
+    <%= p.text_area :bio %>
+  <% end %>
+</div>
