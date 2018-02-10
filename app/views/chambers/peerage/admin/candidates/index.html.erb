@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage <%=peerage.capitalize%> Candidates</li>
+  </ol>
+</nav>
 <h1>Manage Candidates</h1>
 <%= link_to 'Add New Candidate', new_chambers_admin_candidate_path(peerage)%>
 <table class='table'>

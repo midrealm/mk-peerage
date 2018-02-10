@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage <%=peerage.capitalize%>s</li>
+  </ol>
+</nav>
 <h1>Manage <%=peerage.capitalize%>s</h1>
 <%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %>
 <table class='table'>

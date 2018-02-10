@@ -1,2 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "Manage #{peerage.capitalize} Candidates", chambers_admin_candidates_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page">New</li>
+  </ol>
+</nav>
 <h1>Add New Candidate</h1>
 <%= render 'form', action: 'create'%>

@@ -1,2 +1,10 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', '/' %></li>
+    <li class="breadcrumb-item"><%=peerage.capitalize%></li>
+    <li class="breadcrumb-item"><%= link_to 'Specialties', specialties_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=@specialty%></li>
+  </ol>
+</nav>
 <h1><%=@specialty.name.capitalize%></h1>
 <%= render '/shared/peers_table', peers: @specialty.peers %>

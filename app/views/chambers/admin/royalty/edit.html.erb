@@ -1,3 +1,10 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "Manage Royalty", chambers_admin_royalty_index_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+  </ol>
+</nav>
 <h1>Edit Royalty Status of <%=@royal.sca_name%></h1>
   <div class="col-md-4">
     <%= bootstrap_form_for @royal, as: :royal, url: chambers_admin_royalty_path(@royal) do |f| %>

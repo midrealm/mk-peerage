@@ -1,4 +1,10 @@
-<%= link_to "<- #{peerage.capitalize} Candidates", chambers_candidates_path(peerage)%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "#{peerage.capitalize} Candidates", chambers_candidates_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=@candidate.sca_name%></li>
+  </ol>
+</nav>
 <div class ="d-flex flex-row-reverse">
   <div >
     <%= image_tag @candidate.profile_pic.url(:large) %>

@@ -1,3 +1,10 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+  </ol>
+</nav>
 <h1>Edit <%=peerage.capitalize%> <%=@peer.sca_name%></h1>
 <div class="container">
   <div class="col-md-4">

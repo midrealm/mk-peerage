@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Specialties</li>
+  </ol>
+</nav>
 <h1><%=peerage.capitalize%> Candidate Specialties</h1>
 <ul>
 <% @specialties.each do |spec| %>
