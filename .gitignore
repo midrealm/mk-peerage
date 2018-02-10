@@ -1,5 +1,5 @@
-#cecilia ignore
-/public/
+#peerage ignore
+/public/system/
 /storage/
 .byebug_history
 #Related to getting email to work
