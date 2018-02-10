@@ -1,6 +1,14 @@
 require "rails_helper"
 describe "outside world's view of peerage" do
 
+#peerage home page
+  describe 'get /laurel' do
+    it "shows laurel page" do
+      get "/laurel"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include("Order of the Laurel")
+    end 
+  end
 #contact page for peer
   describe "Get /laurel/LAUREL_NAME/contact" do
       it "shows contact page for given laurel" do

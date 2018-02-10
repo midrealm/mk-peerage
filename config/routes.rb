@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   end
 
   scope '/:peerage/' do
+    get '/' => 'order#index', as: :order
     get '/specialties' => 'specialties#index', as: :specialties
     get '/specialties/:slug' => 'specialties#show', as: :specialty
     get '/groups' => 'groups#index', as: :groups
