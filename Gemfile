@@ -64,6 +64,7 @@ group :development, :test do
   #gem 'capybara-webkit'
   gem 'teaspoon-mocha'
   gem 'magic_lamp'
+  gem "rspec_junit_formatter"
 end
 
 group :development do
