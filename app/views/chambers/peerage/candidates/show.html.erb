@@ -1,9 +1,9 @@
 <%= link_to "<- #{peerage.capitalize} Candidates", chambers_candidates_path(peerage)%>
 <div class ="d-flex flex-row-reverse">
-  <div>
+  <div >
     <%= image_tag @candidate.profile_pic.url(:large) %>
   </div>
-  <div>
+  <div class="col-md">
     <h1><%=@candidate.sca_name%> <small><%=candidate_specialties_link(@candidate)%></small></h1>
     <ul class="nav nav-tabs" id="myTabs" role="tablist">
           <li role="presentation" class="nav-item active"><a id="info-tab" class="nav-link" href="#info" aria-controls="contact" role="tab" data-toggle="tab">Info</a></li>
