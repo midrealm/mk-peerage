@@ -47,6 +47,7 @@ gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'bootstrap-datepicker-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'font-awesome-sass', '~> 5.0.6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'
