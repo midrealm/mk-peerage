@@ -7,10 +7,10 @@ module Chambers
       @comment.peer = current_user.peer(candidate.peerage_type)
       if @comment.save
         PeerageMailer.comment(current_user,candidate,@comment.text).deliver
-        flash[:notice] = "Successfully Submitted Comment"
+        flash[:success] = "Successfully Submitted Comment"
         redirect_to chambers_candidate_path(candidate.order,candidate)
       else
-        flash[:notice] = "Comment Submission Unsuccessful"
+        flash[:error] = "Comment Submission Unsuccessful"
       end
     end
     private

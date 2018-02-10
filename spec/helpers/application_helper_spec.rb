@@ -1,5 +1,19 @@
 require 'rails_helper'
 describe ApplicationHelper do
+  describe "flash_class(level)" do
+    it "spits out 'alert alert-info' for 'notice'" do
+      expect(helper.flash_class('notice')).to eq('alert alert-info')
+    end
+    it "spits out 'alert alert-success' for 'success'" do
+      expect(helper.flash_class('success')).to eq('alert alert-success')
+    end
+    it "spits out 'alert alert-error' for 'error'" do
+      expect(helper.flash_class('error')).to eq('alert alert-error')
+    end
+    it "spits out 'alert alert-error' for 'alert'" do
+      expect(helper.flash_class('alert')).to eq('alert alert-error')
+    end
+  end
   describe "peer_specialties_link(peer)" do
     it "handles one specialties" do
       spec1 = create(:specialty, name: 'Spec', slug: 'spec')

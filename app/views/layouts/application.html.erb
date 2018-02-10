@@ -34,12 +34,19 @@
     </div><!-- /.navbar-collapse -->
   </nav>
   <div class="container">
-    <div class="flash">
-       <span class="bg-success"><%= notice %></span>
-       <span class="bg-danger"><%= alert %></span>
+    <div class="d-flex flex-row justify-content-center">
+      <div class="d-flex flex-column flash">
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %>"><%= value %></div>
+        <% end %>
+      </div>
     </div>
-    <%= yield %>
-  <u/div>
+    <div class="row">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
     <%= jskit %>
   </body>
 </html>

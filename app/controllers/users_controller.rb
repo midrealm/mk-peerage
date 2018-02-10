@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
     if current_user.update(user_params)
       redirect_to chambers_path
-      flash.notice = 'Profile Successfully Updated'
+      flash[:success] = 'Profile Successfully Updated'
     else
       render :edit
     end
