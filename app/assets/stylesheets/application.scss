@@ -1,12 +1,14 @@
-@import "bootstrap-sprockets";
 @import "bootstrap";
-@import "select2";
-@import "select2-bootstrap";
-@import "formtastic-bootstrap";
-@import "simplemde";
-@import "croppie";
-@import "bootstrap-datepicker3";
-@import "dataTables.bootstrap.min";
+@import "dataTables.bootstrap4.min.css";
+@import "select2.css";
+@import "select2-bootstrap4.min.css";
+@import "rails_bootstrap_forms.css";
+@import "formtastic-bootstrap.css";
+@import "simplemde.css";
+@import "croppie.css";
+@import "bootstrap-datepicker.css";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 .new_user{
     max-width: 330px;

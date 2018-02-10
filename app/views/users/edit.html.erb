@@ -1,64 +1,43 @@
 <h1>Edit Profile</h1>
 <div class="container">
-  <div class="col-md-6">
-    <ul class="nav nav-tabs" id="myTabs" role="tablist">
-      <li role="presentation" class="<%= 'active' if peerage.nil? %>"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
-      <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
-      <% @user.peers.each do |p| %>
-        <li role="presentation" class="<%= 'active' if peerage == p.peerage_type %>"><%= link_to p.peerage_name, "##{p.peerage_type}", role: 'tab', 'data-toggle': 'tab' %></li>
-      <% end %>
-    </ul>
-    <%= semantic_form_for @user, url: users_edit_path do |f| %>
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane <%= 'active' if peerage.nil? %>  " id="personal">
-      <%= f.inputs do %>
-        <%= f.input :sca_name, label: 'SCA Name' %>
-        <%= f.input :modern_name, label: 'Modern Name' %>
-        <%= f.input :arms %>
-        <%= f.input :group, :as => :select, :collection => Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
-      <% end %>
-      </div>
-      <div role="tabpanel" class="tab-pane" id="contact">
-      <%= f.inputs do %>
-        <%= f.input :street %>
-        <%= f.input :city %>
-        <%= f.input :state %>
-        <%= f.input :zipcode %>
-        <%= f.input :phone %>
-      <% end %>
-      </div>
-      <% @user.peers.each do |peer| %>
-      <div role="tabpanel" class="tab-pane <%= 'active' if peerage == peer.peerage_type %>" id="<%=peer.peerage_type%>">
-        <%= f.inputs do %>
-          <%= f.semantic_fields_for peer.peerage_type.to_sym do |p| %>
-            <%= p.inputs do %>
-              <div id='user_<%=peer.peerage_type%>_attributes_profile_pic_input' class='form-group user-profile-pic-input'>
-                <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
-                <span class="form-wrapper">
-                  <input class="profile-pic" type="file" name="not_included">
-                </span>
-              </div>
-              <input type="hidden" class="profile-pic-actual" id="user_<%=peer.peerage_type%>_attributes_profile_pic" name="user[<%=peer.peerage_type%>_attributes][profile_pic]" value=<%=peer.profile_pic_data_uri%>>
-              <%= image_tag peer.profile_pic.url(:large), class:'hidden profile-pic-cache' %>
-              <%= p.input :specialties, :collection => Specialty.all.where(peerage_type: peer.peerage_type) %>
-              <%= p.input :specialty_detail %>
-              <%= p.input :elevated_by %>
-              <%= p.input :elevation_date %>
-              <%= p.input :active, label: "Active?" %>
-              <%= p.input :vigilant, label: "Vigilant?" %>
-              <%= p.input :superiors, as: :select, label: "#{peer.dependent_name} of: ", :collection => peer.potential_superiors.joins(:user).pluck(:sca_name, :id)%>
-              <%= p.input :dependent_of, label: "#{peer.dependent_name} of: (Not in Middle Kingdom)"  %>
-              <%= p.input :bio %>
-            <% end %>
-          <% end %>
+  <div class="row">
+    <div class="col-md">
+
+      <ul class="nav nav-tabs" id="myTabs" role="tablist">
+        <li role="presentation" class="nav-item"><a class="nav-link <%= 'active' if peerage.nil? %> " href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
+        <li role="presentation"><a  class="nav-link" href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
+        <% @user.peers.each do |p| %>
+          <% link_class = 'nav-link' %>
+          <% link_class = link_class + ' active' if peerage == p.order  %>
+          <li role="presentation" class="nav-item"><%= link_to p.peerage_name, "##{p.peerage_type}", class: link_class, role: 'tab', 'data-toggle': 'tab' %></li>
         <% end %>
+      </ul>
+
+
+      <%= bootstrap_form_for @user, url: users_edit_path do |f| %>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane <%= 'show active' if peerage.nil? %>  " id="personal">
+          <%= f.text_field :sca_name, label: 'SCA Name' %>
+          <%= f.text_field :modern_name, label: 'Modern Name' %>
+          <%= f.file_field :arms %>
+          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group'}%>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="contact">
+          <%= f.text_field :street %>
+          <%= f.text_field :city %>
+          <%= f.text_field :state %>
+          <%= f.text_field :zipcode %>
+          <%= f.telephone_field :phone %>
+        </div>
+        <% @user.peers.each do |peer| %>
+        <%= render  'peer_form', f: f, peer: peer 
+        %>
+        <%end %>
+        
+        <%= f.submit class: 'btn btn-default', id: 'submit' %>
+      <% end %>
       </div>
-    <%end %>
-      
-      <%= f.button class: 'btn btn-default', id: 'submit' %>
-    <% end %>
     </div>
-  </div>
 
   <%= render 'image_preview', user: @user %>
   

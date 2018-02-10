@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Groups</li>
+  </ol>
+</nav>
 <h1>Candidates by Location</h1>
 <ul>
     <%= render '/chambers/peerage/groups/draw_tree', node: @middle_kingdom %>

@@ -1,86 +1,89 @@
-<%= link_to "<- #{peerage.capitalize} Candidates", chambers_candidates_path(peerage)%>
-<div class ="row">
-<div class="col-md-8">
-  <h1><%=@candidate.sca_name%> <small><%=candidate_specialties_link(@candidate)%></small></h1>
-<ul class="nav nav-tabs" id="myTabs" role="tablist">
-      <li role="presentation" class="active"><a href="#info" aria-controls="contact" role="tab" data-toggle="tab">Info</a></li>
-      <li role="presentation"><a href="#gallery" aria-controls="contact" role="tab" data-toggle="tab">Gallery</a></li>
-</ul>
-  <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active " id="info">
-  <strong><%= @candidate.vote ? 'Vote' : 'Watch' %> List</strong></br>
-  <% if @candidate.specialties.count > 0 %>
-    <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
-    <%= spec.name %>  
-    <% end %><br>
-  <% end %>
-  <% if @candidate.peers.count > 0 %>
-    <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
-    <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
-    <% end %><br>
-  <%end%>
-  <% if @candidate.group %>
-  <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
-  <% end %>
-  <% unless @pr.nil? %>
-    <table class="table">
-    <thead>
-    <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
-    <th>Rec%</th><th>Fav%</th>
-    </thead>
-    <tbody>
-    <tr>
-      <td><%=@pr.elevate%></td>
-      <td><%=@pr.wait%></td>
-      <td><%=@pr.no_strong_opinion%></td>
-      <td><%=@pr.drop%></td>
-      <td><%=@pr.rec%></td>
-      <td><%=@pr.fav%></td>
-    </tr>
-    </tbody>
-    </table>
-  <% end%>
-  <h3>Comments</h3>
-  <% @candidate.comments.each do |comment| %>
-  <div class="container" style="padding: 10px">
-    <div class="col-md-2" style="text-align:center">
-    <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "#{peerage.capitalize} Candidates", chambers_candidates_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=@candidate.sca_name%></li>
+  </ol>
+</nav>
+<div class ="d-flex flex-row-reverse">
+  <div >
+    <%= image_tag @candidate.profile_pic.url(:large) %>
+  </div>
+  <div class="col-md">
+    <h1><%=@candidate.sca_name%> <small><%=candidate_specialties_link(@candidate)%></small></h1>
+    <ul class="nav nav-tabs" id="myTabs" role="tablist">
+          <li role="presentation" class="nav-item active"><a id="info-tab" class="nav-link" href="#info" aria-controls="contact" role="tab" data-toggle="tab">Info</a></li>
+          <li role="presentation" class="nav-itme"><a id="gallery-tab" class="nav-link" href="#gallery" aria-controls="contact" role="tab" data-toggle="tab">Gallery</a></li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active " id="info">
+        <strong><%= @candidate.vote ? 'Vote' : 'Watch' %> List</strong></br>
+        <% if @candidate.specialties.count > 0 %>
+          <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
+          <%= spec.name %>  
+          <% end %><br>
+        <% end %>
+        <% if @candidate.peers.count > 0 %>
+          <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
+          <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
+          <% end %><br>
+        <%end%>
+        <% if @candidate.group %>
+          <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
+        <% end %>
+        <% unless @pr.nil? %>
+          <table class="table">
+          <thead>
+          <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+          <th>Rec%</th><th>Fav%</th>
+          </thead>
+          <tbody>
+          <tr>
+            <td><%=@pr.elevate%></td>
+            <td><%=@pr.wait%></td>
+            <td><%=@pr.no_strong_opinion%></td>
+            <td><%=@pr.drop%></td>
+            <td><%=@pr.rec%></td>
+            <td><%=@pr.fav%></td>
+          </tr>
+          </tbody>
+          </table>
+        <% end%>
+        <h3>Comments</h3>
+        <div class="d-flex flex-column" >
+          <% @candidate.comments.each do |comment| %>
+          <div class="p-2">
+            <div style="width:120px;float:left;text-align:center">
+              <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+            </div>
+            <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
+            <%= markdown(comment.text) %>
+          </div>
+          <% end %>
+          <div>
+            <h3>Add A Comment</h3>
+            <%= bootstrap_form_for @comment, url: chambers_comments_path do |f| %>
+              <%= f.text_area :text, hide_label: true, placeholder: 'Leave a comment...' %>
+              <%= f.hidden_field :candidate_id, value: @candidate.id %>
+              <%= f.submit %>
+            <% end %> 
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="gallery">
+        <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
+        <h3>Add An Image/Document</h3>
+        <%= bootstrap_form_for @document, url: chambers_documents_path do |f| %>
+          <%= f.file_field :document, label: 'File' %>
+          <%= f.hidden_field :candidate_id, value: @candidate.id %>
+          <%= f.text_field :name %>
+          <%= f.text_field :description %>
+          <%= f.submit %>
+        <% end %> 
+      </div>
     </div>
-    <div class="col-md-5">
-      <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
-      <%= markdown(comment.text) %>
-    </div>
   </div>
-  <% end %>
-  <div class="col-md-12">
-  <h3>Add A Comment</h3>
-  <%= semantic_form_for @comment, url: chambers_comments_path do |f| %>
-    <%= f.inputs do %>
-      <%= f.input :text, label: 'Comment' %>
-      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
-    <% end %>
-    <%= f.button class: 'btn btn-default' %>
-  <% end %> 
-  </div>
-  </div>
-  <div role="tabpanel" class="tab-pane active " id="gallery">
-  <%= render 'chambers/peerage/candidates/gallery', documents: @candidate.documents %>
-  <h3>Add An Image/Document</h3>
-  <%= semantic_form_for @document, url: chambers_documents_path do |f| %>
-    <%= f.inputs do %>
-      <%= f.input :document, label: 'File', as: :file %>
-      <%= f.input :candidate_id, :as => :hidden, :input_html => {:value => @candidate.id} %>
-      <%= f.input :name %>
-      <%= f.input :description %>
-    <% end %>
-    <%= f.button class: 'btn btn-default' %>
-  <% end %> 
-  </div>
-</div>
-</div>
-<div class="col-md-4">
-<%= image_tag @candidate.profile_pic.url(:large) %>
-</div>
 </div>
 <script>
   var simplemde = new SimpleMDE();

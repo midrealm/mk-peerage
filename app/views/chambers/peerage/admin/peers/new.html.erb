@@ -1,14 +1,22 @@
-<h1>Add New <%=peerage.capitalize%></h1>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page">New</li>
+  </ol>
+</nav>
 <div class="container">
+  <h1>Add New <%=peerage.capitalize%></h1>
   <div class="col-md-4">
-    <%= semantic_form_for @peer, as: peerage, url: chambers_admin_peers_path(peerage) do |f| %>
-      <%= f.inputs do %>
-        <%= f.input :id, label: 'Existing User', :collection => User.all_except(peerage).pluck(:sca_name, :email, :id).map{|x| ["#{x[0]};#{x[1]}", x[2]]}%>
-        <%= f.input :sca_name, label: 'SCA Name' %>
-        <%= f.input :email %>
-        <%= f.input :vigilant, as: :radio, label: 'Status', collection: [['Vigilant',true],['Elevated',false]] %>
-      <% end %>
-      <%= f.action :submit, as: :button,  label: "Create #{peerage.capitalize}", button_html: {class: 'btn btn-default'}, id: 'submit'%>
+    <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peers_path(peerage) do |f| %>
+      <%= f.select :id, User.all_except(peerage).pluck(:sca_name, :email, :id).map{|x| ["#{x[0]} (#{x[1]})", x[2]]}, {label: 'Existing User', include_blank: true } %>
+      <%= f.text_field :sca_name, label: 'SCA Name' %>
+      <%= f.email_field :email %>
+      <%= f.form_group :vigilant, label: {text: "Status"} do %>
+        <%= f.radio_button :vigilant, true, label: "Vigilant" %>
+        <%= f.radio_button :vigilant, false, label: "Elevated" %>
+      <% end %> 
+      <%= f.submit  "Create #{peerage.capitalize}"%>
     <%end%> 
   </div>
 </div>

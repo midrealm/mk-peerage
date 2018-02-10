@@ -9,10 +9,10 @@ class ContactController < ApplicationController
       if params['contact']['message'].present?
         # *contact_params.values explodes items out of the array
         PeerageMailer.contact_user(@user, *contact_params.values).deliver 
-        flash.notice = "email successfully sent"
+        flash[:success]= "email successfully sent"
         redirect_to peer_path(peerage,params[:slug])
       else
-        flash.alert = "not sending email - message must be present"
+        flash[:error] = "not sending email - message must be present"
         render :new
       end
     else

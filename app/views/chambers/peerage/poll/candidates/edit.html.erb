@@ -1,46 +1,49 @@
 <h1><%= peerage.capitalize %> Poll for <%=@candidate.sca_name%></h1>
 
 <div class="container">
-  <div class="col-md-4">
-    <%= semantic_form_for @advising, url: chambers_edit_ballot_candidate_path(peerage,@candidate)  do |f| %>
-      <%= f.inputs do %>
-        <% if @candidate.vote? %>
-          <%= f.input :judgement, :collection => Advising.vote_list_judgements  %>
-        <% else %>
-          <%= f.input :judgement, :collection => Advising.watch_list_judgements  %>
-        <% end %>
-        <%= f.input :comment %>
+  <div class="row">
+    <div class="col-md">
+      <%= bootstrap_form_for @advising, url: chambers_edit_ballot_candidate_path(peerage,@candidate)  do |f| %>
+          <% if @candidate.vote? %>
+            <%= f.select :judgement, Advising.vote_list_judgements  %>
+          <% else %>
+            <%= f.select :judgement, Advising.watch_list_judgements  %>
+          <% end %>
+          <%= f.text_area :comment %>
+        <%= f.submit 'Submit Advising' %>
       <% end %>
-      <%= f.action :submit, as: :button, label: 'Submit Advising', button_html: {class: 'btn btn-default'}, id: 'submit' %>
-    <% end %>
-  </div>
-  <div class="col-md-4">
-    <strong>Status</strong>: <%=  @candidate.vote ? "Vote List" : "Watch List" %><br>
-    <% if @candidate.specialties.count > 0 %>
-      <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
-      <%= spec.name %>  
-      <% end %><br>
-    <% end %>
-    <% if @candidate.peers.count > 0 %>
-      <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
-      <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
-      <% end %><br>
-    <%end%>
-    <% if @candidate.group %>
-    <strong>Group</strong>: <%= candidate_link @candidate.group, peerage %>
-    <% end %>
-    <h3>Comments</h3>
-    <% @candidate.comments.each do |comment| %>
-    <div class="container" style="margin:10px;width:100%">
-      <div style="width:120px;float:left">
-      <%= image_tag comment.peer.profile_pic.url(:thumb) %><br><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%>
-      </div>
-      <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
-      <%= markdown(comment.text) %>
     </div>
-    <% end %> 
-  </div>
-  <div class="col-md-4">
-    <%= image_tag @candidate.profile_pic.url(:large) %>
+    <div class="col-md">
+      <div class="d-flex flex-row-reverse">
+        <div>
+        <%= image_tag @candidate.profile_pic.url(:large) %>
+        </div>
+        <div>
+          <strong>Status</strong>: <%=  @candidate.vote ? "Vote List" : "Watch List" %><br>
+          <% if @candidate.specialties.count > 0 %>
+            <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
+            <%= spec.name %>  
+            <% end %><br>
+          <% end %>
+          <% if @candidate.peers.count > 0 %>
+            <strong>Advocates</strong>: <%= @candidate.peers.map{|adv| link_to adv.sca_name, peer_path(peerage,adv.slug)}.join(', ').html_safe %> <br>
+          <%end%>
+          <% if @candidate.group %>
+          <strong>Group</strong>: <%= candidate_link @candidate.group, peerage %>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+      <h3>Comments</h3>
+      <% @candidate.comments.each do |comment| %>
+      <div class="p-2">
+        <div style="width:120px;float:left">
+        <%= image_tag comment.peer.profile_pic.url(:thumb) %><br><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%>
+        </div>
+        <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
+        <%= markdown(comment.text) %>
+      </div>
+      <% end %> 
+    </div>
   </div>
 </div>

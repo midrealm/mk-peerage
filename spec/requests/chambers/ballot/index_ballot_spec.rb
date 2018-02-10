@@ -24,11 +24,11 @@ describe "get /chambers/laurel/poll" do
       it "shows OK if advising has been submitted for a given candidate" do
         advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
         get "/chambers/laurel/poll"
-        expect(response.body).to include("glyphicon-ok")
+        expect(response.body).to include("fa-check")
       end
       it "does not shows OK if advising has not been submitted for a given candidate" do
         get "/chambers/laurel/poll"
-        expect(response.body).not_to include("glyphicon-ok")
+        expect(response.body).not_to include("fa-check")
       end
 
       it "show progress bar with percent of candidates complete" do

@@ -1,3 +1,11 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Home', '/' %></li>
+    <li class="breadcrumb-item"><%=peerage.capitalize%></li>
+    <li class="breadcrumb-item"><%= link_to 'Groups', groups_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=@group%></li>
+  </ol>
+</nav>
 <h1><%=@group%></h1>
 <ul>
 <%= render '/peerage/groups/draw_tree', node: @group %>

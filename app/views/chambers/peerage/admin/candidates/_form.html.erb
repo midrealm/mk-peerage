@@ -1,34 +1,38 @@
 <div class="container">
-  <div class="col-md-4">
-    <%= semantic_form_for(@candidate, url: {action: action, controller: 'candidates', peerage: peerage} ) do |f| %>
-      <%= f.inputs do %>
-        <%= f.input :peerage_type, :as => :hidden %>
-        <%= f.input :sca_name, label: 'SCA Name' %>
+  <div class="row">
+    <div class="col-md">
+      <%= bootstrap_form_for(@candidate, url: {action: action, controller: 'candidates', peerage: peerage} ) do |f| %>
+        <%= f.hidden_field :peerage_type %>
+        <%= f.text_field :sca_name, label: 'SCA Name' %>
         <% if @candidate.persisted? %>
-          <%= f.input :vote, :as => :radio, label: 'List Status', :collection => [['Vote', true],['Watch', false]]%>
+          <%= f.form_group :vote, label: {text: "List Status"} do %>
+            <%= f.radio_button :vote, true, label: "Vote" %>
+            <%= f.radio_button :vote, false, label: "Watch" %>
+          <% end %> 
         <% end %>
-        <%= f.input :group, :as => :select, :collection => Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}]%>
-        <%= f.input :specialties, :collection => Specialty.where(peerage_type: peerage) %>
-        <%= f.input :specialty_detail %>
-        <%= f.input :peers, label: 'Advocates', collection: Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id) %>
-        <div id='candidate_profile_pic_input' class='form-group'>
-          <span class="form-label"><label for="profile_pic" class="control-label">Profile Pic</label></span>
-          <span class="form-wrapper">
-            <input id="profile_pic" type="file" name="not_included">
-          </span>
+        <%= f.select :group_id, Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true}%>
+        <%= f.select :specialty_ids, Specialty.where(peerage_type: peerage).pluck(:name, :id), {label: 'Specialties', include_blank: true}, multiple: true%>
+        <%= f.text_field :specialty_detail %>
+        <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id), {label: 'Advocates', include_blank: true}, multiple: true %>
+        <div class="form-group">
+          <div id='candidate_profile_pic_input' class="custom-file">
+            <input type="file" class="custom-file-input" id="profile_pic" name="not_included">
+            <label class="custom-file-label" for="profile_pic">Choose Profile Pic</label>
+          </div>
         </div>
         <input type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
-      <% end %>  
-      <%= f.button class: 'btn btn-default', id: 'submit' %>
-    <% end %>
-  </div>
-  <div class="col-md-4">
-    <div id="profile-preview">
-      <% unless @candidate.profile_pic_file_size.nil? %>
-        <%= image_tag @candidate.profile_pic.url(:large) %>
+      <%= f.submit class: 'btn btn-secondary', id: 'submit'%>
       <% end %>
     </div>
-    <button class="btn btn-default hidden" id="crop">Finish</button>
-    <div id="-container"></div>
+    <div class="d-flex flex-column col-md">
+      <div id="profile-preview">
+        <% unless @candidate.profile_pic_file_size.nil? %>
+          <%= image_tag @candidate.profile_pic.url(:large) %>
+        <% end %>
+      </div>
+      <div class="ml-5">
+        <button class="btn btn-default d-none " id="crop">Finish</button>
+      <div> 
+    </div>
   </div>
 </div>

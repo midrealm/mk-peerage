@@ -1,12 +1,17 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "Manage Royalty", chambers_admin_royalty_index_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">New</li>
+  </ol>
+</nav>
 <h1>Add New Royal</h1>
 <div class="container">
   <div class="col-md-4">
-    <%= semantic_form_for @royal, as: :royal, url: chambers_admin_royalty_index_path do |f| %>
-      <%= f.inputs do %>
-        <%= f.input :sca_name, label: 'SCA Name' %>
-        <%= f.input :email %>
-      <% end %>
-      <%= f.action :submit, as: :button,  label: 'Create Royal', button_html: {class: 'btn btn-default'}, id: 'submit'%>
+    <%= bootstrap_form_for @royal, as: :royal, url: chambers_admin_royalty_index_path do |f| %>
+      <%= f.text_field :sca_name, label: 'SCA Name' %>
+      <%= f.email_field :email %>
+      <%= f.submit 'Create Royal'%>
     <%end%> 
   </div>
 </div>

@@ -17,7 +17,7 @@ describe "post /chambers/laurel/admin/peers" do
       post "/chambers/laurel/admin/peers", params: { :laurel => {id: "", sca_name: "Blah Blah", email: "", vigilant:false} }
       expect(response.body).to include('Email is invalid')
       expect(response.body).to include("value=\"Blah Blah\" name=\"laurel[sca_name]\"")
-      expect(response.body).to include("<input id=\"laurel_vigilant_false\" type=\"radio\" value=\"false\" checked=\"checked\"")
+      expect(response.body).to include("type=\"radio\" value=\"false\" checked=\"checked\" name=\"laurel[vigilant]\" id=\"laurel_vigilant_false\"")
     end
   end
   it "doesn't allow non admins to create new users" do

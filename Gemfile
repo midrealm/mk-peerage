@@ -8,8 +8,6 @@ gem 'sqlite3'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -32,11 +30,14 @@ gem 'capistrano-rails', group: :development
 gem 'capistrano-rbenv', group: :development
 
 gem 'devise', '~> 4.4.0'
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #gem 'paperclip', '~> 5.2.1'
 gem 'paperclip', '~> 5.1.0' #so data urls work
 gem 'select2-rails'
+gem "bootstrap_form",
+    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
+    branch: "master"
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 gem 'redcarpet'
@@ -46,6 +47,7 @@ gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'bootstrap-datepicker-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'font-awesome-sass', '~> 5.0.6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

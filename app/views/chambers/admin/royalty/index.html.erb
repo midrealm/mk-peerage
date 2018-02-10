@@ -1,3 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage Royalty</li>
+  </ol>
+</nav>
 <h1>Manage Royalty</h1>
 <table class='table'>
 <thead>
@@ -19,3 +25,4 @@
 <%end%>
 </tbody>
 </table>
+<%= render '/shared/default_datatable' %>

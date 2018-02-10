@@ -12,6 +12,7 @@
 //
 //= require lodash
 //= require jquery
+//= require popper
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require select2
@@ -22,3 +23,4 @@
 //= require rails_jskit
 //= require_tree ./controllers
 
+$.fn.select2.defaults.set( "theme", "bootstrap4" );
