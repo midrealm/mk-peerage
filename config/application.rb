@@ -22,8 +22,6 @@ module Peerage
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.autoload_paths << Rails.root.join('lib')
-
     #so .to_hash only converts permitted params  
     config.action_controller.raise_on_unfiltered_parameters = true
   end

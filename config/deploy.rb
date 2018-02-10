@@ -37,7 +37,7 @@ set :linked_files, fetch(:linked_files, []).push('.env', 'config/secrets.yml')
 # set :keep_releases, 5
 
 
-set :rbenv_ruby, '2.3.0'
+set :rbenv_ruby, '2.5.0'
 set :rbenv_path, '/home/mrio/.rbenv'
 
 namespace :deploy do
