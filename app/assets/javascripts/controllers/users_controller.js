@@ -13,12 +13,12 @@ App.createController("Users", {
     },
   },
   toggleImagePreview: function(e){
-    $('.image-preview-container').addClass('hidden')
+    $('.image-preview-container').addClass('d-none')
     $('.profile-pic-cache').removeClass('active')
     $('.profile-pic-actual').removeClass('active')
     switch(e.target.hash){
       case '#personal':
-        $('#arms_preview_container').removeClass('hidden')
+        $('#arms_preview_container').removeClass('d-none')
         break
       case '#laurel':
         this.peerImagePreview('#laurel')
@@ -32,9 +32,9 @@ App.createController("Users", {
   peerImagePreview: function(peer){
     $(peer + ' .profile-pic-cache').addClass('active')
     $(peer + ' .profile-pic-actual').addClass('active')
-    var $img = $(peer +' .profile-pic-cache').clone().removeClass('hidden')
+    var $img = $(peer +' .profile-pic-cache').clone().removeClass('d-none')
     $('#profile_preview').html($img) 
-    $('#profile_pic_preview_container').removeClass('hidden')
+    $('#profile_pic_preview_container').removeClass('d-none')
   },
   
   validate: function(e){
@@ -48,7 +48,7 @@ App.createController("Users", {
     } 
     if(has_errors){
       e.preventDefault(); 
-    }else if(!$('#crop').hasClass('hidden')){
+    }else if(!$('#crop').hasClass('d-none')){
       var promise = this.cropPicture();
       promise.then(function(){
         console.log('promise success')
@@ -90,7 +90,7 @@ App.createController("Users", {
       })
     }   
     reader.readAsDataURL(e.target.files[0]);
-    $('#crop').removeClass('hidden')
+    $('#crop').removeClass('d-none')
   },
   cropPicture: function(){
     var self = this
@@ -100,9 +100,9 @@ App.createController("Users", {
         size: 'viewport'
       }).then(function(resp){
         $('#profile_preview').empty().append($('<img>',{src: resp}));
-        $('#crop').addClass('hidden')
-        $('.profile-pic-actual.active').first().val(resp)
-        $('.profile-pic-cache.active').first().attr('src',resp)
+        $('#crop').addClass('d-none')
+        $('.tab-pane.active').find('.profile-pic-actual').val(resp)
+        $('.tab-pane.active').find('.profile-pic-cache').attr('src',resp)
         $('#crop').trigger('cropped')
         resolve('Success');
       });
@@ -121,9 +121,5 @@ App.createController("Users", {
     $('#user_group_id').select2();
   },
 });
-
-//function MyObj(peer)  {
-//  this.peer = peer;
-//}
 
 App.UsersController;

@@ -4,17 +4,19 @@
     <div class="col-md">
 
       <ul class="nav nav-tabs" id="myTabs" role="tablist">
-        <li role="presentation" class="<%= 'active' if peerage.nil? %> nav-item"><a class="nav-link" href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
+        <li role="presentation" class="nav-item"><a class="nav-link <%= 'active' if peerage.nil? %> " href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
         <li role="presentation"><a  class="nav-link" href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
         <% @user.peers.each do |p| %>
-          <li role="presentation" class="<%= 'active' if peerage == p.peerage_type %> nav-item"><%= link_to p.peerage_name, "##{p.peerage_type}", class: "nav-link", role: 'tab', 'data-toggle': 'tab' %></li>
+          <% link_class = 'nav-link' %>
+          <% link_class = link_class + ' active' if peerage == p.order  %>
+          <li role="presentation" class="nav-item"><%= link_to p.peerage_name, "##{p.peerage_type}", class: link_class, role: 'tab', 'data-toggle': 'tab' %></li>
         <% end %>
       </ul>
 
 
       <%= bootstrap_form_for @user, url: users_edit_path do |f| %>
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane <%= 'active' if peerage.nil? %>  " id="personal">
+        <div role="tabpanel" class="tab-pane <%= 'show active' if peerage.nil? %>  " id="personal">
           <%= f.text_field :sca_name, label: 'SCA Name' %>
           <%= f.text_field :modern_name, label: 'Modern Name' %>
           <%= f.file_field :arms %>

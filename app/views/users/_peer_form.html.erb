@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane <%= 'active' if peerage == peer.peerage_type %>" id="<%=peer.peerage_type%>">
+<div role="tabpanel" class="tab-pane <%= 'show active' if peerage == peer.order %>" id="<%=peer.peerage_type%>">
   <%= f.fields_for peer.order do |p| %>
 
     <div class="form-group">
