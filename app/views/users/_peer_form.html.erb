@@ -1,7 +1,8 @@
 <div role="tabpanel" class="tab-pane <%= 'show active' if peerage == peer.order %>" id="<%=peer.peerage_type%>">
   <%= f.fields_for peer.order do |p| %>
 
-    <div class="form-group">
+    <div class="d-md-none alert alert-info">Update Profile Pic on larger screen</div>
+    <div class="d-none d-md-block form-group">
       <div id="user_<%=peer.order%>_attributes_profile_pic_input" class="custom-file">
         <input type="file" class="custom-file-input profile-pic" id="profile_pic" name="not_included">
         <label class="custom-file-label" for="profile_pic">Choose Profile Pic</label>
