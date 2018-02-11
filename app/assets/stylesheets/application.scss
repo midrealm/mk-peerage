@@ -19,3 +19,21 @@
 .flex{
   display: 'flex';
 }
+
+.peer-profile-parent{
+  position: relative;
+  bottom: 0;
+  right: 0; 
+  .profile-pic{
+    position: relative;
+    bottom: 0;
+    right: 0; 
+  }
+  .arms{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;  
+  }    
+}      
+
+  

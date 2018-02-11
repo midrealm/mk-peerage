@@ -5,7 +5,7 @@
     <li class="breadcrumb-item active" aria-current="page"><%=@candidate.sca_name%></li>
   </ol>
 </nav>
-<div class ="d-flex flex-row-reverse">
+<div class ="d-md-flex flex-row-reverse">
   <div >
     <%= image_tag @candidate.profile_pic.url(:large) %>
   </div>
@@ -33,9 +33,13 @@
         <% end %>
         <% unless @pr.nil? %>
           <table class="table">
-          <thead>
-          <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
-          <th>Rec%</th><th>Fav%</th>
+          <thead class="d-none d-md-block">
+            <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+            <th>Rec%</th><th>Fav%</th>
+          </thead>
+          <thead class="d-md-none">
+            <th>E</th><th>W</th><th>NSO</th><th>D</th>
+            <th>Rec%</th><th>Fav%</th>
           </thead>
           <tbody>
           <tr>
