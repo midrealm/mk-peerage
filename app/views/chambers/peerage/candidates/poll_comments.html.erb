@@ -2,14 +2,10 @@
 <div class="col-md-8">
   <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
   <% if @candidate.specialties.count > 0 %>
-    <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
-    <%= spec.name %>  
-    <% end %><br>
+    <strong>Specialties</strong>: <%= @candidate.specialties_link %><br>
   <% end %>
   <% if @candidate.peers.count > 0 %>
-    <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
-    <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
-    <% end %><br>
+    <strong>Advocates</strong>: <%= @candidate.advocates_link %> <br>
   <%end%>
   <% if @candidate.group %>
   <strong>Group</strong>: <%= candidate_link(@candidate.group,peerage) %>

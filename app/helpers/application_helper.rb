@@ -20,6 +20,7 @@ module ApplicationHelper
     
     markdown.render(text).html_safe if text
   end
+  
   def flash_class(level)
     case level
         when 'notice' then "alert alert-info"
@@ -29,11 +30,7 @@ module ApplicationHelper
     end
   end
 
-  def peer_specialties_link(peer)
-    peer.specialties.map{|x| link_to(x.name, specialty_path(peer.order, x.slug))}.join(', ').html_safe
-  end 
-
-  def candidate_specialties_link(candidate)
-    candidate.specialties.map{|x| link_to(x.name, chambers_specialty_path(candidate.peerage_type, x.slug))}.join(', ').html_safe
+  def collection_link(collection)
+    collection.map{|x| link_to(*yield(x))}.join(', ').html_safe
   end
 end

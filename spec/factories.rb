@@ -97,6 +97,11 @@ FactoryBot.define do
     type 'Pelican'
   end
 
+  factory :dependency do
+    peer
+    association :superior , factory: :peer
+  end
+
   factory :user do
     email {generate :email}
     password Devise.friendly_token.first(8)  

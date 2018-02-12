@@ -34,7 +34,7 @@
       <td class="d-none d-md-table-cell"><%=pr.rec%></td>
       <td class="d-none d-md-table-cell"><%=pr.fav%></td>
       <td> <% if cand.group.present? %> <%= candidate_region_link(cand.group,peerage) %> <% end %> </td>
-      <td> <%= cand.peers.map{ |p|  link_to p.sca_name, peer_path(peerage, p.slug) }.join(', ').html_safe %> </td>
+      <td> <%= cand.advocates_link %> </td>
    </tr> 
   <% end%>
 </tbody>

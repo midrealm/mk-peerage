@@ -24,6 +24,13 @@ class Candidate < ApplicationRecord
     self.vote ||= false
   end
 
+  def specialties_link
+    ApplicationController.helpers.collection_link(specialties){|x|[x.name, Rails.application.routes.url_helpers.chambers_specialty_path(order, x.slug)]}
+  end
+
+  def advocates_link
+    ApplicationController.helpers.collection_link(peers){|x|[x.sca_name, Rails.application.routes.url_helpers.peer_path(order, x.slug)]}
+  end
   def order
     peerage_type.to_sym
   end

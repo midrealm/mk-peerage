@@ -13,7 +13,7 @@
       
       <% if @peer.modern_name.present? %><strong>Modern Name:</strong> <%=@peer.modern_name%><br><%end%>
       <% if @peer.specialties.count > 0 %>
-         <strong>Specialties:</strong> <%=peer_specialties_link(@peer)%> <% if @peer.specialty_detail.present? %>(<%=@peer.specialty_detail%>)<%end%><br/>
+         <strong>Specialties:</strong> <%=@peer.specialties_link%> <% if @peer.specialty_detail.present? %>(<%=@peer.specialty_detail%>)<%end%><br/>
       <% end %>
       <% if @peer.group.present? %>
         <strong>Group:</strong> <%=peer_link(@peer.group, peerage) %> <br>
@@ -31,7 +31,7 @@
       <% if @peer.elevated_by.present? %> <strong>Elevated by:</strong> <%=@peer.elevated_by%><br> <%end%>
       <% if @peer.elevation_date.present? %><strong>Elevation Date:</strong> <%=@peer.elevation_date%><br><%end%>
       <% if @peer.superiors.count > 0 %>
-      <strong><%=@peer.dependent_name%> of:</strong> <%=@peer.superiors.map{|x| link_to x.sca_name, peer_path(peerage, x.slug)}.join(', ').html_safe%><br>
+      <strong><%=@peer.dependent_name%> of:</strong> <%=@peer.superiors_link%><br>
       <% end %>
       <% if @peer.dependent_of.present? %>
         <strong><%=@peer.dependent_name%> of (Not in Middle Kingdom):</strong> <%=@peer.dependent_of %> 

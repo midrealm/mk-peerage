@@ -8,7 +8,7 @@
 <% candidates.each do |candidate| %>
   <tr>
   <td><%= link_to candidate.sca_name, chambers_candidate_path(peerage,candidate.id)%></td>
-  <td><%=candidate_specialties_link(candidate)%></td>
+  <td><%=candidate.specialties_link%></td>
   <td><%=candidate.list%></td>
   <td><%=link_to candidate.group, chambers_group_path(peerage, candidate.group.slug) unless candidate.group.nil?%></td>
   </tr>

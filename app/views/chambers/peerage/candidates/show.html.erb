@@ -10,7 +10,7 @@
     <%= image_tag @candidate.profile_pic.url(:large) %>
   </div>
   <div class="col-md">
-    <h1><%=@candidate.sca_name%> <small><%=candidate_specialties_link(@candidate)%></small></h1>
+    <h1><%=@candidate.sca_name%> <small><%=@candidate.specialties_link%></small></h1>
     <ul class="nav nav-tabs" id="myTabs" role="tablist">
           <li role="presentation" class="nav-item active"><a id="info-tab" class="nav-link" href="#info" aria-controls="contact" role="tab" data-toggle="tab">Info</a></li>
           <li role="presentation" class="nav-itme"><a id="gallery-tab" class="nav-link" href="#gallery" aria-controls="contact" role="tab" data-toggle="tab">Gallery</a></li>
@@ -19,14 +19,10 @@
       <div role="tabpanel" class="tab-pane active " id="info">
         <strong><%= @candidate.vote ? 'Vote' : 'Watch' %> List</strong></br>
         <% if @candidate.specialties.count > 0 %>
-          <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
-          <%= spec.name %>  
-          <% end %><br>
+          <strong>Specialties</strong>: <%= @candidate.specialties_link %> </br>
         <% end %>
         <% if @candidate.peers.count > 0 %>
-          <strong>Advocates</strong>: <% @candidate.peers.each do |adv| %>
-          <%=link_to adv.sca_name, peer_path(peerage,adv.slug) %> 
-          <% end %><br>
+          <strong>Advocates</strong>: <%= @candidate.advocates_link %><br/>
         <%end%>
         <% if @candidate.group %>
           <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
