@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Middle Kingdom Order of the Laurel</title>
+    <title>Middle Kingdom Peerage Orders</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -22,6 +22,7 @@
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laurel</a>
           <div class="dropdown-menu">
+            <%= link_to 'Home', order_path('laurel'), class: 'dropdown-item'%>
             <%= link_to 'Roll of Honor', roll_of_honor_path('laurel'), class: 'dropdown-item'%>
             <%= link_to 'Browse By Group', groups_path('laurel'), class: 'dropdown-item'%>
             <%= link_to 'Browse By Specialty', specialties_path('laurel'), class: 'dropdown-item'%>

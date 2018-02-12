@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to 'Home', '/' %></li>
-    <li class="breadcrumb-item">Laurel</li>
+    <li class="breadcrumb-item"><%= link_to peerage.capitalize, order_path(peerage)%></li>
     <li class="breadcrumb-item active" aria-current="page">Groups</li>
   </ol>
 </nav>

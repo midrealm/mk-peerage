@@ -10,4 +10,7 @@ class Pelican < Peer
   def self.dependent_name
     'protege'
   end
+
+  def self.image
+  end
 end

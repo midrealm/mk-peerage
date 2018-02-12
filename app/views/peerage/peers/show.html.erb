@@ -27,7 +27,7 @@
           <%end%>
         </address>
       <% end %>
-      <% if @peer.phone.present? %> <strong>Phone:</strong> <%=@peer.phone%><br> <%end %>
+      <% if @peer.phone.present? %> <strong>Phone:</strong> <%=number_to_phone(@peer.phone, area_code: true)%><br> <%end %>
       <% if @peer.elevated_by.present? %> <strong>Elevated by:</strong> <%=@peer.elevated_by%><br> <%end%>
       <% if @peer.elevation_date.present? %><strong>Elevation Date:</strong> <%=@peer.elevation_date%><br><%end%>
       <% if @peer.superiors.count > 0 %>
