@@ -29,11 +29,11 @@ class Peer < ApplicationRecord
   end
 
   def specialties_link
-    ApplicationController.helpers.collection_link(specialties){|x|[x.name, Rails.application.routes.url_helpers.specialty_path(order, x.slug)]}
+    ApplicationController.helpers.collection_link(collection: specialties, label: 'name', order: order, url_helper: 'specialty_path')
   end
 
   def superiors_link
-    ApplicationController.helpers.collection_link(superiors){|x|[x.sca_name, Rails.application.routes.url_helpers.peer_path(order, x.slug)]}
+    ApplicationController.helpers.collection_link(collection: superiors, label: 'sca_name', order: order, url_helper: 'peer_path')
   end
 
   def self.subclass(peerage) 

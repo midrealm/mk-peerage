@@ -21,7 +21,7 @@ describe ApplicationHelper do
       peer = create(:laurel_peer)
       create(:specialization, peer: peer, specialty: spec1)
       
-      expect(helper.collection_link(peer.specialties){|x|[x.name, specialty_path(peer.order, x.slug)]}).to eq('<a href="/laurel/specialties/spec">Spec</a>')
+      expect(helper.collection_link(collection: peer.specialties, label: 'name', order: peer.order, url_helper: 'specialty_path')).to eq('<a href="/laurel/specialties/spec">Spec</a>')
     end
     it "handles multiple items in collection" do
       spec1 = create(:specialty, name: 'Spec', slug: 'spec')
@@ -30,7 +30,7 @@ describe ApplicationHelper do
       create(:specialization, peer: peer, specialty: spec1)
       create(:specialization, peer: peer, specialty: spec2)
       
-      expect(helper.collection_link(peer.specialties){|x|[x.name, specialty_path(peer.order, x.slug)]}).to eq('<a href="/laurel/specialties/spec">Spec</a>, <a href="/laurel/specialties/spec_2">Spec 2</a>')
+      expect(helper.collection_link(collection: peer.specialties, label: 'name', order: peer.order, url_helper: 'specialty_path')).to eq('<a href="/laurel/specialties/spec">Spec</a>, <a href="/laurel/specialties/spec_2">Spec 2</a>')
     end
   end
 end

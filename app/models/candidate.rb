@@ -25,11 +25,11 @@ class Candidate < ApplicationRecord
   end
 
   def specialties_link
-    ApplicationController.helpers.collection_link(specialties){|x|[x.name, Rails.application.routes.url_helpers.chambers_specialty_path(order, x.slug)]}
+    ApplicationController.helpers.collection_link(collection: specialties, label: 'name', order: order, url_helper: 'chambers_specialty_path')
   end
 
   def advocates_link
-    ApplicationController.helpers.collection_link(peers){|x|[x.sca_name, Rails.application.routes.url_helpers.peer_path(order, x.slug)]}
+    ApplicationController.helpers.collection_link(collection: peers, label: 'sca_name', order: order, url_helper: 'peer_path')
   end
   def order
     peerage_type.to_sym

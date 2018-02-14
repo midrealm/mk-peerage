@@ -30,7 +30,10 @@ module ApplicationHelper
     end
   end
 
-  def collection_link(collection)
-    collection.map{|x| link_to(*yield(x))}.join(', ').html_safe
+  def collection_link(collection:, label:, order:, url_helper:)
+    links_array =  collection.map do |x| 
+      link_to( x.public_send(label), Rails.application.routes.url_helpers.public_send(url_helper, order, x.slug) )
+    end
+    links_array.join(', ').html_safe
   end
 end
