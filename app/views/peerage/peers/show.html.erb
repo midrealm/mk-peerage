@@ -1,7 +1,8 @@
 <div class="container">
-  <div class="d-flex flex-row-reverse">
-    <div >
-       <%= image_tag @peer.profile_pic.url(:large)%>
+  <div class="d-md-flex flex-row-reverse">
+    <div class='peer-profile-parent'>
+       <%= image_tag @peer.profile_pic.url(:large), class: 'profile-pic'%>
+       <%= image_tag @peer.arms.url(:large), class: 'arms'%>
     </div>
     <div class="col-md">
       <% if signed_in? && current_user.sca_name == @peer.sca_name %>
@@ -9,11 +10,10 @@
       <% end %>
       <h1><%=@peer.sca_name%><br><small><%=@peer.specialties.to_sentence%></h1>
       <%= link_to "Send #{@peer.sca_name} a Message", contact_path(peerage, @peer.slug), class: "btn btn-primary" %><br/>
-      <%= image_tag @peer.arms.url(:large), class: 'float-right'%>
       
       <% if @peer.modern_name.present? %><strong>Modern Name:</strong> <%=@peer.modern_name%><br><%end%>
       <% if @peer.specialties.count > 0 %>
-         <strong>Specialties:</strong> <%=peer_specialties_link(@peer)%> <% if @peer.specialty_detail.present? %>(<%=@peer.specialty_detail%>)<%end%><br/>
+         <strong>Specialties:</strong> <%=@peer.specialties_link%> <% if @peer.specialty_detail.present? %>(<%=@peer.specialty_detail%>)<%end%><br/>
       <% end %>
       <% if @peer.group.present? %>
         <strong>Group:</strong> <%=peer_link(@peer.group, peerage) %> <br>
@@ -31,7 +31,7 @@
       <% if @peer.elevated_by.present? %> <strong>Elevated by:</strong> <%=@peer.elevated_by%><br> <%end%>
       <% if @peer.elevation_date.present? %><strong>Elevation Date:</strong> <%=@peer.elevation_date%><br><%end%>
       <% if @peer.superiors.count > 0 %>
-      <strong><%=@peer.dependent_name%> of:</strong> <%=@peer.superiors.map{|x| link_to x.sca_name, peer_path(peerage, x.slug)}.join(', ').html_safe%><br>
+      <strong><%=@peer.dependent_name%> of:</strong> <%=@peer.superiors_link%><br>
       <% end %>
       <% if @peer.dependent_of.present? %>
         <strong><%=@peer.dependent_name%> of (Not in Middle Kingdom):</strong> <%=@peer.dependent_of %> 

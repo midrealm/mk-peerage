@@ -2,6 +2,29 @@ require 'rails_helper'
 
 RSpec.describe Peer, type: :model do
 end
+RSpec.describe Peer, "specialties_link" do
+  it "handles two specialties" do
+    spec1 = create(:specialty, name: 'Spec', slug: 'spec')
+    spec2 = create(:specialty, name: 'Spec 2', slug: 'spec_2')
+    peer = create(:laurel_peer)
+    create(:specialization, peer: peer, specialty: spec1)
+    create(:specialization, peer: peer, specialty: spec2)
+    
+    expect(peer.specialties_link).to eq('<a href="/laurel/specialties/spec">Spec</a>, <a href="/laurel/specialties/spec_2">Spec 2</a>')
+  end
+end
+
+RSpec.describe Peer, "superiors_link" do
+  it "handles two superiors" do
+    peer = create(:laurel_peer)
+    sup1 = create(:laurel_user, sca_name: 'Laurel 1', slug: 'laurel_1')
+    sup2 = create(:laurel_user, sca_name: 'Laurel 2', slug: 'laurel_2')
+    create(:dependency, peer: peer, superior: sup1.laurel)
+    create(:dependency, peer: peer, superior: sup2.laurel)
+
+    expect(peer.superiors_link).to eq('<a href="/laurel/laurel_1">Laurel 1</a>, <a href="/laurel/laurel_2">Laurel 2</a>')
+  end
+end
 
 RSpec.describe Peer, "potential_superiors" do
   before(:each) do

@@ -24,6 +24,13 @@ class Candidate < ApplicationRecord
     self.vote ||= false
   end
 
+  def specialties_link
+    ApplicationController.helpers.collection_link(collection: specialties, label: 'name', order: order, url_helper: 'chambers_specialty_path')
+  end
+
+  def advocates_link
+    ApplicationController.helpers.collection_link(collection: peers, label: 'sca_name', order: order, url_helper: 'peer_path')
+  end
   def order
     peerage_type.to_sym
   end

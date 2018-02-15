@@ -27,6 +27,15 @@ class Peer < ApplicationRecord
     end
     data_uri
   end
+
+  def specialties_link
+    ApplicationController.helpers.collection_link(collection: specialties, label: 'name', order: order, url_helper: 'specialty_path')
+  end
+
+  def superiors_link
+    ApplicationController.helpers.collection_link(collection: superiors, label: 'sca_name', order: order, url_helper: 'peer_path')
+  end
+
   def self.subclass(peerage) 
     peerage.to_s.capitalize.constantize
   end

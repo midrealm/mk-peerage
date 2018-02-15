@@ -4,46 +4,37 @@
 <% if can?(:read, PollResult) %>
 <th>Comments from Last Poll</th>
 <% end %>
-  <th>Elevate now</th>
-  <th>Wait</th>
-  <th>No Strong Opinion</th>
-  <th>Drop</th>
-  <th>Rec%</th>
-  <th>Fav%</th>
+  <th class="d-none d-md-table-cell">Elevate now</th>
+  <th class="d-none d-md-table-cell">Wait</th>
+  <th class="d-none d-md-table-cell">No Strong Opinion</th>
+  <th class="d-none d-md-table-cell">Drop</th>
+  <th class="d-none d-md-table-cell">Rec%</th>
+  <th class="d-none d-md-table-cell">Fav%</th>
   <th>Region</th>
   <th>Advocate(s)</th>
 </thead>
 <tbody>
   <% candidates.each do |cand| %>
     <% pr = cand.poll_results.last %>
+    <% pr = PollResult.new if pr.nil? %>
     <tr>
       <td>
         <%= image_tag cand.profile_pic.url(:thumb), class: 'float-left' %>
         <%= link_to "#{cand.sca_name} (#{cand.specialties.to_sentence})", chambers_candidate_path(peerage,cand.id)%>
       </td>
-      <% unless pr.nil? %>
-        <% if can?(:read, PollResult) %>
-            <td><%= link_to 'Comments', chambers_poll_comments_path(peerage,cand.id)%></td>
-        <% end %>
-          <td><%=pr.elevate%></td>
-          <td><%=pr.wait%></td>
-          <td><%=pr.no_strong_opinion%></td>
-          <td><%=pr.drop%></td>
-          <td><%=pr.rec%></td>
-          <td><%=pr.fav%></td>
-      <%else%>
-        <% if can?(:read, PollResult) %>
-            <td></td>
-        <% end %>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      <%end%>
+      <% if can?(:read, PollResult) %>
+          <td>
+            <% if pr.id.present? %><%= link_to 'Comments', chambers_poll_comments_path(peerage,cand.id)%><%end%>
+          </td>
+      <% end %>
+      <td class="d-none d-md-table-cell"><%=pr.elevate%></td>
+      <td class="d-none d-md-table-cell"><%=pr.wait%></td>
+      <td class="d-none d-md-table-cell"><%=pr.no_strong_opinion%></td>
+      <td class="d-none d-md-table-cell"><%=pr.drop%></td>
+      <td class="d-none d-md-table-cell"><%=pr.rec%></td>
+      <td class="d-none d-md-table-cell"><%=pr.fav%></td>
       <td> <% if cand.group.present? %> <%= candidate_region_link(cand.group,peerage) %> <% end %> </td>
-      <td> <%= cand.peers.map{ |p|  link_to p.sca_name, peer_path(peerage, p.slug) }.join(', ').html_safe %> </td>
+      <td> <%= cand.advocates_link %> </td>
    </tr> 
   <% end%>
 </tbody>

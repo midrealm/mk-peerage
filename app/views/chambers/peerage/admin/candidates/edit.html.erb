@@ -6,4 +6,4 @@
   </ol>
 </nav>
 <h1>Edit Candidate <%=@candidate.sca_name%></h1>
-<%= render 'form', action: 'update'%>
+<%= render 'form', url: chambers_admin_candidate_path(peerage, @candidate.id)%>

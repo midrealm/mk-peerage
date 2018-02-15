@@ -20,13 +20,9 @@
         </div>
         <div>
           <strong>Status</strong>: <%=  @candidate.vote ? "Vote List" : "Watch List" %><br>
-          <% if @candidate.specialties.count > 0 %>
-            <strong>Specialties</strong>: <% @candidate.specialties.each do |spec| %>
-            <%= spec.name %>  
-            <% end %><br>
-          <% end %>
+          <% if @candidate.specialties.count > 0 %> <strong>Specialties</strong>: <%= @candidate.specialties_link %> <% end %>
           <% if @candidate.peers.count > 0 %>
-            <strong>Advocates</strong>: <%= @candidate.peers.map{|adv| link_to adv.sca_name, peer_path(peerage,adv.slug)}.join(', ').html_safe %> <br>
+            <strong>Advocates</strong>: <%=@candidate.advocates_link%> <br>
           <%end%>
           <% if @candidate.group %>
           <strong>Group</strong>: <%= candidate_link @candidate.group, peerage %>
