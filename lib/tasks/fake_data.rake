@@ -305,4 +305,5 @@ Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et males
     end
   end
   task :all => [:db_reset, :groups, :people, :calc_poll]
+  task :all_no_reset => [:groups, :people, :calc_poll]
 end

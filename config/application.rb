@@ -24,5 +24,6 @@ module Peerage
 
     #so .to_hash only converts permitted params  
     config.action_controller.raise_on_unfiltered_parameters = true
+    config.serve_static_assets = true #added for heroku
   end
 end
