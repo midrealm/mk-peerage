@@ -180,7 +180,6 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.12.1)
-    mysql2 (0.4.10)
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -198,6 +197,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    pg (1.0.0)
     popper_js (1.12.9)
     pry (0.11.0)
       coderay (~> 1.1.0)
@@ -346,8 +346,8 @@ DEPENDENCIES
   jquery-rails
   lodash-rails
   magic_lamp
-  mysql2 (>= 0.3.18, < 0.5)
   paperclip (~> 5.1.0)
+  pg
   puma (~> 3.0)
   rails (~> 5.0.2)
   rails-assets-croppie!
