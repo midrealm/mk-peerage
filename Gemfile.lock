@@ -366,5 +366,8 @@ DEPENDENCIES
   validates_email_format_of
   web-console
 
+RUBY VERSION
+   ruby 2.5.0p0
+
 BUNDLED WITH
    1.16.1
