@@ -8,7 +8,6 @@ GIT
 
 GEM
   remote: https://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     actioncable (5.0.6)
       actionpack (= 5.0.6)
@@ -53,15 +52,7 @@ GEM
     ancestry (3.0.1)
       activerecord (>= 3.2.0)
     arel (7.1.4)
-    autoprefixer-rails (7.2.5)
-      execjs
     bcrypt (3.1.11)
-    bootstrap (4.0.0)
-      autoprefixer-rails (>= 6.0.3)
-      popper_js (>= 1.12.9, < 2)
-      sass (>= 3.5.2)
-    bootstrap-datepicker-rails (1.7.1.1)
-      railties (>= 3.0)
     builder (3.2.3)
     byebug (9.0.6)
     cancancan (1.16.0)
@@ -123,13 +114,7 @@ GEM
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     ffi (1.9.17)
-    font-awesome-sass (5.0.6.1)
-      sass (>= 3.2)
     formatador (0.2.5)
-    formtastic (3.1.5)
-      actionpack (>= 3.2.13)
-    formtastic-bootstrap (3.1.1)
-      formtastic (>= 3.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     guard (2.14.1)
@@ -165,10 +150,6 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
-    magic_lamp (1.8.1)
-      method_source
-      rails (>= 4.0.0)
-      rake
     mail (2.7.0)
       mini_mime (>= 0.1.1)
     method_source (0.8.2)
@@ -198,7 +179,6 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pg (0.21.0)
-    popper_js (1.12.9)
     pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -218,18 +198,11 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.0.6)
       sprockets-rails (>= 2.0.0)
-    rails-assets-croppie (2.4.1)
-    rails-assets-datatables (1.10.16)
-      rails-assets-jquery (>= 1.7.0)
-    rails-assets-jquery (3.3.1)
-    rails-assets-simplemde (1.10.0)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails_jskit (5.1.5)
-      rails (>= 4.0)
     railties (5.0.6)
       actionpack (= 5.0.6)
       activesupport (= 5.0.6)
@@ -269,11 +242,6 @@ GEM
     rspec-support (3.5.0)
     rspec_junit_formatter (0.3.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    sass (3.5.5)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
     select2-rails (4.0.3)
       thor (~> 0.14)
     shellany (0.0.1)
@@ -294,10 +262,6 @@ GEM
     sshkit (1.11.3)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    teaspoon (1.1.5)
-      railties (>= 3.2.5, < 6)
-    teaspoon-mocha (2.3.3)
-      teaspoon (>= 1.0.0)
     thor (0.20.0)
     thread_safe (0.3.6)
     tzinfo (1.2.4)
@@ -324,8 +288,6 @@ PLATFORMS
 
 DEPENDENCIES
   ancestry
-  bootstrap (~> 4.0.0)
-  bootstrap-datepicker-rails
   bootstrap_form!
   byebug
   cancancan
@@ -337,22 +299,14 @@ DEPENDENCIES
   devise (~> 4.4.0)
   dotenv-rails
   factory_bot_rails
-  font-awesome-sass (~> 5.0.6)
-  formtastic
-  formtastic-bootstrap
   guard-rspec
   jbuilder (~> 2.5)
   jquery-rails
   lodash-rails
-  magic_lamp
   paperclip (~> 5.1.0)
   pg (~> 0.21.0)
   puma (~> 3.0)
   rails (~> 5.0.2)
-  rails-assets-croppie!
-  rails-assets-datatables!
-  rails-assets-simplemde!
-  rails_jskit
   recaptcha
   redcarpet
   rspec-rails
@@ -360,7 +314,6 @@ DEPENDENCIES
   select2-rails
   shoulda-matchers
   simplecov
-  teaspoon-mocha
   tzinfo-data
   uglifier (>= 1.3.0)
   validates_email_format_of

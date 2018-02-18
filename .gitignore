@@ -1,3 +1,8 @@
+#webpack ignore
+/node_modules
+/public/javascripts
+/public/stylesheets
+
 #peerage ignore
 /public/system/
 /storage/

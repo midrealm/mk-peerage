@@ -30,7 +30,7 @@ gem 'capistrano-rails', group: :development
 gem 'capistrano-rbenv', group: :development
 
 gem 'devise', '~> 4.4.0'
-gem 'bootstrap', '~> 4.0.0'
+# gem 'bootstrap', '~> 4.0.0' #TBDELETED when implemented with webpack
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #gem 'paperclip', '~> 5.2.1'
 gem 'paperclip', '~> 5.1.0' #so data urls work
@@ -38,22 +38,23 @@ gem 'select2-rails'
 gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"
-gem 'formtastic'
-gem 'formtastic-bootstrap'
+#gem 'formtastic'
+#gem 'formtastic-bootstrap'
 gem 'redcarpet'
 gem 'cancancan'
-gem 'rails_jskit'
+# gem 'rails_jskit' TBDELETED when webpack is setup
 gem 'ancestry'
 gem 'validates_email_format_of'
-gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap-datepicker-rails' TBDELETED when implemented with webpack
 gem 'recaptcha', require: 'recaptcha/rails'
-gem 'font-awesome-sass', '~> 5.0.6'
+#gem 'font-awesome-sass', '~> 5.0.6' #TBDELETED when implemented in webpack
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-datatables'
-  gem 'rails-assets-simplemde'
-  gem 'rails-assets-croppie'
-end
+#TBDELETED when implemented in webpack
+#source 'https://rails-assets.org' do
+#  gem 'rails-assets-datatables'
+#  gem 'rails-assets-simplemde'
+#  gem 'rails-assets-croppie'
+#end
 
 group :development, :test do
   #gem 'sqlite3' #dev and test dbs
@@ -63,8 +64,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'capybara'
   #gem 'capybara-webkit'
-  gem 'teaspoon-mocha'
-  gem 'magic_lamp'
+  #gem 'teaspoon-mocha' #Turned off for webpack
+  #gem 'magic_lamp' #turned off for webpack
   gem "rspec_junit_formatter"
 end
 
