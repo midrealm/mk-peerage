@@ -1,5 +1,6 @@
 // Import external libraries
 const path = require('path')
+const webpack = require("webpack");
 
 //const ExtractTextPlugin = require("extract-text-webpack-plugin")
 // Define our compiled asset files
@@ -41,7 +42,12 @@ module.exports = {
       }
     }]
   },
-  //plugins: [
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    })
   //    new ExtractTextPlugin({ filename: cssOutputTemplate, allChunks: true }), // Define where to save the CSS file
-  //],
+  ],
 }
