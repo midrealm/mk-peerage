@@ -1,1 +1,1 @@
-//import './modules/alert'
+import 'bootstrap'

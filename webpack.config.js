@@ -1,11 +1,12 @@
 // Import external libraries
 const path = require('path')
 const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-//const ExtractTextPlugin = require("extract-text-webpack-plugin")
 // Define our compiled asset files
 const jsOutputTemplate = 'javascripts/application.js'
-//const cssOutputTemplate = 'stylesheets/application.css'
+
+const extractCSS = new ExtractTextPlugin('stylesheets/application.css');
 
 module.exports = {
   // Remove this if you are not using Docker
@@ -21,7 +22,7 @@ module.exports = {
   // What js / CSS files should we read from and generate
   entry: {
     application: ['./javascripts/application.js', 
-     // './stylesheets/application.sass'
+      './stylesheets/application.scss'
     ]
   },
 
@@ -33,21 +34,40 @@ module.exports = {
 
   // Define how different file types should be transpiled
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['es2015']
-      }
-    }]
+    rules: [
+      {
+        test: /\.css$/,
+        use: extractCSS.extract({ 
+          fallback: 'style-loader',
+          use: 'css-loader', 
+        })
+      },
+      {
+        test: /\.(scss|sass)$/,
+        use: extractCSS.extract({ 
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
+        
+      },
+    ], 
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
+      },
+    ]
   },
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery'
-    })
-  //    new ExtractTextPlugin({ filename: cssOutputTemplate, allChunks: true }), // Define where to save the CSS file
+      'window.jQuery': 'jquery',
+    }),
+    extractCSS, // Define where to save the CSS file
   ],
 }
