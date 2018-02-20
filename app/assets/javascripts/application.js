@@ -6,6 +6,7 @@ import './modules/markdownTextField'
 import './modules/addNewPeer'
 import './modules/select2'
 import './modules/datepicker'
+import './modules/profileCropper'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';

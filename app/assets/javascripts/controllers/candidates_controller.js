@@ -1,8 +1,4 @@
 App.createController("Candidates", {
-  actions: [{
-    new: 'form',
-    edit: 'form', 
-  }],
   elements: {
     edit: {
       profile: '#profile-preview',
@@ -17,35 +13,6 @@ App.createController("Candidates", {
       clickSubmitButton: ['#submit', { click: 'validate' }], 
     }
   },
-  validate: function(e){
-    $('.has-error').removeClass('has-error')    
-    $('.help-block').remove();
-    var has_errors = false;
-    if($('#candidate_sca_name').val() == ''){
-      var msg = $('<span>').addClass('help-block').text('Need SCA Name')
-      $('#candidate_sca_name_input').addClass('has-error').append(msg)
-      has_errors = true
-    } 
-    if($('#candidate_group_id').val() == ''){
-      var msg = $('<span>').addClass('help-block').text('Need Group')
-      $('#candidate_group_input').addClass('has-error').append(msg)
-      has_errors = true
-    }
-    if(this.$profile.is(':empty')){
-      var msg = $('<span>').addClass('help-block').text('Need Profile Picture');
-      $('#candidate_profile_pic_input').addClass('has-error').append(msg)
-      has_errors = true;
-    }
-    if(has_errors){
-      e.preventDefault(); 
-    }else if(!$('#crop').hasClass('d-none')){
-      var promise = this.cropPicture();
-      promise.then(function(){
-        console.log('promise success')
-      });
-    }   
-  },
-  
   openCroppie: function(e){
     var reader =  new window.FileReader();
     var self = this
@@ -84,8 +51,35 @@ App.createController("Candidates", {
     });
     return promise;
   },
-  form: function(){ 
+  validate: function(e){
+    $('.has-error').removeClass('has-error')    
+    $('.help-block').remove();
+    var has_errors = false;
+    if($('#candidate_sca_name').val() == ''){
+      var msg = $('<span>').addClass('help-block').text('Need SCA Name')
+      $('#candidate_sca_name_input').addClass('has-error').append(msg)
+      has_errors = true
+    } 
+    if($('#candidate_group_id').val() == ''){
+      var msg = $('<span>').addClass('help-block').text('Need Group')
+      $('#candidate_group_input').addClass('has-error').append(msg)
+      has_errors = true
+    }
+    if(this.$profile.is(':empty')){
+      var msg = $('<span>').addClass('help-block').text('Need Profile Picture');
+      $('#candidate_profile_pic_input').addClass('has-error').append(msg)
+      has_errors = true;
+    }
+    if(has_errors){
+      e.preventDefault(); 
+    }else if(!$('#crop').hasClass('d-none')){
+      var promise = this.cropPicture();
+      promise.then(function(){
+        console.log('promise success')
+      });
+    }   
   },
+  
 });
 
 App.CandidatesController;

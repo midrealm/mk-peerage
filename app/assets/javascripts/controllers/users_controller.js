@@ -1,7 +1,4 @@
 App.createController("Users", {
-  actions: [{
-    edit: 'form', 
-  }],
   elements: {
     edit: {
       profile: '#profile_preview',
@@ -108,17 +105,6 @@ App.createController("Users", {
       });
     });
     return promise;
-  },
-  form: function(){ 
-    peerage = ['laurel', 'pelican']
-    for(var i in peerage){
-      $('#user_' + peerage[i] + '_attributes_specialty_ids').select2();
-      $('#user_' + peerage[i]  + '_attributes_superior_ids').select2();
-      if($('#user_'+peerage[i]+'_attributes_bio')[0]){
-        new SimpleMDE({element: $('#user_'+peerage[i]+'_attributes_bio')[0]});
-      }
-    }
-    $('#user_group_id').select2();
   },
 });
 
