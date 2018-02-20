@@ -1,4 +1,3 @@
-import peerages from '../entities/peerages';
 export default (() => {
   var div = $("div[data-behavior='addNewPeer']")
   if( div.length > 0){
