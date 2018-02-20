@@ -20,9 +20,9 @@
     <td><%= link_to cand.sca_name, chambers_edit_ballot_candidate_path(peerage,cand.id)%></td>
     <td><%= cand.vote ? 'Vote List' : 'Watch List' %></td>
   <% if @ballot.submission_for?(cand)%>
-    <td><%=icon('fas', 'check')%></td>
+    <td><i class="fas fa-check"></i></td>
   <% else %>
-    <td><%=icon('far','square')%></td>
+    <td><i class="far fa-square"></i></td>
   <% end %>
 </tr>
 <% end %>

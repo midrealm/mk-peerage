@@ -1,6 +1,10 @@
 {
   "license": "SEE LICENSE IN THE MODULES HEREIN",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.3",
+    "@fortawesome/fontawesome-free-brands": "^5.0.6",
+    "@fortawesome/fontawesome-free-regular": "^5.0.6",
+    "@fortawesome/fontawesome-free-solid": "^5.0.6",
     "babel-core": "^6.26.0",
     "babel-loader": "7.1.1",
     "babel-polyfill": "^6.26.0",
@@ -14,7 +18,7 @@
     "postcss-loader": "^2.1.0",
     "precss": "^3.1.0",
     "sass-loader": "^6.0.6",
-    "simplemde": "^1.11.2",
+    "simplemde": "https://github.com/Ionaru/simplemde-markdown-editor.git#development", 
     "style-loader": "^0.20.2",
     "webpack": "3.11.0"
   },
