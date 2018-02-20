@@ -8,9 +8,10 @@
 <div class="container">
   <div class="col-md-4">
     <%= bootstrap_form_for @poll, url: chambers_admin_poll_path(peerage) do |f| %>
-      <%= f.text_field :start_date %>
-      <%= f.text_field :end_date %>
+      <%= f.text_field :start_date, data: { behavior: 'datepicker'} %>
+      <%= f.text_field :end_date, data: { behavior: 'datepicker'} %>
       <%= f.submit "Create Poll" %>
     <%end%> 
   </div>
+</div>
 

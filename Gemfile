@@ -16,8 +16,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'lodash-rails'
+# gem 'lodash-rails' TBDELETED when webpack is setup
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -33,20 +32,15 @@ gem 'devise', '~> 4.4.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #gem 'paperclip', '~> 5.2.1'
 gem 'paperclip', '~> 5.1.0' #so data urls work
-#gem 'select2-rails' TBDELETED when webpack is setup
 gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"
-#gem 'formtastic'
-#gem 'formtastic-bootstrap'
 gem 'redcarpet'
 gem 'cancancan'
 # gem 'rails_jskit' TBDELETED when webpack is setup
 gem 'ancestry'
 gem 'validates_email_format_of'
-# gem 'bootstrap-datepicker-rails' TBDELETED when implemented with webpack
 gem 'recaptcha', require: 'recaptcha/rails'
-#gem 'font-awesome-sass', '~> 5.0.6' #TBDELETED when implemented in webpack
 
 #TBDELETED when implemented in webpack
 #source 'https://rails-assets.org' do

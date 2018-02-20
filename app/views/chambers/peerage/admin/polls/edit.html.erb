@@ -9,9 +9,9 @@
   <div class="col-md-4">
     <%= bootstrap_form_for @poll, url: chambers_admin_poll_path(peerage) do |f|%>
       <% if @poll.start_date > DateTime.now %>
-        <%= f.text_field :start_date, value: @poll.start_date.strftime('%d-%b-%Y') %>
+        <%= f.text_field :start_date, value: @poll.start_date.strftime('%d-%b-%Y'), data: { behavior: 'datepicker' } %>
       <% end %>
-      <%= f.text_field :end_date, value: @poll.end_date.strftime('%d-%b-%Y') %>
+      <%= f.text_field :end_date, value: @poll.end_date.strftime('%d-%b-%Y'), data: { behavior: 'datepicker' } %>
       <%= f.submit "Update Poll" %>
     <% end %>
   </div>
