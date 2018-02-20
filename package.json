@@ -18,7 +18,9 @@
     "postcss-loader": "^2.1.0",
     "precss": "^3.1.0",
     "sass-loader": "^6.0.6",
-    "simplemde": "https://github.com/Ionaru/simplemde-markdown-editor.git#development", 
+    "select2": "^4.0.6-rc.1",
+    "select2-bootstrap4-theme": "^1.0.0",
+    "simplemde": "https://github.com/Ionaru/simplemde-markdown-editor.git#development",
     "style-loader": "^0.20.2",
     "webpack": "3.11.0"
   },
