@@ -5,7 +5,7 @@
       <%= f.text_field :subject %>
       <%= f.text_field :from_name, label: 'Your Name' %> 
       <%= f.email_field :from_email, label: 'Your Email Address', as: :email %>
-      <%= f.text_area :message, label: 'Your message', as: :text %>
+      <%= f.text_area :message, label: 'Your message', as: :text, data: { behavior: 'markdown' } %>
       <div class="form-group">
         <%= recaptcha_tags %>
       </div>

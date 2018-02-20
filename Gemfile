@@ -30,11 +30,10 @@ gem 'capistrano-rails', group: :development
 gem 'capistrano-rbenv', group: :development
 
 gem 'devise', '~> 4.4.0'
-# gem 'bootstrap', '~> 4.0.0' #TBDELETED when implemented with webpack
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #gem 'paperclip', '~> 5.2.1'
 gem 'paperclip', '~> 5.1.0' #so data urls work
-gem 'select2-rails'
+#gem 'select2-rails' TBDELETED when webpack is setup
 gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"
@@ -51,8 +50,6 @@ gem 'recaptcha', require: 'recaptcha/rails'
 
 #TBDELETED when implemented in webpack
 #source 'https://rails-assets.org' do
-#  gem 'rails-assets-datatables'
-#  gem 'rails-assets-simplemde'
 #  gem 'rails-assets-croppie'
 #end
 
