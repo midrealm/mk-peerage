@@ -4,6 +4,7 @@ $.fn.select2.defaults.set( "theme", "bootstrap4" );
 import './modules/datatable'
 import './modules/markdownTextField'
 import './modules/addNewPeer'
+import './modules/select2'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';

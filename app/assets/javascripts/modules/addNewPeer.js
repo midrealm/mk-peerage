@@ -14,6 +14,6 @@ export default (() => {
          sca_name_field.val('').prop('disabled',true);
          email_field.val('').prop('disabled',true);
        }
-    }).select2();
+    })
   }
 })()
