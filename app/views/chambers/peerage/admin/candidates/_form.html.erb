@@ -8,7 +8,7 @@
         <div class="d-none d-md-block form-group">
           <label for="profile_pic_input">Profile Pic</label>
           <div id='candidate_profile_pic_input' class="custom-file">
-            <input type="file" class="custom-file-input" id="profile_pic_input" name="not_included">
+            <input type="file" class="custom-file-input profile-pic" id="profile_pic_input" name="not_included">
             <label class="custom-file-label" for="profile_pic_input">Choose Profile Pic</label>
           </div>
         </div>
@@ -22,7 +22,7 @@
         <%= f.select :specialty_ids, Specialty.where(peerage_type: peerage).pluck(:name, :id), {label: 'Specialties', include_blank: true}, {data: {behavior: 'select2'}, multiple: true} %>
         <%= f.text_field :specialty_detail %>
         <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id), {label: 'Advocates', include_blank: true}, {data: {behavior: 'select2'}, multiple: true } %>
-        <input data-behavior="profile-data" type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
+        <input data-behavior="profile-data" class='active' type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
       <%= f.submit class: 'btn btn-secondary', id: 'submit'%>
       <% end %>
     </div>

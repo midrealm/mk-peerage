@@ -7,6 +7,7 @@ import './modules/addNewPeer'
 import './modules/select2'
 import './modules/datepicker'
 import './modules/profileCropper'
+import './modules/editUserToggle'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';

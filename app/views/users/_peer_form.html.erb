@@ -4,13 +4,12 @@
     <div class="d-md-none alert alert-info">Update Profile Pic on larger screen</div>
     <div class="d-none d-md-block form-group">
       <div id="user_<%=peer.order%>_attributes_profile_pic_input" class="custom-file">
-        <input type="file" class="custom-file-input profile-pic" id="profile_pic" name="not_included">
+        <input type="file" class="custom-file-input profile-pic" name="not_included">
         <label class="custom-file-label" for="profile_pic">Choose Profile Pic</label>
       </div>
     </div>
-    <input type="hidden" class="profile-pic-actual" id="user_<%=peer.order%>_attributes_profile_pic" name="user[<%=peer.peerage_type%>_attributes][profile_pic]" value=<%=peer.profile_pic_data_uri%>>
+    <input data-behavior="profile-data" type="hidden" class="<%= 'active' if peerage == peer.order %>" id="user_<%=peer.order%>_attributes_profile_pic" name="user[<%=peer.peerage_type%>_attributes][profile_pic]" value=<%=peer.profile_pic_data_uri%>>
 
-    <%= image_tag peer.profile_pic.url(:large), class:'d-none profile-pic-cache' %>
     <%= p.select :specialty_ids, Specialty.all.where(peerage_type: peer.peerage_type).pluck(:name, :id), {label: 'Specialties', include_blank: true}, {data: {behavior: 'select2'}, multiple: true }%>
     <%= p.text_field :specialty_detail %>
     <%= p.text_field :elevated_by %>

@@ -45,6 +45,16 @@ class User < ApplicationRecord
     user
   end
 
+  def arms_data_uri
+    data_uri = nil 
+    if arms.present?
+      file_contents = Paperclip.io_adapters.for(arms.styles[:large]).read
+      enc = Base64.strict_encode64(file_contents)    
+      data_uri = "data:#{arms_content_type};base64,#{enc}"
+    end
+    data_uri
+  end
+
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')

@@ -1,4 +1,5 @@
 App.createController("Users", {
+  //on open would initialize croppie
   elements: {
     edit: {
       profile: '#profile_preview',
@@ -66,41 +67,48 @@ App.createController("Users", {
     }
     reader.readAsDataURL(e.target.files[0]);
   },
+
+  initializeCroppie(){
+    $('#croppie').croppie({
+      viewport:{
+        width: 300,
+        height: 400,
+      },
+      boundary: {
+        width: 400,
+        height: 400,
+      },
+    });
+  }
   openCroppie: function(e){
     var reader =  new window.FileReader();
     var self = this
-    $("#profile_pic_status").text(e.target.files[0].name)
     reader.onload = function(e){
-      $('#profile_preview').empty();  
-      self.$profile.croppie({
-        viewport:{
-          width: 300,
-          height: 400,
-        },
-        boundary: {
-          width: 400,
-          height: 400,
-        },
-      })
-      self.$profile.croppie('bind',{
+      $('#profile_preview').addClass('d-none');
+      $('#croppie').removeClass('d-none');
+      $('#croppie').croppie('bind',{
         url: e.target.result,
       })
     }   
     reader.readAsDataURL(e.target.files[0]);
-    $('#crop').removeClass('d-none')
+    $('#crop_button').removeClass('d-none')
   },
   cropPicture: function(){
     var self = this
     var promise = new Promise(function(resolve, reject){
-      self.$profile.croppie('result' , {
+      $('#croppie').croppie('result' , {
         type: 'canvas',
         size: 'viewport'
       }).then(function(resp){
-        $('#profile_preview').empty().append($('<img>',{src: resp}));
-        $('#crop').addClass('d-none')
+        $('#profile_preview').empty().append($('<img>',{src: resp})).removeClass('d-none');
+        $('#croppie').addClass('d-none')
+        $('#crop_button').addClass('d-none')
+
+        $('input[data-behavior="profile-data"].active').val(resp)
         $('.tab-pane.active').find('.profile-pic-actual').val(resp)
         $('.tab-pane.active').find('.profile-pic-cache').attr('src',resp)
-        $('#crop').trigger('cropped')
+
+        //$('#crop').trigger('cropped')??
         resolve('Success');
       });
     });
