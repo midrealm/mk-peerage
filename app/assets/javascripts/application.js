@@ -10,6 +10,7 @@ import './modules/editUserToggle'
 import './modules/editUserOpenArms'
 import './modules/candidateValidator'
 import './modules/addNewPeer'
+import './modules/userValidator'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
