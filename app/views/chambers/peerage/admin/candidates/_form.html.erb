@@ -23,7 +23,7 @@
         <%= f.text_field :specialty_detail %>
         <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id), {label: 'Advocates', include_blank: true}, {data: {behavior: 'select2'}, multiple: true } %>
         <input data-behavior="profile-data" class='active' type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
-      <%= f.submit class: 'btn btn-secondary', id: 'submit'%>
+      <%= f.submit class: 'btn btn-secondary', id: 'candidate_submit'%>
       <% end %>
     </div>
     <div class="d-none d-md-block col-md">
