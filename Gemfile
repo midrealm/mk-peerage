@@ -15,7 +15,6 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# gem 'lodash-rails' TBDELETED when webpack is setup
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
@@ -32,15 +31,9 @@ gem "bootstrap_form",
     branch: "master"
 gem 'redcarpet'
 gem 'cancancan'
-# gem 'rails_jskit' TBDELETED when webpack is setup
 gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'recaptcha', require: 'recaptcha/rails'
-
-#TBDELETED when implemented in webpack
-#source 'https://rails-assets.org' do
-#  gem 'rails-assets-croppie'
-#end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -23,7 +23,7 @@ RSpec.feature 'Update Peer info' do
     fill_in 'user_laurel_attributes_dependent_of', with: 'Some Person'
     uncheck 'user_laurel_attributes_active'
     check 'user_laurel_attributes_vigilant'
-    click_on 'submit'
+    click_on 'user_submit'
     
     expect(User.last.sca_name).to eq('Smarty Pants')
     expect(Laurel.last.specialty_detail).to eq('Earwax Studies')
