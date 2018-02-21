@@ -5,7 +5,7 @@ export default (() => {
     switch(e.target.hash){
       case '#personal':
           var input = $('#arms_cache')
-          var img = $('<img>').attr('src', input.val())
+          var img = $('<img>', {src: input.val(), width: '100px'})
           $('#profile_preview').html(img) 
         break
       case '#laurel':

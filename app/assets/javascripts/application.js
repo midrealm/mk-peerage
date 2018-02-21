@@ -8,6 +8,7 @@ import './modules/select2'
 import './modules/datepicker'
 import './modules/profileCropper'
 import './modules/editUserToggle'
+import './modules/editUserOpenArms'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
