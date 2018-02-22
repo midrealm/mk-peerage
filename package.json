@@ -38,7 +38,7 @@
     "webpack": "3.11.0"
   },
   "scripts": {
-    "webpack:deploy": "webpack --config=webpack.config.js -p",
+    "webpack:deploy": "webpack",
     "heroku-postbuild": "npm run webpack:deploy"
   }
 }
