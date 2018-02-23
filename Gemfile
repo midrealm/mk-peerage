@@ -19,8 +19,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
-gem 'capistrano-rbenv', group: :development
 
 gem 'devise', '~> 4.4.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
@@ -51,6 +49,9 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'guard-rspec', require: false
+  gem 'capistrano-rails'
+  gem 'capistrano-nvm', require: false
+  gem 'capistrano-rbenv'
 end
 
 group :test do
