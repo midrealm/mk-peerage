@@ -24,6 +24,7 @@ gem 'devise', '~> 4.4.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 #gem 'paperclip', '~> 5.2.1'
 gem 'paperclip', '~> 5.1.0' #so data urls work
+gem 'aws-sdk', '~> 2'
 gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"
