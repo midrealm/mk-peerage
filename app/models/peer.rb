@@ -19,13 +19,7 @@ class Peer < ApplicationRecord
   end
   #helpers
   def profile_pic_data_uri
-    data_uri = nil 
-    if profile_pic.present?
-      file_contents = Paperclip.io_adapters.for(profile_pic).read
-      enc = Base64.strict_encode64(file_contents)    
-      data_uri = "data:#{profile_pic_content_type};base64,#{enc}"
-    end
-    data_uri
+    DataUriGenerator.new(profile_pic).data_uri
   end
 
   def specialties_link
