@@ -5,7 +5,7 @@
   </ol>
 </nav>
 <h1>Manage Royalty</h1>
-<table class='table'>
+<table class='table' data-behavior="dtable">
 <thead>
 <%= link_to 'Add New Royal', new_chambers_admin_royalty_path %>
 <th>SCA Name</th><th>Royal Status</th><th>Edit</th>
@@ -25,4 +25,3 @@
 <%end%>
 </tbody>
 </table>
-<%= render '/shared/default_datatable' %>

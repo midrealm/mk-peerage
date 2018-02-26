@@ -9,7 +9,7 @@
           <% else %>
             <%= f.select :judgement, Advising.watch_list_judgements  %>
           <% end %>
-          <%= f.text_area :comment %>
+          <%= f.text_area :comment, data: { behavior: 'markdown' }  %>
         <%= f.submit 'Submit Advising' %>
       <% end %>
     </div>

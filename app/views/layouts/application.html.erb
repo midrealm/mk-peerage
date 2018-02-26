@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all'  %>
-    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
@@ -16,38 +15,38 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laurel</a>
-          <div class="dropdown-menu">
-            <%= link_to 'Home', order_path('laurel'), class: 'dropdown-item'%>
-            <%= link_to 'Roll of Honor', roll_of_honor_path('laurel'), class: 'dropdown-item'%>
-            <%= link_to 'Browse By Group', groups_path('laurel'), class: 'dropdown-item'%>
-            <%= link_to 'Browse By Specialty', specialties_path('laurel'), class: 'dropdown-item'%>
-          </div>
-        </li>
-      </ul>
-      <ul class="navbar-nav my-2 my-lg-0">
-      <%= render "/layouts/private_chambers" %>   
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </nav>
-  <div class="container">
-    <div class="d-flex flex-row justify-content-center">
-      <div class="d-flex flex-column flash">
-        <% flash.each do |key, value| %>
-          <div class="<%= flash_class(key) %>"><%= value %></div>
-        <% end %>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laurel</a>
+            <div class="dropdown-menu">
+              <%= link_to 'Home', order_path('laurel'), class: 'dropdown-item'%>
+              <%= link_to 'Roll of Honor', roll_of_honor_path('laurel'), class: 'dropdown-item'%>
+              <%= link_to 'Browse By Group', groups_path('laurel'), class: 'dropdown-item'%>
+              <%= link_to 'Browse By Specialty', specialties_path('laurel'), class: 'dropdown-item'%>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav my-2 my-lg-0">
+        <%= render "/layouts/private_chambers" %>   
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <div class="container">
+      <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex flex-column flash">
+          <% flash.each do |key, value| %>
+            <div class="<%= flash_class(key) %>"><%= value %></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+          <%= yield %>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="container">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
-    <%= jskit %>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

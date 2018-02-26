@@ -1,3 +1,9 @@
+#webpack ignore
+/node_modules
+/public/javascripts
+/public/stylesheets
+yarn-error.log
+
 #peerage ignore
 /public/system/
 /storage/

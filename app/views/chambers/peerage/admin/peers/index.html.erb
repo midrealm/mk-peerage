@@ -6,7 +6,7 @@
 </nav>
 <h1>Manage <%=peerage.capitalize%>s</h1>
 <%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %>
-<table class='table'>
+<table class='table' data-behavior="dtable">
   <thead>
     <th>Name</th><th>Show</th><th>Edit</th>
   </thead>
@@ -20,4 +20,3 @@
     <% end %>
   </tbody
 </table>
-<%= render '/shared/default_datatable' %>

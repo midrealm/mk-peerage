@@ -8,9 +8,6 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
-require "action_cable/engine"
-require "sprockets/railtie"
-# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -24,5 +21,6 @@ module Peerage
 
     #so .to_hash only converts permitted params  
     config.action_controller.raise_on_unfiltered_parameters = true
+    config.serve_static_assets = true #added for heroku
   end
 end

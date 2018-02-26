@@ -1,0 +1,14 @@
+<% image_preview = image_tag user.arms.url(:large)  %>
+<% image_preview = image_tag user.peer(peerage).profile_pic.url(:large) unless peerage.nil? %>
+<div class="d-none d-md-block col-md">
+  <div class="d-flex flex-column">
+    <div id="profile_preview">
+      <%= image_preview %>
+    </div>
+    <div id="croppie" class='d-none'>
+    </div>
+    <div class="ml-5">
+      <button class="btn btn-default d-none " id="crop_button">Finish</button>
+    </div> 
+  </div>
+</div>

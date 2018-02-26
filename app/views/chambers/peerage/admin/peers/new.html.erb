@@ -7,9 +7,9 @@
 </nav>
 <div class="container">
   <h1>Add New <%=peerage.capitalize%></h1>
-  <div class="col-md-4">
+  <div class="col-md-4" data-behavior='addNewPeer' data-peerage="<%=peerage%>">
     <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peers_path(peerage) do |f| %>
-      <%= f.select :id, User.all_except(peerage).pluck(:sca_name, :email, :id).map{|x| ["#{x[0]} (#{x[1]})", x[2]]}, {label: 'Existing User', include_blank: true } %>
+      <%= f.select :id, User.all_except(peerage).pluck(:sca_name, :email, :id).map{|x| ["#{x[0]} (#{x[1]})", x[2]]}, {label: 'Existing User', include_blank: true, }, {data: {behavior: 'select2'} } %>
       <%= f.text_field :sca_name, label: 'SCA Name' %>
       <%= f.email_field :email %>
       <%= f.form_group :vigilant, label: {text: "Status"} do %>
@@ -20,21 +20,3 @@
     <%end%> 
   </div>
 </div>
-<script>
-$(document).ready(function(){
-
- $('#<%=peerage%>_id').change(function(){
-    var selected = $('#<%=peerage%>_id option:selected').text()
-    if (selected == ''){
-      $('#<%=peerage%>_sca_name').prop('disabled',false);
-      $('#<%=peerage%>_email').prop('disabled',false);
-    }else{
-      $('#<%=peerage%>_sca_name').val('').prop('disabled',true);
-      $('#<%=peerage%>_email').val('').prop('disabled',true);
-    }
- }).select2();
- 
- 
-});
-
-</script>

@@ -45,6 +45,10 @@ class User < ApplicationRecord
     user
   end
 
+  def arms_data_uri
+    DataUriGenerator.new(arms).data_uri
+  end
+
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')

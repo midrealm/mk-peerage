@@ -20,8 +20,9 @@
           <%= f.text_field :sca_name, label: 'SCA Name' %>
           <%= f.text_field :modern_name, label: 'Modern Name' %>
           <%= f.file_field :arms, class: 'd-none d-md-block' %>
+          <input type="hidden" id="arms_cache" value=<%= @user.arms_data_uri %> >
           <div class="d-md-none alert alert-info">Update Arms on larger screen</div>
-          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group'}%>
+          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group'}, {data: {behavior: 'select2'}}%>
         </div>
         <div role="tabpanel" class="tab-pane" id="contact">
           <%= f.text_field :street %>
@@ -35,11 +36,11 @@
         %>
         <%end %>
         
-        <%= f.submit class: 'btn btn-default', id: 'submit' %>
+        <%= f.submit class: 'btn btn-default', id: 'user_submit' %>
       <% end %>
       </div>
     </div>
 
-  <%= render 'image_preview', user: @user %>
+  <%= render 'image_cropper_preview', user: @user %>
   
 </div>

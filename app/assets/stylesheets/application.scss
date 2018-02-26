@@ -1,39 +1,8 @@
-@import "bootstrap";
-@import "dataTables.bootstrap4.min.css";
-@import "select2.css";
-@import "select2-bootstrap4.min.css";
-@import "rails_bootstrap_forms.css";
-@import "formtastic-bootstrap.css";
-@import "simplemde.css";
-@import "croppie.css";
-@import "bootstrap-datepicker.css";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-
-.new_user{
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-}
-
-.flex{
-  display: 'flex';
-}
-
-.peer-profile-parent{
-  position: relative;
-  bottom: 0;
-  right: 0; 
-  .profile-pic{
-    position: relative;
-    bottom: 0;
-    right: 0; 
-  }
-  .arms{
-    position: absolute;
-    bottom: 0px;
-    right: 0px;  
-  }    
-}      
-
-  
+@import "./custom";
+@import "~bootstrap/scss/bootstrap";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4";
+@import "~simplemde/dist/simplemde.min";
+@import "~select2/dist/css/select2.min";
+@import "~select2-bootstrap4-theme/dist/select2-bootstrap4.min";
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min";
+@import "~croppie/croppie";

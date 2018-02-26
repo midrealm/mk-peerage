@@ -6,10 +6,10 @@
         <%= f.text_field :sca_name, label: 'SCA Name' %>
         <div class="d-md-none alert alert-info"><% if @candidate.persisted? %>Update<%else%>Add<%end%> Candidate Profile Pic on larger screen</div>
         <div class="d-none d-md-block form-group">
-          <label for="profile_pic">Profile Pic</label>
+          <label for="profile_pic_input">Profile Pic</label>
           <div id='candidate_profile_pic_input' class="custom-file">
-            <input type="file" class="custom-file-input" id="profile_pic" name="not_included">
-            <label class="custom-file-label" for="profile_pic">Choose Profile Pic</label>
+            <input type="file" class="custom-file-input profile-pic" id="profile_pic_input" name="not_included">
+            <label class="custom-file-label" for="profile_pic_input">Choose Profile Pic</label>
           </div>
         </div>
         <% if @candidate.persisted? %>
@@ -18,23 +18,25 @@
             <%= f.radio_button :vote, false, label: "Watch" %>
           <% end %> 
         <% end %>
-        <%= f.select :group_id, Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true}%>
-        <%= f.select :specialty_ids, Specialty.where(peerage_type: peerage).pluck(:name, :id), {label: 'Specialties', include_blank: true}, multiple: true%>
+        <%= f.select :group_id, Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true, }, {data: {behavior: 'select2'} } %>
+        <%= f.select :specialty_ids, Specialty.where(peerage_type: peerage).pluck(:name, :id), {label: 'Specialties', include_blank: true}, {data: {behavior: 'select2'}, multiple: true} %>
         <%= f.text_field :specialty_detail %>
-        <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id), {label: 'Advocates', include_blank: true}, multiple: true %>
-        <input type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
-      <%= f.submit class: 'btn btn-secondary', id: 'submit'%>
+        <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id), {label: 'Advocates', include_blank: true}, {data: {behavior: 'select2'}, multiple: true } %>
+        <input data-behavior="profile-data" class='active' type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
+      <%= f.submit class: 'btn btn-secondary', id: 'candidate_submit'%>
       <% end %>
     </div>
     <div class="d-none d-md-block col-md">
       <div class="d-flex flex-column">
-        <div id="profile-preview">
+        <div id="croppie" class='d-none'>
+        </div>
+        <div id="profile_preview">
           <% unless @candidate.profile_pic_file_size.nil? %>
             <%= image_tag @candidate.profile_pic.url(:large) %>
           <% end %>
         </div>
         <div class="ml-5">
-          <button class="btn btn-default d-none " id="crop">Finish</button>
+          <button class="btn btn-default d-none " id="crop_button">Finish</button>
         </div> 
       </div>
     </div>

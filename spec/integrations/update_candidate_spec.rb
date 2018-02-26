@@ -19,7 +19,7 @@ RSpec.feature 'Update Candidate info' do
     select 'Laurel1', from: 'Advocates'
     select 'Laurel2', from: 'Advocates'
     choose('Vote')
-    click_on 'submit'
+    click_on 'candidate_submit'
     
     expect(Candidate.last.sca_name).to eq('Smarty Pants')
     expect(Candidate.last.specialty_detail).to eq('Earwax Studies')
