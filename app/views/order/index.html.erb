@@ -1,17 +1,33 @@
 <h1 style="text-align:center">The Order of the <%=peerage.capitalize%></h1>
 
-<div class="d-flex flex-row justify-content-around">
-  <div class="nav flex-column nav-pills">
+<div class="d-none d-md-flex flex-row justify-content-around">
+  <div class="d-none d-md-block nav flex-column nav-pills">
     <%= link_to 'Roll of Honor', roll_of_honor_path(peerage), class: 'nav-item, nav-link'%>
     <%= link_to 'Browse By Group', groups_path(peerage), class: 'nav-item, nav-link'%>
     <%= link_to 'Browse By Specialty', specialties_path(peerage), class: 'nav-item, nav-link'%>
   </div>
+  <ul class="d-md-none nav nav-pills">
+    <li class="nav-item"><%= link_to 'Roll of Honor', roll_of_honor_path(peerage), class: 'nav-link'%></li>
+    <li class="nav-item"><%= link_to 'Browse By Group', groups_path(peerage), class: 'nav-link'%></li>
+    <li class="nav-item"><%= link_to 'Browse By Specialty', specialties_path(peerage), class: 'nav-link'%></li>
+  </ul>
   <div class="card bg-light mb-3" style="max-width: 23rem;">
     <div class="card-body">
       <p class="card-text"><%=@order.oath%></p>
     </div>
   </div>
-  <div class="d-none d-md-block">
+  <div>
     <%= image_tag(@order.image, class: 'float-right') %>
   </div>
 </div>
+<div class="d-md-none">
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item"><%= link_to 'Roll of Honor', roll_of_honor_path(peerage), class: 'nav-link'%></li>
+    <li class="nav-item"><%= link_to 'Browse By Group', groups_path(peerage), class: 'nav-link'%></li>
+    <li class="nav-item"><%= link_to 'Browse By Specialty', specialties_path(peerage), class: 'nav-link'%></li>
+  </ul>
+  <div class="card bg-light mb-3 mx-auto" style="max-width: 23rem;">
+    <div class="card-body">
+      <p class="card-text"><%=@order.oath%></p>
+    </div>
+  </div>
