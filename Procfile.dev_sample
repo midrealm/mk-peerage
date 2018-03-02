@@ -1,2 +1,2 @@
-webpack: webpack -w --devtool 'eval-source-map'
+webpack: webpack -w 
 rails: bundle exec rails s -p 3000

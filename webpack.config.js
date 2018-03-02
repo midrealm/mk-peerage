@@ -31,7 +31,7 @@ module.exports = {
     path: path.join(__dirname, '/public'),
     filename: jsOutputTemplate
   },
-
+  devtool: 'source-map',
   // Define how different file types should be transpiled
   module: {
     rules: [
@@ -39,14 +39,19 @@ module.exports = {
         test: /\.css$/,
         use: extractCSS.extract({ 
           fallback: 'style-loader',
-          use: 'css-loader', 
+          use: [
+            { loader: 'css-loader', options: { sourceMap: true } } 
+          ]
         })
       },
       {
         test: /\.(scss|sass)$/,
         use: extractCSS.extract({ 
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: [
+            { loader: 'css-loader', options: { sourceMap: true } }, 
+            { loader: 'sass-loader', options: { sourceMap: true } }
+          ]
         })
         
       },
