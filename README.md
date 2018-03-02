@@ -14,7 +14,7 @@ then go to localhost:3000 in your browser
 
 For actually doing development, you'll need to start the webpack with the watch flag 
 and the rails server. You can do this by runnning in separte terminals:
-* webpack -w
+* webpack -w --devtool 'eval-source-map'
 * bundle exec rails s
 
 or you can run both at once. 
