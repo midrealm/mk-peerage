@@ -1,6 +1,6 @@
 #sqlite db setup (intended for frontend development)
 default: &default
-  adapter: default
+  adapter: sqlite3
   pool: 5
   timeout: 5000
 
