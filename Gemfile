@@ -53,6 +53,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-nvm', require: false
   gem 'capistrano-rbenv'
+  gem 'foreman'
 end
 
 group :test do

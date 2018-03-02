@@ -11,6 +11,7 @@ yarn-error.log
 #Related to getting email to work
 .env
 Procfile
+Procfile.dev
 
 
 *.gem
