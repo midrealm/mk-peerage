@@ -1,7 +1,7 @@
 {
   "name": "mk-peerage",
   "scripts": {
-    "postdeploy": "pg:reset && rake fake_data:all_heroku"
+    "postdeploy": "rake fake_data:all_heroku"
   },
   "env": {
     "AWS_ACCESS_KEY_ID": {
