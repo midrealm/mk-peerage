@@ -19,6 +19,12 @@
     "LANG": {
       "required": true
     },
+    "LAUREL_MAILING_LIST": {
+      "required": true
+    },
+    "PELICAN_MAILING_LIST": {
+      "required": true
+    },
     "RACK_ENV": {
       "required": true
     },
@@ -43,13 +49,16 @@
     "SECRET_KEY_BASE": {
       "required": true
     },
-    "LAUREL_MAILING_LIST": {
+    "SENDGRID_API_KEY": {
       "required": true
     },
-    "PELICAN_MAILING_LIST": {
+    "SENDGRID_PASSWORD": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
       "required": true
     }
-  },
+  }
   "formation": {
     "worker": {
       "quantity": 1
