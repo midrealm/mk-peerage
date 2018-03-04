@@ -1,6 +1,6 @@
 class Laurel < Peer
   def self.mailing_list 
-    'laurel@laurelist.org'
+    ENV['LAUREL_MAILING_LIST']
   end
 
   def self.collection

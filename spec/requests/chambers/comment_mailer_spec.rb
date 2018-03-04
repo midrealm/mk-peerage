@@ -7,7 +7,7 @@ describe "on comment submission" do
     post '/chambers/comments', params: {:comment => { candidate_id: candidate.id, text: 'I like this candidate' }}
     
     email = ActionMailer::Base.deliveries.last
-    expect(email.to[0]).to eq('laurel@laurelist.org')
+    expect(email.to[0]).to eq(ENV['LAUREL_MAILING_LIST'])
     expect(email.subject).to include("Candidate ##{candidate.id} Comment")
     expect(email.body).to include(admin.sca_name)
     expect(email.body).to include('I like this candidate')

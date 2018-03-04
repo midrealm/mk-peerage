@@ -1,6 +1,6 @@
 class Pelican < Peer
   def self.mailing_list
-    'pelican@pelicanlist.org'
+    ENV['PELICAN_MAILING_LIST']
   end 
 
   def self.collection
