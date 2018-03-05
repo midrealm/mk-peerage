@@ -1,6 +1,9 @@
 import 'bootstrap'
 import 'select2';
 $.fn.select2.defaults.set( "theme", "bootstrap4" );
+import Rails from 'rails-ujs';
+Rails.start();
+
 import './modules/datatable'
 import './modules/markdownTextField'
 import './modules/select2'
