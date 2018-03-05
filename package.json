@@ -24,6 +24,7 @@
     "popper.js": "^1.12.9",
     "postcss-loader": "^2.1.0",
     "precss": "^3.1.0",
+    "rails-ujs": "^5.1.5",
     "sass-loader": "^6.0.6",
     "select2": "^4.0.6-rc.1",
     "select2-bootstrap4-theme": "^1.0.0",
