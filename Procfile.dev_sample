@@ -1,0 +1,2 @@
+webpack: npm webpack:start
+rails: bundle exec rails s -p 3000

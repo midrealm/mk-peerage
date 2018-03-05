@@ -5,6 +5,10 @@ namespace :fake_data do
     Rake::Task['db:migrate'].invoke 
   end
 
+  task :db_migrate => :environment do
+    Rake::Task['db:migrate'].invoke 
+  end
+
   task :groups => :environment do
     Rake::Task['groups'].invoke
   end
@@ -305,5 +309,5 @@ Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et males
     end
   end
   task :all => [:db_reset, :groups, :people, :calc_poll]
-  task :all_no_reset => [:groups, :people, :calc_poll]
+  task :all_heroku => [:db_migrate, :groups, :people, :calc_poll]
 end

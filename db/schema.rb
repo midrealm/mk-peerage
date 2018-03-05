@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20180202225541) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "advisings", force: :cascade do |t|
     t.integer  "candidate_id"
     t.integer  "poll_id"
@@ -24,9 +21,9 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.boolean  "submitted"
     t.integer  "peer_id"
     t.integer  "judgement"
-    t.index ["candidate_id"], name: "index_advisings_on_candidate_id", using: :btree
-    t.index ["peer_id"], name: "index_advisings_on_peer_id", using: :btree
-    t.index ["poll_id"], name: "index_advisings_on_poll_id", using: :btree
+    t.index ["candidate_id"], name: "index_advisings_on_candidate_id"
+    t.index ["peer_id"], name: "index_advisings_on_peer_id"
+    t.index ["poll_id"], name: "index_advisings_on_poll_id"
   end
 
   create_table "advocacies", force: :cascade do |t|
@@ -36,9 +33,9 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "peer_id"
-    t.index ["candidate_id"], name: "index_advocacies_on_candidate_id", using: :btree
-    t.index ["peer_id"], name: "index_advocacies_on_peer_id", using: :btree
-    t.index ["user_id"], name: "index_advocacies_on_user_id", using: :btree
+    t.index ["candidate_id"], name: "index_advocacies_on_candidate_id"
+    t.index ["peer_id"], name: "index_advocacies_on_peer_id"
+    t.index ["user_id"], name: "index_advocacies_on_user_id"
   end
 
   create_table "candidates", force: :cascade do |t|
@@ -53,7 +50,7 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.integer  "group_id"
     t.string   "specialty_detail"
     t.integer  "peerage_type"
-    t.index ["group_id"], name: "index_candidates_on_group_id", using: :btree
+    t.index ["group_id"], name: "index_candidates_on_group_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -62,8 +59,8 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "peer_id"
-    t.index ["candidate_id"], name: "index_comments_on_candidate_id", using: :btree
-    t.index ["peer_id"], name: "index_comments_on_peer_id", using: :btree
+    t.index ["candidate_id"], name: "index_comments_on_candidate_id"
+    t.index ["peer_id"], name: "index_comments_on_peer_id"
   end
 
   create_table "dependencies", force: :cascade do |t|
@@ -71,9 +68,9 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.integer  "superior_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["peer_id", "superior_id"], name: "index_dependencies_on_peer_id_and_superior_id", unique: true, using: :btree
-    t.index ["peer_id"], name: "index_dependencies_on_peer_id", using: :btree
-    t.index ["superior_id"], name: "index_dependencies_on_superior_id", using: :btree
+    t.index ["peer_id", "superior_id"], name: "index_dependencies_on_peer_id_and_superior_id", unique: true
+    t.index ["peer_id"], name: "index_dependencies_on_peer_id"
+    t.index ["superior_id"], name: "index_dependencies_on_superior_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -87,8 +84,8 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.datetime "updated_at",            null: false
     t.string   "name"
     t.text     "description"
-    t.index ["candidate_id"], name: "index_documents_on_candidate_id", using: :btree
-    t.index ["peer_id"], name: "index_documents_on_peer_id", using: :btree
+    t.index ["candidate_id"], name: "index_documents_on_candidate_id"
+    t.index ["peer_id"], name: "index_documents_on_peer_id"
   end
 
   create_table "group_types", force: :cascade do |t|
@@ -105,8 +102,8 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.string   "ancestry"
     t.integer  "ancestry_depth", default: 0
     t.string   "slug"
-    t.index ["ancestry"], name: "index_groups_on_ancestry", using: :btree
-    t.index ["group_type_id"], name: "index_groups_on_group_type_id", using: :btree
+    t.index ["ancestry"], name: "index_groups_on_ancestry"
+    t.index ["group_type_id"], name: "index_groups_on_group_type_id"
   end
 
   create_table "peers", force: :cascade do |t|
@@ -126,7 +123,7 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.datetime "updated_at",               null: false
     t.integer  "user_id"
     t.string   "type"
-    t.index ["user_id"], name: "index_peers_on_user_id", using: :btree
+    t.index ["user_id"], name: "index_peers_on_user_id"
   end
 
   create_table "poll_results", force: :cascade do |t|
@@ -140,8 +137,8 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.float    "fav"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["candidate_id"], name: "index_poll_results_on_candidate_id", using: :btree
-    t.index ["poll_id"], name: "index_poll_results_on_poll_id", using: :btree
+    t.index ["candidate_id"], name: "index_poll_results_on_candidate_id"
+    t.index ["poll_id"], name: "index_poll_results_on_poll_id"
   end
 
   create_table "polls", force: :cascade do |t|
@@ -159,10 +156,10 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.datetime "updated_at",   null: false
     t.integer  "candidate_id"
     t.integer  "peer_id"
-    t.index ["candidate_id"], name: "index_specializations_on_candidate_id", using: :btree
-    t.index ["peer_id"], name: "index_specializations_on_peer_id", using: :btree
-    t.index ["specialty_id"], name: "index_specializations_on_specialty_id", using: :btree
-    t.index ["user_id"], name: "index_specializations_on_user_id", using: :btree
+    t.index ["candidate_id"], name: "index_specializations_on_candidate_id"
+    t.index ["peer_id"], name: "index_specializations_on_peer_id"
+    t.index ["specialty_id"], name: "index_specializations_on_specialty_id"
+    t.index ["user_id"], name: "index_specializations_on_user_id"
   end
 
   create_table "specialties", force: :cascade do |t|
@@ -201,31 +198,9 @@ ActiveRecord::Schema.define(version: 20180202225541) do
     t.integer  "group_id"
     t.string   "slug"
     t.boolean  "royalty"
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["group_id"], name: "index_users_on_group_id", using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "advisings", "candidates"
-  add_foreign_key "advisings", "peers"
-  add_foreign_key "advisings", "polls"
-  add_foreign_key "advocacies", "candidates"
-  add_foreign_key "advocacies", "peers"
-  add_foreign_key "advocacies", "users"
-  add_foreign_key "candidates", "groups"
-  add_foreign_key "comments", "candidates"
-  add_foreign_key "comments", "peers"
-  add_foreign_key "dependencies", "peers"
-  add_foreign_key "dependencies", "peers", column: "superior_id"
-  add_foreign_key "documents", "candidates"
-  add_foreign_key "documents", "peers"
-  add_foreign_key "groups", "group_types"
-  add_foreign_key "peers", "users"
-  add_foreign_key "poll_results", "candidates"
-  add_foreign_key "poll_results", "polls"
-  add_foreign_key "specializations", "candidates"
-  add_foreign_key "specializations", "peers"
-  add_foreign_key "specializations", "specialties"
-  add_foreign_key "specializations", "users"
-  add_foreign_key "users", "groups"
 end

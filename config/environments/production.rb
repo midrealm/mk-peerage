@@ -64,6 +64,14 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "laurel_#{Rails.env}"
   config.action_mailer.default_url_options = { host: 'mk-peerage.herokuapp.com', port: 80 }
   config.action_mailer.perform_caching = false
+  ActionMailer::Base.smtp_settings = {
+    :address          => "smtp.sendgrid.net",
+    :port             => "25",
+    :authentication   => :plain,
+    :user_name        => ENV['SENDGRID_USERNAME'],
+    :password         => ENV['SENDGRID_PASSWORD'],
+    :domain           => ENV['SENDGRID_DOMAIN']
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

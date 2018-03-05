@@ -35,6 +35,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -52,6 +53,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-nvm', require: false
   gem 'capistrano-rbenv'
+  gem 'foreman'
 end
 
 group :test do

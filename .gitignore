@@ -11,6 +11,7 @@ yarn-error.log
 #Related to getting email to work
 .env
 Procfile
+Procfile.dev
 
 
 *.gem
@@ -26,7 +27,7 @@ Procfile
 /log
 /db/*.sqlite3
 /db/*.sqlite3-journal
-#config/database.yml
+/config/database.yml
 spec/examples.txt
 
 #Ignore Spring Files

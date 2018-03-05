@@ -1,7 +1,7 @@
 {
   "name": "mk-peerage",
   "scripts": {
-    "postdeploy": "pg:reset && rake fake_data:all_heroku"
+    "postdeploy": "rake fake_data:all_heroku"
   },
   "env": {
     "AWS_ACCESS_KEY_ID": {
@@ -17,6 +17,12 @@
       "required": true
     },
     "LANG": {
+      "required": true
+    },
+    "LAUREL_MAILING_LIST": {
+      "required": true
+    },
+    "PELICAN_MAILING_LIST": {
       "required": true
     },
     "RACK_ENV": {
@@ -41,6 +47,15 @@
       "required": true
     },
     "SECRET_KEY_BASE": {
+      "required": true
+    },
+    "SENDGRID_API_KEY": {
+      "required": true
+    },
+    "SENDGRID_PASSWORD": {
+      "required": true
+    },
+    "SENDGRID_USERNAME": {
       "required": true
     }
   },
