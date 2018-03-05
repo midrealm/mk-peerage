@@ -58,7 +58,7 @@
     "SENDGRID_USERNAME": {
       "required": true
     }
-  }
+  },
   "formation": {
     "worker": {
       "quantity": 1
