@@ -19,7 +19,7 @@
     <% pr = PollResult.new if pr.nil? %>
     <tr>
       <td>
-        <%= image_tag cand.profile_pic.url(:thumb), class: 'float-left' %>
+        <%= link_to (image_tag cand.profile_pic.url(:thumb), class: 'float-left'), chambers_candidate_path(peerage,cand.id) %>
         <%= link_to "#{cand.sca_name} (#{cand.specialties.to_sentence})", chambers_candidate_path(peerage,cand.id)%>
       </td>
       <% if can?(:read, PollResult) %>
