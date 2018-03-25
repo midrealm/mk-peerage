@@ -75,7 +75,7 @@
           <% @candidate.comments.each do |comment| %>
           <div class="p-2">
             <div style="width:120px;float:left;text-align:center">
-              <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+              <%= link_to (image_tag comment.peer.profile_pic.url(:thumb)), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
             </div>
             <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
             <%= markdown(comment.text) %>
