@@ -1,7 +1,7 @@
 class Advising < ApplicationRecord
   belongs_to :peer
   belongs_to :candidate
-  belongs_to :poll
+  belongs_to :poll, optional: true
   
   enum judgement: [:elevate, :wait, :no_strong_opinion, :drop]
   

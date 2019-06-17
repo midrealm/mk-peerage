@@ -15,7 +15,7 @@ class User < ApplicationRecord
   
   has_many :comments
 
-  belongs_to :group
+  belongs_to :group, optional: true
 
   has_attached_file :arms, styles: {large: '100x200'}, default_url: '/images/:style/no_arms.jpg'
   validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]

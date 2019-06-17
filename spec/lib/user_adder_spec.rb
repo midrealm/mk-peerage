@@ -1,4 +1,3 @@
-require 'user_adder'
 require 'rails_helper'
 
 describe UserAdder, 'initialize' do

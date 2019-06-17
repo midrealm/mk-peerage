@@ -68,11 +68,9 @@ FactoryBot.define do
   factory :candidate, aliases: [:laurel_candidate] do
     sca_name {"MyString"}
     peerage_type {:laurel}
-    association :group, strategy: :build
   end
   factory :pelican_candidate, parent: :candidate do
     peerage_type {:pelican}
-    association :group, strategy: :build
   end
 
   factory :specialization do

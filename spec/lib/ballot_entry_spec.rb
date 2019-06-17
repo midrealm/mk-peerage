@@ -50,7 +50,7 @@ describe BallotEntry, "advising" do
       expect(@b.advising.poll).to eq(@poll)
     end
 
-    it 'returns updates advising to have new poll id if old poll id is nil' do
+    it 'updates advising to have new poll id if old poll id is nil' do
       past_advising = create(:advising, candidate: @candidate, peer: @laurel, 
         poll: @past_poll, judgement: :elevate, comment: 'comment comment comment')
       nil_advising = create(:advising, candidate: @candidate, peer: @laurel, 
