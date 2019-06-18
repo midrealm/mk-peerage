@@ -49,7 +49,7 @@ RSpec.feature 'Contact email' do
   context 'recaptcha verfication unsuccessful' do
     before(:each) do
       Recaptcha.configuration.skip_verify_env << "test"
-      allow_any_instance_of(Recaptcha::Verify).to receive(:verify_recaptcha).and_return(false)
+      allow_any_instance_of(Recaptcha::Adapters::ControllerMethods).to receive(:verify_recaptcha).and_return(false)
     end
     scenario 'does not send email' do
       setup_laurel_contact
