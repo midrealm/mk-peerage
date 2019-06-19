@@ -20,7 +20,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 
-gem 'devise', '~> 4.4.0'
+gem 'devise', '~> 4.6.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'paperclip', '~> 5.2.1'
 gem 'aws-sdk', '~> 2'
