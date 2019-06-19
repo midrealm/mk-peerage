@@ -12,7 +12,7 @@ class Candidate < ApplicationRecord
   has_many :poll_results, dependent: :destroy
   has_many :advisings, dependent: :destroy
 
-  belongs_to :group
+  belongs_to :group, optional: true
 
   validates_presence_of(:peerage_type)
   enum peerage_type: Peer.orders
