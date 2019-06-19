@@ -28,25 +28,46 @@
           <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
         <% end %>
         <% unless @pr.nil? %>
-          <table class="table">
-          <thead class="d-none d-md-block">
-            <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
-            <th>Rec%</th><th>Fav%</th>
-          </thead>
-          <thead class="d-md-none">
-            <th>E</th><th>W</th><th>NSO</th><th>D</th>
-            <th>Rec%</th><th>Fav%</th>
-          </thead>
-          <tbody>
-          <tr>
-            <td><%=@pr.elevate%></td>
-            <td><%=@pr.wait%></td>
-            <td><%=@pr.no_strong_opinion%></td>
-            <td><%=@pr.drop%></td>
-            <td><%=@pr.rec%></td>
-            <td><%=@pr.fav%></td>
-          </tr>
-          </tbody>
+          <table class="table d-none d-md-table">
+            <thead>
+              <th>Elevate</th>
+              <th>Wait</th>
+              <th>No Strong Opinion</th>
+              <th>Drop</th>
+              <th>Rec%</th>
+              <th>Fav%</th>
+            </thead>
+            <tbody>
+            <tr>
+              <td><%=@pr.elevate%></td>
+              <td><%=@pr.wait%></td>
+              <td><%=@pr.no_strong_opinion%></td>
+              <td><%=@pr.drop%></td>
+              <td><%=@pr.rec%></td>
+              <td><%=@pr.fav%></td>
+            </tr>
+            </tbody>
+          </table>
+
+          <table class="table d-md-none">
+            <thead class="d-md-none">
+              <th>E</th>
+              <th>W</th>
+              <th>NSO</th>
+              <th>D</th>
+              <th>Rec%</th>
+              <th>Fav%</th>
+            </thead>
+            <tbody>
+            <tr>
+              <td><%=@pr.elevate%></td>
+              <td><%=@pr.wait%></td>
+              <td><%=@pr.no_strong_opinion%></td>
+              <td><%=@pr.drop%></td>
+              <td><%=@pr.rec%></td>
+              <td><%=@pr.fav%></td>
+            </tr>
+            </tbody>
           </table>
         <% end%>
         <h3>Comments</h3>
@@ -54,7 +75,7 @@
           <% @candidate.comments.each do |comment| %>
           <div class="p-2">
             <div style="width:120px;float:left;text-align:center">
-              <%= image_tag comment.peer.profile_pic.url(:thumb) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+              <%= link_to (image_tag comment.peer.profile_pic.url(:thumb)), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
             </div>
             <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
             <%= markdown(comment.text) %>
