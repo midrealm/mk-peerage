@@ -33,16 +33,18 @@ namespace :fake_data do
       u.arms = File.open('lib/assets/fake_data/byrd_coa.jpg')
       u.deceased = false
       u.group = Group.find_by(name: 'Cynnabar')
-      u.laurel = Laurel.create do |p|
-        p.active = true
-        p.elevation_date = Date.parse('1560-May-10')
-        p.elevated_by = 'Elizabeth I'
-        p.vigilant = false
-        p.specialty_detail = 'Motets'
-        p.bio = 'I like Music. I am a **Catholic**.'
-        p.profile_pic = File.open('lib/assets/fake_data/byrd.png')
-        p.admin = true
-      end
+    end
+
+    Laurel.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1560-May-10')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Motets'
+      p.bio = 'I like Music. I am a **Catholic**.'
+      p.profile_pic = File.open('lib/assets/fake_data/byrd.png')
+      p.admin = true
+  		p.user = byrd
     end
 
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))
@@ -59,17 +61,19 @@ namespace :fake_data do
       u.phone = '5556667777'
       u.deceased = true
       u.group = Group.find_by(name: 'Tree Girt Sea')
-      u.laurel = Laurel.create do |p|
-        p.active = false
-        p.elevation_date = Date.parse('1532-Sept-05')
-        p.elevated_by = 'Henry VIII'
-        p.vigilant = false
-        p.specialty_detail = 'Polyphony'
-        p.bio = 'I liked Music First.'
-        p.profile_pic = File.open('lib/assets/fake_data/tallis.png')
-        p.admin = false
-      end
     end
+		Laurel.create do |p|
+      p.active = false
+      p.elevation_date = Date.parse('1532-Sept-05')
+      p.elevated_by = 'Henry VIII'
+      p.vigilant = false
+      p.specialty_detail = 'Polyphony'
+      p.bio = 'I liked Music First.'
+      p.profile_pic = File.open('lib/assets/fake_data/tallis.png')
+      p.admin = false
+			p.user = tallis
+    end
+
     Specialization.create(peer: tallis.laurel, specialty: Specialty.find_by(name: 'Music'))
     Dependency.create(peer: byrd.laurel, superior: tallis.laurel)
 
@@ -86,16 +90,18 @@ namespace :fake_data do
       u.phone = '5556667777'
       u.deceased = false
       u.group = Group.find_by(name: 'Mynydd Seren')
-      u.laurel = Laurel.create do |p|
-        p.active = false
-        p.elevation_date = Date.parse('1570-Sept-05')
-        p.elevated_by = 'Elizabeth I'
-        p.vigilant = false
-        p.specialty_detail = 'Lute Songs'
-        p.bio = 'I am on of the first Singer Songwriters. No longer active because I moved to Paris.'
-        p.profile_pic = File.open('lib/assets/fake_data/dowland.png')
-        p.admin = false
-      end
+    end
+
+    Laurel.create do |p|
+      p.active = false
+      p.elevation_date = Date.parse('1570-Sept-05')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Lute Songs'
+      p.bio = 'I am on of the first Singer Songwriters. No longer active because I moved to Paris.'
+      p.profile_pic = File.open('lib/assets/fake_data/dowland.png')
+      p.admin = false
+			p.user = dowland
     end
 
     morley = Candidate.create do |u|
@@ -120,18 +126,20 @@ namespace :fake_data do
       u.phone = '5556667777'
       u.deceased = false
       u.group = Group.find_by(name: 'Middle Marches')
-      u.laurel = Laurel.create do |p|
-        p.active = true
-        p.elevation_date = Date.parse('1572-Jan-15')
-        p.elevated_by = 'Elizabeth I'
-        p.vigilant = false
-        p.specialty_detail = 'Portraits'
-        p.bio = 'Yay Painting.'
-        p.profile_pic = File.open('lib/assets/fake_data/hilliard.png')
-        p.admin = false
-      end
     end
     
+    Laurel.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1572-Jan-15')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Portraits'
+      p.bio = 'Yay Painting.'
+      p.profile_pic = File.open('lib/assets/fake_data/hilliard.png')
+      p.admin = false
+			p.user = hilliard
+    end
+
     Specialization.create(peer: hilliard.laurel, specialty: Specialty.find_by(name: 'Painting'))
     holbein = User.create do |u|
       u.email = 'holbein@example.com'
@@ -145,18 +153,19 @@ namespace :fake_data do
       u.phone = '5556667777'
       u.deceased = false
       u.group = Group.find_by(name: 'Middle Marches')
-      u.laurel = Laurel.create do |p|
-        p.active = true
-        p.elevation_date = Date.parse('1572-Jan-15')
-        p.elevated_by = 'Elizabeth I'
-        p.vigilant = false
-        p.specialty_detail = 'Portraits'
-        p.bio = 'Yay Painting.'
-        p.profile_pic = File.open('lib/assets/fake_data/hans.png')
-        p.admin = false
-      end
     end
     
+    Laurel.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1572-Jan-15')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Portraits'
+      p.bio = 'Yay Painting.'
+      p.profile_pic = File.open('lib/assets/fake_data/hans.png')
+      p.admin = false
+			p.user = holbein
+    end
     Specialization.create(peer: holbein.laurel, specialty: Specialty.find_by(name: 'Painting'))
 
     oliver = Candidate.create do |u|
