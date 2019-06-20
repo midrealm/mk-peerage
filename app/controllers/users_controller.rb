@@ -17,6 +17,21 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+	def edit_password
+		@user = current_user
+	end
+
+	def update_password
+		@user = current_user
+		if @user.update_with_password(password_params)
+			bypass_sign_in(@user)
+			redirect_to chambers_path
+      flash[:success] = 'Password Successfully Updated'
+		else
+			render 'edit_password'
+		end
+	end
   private 
   
   def user_params
@@ -28,4 +43,8 @@ class UsersController < ApplicationController
 			#:street, :city, :state, :zipcode, :phone,
       *all_peer_params)
   end
+
+	def password_params
+		params.require(:user).permit(:current_password, :password, :password_confirmation)
+	end
 end
