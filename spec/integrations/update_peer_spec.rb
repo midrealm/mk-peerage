@@ -15,6 +15,7 @@ RSpec.feature 'Update Peer info' do
     visit '/users/edit' 
     select 'Generic Specialty', from: 'Specialties'
     select 'Other Specialty', from: 'Specialties'
+    fill_in 'user_email', with: 'new_email@example.com'
     fill_in 'user_sca_name', with: 'Smarty Pants'
     fill_in 'user_laurel_attributes_specialty_detail', with: 'Earwax Studies'
     fill_in 'user_laurel_attributes_elevated_by', with: 'Some People'
@@ -25,6 +26,7 @@ RSpec.feature 'Update Peer info' do
     check 'user_laurel_attributes_vigilant'
     click_on 'user_submit'
     
+    expect(User.last.email).to eq('new_email@example.com')
     expect(User.last.sca_name).to eq('Smarty Pants')
     expect(Laurel.last.specialty_detail).to eq('Earwax Studies')
     expect(Laurel.last.bio).to eq('Some Text')

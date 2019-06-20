@@ -17,6 +17,7 @@
       <%= bootstrap_form_for @user, url: users_edit_path do |f| %>
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane <%= 'show active' if peerage.nil? %>  " id="personal">
+          <%= f.email_field :email, label: 'Email address' %>
           <%= f.text_field :sca_name, label: 'SCA Name' %>
           <%= f.text_field :modern_name, label: 'Modern Name' %>
           <%= f.file_field :arms, class: 'd-none d-md-block' %>
