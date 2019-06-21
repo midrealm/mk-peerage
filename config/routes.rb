@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :chambers do
     resources :documents, only: [:create]
 
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :edit, :update]
 
     namespace :admin do
       resources :royalty, except: [:destroy, :show] 

@@ -1,0 +1,6 @@
+<h1>Edit Comment for <%= @comment.candidate.sca_name%></h1>
+<%= bootstrap_form_for @comment, url: chambers_comment_path do |f| %>
+  <%= f.text_area :text, hide_label: true, data: { behavior: 'markdown' } %>
+  <%= f.submit %>
+<% end %>
+
