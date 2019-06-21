@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   get '/users/edit' => 'users#edit'
   patch '/users/edit' => 'users#update'
+  get '/users/edit/password' => 'users#edit_password'
+  patch '/users/edit/password' => 'users#update_password'
+  
   
   
   get '/chambers' => 'users#index'
@@ -11,7 +14,7 @@ Rails.application.routes.draw do
   namespace :chambers do
     resources :documents, only: [:create]
 
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :edit, :update]
 
     namespace :admin do
       resources :royalty, except: [:destroy, :show] 

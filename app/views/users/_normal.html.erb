@@ -1,6 +1,7 @@
 <% poll = Poll.current(peerage) %>
 <%= link_to 'View Your Profile', peer_path(peerage, current_user.slug) %><br>
 <%= link_to 'Edit Your Profile', users_edit_path( peerage: peerage ) %><br>
+<%= link_to 'Change Your Password', users_edit_password_path %><br />
 <%= link_to 'View Candidates', chambers_candidates_path(peerage) %><br>
 <%= link_to 'Browse Candidates By Group', chambers_groups_path(peerage) %><br/>
 <%= link_to 'Browse Candidates By Specialty', chambers_specialties_path(peerage) %><br/>
