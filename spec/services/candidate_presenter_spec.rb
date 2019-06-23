@@ -1,6 +1,5 @@
 require 'rails_helper'
-require 'candidate_presenter'
-describe CandidatePresenter, 'initialize' do
+describe 'CandidatePresenter initialize' do
   before(:each) do
     @laurel = create(:laurel_peer)
     @group = create(:group)
@@ -28,7 +27,7 @@ describe CandidatePresenter, 'initialize' do
    expect(@presenter.documents&.first).to eq(@document)
   end
 end
-describe CandidatePresenter, 'behavior' do
+describe 'CandidatePresenter: behavior' do
   it "shows advocates" do
     @laurel = create(:laurel_peer)
     @candidate = create(:laurel_candidate)
@@ -49,7 +48,7 @@ describe CandidatePresenter, 'behavior' do
   end  
 end
 
-describe CandidatePresenter, 'last poll results' do
+describe 'CandidatePresenter: last poll results' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
     @poll = create(:past_poll) 
@@ -75,7 +74,7 @@ describe CandidatePresenter, 'last poll results' do
     expect(@presenter.fav).to eq("#{@poll_result.fav*100}%")
   end
 end
-describe CandidatePresenter, 'last poll results for no polls' do
+describe 'CandidatePresenter: last poll results for no polls' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
     @presenter = CandidatePresenter.new(@candidate)
