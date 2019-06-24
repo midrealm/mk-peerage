@@ -39,7 +39,7 @@ class PeerageMailer < Devise::Mailer
 
   private
   def self.no_reply
-    'no_reply@peerage.org'
+    ENV['DEVISE_MAIL_SENDER']
   end
   def self.names(peerage)
     peerage_class = Peer.subclass(peerage)

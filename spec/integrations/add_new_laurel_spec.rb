@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Add New Laurel' do
   include_context 'when signed in through capybara'
-  scenario 'adds new candidate when appropriate info is filled in' do
+  scenario 'adds new laurel when appropriate info is filled in' do
     admin = create(:admin)
     expect(User.count).to eq(1)
     sign_in(admin)
@@ -17,5 +17,9 @@ RSpec.feature 'Add New Laurel' do
     expect(Laurel.last.vigilant).to eq(true)
     expect(Laurel.last.active).to eq(true)
     expect(Peer.last.type).to eq("Laurel")
+
+    email = ActionMailer::Base.deliveries.last
+    expect(email.body).to include('Welcome to the Order of the Laurel')
+    expect(email.body).to include('https')
   end
 end
