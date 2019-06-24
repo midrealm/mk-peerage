@@ -2,14 +2,13 @@ class Chambers::CandidatesController < ApplicationController
   before_action :authenticate_user!
   def index
     authorize! :read, peerage
-    @candidates = Candidate.where(peerage_type: peerage)
+    @candidates = Candidate.where(peerage_type: peerage).map{|cand| CandidatePresenter.new(cand) }
   end
 
   def show
     authorize! :read, peerage
-    @candidate = Candidate.find(params[:id])
+    @candidate = CandidatePresenter.new(Candidate.find(params[:id]))
     raise "Access Denied" unless @candidate.peerage_type == peerage.to_s
-    @pr = @candidate.poll_results.last
     @comment = Comment.new
     @document = Document.new
   end

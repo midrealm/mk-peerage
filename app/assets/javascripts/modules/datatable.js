@@ -2,7 +2,7 @@ import 'datatables.net-bs4'
 export default (() => {
   $("table[data-behavior='dtable']").DataTable(
       {
-        "pageLength": 25, 
+        "pageLength": 50, 
         "saveState": true,
       });
 

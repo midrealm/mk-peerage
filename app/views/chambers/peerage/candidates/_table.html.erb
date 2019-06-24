@@ -1,6 +1,8 @@
-<table class="table">
+<table class="table" data-behavior="dtable" data-order='[[2, "asc"],[0,"asc"]]'>
 <thead>
 <th>Name</th>
+<th>Specialties</th>
+<th>List</th>
 <% if can?(:read, PollResult) %>
 <th>Comments from Last Poll</th>
 <% end %>
@@ -15,26 +17,26 @@
 </thead>
 <tbody>
   <% candidates.each do |cand| %>
-    <% pr = cand.poll_results.last %>
-    <% pr = PollResult.new if pr.nil? %>
     <tr>
       <td style="width:140px;text-align:center">
         <%= link_to (image_tag cand.profile_pic.url(:thumb)), chambers_candidate_path(peerage,cand.id) %><br>
-        <%= link_to "#{cand.sca_name} (#{cand.specialties.to_sentence})", chambers_candidate_path(peerage,cand.id)%>
+        <%= link_to "#{cand.sca_name}", chambers_candidate_path(peerage,cand.id)%>
       </td>
+      <td><%=cand.specialties%></td>
+      <td><%=cand.list%></td>
       <% if can?(:read, PollResult) %>
-          <td>
-            <% if pr.id.present? %><%= link_to 'Comments', chambers_poll_comments_path(peerage,cand.id)%><%end%>
-          </td>
+        <td>
+          <% if cand.poll_result? %><%= link_to 'Comments', chambers_poll_comments_path(peerage,cand.id)%><%end%>
+        </td>
       <% end %>
-      <td class="d-none d-md-table-cell"><%=pr.elevate%></td>
-      <td class="d-none d-md-table-cell"><%=pr.wait%></td>
-      <td class="d-none d-md-table-cell"><%=pr.no_strong_opinion%></td>
-      <td class="d-none d-md-table-cell"><%=pr.drop%></td>
-      <td class="d-none d-md-table-cell"><%=pr.rec%></td>
-      <td class="d-none d-md-table-cell"><%=pr.fav%></td>
+      <td class="d-none d-md-table-cell"><%=cand.elevate%></td>
+      <td class="d-none d-md-table-cell"><%=cand.wait%></td>
+      <td class="d-none d-md-table-cell"><%=cand.no_strong_opinion%></td>
+      <td class="d-none d-md-table-cell"><%=cand.drop%></td>
+      <td class="d-none d-md-table-cell"><%=cand.rec%></td>
+      <td class="d-none d-md-table-cell"><%=cand.fav%></td>
       <td> <% if cand.group.present? %> <%= candidate_region_link(cand.group,peerage) %> <% end %> </td>
-      <td> <%= cand.advocates_link %> </td>
+      <td> <%= cand.advocates %> </td>
    </tr> 
   <% end%>
 </tbody>
