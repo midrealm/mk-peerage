@@ -12,7 +12,7 @@
   <div class="col-md">
     <h1><%=@candidate.sca_name%><br/><small class="text-muted"><%=@candidate.specialties%></small></h1>
         <strong><%= @candidate.list %> List</strong></br>
-        <% if @candidate.specialties.empty? %>
+        <% if @candidate.specialties? %>
           <strong>Specialties</strong>: <%= @candidate.specialties %> </br>
         <% end %>
         <% if @candidate.advocates? %>

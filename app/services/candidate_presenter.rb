@@ -41,21 +41,29 @@ class CandidatePresenter
   end
 
   def elevate
-    @results&.elevate
+    @results&.elevate || ''
   end
   def wait
-    @results&.wait
+    @results&.wait || ''
   end
   def drop
-    @results&.drop
+    @results&.drop || ''
   end
   def no_strong_opinion
-    @results&.no_strong_opinion
+    @results&.no_strong_opinion || ''
   end
   def rec
-    "#{@results.rec * 100}%" if @results&.rec
+    if @results&.rec
+      "#{@results.rec * 100}%" 
+    else
+      ''
+    end
   end
   def fav
-    "#{@results.fav * 100}%" if @results&.fav
+    if @results&.fav
+      "#{@results.fav * 100}%"
+    else
+      ''
+    end
   end
 end

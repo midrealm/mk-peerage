@@ -164,21 +164,21 @@ describe CandidatePresenter, 'last poll results for no polls' do
     @presenter = CandidatePresenter.new(@candidate)
   end
   it "shows elevate" do
-    expect(@presenter.elevate).to be_nil
+    expect(@presenter.elevate).to eq('')
   end
   it "shows wait" do
-    expect(@presenter.wait).to be_nil
+    expect(@presenter.wait).to eq('')
   end
   it "drop" do
-    expect(@presenter.drop).to be_nil
+    expect(@presenter.drop).to eq('')
   end
   it "shows no_strong_opinion" do
-    expect(@presenter.no_strong_opinion).to be_nil
+    expect(@presenter.no_strong_opinion).to eq('')
   end
   it "rec" do
-    expect(@presenter.rec).to be_nil
+    expect(@presenter.rec).to eq('')
   end
   it "fav" do
-    expect(@presenter.fav).to be_nil
+    expect(@presenter.fav).to eq('')
   end
 end
