@@ -1,8 +1,6 @@
-include Rails.application.routes.url_helpers 
-include ActionView::Helpers::UrlHelper
 class CandidatePresenter
   extend Forwardable
-  def_delegators :@candidate, :sca_name, :comments, :profile_pic, :list, :group, :documents
+  def_delegators :@candidate, :sca_name, :comments, :profile_pic, :list, :group, :documents, :peerage_type, :id
 
   def initialize(candidate)
     @candidate = candidate
@@ -10,16 +8,27 @@ class CandidatePresenter
   end
 
   def advocates
-    @candidate.advocacies
+    @candidate.advocacies.map{ |adv| "<a href=\"/#{adv.peer.peerage_type}/#{adv.peer.slug}\">#{adv.peer.sca_name}</a>" }.join(', ').html_safe
   end
 
+  def advocates?
+    @candidate.advocacies.count > 0
+  end
+
+  def document_count
+    @candidate.documents.count
+  end
   def specialties
     array = []
     @candidate.specialties.each do |spec|
-      array.push(link_to( spec.name, chambers_specialty_path(spec.peerage_type,spec.slug)))
+      array.push("<a href=\"/chambers/#{spec.peerage_type}/specialties/#{spec.slug}\">#{spec.name}</a>")
     end
-    array.push @candidate.specialty_detail
-    array
+    array.push @candidate.specialty_detail if @candidate.specialty_detail
+    array.join(', ').html_safe
+  end
+
+  def specialties?
+    @candidate.specialty_detail.present? || @candidate.specialties.present?
   end
 
   def elevate

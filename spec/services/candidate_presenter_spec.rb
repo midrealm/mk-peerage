@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe 'CandidatePresenter initialize' do
+describe CandidatePresenter, 'initialize' do
   before(:each) do
     @laurel = create(:laurel_peer)
     @group = create(:group)
@@ -7,6 +7,12 @@ describe 'CandidatePresenter initialize' do
     @comment = create(:comment, candidate: @candidate, peer: @laurel) 
     @document = create(:document, candidate: @candidate, peer: @laurel)
     @presenter = CandidatePresenter.new(@candidate)
+  end
+  it "shows candidate id" do
+    expect(@presenter.id).to eq(@candidate.id)
+  end
+  it "shows peerage_type" do
+    expect(@presenter.peerage_type).to eq(@candidate.peerage_type)
   end
   it "shows sca_name" do
     expect(@presenter.sca_name).to eq(@candidate.sca_name)
@@ -27,28 +33,91 @@ describe 'CandidatePresenter initialize' do
    expect(@presenter.documents&.first).to eq(@document)
   end
 end
-describe 'CandidatePresenter: behavior' do
-  it "shows advocates" do
-    @laurel = create(:laurel_peer)
-    @candidate = create(:laurel_candidate)
-    create(:advocacy, peer: @laurel, candidate: @candidate)
-    @presenter = CandidatePresenter.new(@candidate)
-   
-    expect(@presenter.advocates).to eq(@candidate.advocacies) 
+describe CandidatePresenter, 'document_count' do
+  before(:each) do
+    @candidate = create(:candidate)
+  end
+  it 'returns count of documents' do
+    document = create(:document, candidate:@candidate)
+    presenter = CandidatePresenter.new(@candidate)
+    expect(presenter.document_count).to eq(1) 
   end 
+  it 'returns 0 for no documents' do
+    presenter = CandidatePresenter.new(@candidate)
+    expect(presenter.document_count).to eq(0) 
+  end
+end
+describe CandidatePresenter, 'specialties' do
  
   it "outputs array of specialties with appropriate linking" do
     @candidate = create(:laurel_candidate, specialty_detail: 'Motets')
     @specialty = create(:specialty, name: 'Music')
     create(:specialization, candidate: @candidate, specialty: @specialty)
     @presenter = CandidatePresenter.new(@candidate)
-    expect(@presenter.specialties.count).to eq(2)
-    expect(@presenter.specialties.first).to eq('<a href="/chambers/laurel/specialties/music">Music</a>')
-    expect(@presenter.specialties.second).to eq('Motets')
+    expect(@presenter.specialties).to eq('<a href="/chambers/laurel/specialties/music">Music</a>, Motets')
   end  
 end
+describe CandidatePresenter, 'specialties?' do
+    it 'returns true for exisitng specialties' do
+      candidate = create(:laurel_candidate, specialty_detail: 'Motets')
+      specialty = create(:specialty, name: 'Music')
+      create(:specialization, candidate: candidate, specialty: specialty)
+      presenter = CandidatePresenter.new(candidate)
+      expect(presenter.specialties?).to be_truthy
+    end
+    it 'returns true for one specialty and no detail' do
+      candidate = create(:laurel_candidate, specialty_detail: nil)
+      specialty = create(:specialty, name: 'Music')
+      create(:specialization, candidate: candidate, specialty: specialty)
+      presenter = CandidatePresenter.new(candidate)
+      expect(presenter.specialties?).to be_truthy
+    end
+    it 'returns true for specialty detail and no Specialty' do
+      candidate = create(:laurel_candidate, specialty_detail: 'Motets')
+      presenter = CandidatePresenter.new(candidate)
+      expect(presenter.specialties?).to be_truthy
+    end
+    it 'returns false for no specialty detail or Specialty'  do
+      candidate = create(:laurel_candidate, specialty_detail: nil)
+      presenter = CandidatePresenter.new(candidate)
+      expect(presenter.specialties?).to be_falsey
+    end 
+end
 
-describe 'CandidatePresenter: last poll results' do
+describe CandidatePresenter, 'advocates' do
+  before(:each) do
+    @candidate = create(:laurel_candidate) 
+    @laurel = create(:laurel_peer)
+    create(:advocacy, candidate: @candidate, peer: @laurel)
+  end
+  it "returns advocate as a link"  do
+    presenter = CandidatePresenter.new(@candidate)
+    expect(presenter.advocates).to eq("<a href=\"/laurel/#{@laurel.slug}\">#{@laurel.sca_name}</a>")  
+  end
+  it "returns advocates as links separated by ', '" do
+    laurel2 = create(:laurel_user, sca_name: 'Bob', slug: 'bob')
+    create(:advocacy, candidate: @candidate, peer: laurel2.laurel)
+    presenter = CandidatePresenter.new(@candidate)
+    expect(presenter.advocates).to eq("<a href=\"/laurel/#{@laurel.slug}\">#{@laurel.sca_name}</a>, <a href=\"/laurel/bob\">Bob</a>")  
+  end
+end
+describe CandidatePresenter, 'advocates?' do
+  it "returns true if there are advocates" do
+    candidate = create(:laurel_candidate) 
+    laurel = create(:laurel_peer)
+    create(:advocacy, candidate: candidate, peer: laurel)
+    presenter = CandidatePresenter.new(candidate)
+   
+    expect(presenter.advocates?).to be_truthy 
+  end
+  it "returns false if there are no advocates" do
+    candidate = create(:laurel_candidate) 
+    presenter = CandidatePresenter.new(candidate)
+   
+    expect(presenter.advocates?).to be_falsey 
+  end
+end
+describe CandidatePresenter, 'last poll results' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
     @poll = create(:past_poll) 
@@ -74,7 +143,7 @@ describe 'CandidatePresenter: last poll results' do
     expect(@presenter.fav).to eq("#{@poll_result.fav*100}%")
   end
 end
-describe 'CandidatePresenter: last poll results for no polls' do
+describe CandidatePresenter, 'last poll results for no polls' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
     @presenter = CandidatePresenter.new(@candidate)

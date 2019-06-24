@@ -8,6 +8,6 @@ describe "post /chambers/documents" do
     expect(Document.count).to eq(0)
     post '/chambers/documents', params: { :document => {candidate_id: cand.id, document: document, name: 'Name', description: 'Description'} }
     expect(Document.count).to eq(1)
-    expect(response).to redirect_to("/chambers/laurel/candidates/#{cand.id}")
+    expect(response).to redirect_to("/chambers/laurel/candidates/#{cand.id}/documents")
   end
 end

@@ -7,9 +7,8 @@ class Chambers::CandidatesController < ApplicationController
 
   def show
     authorize! :read, peerage
-    @candidate = Candidate.find(params[:id])
+    @candidate = CandidatePresenter.new(Candidate.find(params[:id]))
     raise "Access Denied" unless @candidate.peerage_type == peerage.to_s
-    @pr = @candidate.poll_results.last
     @comment = Comment.new
     @document = Document.new
   end
