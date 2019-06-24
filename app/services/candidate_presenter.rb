@@ -7,6 +7,10 @@ class CandidatePresenter
     @results = @candidate&.poll_results&.last
   end
 
+  def poll_result?
+    @results.present?
+  end
+
   def advocates
     @candidate.advocacies.map{ |adv| "<a href=\"/#{adv.peer.peerage_type}/#{adv.peer.slug}\">#{adv.peer.sca_name}</a>" }.join(', ').html_safe
   end
@@ -25,6 +29,11 @@ class CandidatePresenter
     end
     array.push @candidate.specialty_detail if @candidate.specialty_detail
     array.join(', ').html_safe
+  end
+
+  #TBRemoved
+  def specialties_link
+    specialties
   end
 
   def specialties?

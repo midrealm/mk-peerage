@@ -33,6 +33,21 @@ describe CandidatePresenter, 'initialize' do
    expect(@presenter.documents&.first).to eq(@document)
   end
 end
+describe CandidatePresenter, 'poll_result?' do
+  it 'returns true when there is a last poll result' do
+    candidate = create(:candidate)
+    create(:poll_result, candidate: candidate)
+    presenter = CandidatePresenter.new(candidate)
+    
+    expect(presenter.poll_result?).to be_truthy 
+  end
+  it 'returns false when there is no last poll result' do
+    candidate = create(:candidate)
+    presenter = CandidatePresenter.new(candidate)
+    
+    expect(presenter.poll_result?).to be_falsey 
+  end
+end
 describe CandidatePresenter, 'document_count' do
   before(:each) do
     @candidate = create(:candidate)
