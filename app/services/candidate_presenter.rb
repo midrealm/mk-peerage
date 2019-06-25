@@ -54,14 +54,14 @@ class CandidatePresenter
   end
   def rec
     if @results&.rec
-      "#{@results.rec * 100}%" 
+      "#{(@results.rec * 100).round}%" 
     else
       ''
     end
   end
   def fav
     if @results&.fav
-      "#{@results.fav * 100}%"
+      "#{(@results.fav * 100).round}%"
     else
       ''
     end

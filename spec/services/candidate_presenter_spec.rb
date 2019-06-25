@@ -136,7 +136,7 @@ describe CandidatePresenter, 'last poll results' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
     @poll = create(:past_poll) 
-    @poll_result = create(:poll_result, candidate: @candidate, poll: @poll, elevate: 1, wait:2, drop:3, no_strong_opinion: 4, rec: 0.3, fav: 0.5)
+    @poll_result = create(:poll_result, candidate: @candidate, poll: @poll, elevate: 1, wait:2, drop:3, no_strong_opinion: 4, rec: 0.399999, fav: 0.59999)
     @presenter = CandidatePresenter.new(@candidate)
   end
   it "shows elevate" do
@@ -152,10 +152,10 @@ describe CandidatePresenter, 'last poll results' do
     expect(@presenter.no_strong_opinion).to eq(@poll_result.no_strong_opinion)
   end
   it "rec" do
-    expect(@presenter.rec).to eq("#{@poll_result.rec*100}%")
+    expect(@presenter.rec).to eq("40%")
   end
   it "fav" do
-    expect(@presenter.fav).to eq("#{@poll_result.fav*100}%")
+    expect(@presenter.fav).to eq("60%")
   end
 end
 describe CandidatePresenter, 'last poll results for no polls' do
