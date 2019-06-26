@@ -27,7 +27,7 @@ class CandidatePresenter
     @candidate.specialties.each do |spec|
       array.push("<a href=\"/chambers/#{spec.peerage_type}/specialties/#{spec.slug}\">#{spec.name}</a>")
     end
-    array.push @candidate.specialty_detail if @candidate.specialty_detail
+    array.push @candidate.specialty_detail if @candidate.specialty_detail.present?
     array.join(', ').html_safe
   end
 

@@ -64,13 +64,20 @@ describe CandidatePresenter, 'document_count' do
 end
 describe CandidatePresenter, 'specialties' do
  
-  it "outputs array of specialties with appropriate linking" do
+  it "outputs string of specialties with appropriate linking" do
     @candidate = create(:laurel_candidate, specialty_detail: 'Motets')
     @specialty = create(:specialty, name: 'Music')
     create(:specialization, candidate: @candidate, specialty: @specialty)
     @presenter = CandidatePresenter.new(@candidate)
     expect(@presenter.specialties).to eq('<a href="/chambers/laurel/specialties/music">Music</a>, Motets')
   end  
+  it "outputs no specialty_detail appropriately" do
+    @candidate = create(:laurel_candidate, specialty_detail: '')
+    @specialty = create(:specialty, name: 'Music')
+    create(:specialization, candidate: @candidate, specialty: @specialty)
+    @presenter = CandidatePresenter.new(@candidate)
+    expect(@presenter.specialties).to eq('<a href="/chambers/laurel/specialties/music">Music</a>')
+  end
 end
 describe CandidatePresenter, 'specialties?' do
     it 'returns true for exisitng specialties' do
