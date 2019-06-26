@@ -1,0 +1,10 @@
+<div class="row justify-content-center">
+  <div class="col-6">
+<h1>Send Reset Password Email</h2>
+
+<%= bootstrap_form_tag url: chambers_admin_peers_password_path do |f| %>
+  <%= f.select :id, @peers, {label: 'Peers'}, {data: {behavior: 'select2'}} %>
+  <%= f.submit "Send Reset Password Info" %>
+<% end %>
+</div>
+</div>
