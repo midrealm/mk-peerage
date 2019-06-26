@@ -1,6 +1,11 @@
 Welcome to the Order of the <%=@names[:name]%>, <%=@resource.sca_name%>.
 
+Your login email is: <%=@resource.email%>
+
 To access <%=@names[:collection].capitalize%> content, first change your password by going here:
 <%= edit_password_url(@resource, reset_password_token: @token) %>
+
+If this link expires you go to the "Forgot your Password?" page and enter your login email: 
+<%= new_user_password_url %>
 
 Welcome!

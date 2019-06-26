@@ -42,6 +42,10 @@ Rails.application.routes.draw do
         resources :candidates, except: [:show]
         resource :poll, except: [:show, :delete]
         resources :peers, except: [:show, :delete]
+        namespace :peers do
+          get 'password' => 'password#new'
+          post 'password' => 'password#create'
+        end
       end
     end
   end

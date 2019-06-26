@@ -35,6 +35,10 @@ class Chambers::Admin::PeersController < ApplicationController
       render :edit
     end
   end
+
+  def reset_password
+    @peers = Peer.where_order(peerage)
+  end
   private
   def user_params
     params.require(peerage).permit(:id, :sca_name, :email, :vigilant).merge(peerage: peerage).to_hash.symbolize_keys

@@ -73,6 +73,10 @@ class Peer < ApplicationRecord
     self.class.peerage_name
   end
 
+  def email
+    user.email
+  end
+
   def slug
     user.slug
   end
