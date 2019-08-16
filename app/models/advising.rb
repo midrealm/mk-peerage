@@ -3,7 +3,7 @@ class Advising < ApplicationRecord
   belongs_to :candidate
   belongs_to :poll, optional: true
   
-  enum judgement: [:elevate, :wait, :no_strong_opinion, :drop]
+  enum judgement: [:elevate, :wait, :no_strong_opinion, :drop], _prefix: true
   
   def self.vote_list_judgements
     Hash[Advising.judgements.keys.map{|j| [Advising.vote_list_judgement_name(j),j]}]     

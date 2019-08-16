@@ -3,7 +3,7 @@ ruby '2.5.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.21.0' #set for heroku
 #gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
