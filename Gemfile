@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+gem "bootsnap", ">= 1.4.4", require: false
+
 # Use Capistrano for deployment
 
 gem 'devise', '~> 4.6.0'
@@ -32,6 +34,7 @@ gem 'cancancan'
 gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'recaptcha', require: 'recaptcha/rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
