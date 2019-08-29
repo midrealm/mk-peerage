@@ -25,7 +25,8 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem 'devise', '~> 4.6.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'paperclip', '~> 5.2.1'
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk-s3'
+gem 'mini_magick'
 gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"

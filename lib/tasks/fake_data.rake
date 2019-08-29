@@ -30,10 +30,10 @@ namespace :fake_data do
       u.state = 'MI'
       u.zipcode = '48105'
       u.phone = '5556667777'
-      u.arms = File.open('lib/assets/fake_data/byrd_coa.jpg')
       u.deceased = false
       u.group = Group.find_by(name: 'Cynnabar')
     end
+
 
     Laurel.create do |p|
       p.active = true
@@ -46,7 +46,8 @@ namespace :fake_data do
       p.admin = true
   		p.user = byrd
     end
-
+		byrd.arms.attach(io: File.open('lib/assets/fake_data/byrd_coa.jpg'), filename: 'byrd_coa.jpg', content_type: 'image/jpeg');
+	
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))
 
     tallis = User.create do |u|

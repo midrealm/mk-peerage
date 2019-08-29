@@ -1,4 +1,4 @@
-<% image_preview = image_tag user.arms.url(:large)  %>
+<% image_preview = image_tag user.arms.variant(resize: "100x200") %>
 <% image_preview = image_tag user.peer(peerage).profile_pic.url(:large) unless peerage.nil? %>
 <div class="d-none d-md-block col-md">
   <div class="d-flex flex-column">

@@ -17,12 +17,12 @@ class User < ApplicationRecord
 
   belongs_to :group, optional: true
 
-  has_attached_file :arms, styles: {large: '100x200'}, default_url: '/images/:style/no_arms.jpg'
-  validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  has_one_attached :arms
   validates :email, format: /.+@.+\..+/i
   validates_presence_of :sca_name
 
   before_save :set_slug, :set_deceased
+	after_create :set_arms
 
   scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
 
@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def arms_data_uri
-    DataUriGenerator.new(arms).data_uri
+    "data:image/jpeg;base64,#{Base64.strict_encode64(arms.variant(resize: "100x200").blob.download)}"
   end
 
   private
@@ -61,4 +61,10 @@ class User < ApplicationRecord
       end
     end
   end
+  def set_arms
+		if !arms.attached?
+			self.arms.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'no_arms.jpg')), filename: 'no_arms.jpg', content_type: 'images/jpeg')
+		end
+	end
+
 end

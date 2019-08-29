@@ -4,6 +4,7 @@
 /public/stylesheets
 yarn-error.log
 
+storage/
 #peerage ignore
 /public/system/
 /storage/
