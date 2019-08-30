@@ -32,7 +32,7 @@
         </div>
         <div id="profile_preview">
           <% unless @candidate.profile_pic_file_size.nil? %>
-            <%= image_tag @candidate.profile_pic.url(:large) %>
+            <%= image_tag @candidate.profile_pic_full %>
           <% end %>
         </div>
         <div class="ml-5">

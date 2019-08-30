@@ -19,7 +19,7 @@
   <% candidates.each do |cand| %>
     <tr>
       <td style="width:140px;text-align:center">
-        <%= link_to (image_tag cand.profile_pic.url(:thumb)), chambers_candidate_path(peerage,cand.id) %><br>
+        <%= link_to (image_tag cand.profile_pic_thumb), chambers_candidate_path(peerage,cand.id) %><br>
         <%= link_to "#{cand.sca_name}", chambers_candidate_path(peerage,cand.id)%>
       </td>
       <td><%=cand.specialties%></td>

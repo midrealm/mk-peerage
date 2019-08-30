@@ -1,6 +1,6 @@
 class CandidatePresenter
   extend Forwardable
-  def_delegators :@candidate, :sca_name, :comments, :profile_pic, :list, :group, :documents, :peerage_type, :id
+  def_delegators :@candidate, :sca_name, :comments, :profile_pic, :profile_pic_full, :profile_pic_thumb, :list, :group, :documents, :peerage_type, :id
 
   def initialize(candidate)
     @candidate = candidate

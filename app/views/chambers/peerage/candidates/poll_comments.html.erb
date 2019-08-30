@@ -31,7 +31,7 @@
   <% @pr.advisings.each do |adv| %>
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
-    <%= image_tag adv.peer.profile_pic.url(:thumb) %><br/>
+    <%= image_tag adv.peer.profile_pic_thumb %><br/>
     <%= link_to adv.peer.sca_name, peer_path(peerage,adv.peer.slug)%>
     </div>
     <div class="col-md-5">
@@ -42,5 +42,5 @@
   <% end %>
 </div>
 <div class="col-md-4">
-<%= image_tag @candidate.profile_pic.url(:large) %>
+<%= image_tag @candidate.profile_pic_full %>
 </div>

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="d-md-flex flex-row-reverse">
     <div class='peer-profile-parent'>
-       <%= image_tag @peer.profile_pic.url(:large), class: 'profile-pic'%>
+       <%= image_tag @peer.profile_pic_full, class: 'profile-pic'%>
        <%= image_tag @peer.arms.variant(resize: "100x200"), class: 'arms'%>
     </div>
     <div class="col-md">

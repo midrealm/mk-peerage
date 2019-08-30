@@ -7,7 +7,7 @@
 </nav>
 <div class ="d-md-flex flex-row-reverse">
   <div >
-    <%= image_tag @candidate.profile_pic.url(:large) %>
+    <%= image_tag @candidate.profile_pic_full %>
   </div>
   <div class="col-md">
     <h1><%=@candidate.sca_name%><br/><small class="text-muted"><%=@candidate.specialties%></small></h1>
@@ -68,7 +68,7 @@
           <% @candidate.comments.each do |comment| %>
           <div class="p-2">
             <div style="width:120px;float:left;text-align:center">
-              <%= link_to (image_tag comment.peer.profile_pic.url(:thumb)), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+              <%= link_to (image_tag comment.peer.profile_pic_thumb), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
             </div>
             <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %><br>
             <% if comment.peer.user === current_user %>

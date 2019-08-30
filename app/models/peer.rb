@@ -11,15 +11,25 @@ class Peer < ApplicationRecord
   has_many :dependencies
   has_many :superiors, through: :dependencies 
 
-  has_attached_file :profile_pic, styles: {thumb: '100x133', large: '300x400' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: '/images/:style/frame.jpg'
-  validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  has_one_attached :profile_pic
+  after_create :set_profile_pic
+ # has_attached_file :profile_pic, styles: {thumb: '100x133', large: '300x400' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: '/images/:style/frame.jpg'
+ # validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   def order
     type.downcase.to_sym
   end
   #helpers
   def profile_pic_data_uri
-    DataUriGenerator.new(profile_pic).data_uri
+    "data:image/jpeg;base64,#{Base64.strict_encode64(profile_pic.blob.download)}"
+  end
+
+  def profile_pic_full
+    profile_pic
+  end
+
+  def profile_pic_thumb
+    profile_pic.variant(combine_options: {resize: '100x133', gravity: 'South', chop: '0x33'})
   end
 
   def specialties_link
@@ -112,6 +122,11 @@ class Peer < ApplicationRecord
   def deceased
     user.deceased
   end
+  def set_profile_pic
+		if !profile_pic.attached?
+			self.profile_pic.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'frame.jpg')), filename: 'frame.jpg', content_type: 'images/jpeg')
+		end
+	end
 end
 require_dependency 'laurel'
 require_dependency 'pelican'

@@ -44,8 +44,9 @@ namespace :fake_data do
       p.bio = 'I like Music. I am a **Catholic**.'
       p.profile_pic = File.open('lib/assets/fake_data/byrd.png')
       p.admin = true
-  		p.user = byrd
+  		p.user_id = byrd.id
     end
+
 		byrd.arms.attach(io: File.open('lib/assets/fake_data/byrd_coa.jpg'), filename: 'byrd_coa.jpg', content_type: 'image/jpeg');
 	
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))
@@ -112,6 +113,7 @@ namespace :fake_data do
       u.group = Group.find_by(name: 'Northwoods')
       u.peerage_type = :laurel
     end    
+		morley.profile_pic.attach(io: File.open('lib/assets/fake_data/morley.png'), filename: 'morley.png', content_type: 'image/png');
     Specialization.create(candidate: morley, specialty: Specialty.find_by(name: 'Music'))
     Advocacy.create(candidate: morley, peer: byrd.laurel)
 
@@ -176,6 +178,7 @@ namespace :fake_data do
       u.group = Group.find_by(name: 'Roaring Wastes')
       u.peerage_type = :laurel
     end    
+		oliver.profile_pic.attach(io: File.open('lib/assets/fake_data/oliver.png'), filename: 'morley.png', content_type: 'image/png');
     Document.create(candidate:oliver, peer: byrd.laurel, document: File.open('lib/assets/fake_data/oliver_1.jpg'), name: 'First Image')
     Document.create(candidate:oliver, peer: byrd.laurel, document: File.open('lib/assets/fake_data/oliver_2.jpg'), name: 'Second Image')
 

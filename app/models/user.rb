@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -18,6 +19,8 @@ class User < ApplicationRecord
   belongs_to :group, optional: true
 
   has_one_attached :arms
+  #has_attached_file :arms, styles: {large: '100x200'}, default_url: '/images/:style/no_arms.jpg'
+#  validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   validates :email, format: /.+@.+\..+/i
   validates_presence_of :sca_name
 
