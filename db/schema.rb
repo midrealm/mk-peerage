@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_234641) do
+ActiveRecord::Schema.define(version: 2019_09_01_154916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,10 +67,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_234641) do
     t.boolean "vote"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "profile_pic_file_name"
-    t.string "profile_pic_content_type"
-    t.integer "profile_pic_file_size"
-    t.datetime "profile_pic_updated_at"
     t.integer "group_id"
     t.string "specialty_detail"
     t.integer "peerage_type"
@@ -100,10 +96,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_234641) do
   create_table "documents", id: :serial, force: :cascade do |t|
     t.integer "peer_id"
     t.integer "candidate_id"
-    t.string "document_file_name"
-    t.string "document_content_type"
-    t.integer "document_file_size"
-    t.datetime "document_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -136,10 +128,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_234641) do
     t.boolean "vigilant"
     t.date "elevation_date"
     t.text "bio"
-    t.string "profile_pic_file_name"
-    t.string "profile_pic_content_type"
-    t.integer "profile_pic_file_size"
-    t.datetime "profile_pic_updated_at"
     t.string "dependent_of"
     t.boolean "admin"
     t.string "specialty_detail"

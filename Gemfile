@@ -24,7 +24,6 @@ gem "bootsnap", ">= 1.4.4", require: false
 
 gem 'devise', '~> 4.6.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
-gem 'paperclip', '~> 5.2.1'
 gem 'aws-sdk-s3'
 gem 'image_processing'
 gem 'mini_magick'

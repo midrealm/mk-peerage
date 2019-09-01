@@ -1,8 +1,6 @@
 namespace :fake_data do
   task :db_reset => :environment do
-    Rake::Task['db:drop'].invoke 
-    Rake::Task['db:create'].invoke 
-    Rake::Task['db:migrate'].invoke 
+    Rake::Task['db:reset'].invoke 
   end
 
   task :db_migrate => :environment do
@@ -42,12 +40,12 @@ namespace :fake_data do
       p.vigilant = false
       p.specialty_detail = 'Motets'
       p.bio = 'I like Music. I am a **Catholic**.'
-      p.profile_pic = File.open('lib/assets/fake_data/byrd.png')
       p.admin = true
   		p.user_id = byrd.id
     end
 
 		byrd.arms.attach(io: File.open('lib/assets/fake_data/byrd_coa.jpg'), filename: 'byrd_coa.jpg', content_type: 'image/jpeg');
+		byrd.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 	
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))
 
@@ -71,11 +69,11 @@ namespace :fake_data do
       p.vigilant = false
       p.specialty_detail = 'Polyphony'
       p.bio = 'I liked Music First.'
-      p.profile_pic = File.open('lib/assets/fake_data/tallis.png')
       p.admin = false
 			p.user = tallis
     end
 
+    tallis.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/tallis.png'), filename: 'byrd_coa.jpg', content_type: 'image/png');
     Specialization.create(peer: tallis.laurel, specialty: Specialty.find_by(name: 'Music'))
     Dependency.create(peer: byrd.laurel, superior: tallis.laurel)
 
@@ -101,11 +99,11 @@ namespace :fake_data do
       p.vigilant = false
       p.specialty_detail = 'Lute Songs'
       p.bio = 'I am on of the first Singer Songwriters. No longer active because I moved to Paris.'
-      p.profile_pic = File.open('lib/assets/fake_data/dowland.png')
       p.admin = false
 			p.user = dowland
     end
 
+    dowland.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/dowland.png'), filename: 'dowland.png', content_type: 'image/png');
     morley = Candidate.create do |u|
       u.sca_name = 'Thomas Morley'
       u.vote = true
@@ -138,10 +136,11 @@ namespace :fake_data do
       p.vigilant = false
       p.specialty_detail = 'Portraits'
       p.bio = 'Yay Painting.'
-      p.profile_pic = File.open('lib/assets/fake_data/hilliard.png')
       p.admin = false
 			p.user = hilliard
     end
+
+    hilliard.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/hilliard.png'), filename: 'hilliard.png', content_type: 'image/png');
 
     Specialization.create(peer: hilliard.laurel, specialty: Specialty.find_by(name: 'Painting'))
     holbein = User.create do |u|
@@ -165,22 +164,24 @@ namespace :fake_data do
       p.vigilant = false
       p.specialty_detail = 'Portraits'
       p.bio = 'Yay Painting.'
-      p.profile_pic = File.open('lib/assets/fake_data/hans.png')
+      p.profile_pic = 
       p.admin = false
 			p.user = holbein
     end
     Specialization.create(peer: holbein.laurel, specialty: Specialty.find_by(name: 'Painting'))
+    holbein.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/hans.png'), filename: 'hans.png', content_type: 'image/png')
 
     oliver = Candidate.create do |u|
       u.sca_name = 'Isaac Oliver'
       u.vote = false
-      u.profile_pic = File.open('lib/assets/fake_data/oliver.png')
       u.group = Group.find_by(name: 'Roaring Wastes')
       u.peerage_type = :laurel
     end    
 		oliver.profile_pic.attach(io: File.open('lib/assets/fake_data/oliver.png'), filename: 'morley.png', content_type: 'image/png');
-    Document.create(candidate:oliver, peer: byrd.laurel, document: File.open('lib/assets/fake_data/oliver_1.jpg'), name: 'First Image')
-    Document.create(candidate:oliver, peer: byrd.laurel, document: File.open('lib/assets/fake_data/oliver_2.jpg'), name: 'Second Image')
+    d1 = Document.create(candidate:oliver, peer: byrd.laurel, name: 'First Image')
+    d1.document.attach(io:  File.open('lib/assets/fake_data/oliver_1.jpg'), filename: 'oliver_1.jpg', content_type: 'image/jpeg')
+    d2 = Document.create(candidate:oliver, peer: byrd.laurel, name: 'Second Image')
+    d2.document.attach(io:  File.open('lib/assets/fake_data/oliver_2.jpg'), filename: 'oliver_2.jpg', content_type: 'image/jpeg')
 
     Specialization.create(candidate: oliver, specialty: Specialty.find_by(name: 'Painting'))
     Advocacy.create(candidate: oliver, peer: hilliard.laurel)

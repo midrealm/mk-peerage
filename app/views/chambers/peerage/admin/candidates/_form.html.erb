@@ -31,7 +31,7 @@
         <div id="croppie" class='d-none'>
         </div>
         <div id="profile_preview">
-          <% unless @candidate.profile_pic_file_size.nil? %>
+          <% if @candidate.profile_pic.attached?%>
             <%= image_tag @candidate.profile_pic_full %>
           <% end %>
         </div>

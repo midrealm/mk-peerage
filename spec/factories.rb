@@ -4,7 +4,9 @@ FactoryBot.define do
     name { 'String' }
     association :peer, strategy: :build
     association :candidate, strategy: :build
-    document { File.new("#{Rails.root}/spec/fixtures/images/portrait.jpg") }
+    after(:create) do |d|
+      d.document.attach(io: File.open("#{Rails.root}/spec/fixtures/images/portrait.jpg"), filename: 'portrait.jpg', content_type: 'image/jpeg') 
+    end
   end
   factory :poll_result do
     association :candidate, strategy: :build
