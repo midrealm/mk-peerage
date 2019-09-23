@@ -28,7 +28,12 @@ class Candidate < ApplicationRecord
   end
 
   def specialties_link
-    ApplicationController.helpers.collection_link(collection: specialties, label: 'name', order: order, url_helper: 'chambers_specialty_path')
+    array = []
+    specialties.each do |spec|
+      array.push("<a href=\"/chambers/#{spec.peerage_type}/specialties/#{spec.slug}\">#{spec.name}</a>")
+    end
+    array.push specialty_detail if specialty_detail.present?
+    array.join(', ').html_safe
   end
 
   def advocates_link
