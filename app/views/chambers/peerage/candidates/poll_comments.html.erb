@@ -1,4 +1,5 @@
-<h3>Full Poll Results for</h3>
+<% title "Full Poll Results"%>
+<h3>Full Poll Results</h3>
 <div class="col-md-8">
   <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
   <% if @candidate.specialties.count > 0 %>

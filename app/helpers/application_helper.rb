@@ -36,4 +36,7 @@ module ApplicationHelper
     end
     links_array.join(', ').html_safe
   end
+  def title(title)
+    content_for(:title) { title }
+  end
 end

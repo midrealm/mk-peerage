@@ -10,7 +10,7 @@ end
 describe "post /users/set_up_account" do
   it "redirects to home and sends email for found account" do
     laurel = create(:laurel_user, sca_name: 'Lucy Laurel', email: 'thing@example.com')
-    post "/users/set_up_account", params: { :user => { sca_name: 'Lucy Laurel', email: 'thing@example.com' } }
+    post "/users/set_up_account", params: { sca_name: 'Lucy Laurel', email: 'thing@example.com' } 
     expect(response).to redirect_to "/"
   end
 end
