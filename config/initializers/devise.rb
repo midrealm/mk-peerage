@@ -274,3 +274,14 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
+#So there can be multpile reset password emails
+Devise::Models::Recoverable.module_eval do
+	def send_reset_password_instructions(type=nil)
+    token = set_reset_password_token
+    send_reset_password_instructions_notification(token, type)
+    token	
+	end
+  def send_reset_password_instructions_notification(token, type=nil)
+     send_devise_notification(:reset_password_instructions, token, type, {})
+  end
+end

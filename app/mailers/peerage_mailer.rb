@@ -17,16 +17,18 @@ class PeerageMailer < Devise::Mailer
     subject = "Welcome to the Middle Kingdom #{@names[:collection].capitalize}"
     mail(to: @user.email, subject: subject, from: self.class.no_reply)
  end
-  def reset_password_instructions(record, token, opts={})
+  def reset_password_instructions(record, token, type=nil, opts={})
     @token = token
-    if record.last_sign_in_at.nil? && record.created_at > (Time.now - 10.minutes)
+    if type === 'setup'
+      devise_mail(record, :setup, opts)
+    elsif record.last_sign_in_at.nil? && record.created_at > (Time.now - 10.minutes)
       if record.royalty?
         devise_mail(record, :royal_welcome, opts)
       else
         @names = self.class.names(record.peers.first.order)
         devise_mail(record, :welcome, opts)
       end
-    else
+		else
       devise_mail(record, :reset_password_instructions, opts)
     end
   end

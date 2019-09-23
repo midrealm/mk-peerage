@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   patch '/users/edit' => 'users#update'
   get '/users/edit/password' => 'users#edit_password'
   patch '/users/edit/password' => 'users#update_password'
-  
+	get '/users/set_up_account' => 'setup#new'
+	post '/users/set_up_account' => 'setup#create'
+   
   
   
   get '/chambers' => 'users#index'
