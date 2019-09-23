@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_01_154916) do
+ActiveRecord::Schema.define(version: 2019_09_06_185351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_09_01_154916) do
     t.integer "group_id"
     t.string "specialty_detail"
     t.integer "peerage_type"
+    t.string "modern_name"
     t.index ["group_id"], name: "index_candidates_on_group_id"
   end
 
