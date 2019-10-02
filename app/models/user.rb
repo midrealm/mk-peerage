@@ -25,6 +25,7 @@ class User < ApplicationRecord
   validates_presence_of :sca_name
 
   before_save :set_slug, :set_deceased
+  after_save :enforce_parent_specialty
 	after_create :set_arms
 
   scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
@@ -55,6 +56,21 @@ class User < ApplicationRecord
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')
+  end
+  def enforce_parent_specialty
+    self.peers.all.each do |peer|
+        specs_to_add = []
+        specs = peer.specialties.all
+        specs.each do |s|
+          if s.has_parent? && !specs.include?(s.parent)
+            specs_to_add.push(s.parent) 
+          end
+        end
+      
+        specs_to_add.uniq.each do |s|
+          Specialization.create(specialty: s, peer: peer)
+        end
+      end
   end
 
   def set_deceased

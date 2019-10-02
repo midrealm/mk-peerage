@@ -2,6 +2,7 @@ class Specialty < ApplicationRecord
   has_many :specializations
 
 
+  has_ancestry 
   has_many :peers, through: :specializations
   has_many :candidates, through: :specializations
 

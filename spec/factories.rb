@@ -76,14 +76,15 @@ FactoryBot.define do
   end
 
   factory :specialization do
-    association :peer, strategy: :build
+    #association :peer, strategy: :build
     association :specialty, strategy: :build 
-    association :candidate, strategy: :build
+    #association :candidate, strategy: :build
   end
   factory :specialty do
     name {"MyString"}
     peerage_type {:laurel}
     slug {'my_string'}
+    ancestry {nil}
   end
   sequence :email do |n|
     "person#{n}@example.com"

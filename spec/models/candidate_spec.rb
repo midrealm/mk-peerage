@@ -10,12 +10,11 @@ RSpec.describe Candidate, "specialties_link" do
     candidate = create(:laurel_candidate)
     create(:specialization, candidate: candidate, specialty: spec1)
     create(:specialization, candidate: candidate, specialty: spec2)
-    
     expect(candidate.specialties_link).to eq('<a href="/chambers/laurel/specialties/spec">Spec</a>, <a href="/chambers/laurel/specialties/spec_2">Spec 2</a>')
   end
 
 end
-RSpec.describe Peer, "advocates_link" do
+RSpec.describe Candidate, "advocates_link" do
   it "handles two advocates" do
     candidate = create(:laurel_candidate)
     sup1 = create(:laurel_user, sca_name: 'Laurel 1', slug: 'laurel_1')
@@ -34,5 +33,25 @@ RSpec.describe Candidate, "order" do
   it "returns :pelican for a Pelican Peer" do
     candidate = build(:candidate, peerage_type: :pelican)
     expect(candidate.order).to eq(:pelican) 
+  end
+end
+RSpec.describe Candidate, "enforce_parent_specialty" do
+  before :each do
+    @parent = create(:specialty, name: 'Parent')
+    @child = create(:specialty, name: 'Child', parent_id: @parent.id)
+    @candidate = create(:laurel_candidate)
+  end
+  it "sets parent specialty if child specialty selected and parent specializaiton doesn't already exit" do
+    @candidate.update_attributes(:specialty_ids => [@child.id])
+    expect(@candidate.specialties.count).to eq(2)
+  end
+  it "only sets one parent specialization even if two new children created" do
+    child2 = create(:specialty, name: 'Child2', parent_id: @parent.id) 
+    @candidate.update_attributes( :specialty_ids => [@child.id, child2.id])
+    expect(@candidate.specialties.count).to eq(3)
+  end
+  it "sets only one parent if child and parent selected" do
+    @candidate.update_attributes(:specialty_ids => [@child.id, @parent.id])
+    expect(@candidate.specialties.count).to eq(2)
   end
 end

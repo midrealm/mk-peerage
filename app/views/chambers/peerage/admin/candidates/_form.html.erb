@@ -19,7 +19,9 @@
           <% end %> 
         <% end %>
         <%= f.select :group_id, Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true, }, {data: {behavior: 'select2'} } %>
-        <%= f.select :specialty_ids, Specialty.where(peerage_type: peerage).pluck(:name, :id), {label: 'Specialties', include_blank: true}, {data: {behavior: 'select2'}, multiple: true} %>
+        <%= f.select :specialty_ids, 
+          Specialty.where(peerage_type: peerage).pluck(:name, :id).map{|x| [ Specialty.find(x[1]).ancestors? ? "#{Specialty.find(x[1]).parent.name} -> #{x[0]}" : x[0] , x[1]] }.sort,
+         {label: 'Specialties', include_blank: true}, {data: {behavior: 'select2'}, multiple: true} %>
         <%= f.text_field :specialty_detail %>
         <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id), {label: 'Advocates', include_blank: true}, {data: {behavior: 'select2'}, multiple: true } %>
         <input data-behavior="profile-data" class='active' type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>

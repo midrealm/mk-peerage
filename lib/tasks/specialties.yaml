@@ -1,0 +1,39 @@
+- name: Performance
+  sub:
+    - name: Dance
+    - name: Music
+    - name: Bardic
+    - name: Storytelling
+- name: Textiles
+  sub: 
+    - name: Embroidery
+    - name: Costuming
+    - name: Knitting
+    - name: Lacemaking
+    - name: Weaving
+- name: Technology
+  sub: 
+    - name: Armoring
+    - name: Metalworking
+    - name: Musical Instrument Making
+    - name: Woodworking
+- name: Research
+- name: Studio
+  sub: 
+    - name: Beadwork
+    - name: Bookbinding
+    - name: Calligraphy
+    - name: Ceramics and Pottery
+    - name: Drawing
+    - name: Glasswork
+    - name: Illumination
+    - name: Painting
+    - name: Paper Making
+    - name: Sculpture
+- name: Domestic
+  sub: 
+    - name: Animal Husbandry
+    - name: Basket Weaving
+    - name: Brewing and Vinting
+    - name: Cooking
+    - name: Herbcraft_and_Apothecary

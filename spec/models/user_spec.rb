@@ -17,6 +17,26 @@ RSpec.describe User, 'set_slug' do
     expect(User.last.slug).to eq('heregyd_ketilsdottir')
   end
 end
+RSpec.describe User, "enforce_parent_specialty" do
+  before :each do
+    @parent = create(:specialty, name: 'Parent')
+    @child = create(:specialty, name: 'Child', parent_id: @parent.id)
+    @user = create(:laurel_user)
+  end
+  it "sets parent specialty if child specialty selected and parent specializaiton doesn't already exit" do
+    @user.update_attributes( :laurel_attributes => {id: @user.laurel.id, :specialty_ids => [@child.id]})
+    expect(@user.laurel.specialties.count).to eq(2)
+  end
+  it "only sets one parent specialization even if two new children created" do
+    child2 = create(:specialty, name: 'Child2', parent_id: @parent.id) 
+    @user.update_attributes( :laurel_attributes => {id: @user.laurel.id, :specialty_ids => [@child.id, child2.id]})
+    expect(@user.laurel.specialties.count).to eq(3)
+  end
+  it "sets only one parent if child and parent selected" do
+    @user.update_attributes( :laurel_attributes => {id: @user.laurel.id, :specialty_ids => [@child.id, @parent.id]})
+    expect(@user.laurel.specialties.count).to eq(2)
+  end
+end
 
 RSpec.describe User, 'self.add_new(id, sca_name, email, vigilant, peerage)' do
   context 'for totally new user' do

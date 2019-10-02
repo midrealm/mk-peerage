@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_06_185351) do
+ActiveRecord::Schema.define(version: 2019_10_02_175321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,7 +163,6 @@ ActiveRecord::Schema.define(version: 2019_09_06_185351) do
   end
 
   create_table "specializations", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
     t.integer "specialty_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -172,7 +171,6 @@ ActiveRecord::Schema.define(version: 2019_09_06_185351) do
     t.index ["candidate_id"], name: "index_specializations_on_candidate_id"
     t.index ["peer_id"], name: "index_specializations_on_peer_id"
     t.index ["specialty_id"], name: "index_specializations_on_specialty_id"
-    t.index ["user_id"], name: "index_specializations_on_user_id"
   end
 
   create_table "specialties", id: :serial, force: :cascade do |t|
@@ -181,6 +179,8 @@ ActiveRecord::Schema.define(version: 2019_09_06_185351) do
     t.datetime "updated_at", null: false
     t.integer "peerage_type"
     t.string "slug"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_specialties_on_ancestry"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -233,6 +233,5 @@ ActiveRecord::Schema.define(version: 2019_09_06_185351) do
   add_foreign_key "specializations", "candidates"
   add_foreign_key "specializations", "peers"
   add_foreign_key "specializations", "specialties"
-  add_foreign_key "specializations", "users"
   add_foreign_key "users", "groups"
 end

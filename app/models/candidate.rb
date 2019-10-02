@@ -19,6 +19,7 @@ class Candidate < ApplicationRecord
 
   has_one_attached :profile_pic
   after_create :set_profile_pic
+  after_save :enforce_parent_specialty
 
   #has_attached_file :profile_pic, styles: {large: '300x400', thumb: '100x133' }, convert_options: { thumb: '-gravity South -chop 0x33' }, default_url: '/images/:style/frame.jpg'
   #validates_attachment_content_type :profile_pic, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
@@ -29,7 +30,7 @@ class Candidate < ApplicationRecord
 
   def specialties_link
     array = []
-    specialties.each do |spec|
+    specialties.all.each do |spec|
       array.push("<a href=\"/chambers/#{spec.peerage_type}/specialties/#{spec.slug}\">#{spec.name}</a>")
     end
     array.push specialty_detail if specialty_detail.present?
@@ -39,7 +40,18 @@ class Candidate < ApplicationRecord
   def advocates_link
     ApplicationController.helpers.collection_link(collection: peers, label: 'sca_name', order: order, url_helper: 'peer_path')
   end
-
+  
+  def enforce_parent_specialty
+    specs_to_add = []
+    specialties.each do |s|
+      if s.has_parent? && !specialties.include?(s.parent)
+        specs_to_add.push(s.parent)
+      end
+    end
+    specs_to_add.uniq.each do |s|
+      Specialization.create(specialty: s, candidate: self)
+    end
+  end
   def profile_pic_full
     profile_pic
   end

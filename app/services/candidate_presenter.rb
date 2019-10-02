@@ -24,7 +24,7 @@ class CandidatePresenter
   end
   def specialties
     array = []
-    @candidate.specialties.each do |spec|
+    @candidate.specialties.all.each do |spec|
       array.push("<a href=\"/chambers/#{spec.peerage_type}/specialties/#{spec.slug}\">#{spec.name}</a>")
     end
     array.push @candidate.specialty_detail if @candidate.specialty_detail.present?
@@ -37,7 +37,7 @@ class CandidatePresenter
   end
 
   def specialties?
-    @candidate.specialty_detail.present? || @candidate.specialties.present?
+    @candidate.specialty_detail.present? || @candidate.specialties.all.present?
   end
 
   def elevate

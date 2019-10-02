@@ -58,7 +58,6 @@ RSpec.describe Peer, "order" do
   end
 end
 
-
 RSpec.describe Peer, "self.where_order(peerage)" do
   it "returns only Laurels when :laurel submitted as peerage" do
     create(:laurel_peer)
