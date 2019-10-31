@@ -1,12 +1,10 @@
 import 'bootstrap'
-import 'select2';
-$.fn.select2.defaults.set( "theme", "bootstrap4" );
+import 'bootstrap-select';
 import Rails from 'rails-ujs';
 Rails.start();
 
 import './modules/datatable'
 import './modules/markdownTextField'
-import './modules/select2'
 import './modules/datepicker'
 import './modules/profileCropper'
 import './modules/editUserToggle'

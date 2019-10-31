@@ -24,7 +24,7 @@
           <%= f.file_field :arms, class: 'd-none d-md-block' %>
           <input type="hidden" id="arms_cache" value=<%= @user.arms_data_uri %> >
           <div class="d-md-none alert alert-info">Update Arms on larger screen</div>
-          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group'}, {data: {behavior: 'select2'}}%>
+          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}}%>
         </div>
       <%# render "edit_contact", f: f 
         %>
