@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
         resources :candidates, except: [:show]
         resource :poll, except: [:show, :delete]
+        resource :news, only: [:edit, :update]
         resources :peers, except: [:show, :delete]
         namespace :peers do
           get 'password' => 'password#new'

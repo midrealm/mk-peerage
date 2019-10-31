@@ -1,0 +1,12 @@
+<% title "Edit #{@news.peerage} News"%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit News</li>
+  </ol>
+</nav>
+<h1>Edit <%=@news.peerage%> News</h1>
+    <%= bootstrap_form_for @news, as: :news, url: chambers_admin_news_path(peerage,@news) do |f| %>
+      <%= f.text_area :body, hide_label: true, data: {behavior: 'markdown'} %>
+      <%= f.submit 'Update News' %>
+    <%end %>

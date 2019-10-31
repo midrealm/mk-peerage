@@ -67,6 +67,12 @@ class Peer < ApplicationRecord
   def self.where_order(peerage)
     Peer.where(type: peerage.to_s.capitalize)
   end
+	def self.news_last_updated(peerage)
+		News.find_by(peerage_type: peerage)&.updated_at&.strftime('%d-%B-%Y')
+	end
+	def self.news_body(peerage)
+		News.find_by(peerage_type: peerage)&.body || ''
+	end
 
   def potential_superiors
     Peer.where(type: type).where.not(id: id)   

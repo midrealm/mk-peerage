@@ -1,5 +1,10 @@
 FactoryBot.use_parent_strategy = false
 FactoryBot.define do
+  factory :news, aliases: [:laurel_news] do
+    peerage_type { :laurel }
+    body { "So much News News News News" }
+  end
+
   factory :document do
     name { 'String' }
     association :peer, strategy: :build

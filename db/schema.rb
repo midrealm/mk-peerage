@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_175321) do
+ActiveRecord::Schema.define(version: 2019_10_30_150852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,13 @@ ActiveRecord::Schema.define(version: 2019_10_02_175321) do
     t.string "slug"
     t.index ["ancestry"], name: "index_groups_on_ancestry"
     t.index ["group_type_id"], name: "index_groups_on_group_type_id"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.integer "peerage_type"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "peers", id: :serial, force: :cascade do |t|
