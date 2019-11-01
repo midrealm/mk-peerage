@@ -48,6 +48,8 @@ Rails.application.routes.draw do
         namespace :peers do
           get 'password' => 'password#new'
           post 'password' => 'password#create'
+          get 'email' => 'email#new'
+          post 'email' => 'email#create'
         end
       end
     end

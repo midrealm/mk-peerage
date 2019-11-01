@@ -7,7 +7,8 @@
 </nav>
 <h1>Manage <%=peerage.capitalize%>s</h1>
 <%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %><br/>
-<%= link_to "Reset #{peerage.capitalize}'s password", chambers_admin_peers_password_path %>
+<%= link_to "Reset #{peerage.capitalize}'s password", chambers_admin_peers_password_path %><br>
+<%= link_to "Set #{peerage.capitalize}'s email address and reset their password", chambers_admin_peers_email_path %>
 <table class='table' data-behavior="dtable">
   <thead>
     <th>Name</th><th>Show</th><th>Edit</th>
