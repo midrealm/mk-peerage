@@ -3,7 +3,7 @@ ruby '2.5.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.21.0' #set for heroku
 #gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
@@ -18,12 +18,15 @@ gem 'coffee-rails', '~> 4.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+gem "bootsnap", ">= 1.4.4", require: false
+
 # Use Capistrano for deployment
 
 gem 'devise', '~> 4.6.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
-gem 'paperclip', '~> 5.2.1'
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk-s3'
+gem 'image_processing'
+gem 'mini_magick'
 gem "bootstrap_form",
     git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
     branch: "master"
@@ -32,6 +35,7 @@ gem 'cancancan'
 gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'recaptcha', require: 'recaptcha/rails'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

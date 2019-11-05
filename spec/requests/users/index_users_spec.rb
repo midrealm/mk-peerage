@@ -20,6 +20,12 @@ describe "Get /chambers" do
       expect(response).to have_http_status(:success)
       expect(response.body).not_to include('Admin Tasks')
     end
+    it "shows news" do
+      news = create(:laurel_news, body: 'There is some new News')
+      get "/chambers"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('There is some new News')
+    end
   end
   describe "admin user" do
     before(:each) do
@@ -30,6 +36,10 @@ describe "Get /chambers" do
       get "/chambers"
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Admin Tasks')
+    end
+    it "shows 'Edit News'" do
+      get "/chambers"
+      expect(response.body).to include('Edit News')
     end
   end
   it "redirects if not logged in" do

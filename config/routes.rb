@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   patch '/users/edit' => 'users#update'
   get '/users/edit/password' => 'users#edit_password'
   patch '/users/edit/password' => 'users#update_password'
-  
+	get '/users/set_up_account' => 'setup#new'
+	post '/users/set_up_account' => 'setup#create'
+   
   
   
   get '/chambers' => 'users#index'
@@ -41,10 +43,13 @@ Rails.application.routes.draw do
 
         resources :candidates, except: [:show]
         resource :poll, except: [:show, :delete]
+        resource :news, only: [:edit, :update]
         resources :peers, except: [:show, :delete]
         namespace :peers do
           get 'password' => 'password#new'
           post 'password' => 'password#create'
+          get 'email' => 'email#new'
+          post 'email' => 'email#create'
         end
       end
     end

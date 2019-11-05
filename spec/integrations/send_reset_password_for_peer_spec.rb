@@ -7,7 +7,7 @@ RSpec.feature 'Send Reset Password for Peer' do
     sign_in(admin)
     Timecop.travel(Time.now + 1.day)
     visit '/chambers/laurel/admin/peers/password'
-    all('#_id option')[1].select_option  
+    select laurel.sca_name, from: "id"
     click_on 'Send Reset Password Info'
 
     expect(page).to have_content('Reset Password Instructions Sent')

@@ -12,6 +12,12 @@ RSpec.describe Peer, "specialties_link" do
     
     expect(peer.specialties_link).to eq('<a href="/laurel/specialties/spec">Spec</a>, <a href="/laurel/specialties/spec_2">Spec 2</a>')
   end
+  it "handles specialty and specialty detail" do
+    spec1 = create(:specialty, name: 'Spec', slug: 'spec')
+    peer = create(:laurel_peer, specialty_detail: 'Thing')
+    create(:specialization, peer: peer, specialty: spec1)
+    expect(peer.specialties_link).to eq('<a href="/laurel/specialties/spec">Spec</a>, Thing')
+  end
 end
 
 RSpec.describe Peer, "superiors_link" do
@@ -51,7 +57,6 @@ RSpec.describe Peer, "order" do
     expect(peer.order).to eq(:pelican) 
   end
 end
-
 
 RSpec.describe Peer, "self.where_order(peerage)" do
   it "returns only Laurels when :laurel submitted as peerage" do

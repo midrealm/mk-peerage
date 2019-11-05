@@ -117,18 +117,20 @@ describe "outside world's view of peerage" do
 
 #peers show
   describe "Get /laurel/LAUREL_NAME" do
-      it "shows laurel page; does not show edit link" do
+      it "shows laurel page; does not show edit link; doesn't show contact for user who has never logged in" do
         create(:laurel_user, sca_name: "Mundungus Smith")
         get "/laurel/mundungus_smith"
         expect(response).to have_http_status(:success)
         expect(response.body).to include("Mundungus Smith")
         expect(response.body).not_to include('<a href="/users/edit?peerage=laurel">Edit Profile</a>')
+        expect(response.body).not_to include('Contact')
       end
-      it "shows link to peer edit for logged in peer" do
+      it "shows link to peer edit for logged in peer and Contact link" do
         laurel_user = create(:laurel_user, sca_name: "Mundungus Smith")
         sign_in(laurel_user)
         get "/laurel/mundungus_smith"
         expect(response.body).to include('<a href="/users/edit?peerage=laurel">Edit Profile</a>')
+        expect(response.body).not_to include('Contact')
       end
   end
 end

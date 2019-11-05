@@ -25,8 +25,9 @@ module ApplicationHelper
     case level
         when 'notice' then "alert alert-info"
         when 'success' then "alert alert-success"
-        when 'error' then "alert alert-error"
-        when 'alert' then "alert alert-error"
+        when 'error' then "alert alert-danger"
+        when 'alert' then "alert alert-danger"
+        when 'danger' then "alert alert-danger"
     end
   end
 
@@ -35,5 +36,8 @@ module ApplicationHelper
       link_to( x.public_send(label), Rails.application.routes.url_helpers.public_send(url_helper, order, x.slug) )
     end
     links_array.join(', ').html_safe
+  end
+  def title(title)
+    content_for(:title) { title }
   end
 end

@@ -14,3 +14,7 @@
   <%end %>
   Open Until Midnight on: <%= poll.end_date.strftime('%d-%b-%Y') %> <br/>
 <% end %>
+<h4>News</h4>
+<%= markdown(Peer.news_body(peerage)) %>
+<small>Last updated: <%=Peer.news_last_updated(peerage)%></small><br>
+

@@ -5,7 +5,7 @@
   </thead>
   <% documents.each do |doc| %>
     <tr>
-      <td><%= link_to image_tag(doc.document.url(:thumb)), doc.document.url%></td>
+      <td><%= link_to image_tag(doc.document_thumb), doc.document_full%></td>
       <td><%= doc.name %></td>
       <td><%= doc.description %></td>
       <td><%= doc.created_at.strftime('%b %-d, %Y')%></td>

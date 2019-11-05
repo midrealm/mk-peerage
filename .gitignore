@@ -4,10 +4,12 @@
 /public/stylesheets
 yarn-error.log
 
+storage/
 #peerage ignore
 /public/system/
 /storage/
 .byebug_history
+/public/packs
 #Related to getting email to work
 .env
 Procfile

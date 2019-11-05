@@ -1,3 +1,4 @@
+<% title "#{peerage.capitalize} Poll for #{@candidate.sca_name}"%>
 <h1><%= peerage.capitalize %> Poll for <%=@candidate.sca_name%></h1>
 
 <div class="container">
@@ -16,7 +17,7 @@
     <div class="col-md">
       <div class="d-flex flex-row-reverse">
         <div>
-        <%= image_tag @candidate.profile_pic.url(:large) %>
+        <%= image_tag @candidate.profile_pic_full %>
         </div>
         <div>
           <strong>Status</strong>: <%=  @candidate.vote ? "Vote List" : "Watch List" %><br>
@@ -34,7 +35,7 @@
       <% @candidate.comments.each do |comment| %>
       <div class="p-2">
         <div style="width:120px;float:left">
-        <%= image_tag comment.peer.profile_pic.url(:thumb) %><br><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%>
+        <%= image_tag comment.peer.profile_pic_thumb %><br><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%>
         </div>
         <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
         <%= markdown(comment.text) %>

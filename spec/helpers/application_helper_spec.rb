@@ -8,10 +8,13 @@ describe ApplicationHelper do
       expect(helper.flash_class('success')).to eq('alert alert-success')
     end
     it "spits out 'alert alert-error' for 'error'" do
-      expect(helper.flash_class('error')).to eq('alert alert-error')
+      expect(helper.flash_class('error')).to eq('alert alert-danger')
     end
     it "spits out 'alert alert-error' for 'alert'" do
-      expect(helper.flash_class('alert')).to eq('alert alert-error')
+      expect(helper.flash_class('alert')).to eq('alert alert-danger')
+    end
+    it "spits out 'alert alert-error' for 'danger'" do
+      expect(helper.flash_class('danger')).to eq('alert alert-danger')
     end
   end
 

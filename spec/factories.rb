@@ -1,10 +1,17 @@
 FactoryBot.use_parent_strategy = false
 FactoryBot.define do
+  factory :news, aliases: [:laurel_news] do
+    peerage_type { :laurel }
+    body { "So much News News News News" }
+  end
+
   factory :document do
     name { 'String' }
     association :peer, strategy: :build
     association :candidate, strategy: :build
-    document { File.new("#{Rails.root}/spec/fixtures/images/portrait.jpg") }
+    after(:create) do |d|
+      d.document.attach(io: File.open("#{Rails.root}/spec/fixtures/images/portrait.jpg"), filename: 'portrait.jpg', content_type: 'image/jpeg') 
+    end
   end
   factory :poll_result do
     association :candidate, strategy: :build
@@ -74,14 +81,15 @@ FactoryBot.define do
   end
 
   factory :specialization do
-    association :peer, strategy: :build
+    #association :peer, strategy: :build
     association :specialty, strategy: :build 
-    association :candidate, strategy: :build
+    #association :candidate, strategy: :build
   end
   factory :specialty do
     name {"MyString"}
     peerage_type {:laurel}
     slug {'my_string'}
+    ancestry {nil}
   end
   sequence :email do |n|
     "person#{n}@example.com"

@@ -1,4 +1,5 @@
-<h3>Full Poll Results for</h3>
+<% title "Full Poll Results"%>
+<h3>Full Poll Results</h3>
 <div class="col-md-8">
   <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
   <% if @candidate.specialties.count > 0 %>
@@ -31,7 +32,7 @@
   <% @pr.advisings.each do |adv| %>
   <div class="container" style="padding: 10px">
     <div class="col-md-2" style="text-align:center">
-    <%= image_tag adv.peer.profile_pic.url(:thumb) %><br/>
+    <%= image_tag adv.peer.profile_pic_thumb %><br/>
     <%= link_to adv.peer.sca_name, peer_path(peerage,adv.peer.slug)%>
     </div>
     <div class="col-md-5">
@@ -42,5 +43,5 @@
   <% end %>
 </div>
 <div class="col-md-4">
-<%= image_tag @candidate.profile_pic.url(:large) %>
+<%= image_tag @candidate.profile_pic_full %>
 </div>

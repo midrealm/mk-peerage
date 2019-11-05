@@ -1,3 +1,4 @@
+<% title "#{peerage.capitalize} Specialties" %>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to 'Home', '/' %></li>
@@ -10,7 +11,9 @@
 <% @specialties.each do |spec| %>
   <% count = spec.peers.count%>
   <% if count > 0 %>
-  <li><%=link_to spec.name.capitalize, specialty_path(peerage, spec.slug)%> (<%=count%>)</li>
+  <% spec_name = spec.name.capitalize %>
+  <% spec_name = "#{spec.parent.name.capitalize} -> #{spec.name.capitalize}" if spec.ancestors? %>
+  <li><%=link_to spec_name, specialty_path(peerage, spec.slug)%> (<%=count%>)</li>
   <% end %>
 <%end %>
 </ul>

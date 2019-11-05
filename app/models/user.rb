@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -17,12 +18,15 @@ class User < ApplicationRecord
 
   belongs_to :group, optional: true
 
-  has_attached_file :arms, styles: {large: '100x200'}, default_url: '/images/:style/no_arms.jpg'
-  validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  has_one_attached :arms
+  #has_attached_file :arms, styles: {large: '100x200'}, default_url: '/images/:style/no_arms.jpg'
+#  validates_attachment_content_type :arms, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   validates :email, format: /.+@.+\..+/i
   validates_presence_of :sca_name
 
   before_save :set_slug, :set_deceased
+  after_save :enforce_parent_specialty
+	after_create :set_arms
 
   scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
 
@@ -46,12 +50,27 @@ class User < ApplicationRecord
   end
 
   def arms_data_uri
-    DataUriGenerator.new(arms).data_uri
+    "data:image/jpeg;base64,#{Base64.strict_encode64(arms.variant(resize: "100x200").blob.download)}"
   end
 
   private
   def set_slug
     self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')
+  end
+  def enforce_parent_specialty
+    self.peers.all.each do |peer|
+        specs_to_add = []
+        specs = peer.specialties.all
+        specs.each do |s|
+          if s.has_parent? && !specs.include?(s.parent)
+            specs_to_add.push(s.parent) 
+          end
+        end
+      
+        specs_to_add.uniq.each do |s|
+          Specialization.create(specialty: s, peer: peer)
+        end
+      end
   end
 
   def set_deceased
@@ -61,4 +80,10 @@ class User < ApplicationRecord
       end
     end
   end
+  def set_arms
+		if !arms.attached?
+			self.arms.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'no_arms.jpg')), filename: 'no_arms.jpg', content_type: 'images/jpeg')
+		end
+	end
+
 end

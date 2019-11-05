@@ -9,14 +9,14 @@
       </div>
     </div>
     <input data-behavior="profile-data" type="hidden" class="<%= 'active' if peerage == peer.order %>" id="user_<%=peer.order%>_attributes_profile_pic" name="user[<%=peer.peerage_type%>_attributes][profile_pic]" value=<%=peer.profile_pic_data_uri%>>
-
-    <%= p.select :specialty_ids, Specialty.all.where(peerage_type: peer.peerage_type).pluck(:name, :id), {label: 'Specialties', include_blank: true}, {data: {behavior: 'select2'}, multiple: true }%>
+    <%= p.select :specialty_ids, Specialty.all.where(peerage_type: peer.peerage_type).pluck(:name, :id).map{|x| [ Specialty.find(x[1]).ancestors? ? "#{Specialty.find(x[1]).parent.name} -> #{x[0]}" : x[0] , x[1]] }.sort,
+       {label: 'Specialties', include_blank: true}, class: "selectpicker", data: {'live-search' => true}, multiple: true %>
     <%= p.text_field :specialty_detail %>
     <%= p.text_field :elevated_by %>
     <%= p.date_field :elevation_date %>
     <%= p.check_box :active, label: "Active?" %>
     <%= p.check_box :vigilant, label: "Vigilant?" %>
-    <%= p.select :superior_ids, peer.potential_superiors.joins(:user).pluck(:sca_name, :id), {label: "#{peer.dependent_name} of: ", include_blank: true}, {data: {behavior: 'select2'}, multiple: true } %>
+    <%= p.select :superior_ids, peer.potential_superiors.joins(:user).pluck(:sca_name, :id), {label: "#{peer.dependent_name} of: ", include_blank: true}, class: "selectpicker", data: {'live-search' => true}, multiple: true  %>
     <%= p.text_field :dependent_of, label: "#{peer.dependent_name} of: (Not in Middle Kingdom)"  %>
     <%= p.text_area :bio %>
   <% end %>

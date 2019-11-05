@@ -10,6 +10,7 @@ class Chambers::Admin::CandidatesController < ApplicationController
   end
   def create
     @candidate = Candidate.new(candidate_params)
+    attach_profile_pic
     @candidate.vote = false;
     if @candidate.save
       redirect_to chambers_candidate_path(peerage,@candidate)
@@ -25,7 +26,9 @@ class Chambers::Admin::CandidatesController < ApplicationController
   def update
     @candidate = Candidate.find(params[:id])
     check_candidate_order
-    if @candidate.update(candidate_params)
+    @candidate.assign_attributes(candidate_params)
+    attach_profile_pic
+    if @candidate.save
       redirect_to chambers_candidate_path(peerage,@candidate)
     else
       render :edit
@@ -45,11 +48,19 @@ class Chambers::Admin::CandidatesController < ApplicationController
   end
 
   def candidate_params
-    params.require(:candidate).permit(:sca_name, :profile_pic, :group_id, :vote, :peerage_type, :specialty_detail, {:specialty_ids => [] }, {:peer_ids => [] })
+    params.require(:candidate).permit(:sca_name, :group_id, :vote, :peerage_type, :specialty_detail, {:specialty_ids => [] }, {:peer_ids => [] })
   end
 
   def authorize_admin
     authorize! :manage, peerage
+  end
+  def attach_profile_pic
+    if params["candidate"]["profile_pic"].present?
+      headers, data = params["candidate"]["profile_pic"].split(',')
+      headers =~ /^data:(.*?)$/
+      content_type = Regexp.last_match(1).split(';base64').first
+      @candidate.profile_pic.attach(io: StringIO.new(Base64.decode64(data)), filename: Time.current.to_i.to_s, content_type: content_type) 
+    end
   end
 
   def self.controller_path
