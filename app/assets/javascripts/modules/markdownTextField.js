@@ -1,4 +1,3 @@
-//import SimpleMDE  from 'simplemde';
 import EasyMDE  from 'easymde';
 import peerages from '../entities/peerages';
 export default (() => {
