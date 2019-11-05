@@ -22,7 +22,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 
 # Use Capistrano for deployment
 
-gem 'devise', '~> 4.6.0'
+gem 'devise', '~> 4.7.0'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'aws-sdk-s3'
 gem 'image_processing'
