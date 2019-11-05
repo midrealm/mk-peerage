@@ -36,7 +36,7 @@
     "webpack-merge": "^4.1.2"
   },
   "devDependencies": {
-    "jquery": "^3.3.1"
+    "jquery": "^3.4.0"
   },
   "peerDependencies": {
     "popper.js": "^1.12.9",
