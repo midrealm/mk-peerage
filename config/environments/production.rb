@@ -60,7 +60,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "peerage_#{Rails.env}"
 
-  config.action_mailer.default_url_options = { host: 'mk-peerage.herokuapp.com', protocol: 'https'}
+  config.action_mailer.default_url_options = { host: 'peerage.midrealm.org', protocol: 'https'}
 
 
   config.action_mailer.perform_caching = false

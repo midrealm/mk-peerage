@@ -2,6 +2,6 @@
 <p>Welcome to the Middle Kingdom Peerage Website: https://peerage.midrealm.org</p>
 <p>To set up your account, you must first set your password. You can do this through the link below.</p>
 
-<p><%= link_to 'Set my password', edit_password_url(@resource, reset_password_token: @token) %></p>
+<p><%= edit_password_url(@resource, reset_password_token: @token) %></p>
 
 To log in go to <%= new_user_session_url %>, and use this email address (<%= @resource.sca_name %>) and your new password.
