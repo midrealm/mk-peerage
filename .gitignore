@@ -5,6 +5,10 @@
 yarn-error.log
 
 storage/
+#peerage init ignore
+/lib/assets/init_images.tar.gz 
+/lib/assets/init_images/ 
+/lib/tasks/peer_migrate.rake
 #peerage ignore
 /public/system/
 /storage/
