@@ -1,4 +1,6 @@
-Comment Regarding: <%=@candidate.sca_name%>
-Submitted by: <%=@current_user.sca_name%>
+Comment Regarding: <%=@presenter.candidate_sca_name_with_specialties%> 
+Submitted by: <%=@presenter.peer_sca_name %> <%= peer_url(@presenter.peerage_type, @presenter.peer_slug) %>
 
-<%= @comment %>
+<%= @presenter.comment_text %>
+
+View <%=@presenter.candidate_sca_name%>'s candidate page here: <%= chambers_candidate_url(@presenter.peerage_type, @presenter.candidate_id) %>
