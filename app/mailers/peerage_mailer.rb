@@ -3,10 +3,11 @@ class PeerageMailer < Devise::Mailer
   include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`
   default template_path: 'devise/mailer' # to make sure that your mailer uses the devise views
 
-  def comment(current_user,candidate, comment)
+  def comment(current_user,candidate, comment, presenter=nil)
     @current_user = current_user
     @candidate = candidate
     @comment = comment
+    @presenter = presenter
     peerage = @candidate.peerage_type.to_sym
     subject = "Candidate ##{candidate.id} Comment"
     mail(to: Peer.subclass(peerage).mailing_list, subject: subject, from: self.class.no_reply)

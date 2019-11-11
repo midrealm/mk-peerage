@@ -21,7 +21,8 @@ module Chambers
       candidate = Candidate.find(@comment.candidate_id)
       @comment.peer = current_user.peer(candidate.peerage_type)
       if @comment.save
-        PeerageMailer.comment(current_user,candidate,@comment.text).deliver
+        presenter = CommentEmailPresenter.new(current_user, candidate, @comment.text)
+        PeerageMailer.comment(current_user,candidate,@comment.text, presenter).deliver
         flash[:success] = "Successfully Submitted Comment"
         redirect_to chambers_candidate_path(candidate.order,candidate)
       else

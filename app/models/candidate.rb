@@ -37,6 +37,19 @@ class Candidate < ApplicationRecord
     array.join(', ').html_safe
   end
 
+  def specialties_sentence
+    array = []
+    specialties.all.each do |spec|
+      array.push(spec.name)
+    end
+    array.push specialty_detail if specialty_detail.present?
+    array.join(', ')
+  end
+  
+  def specialties?
+    specialties.count > 0 || specialty_detail.present? 
+  end
+
   def advocates_link
     ApplicationController.helpers.collection_link(collection: peers, label: 'sca_name', order: order, url_helper: 'peer_path')
   end
