@@ -57,6 +57,8 @@ Rails.application.routes.draw do
 
   scope '/:peerage/' do
     get '/' => 'order#index', as: :order
+    get '/order_secretary/contact' => 'order_secretary_contact#new', as: :contact_order_secretary
+    post '/order_secretary/contact' => 'order_secretary_contact#create'
     get '/specialties' => 'specialties#index', as: :specialties
     get '/specialties/:slug' => 'specialties#show', as: :specialty
     get '/groups' => 'groups#index', as: :groups

@@ -30,6 +30,12 @@ RSpec.feature 'Contact email' do
     laurel
   end
 
+  def setup_laurel_secretary_contact
+    laurel = create(:laurel_admin, sca_name: 'Mundungus Smith')
+    visit "/laurel/order_secretary/contact"
+    laurel
+  end
+
   scenario 'sends email to pelican' do
     pelican = setup_pelican_contact
     send_mail
@@ -37,6 +43,12 @@ RSpec.feature 'Contact email' do
   end
   scenario 'sends email to laurel' do
     laurel = setup_laurel_contact
+    send_mail
+    expect_email_to(laurel.email)
+  end
+
+  scenario 'sends email to laurel order secretary' do
+    laurel = setup_laurel_secretary_contact
     send_mail
     expect_email_to(laurel.email)
   end

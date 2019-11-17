@@ -16,6 +16,12 @@ class Ability
         can :read, peer.order
       end
     end
+		if user.superuser?
+			can :manage, :royalty
+			Peer.orders.each do |order|
+				can :manage, order
+			end
+		end
    
     if user.royalty?
       can :read, :all

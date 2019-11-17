@@ -123,14 +123,14 @@ describe "outside world's view of peerage" do
         expect(response).to have_http_status(:success)
         expect(response.body).to include("Mundungus Smith")
         expect(response.body).not_to include('<a href="/users/edit?peerage=laurel">Edit Profile</a>')
-        expect(response.body).not_to include('Contact')
+        expect(response.body).not_to include('Send Mundungs Smith a Message')
       end
       it "shows link to peer edit for logged in peer and Contact link" do
         laurel_user = create(:laurel_user, sca_name: "Mundungus Smith")
         sign_in(laurel_user)
         get "/laurel/mundungus_smith"
         expect(response.body).to include('<a href="/users/edit?peerage=laurel">Edit Profile</a>')
-        expect(response.body).not_to include('Contact')
+        expect(response.body).to include('Send Mundungus Smith a Message')
       end
   end
 end

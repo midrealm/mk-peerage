@@ -26,4 +26,7 @@ class Laurel < Peer
     "And to be worthy of the Wreath I wear...<br/>\n"\
     "thus swear I, <<Name>>.<br/>\n".html_safe
   end
+  def self.order_secretary
+    Laurel.find_by(admin: true)
+  end
 end

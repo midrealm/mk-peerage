@@ -121,6 +121,10 @@ FactoryBot.define do
   factory :royal, parent: :user do
     royalty {true}
   end
+  factory :superuser, parent: :user do
+    sca_name {'Susie Superuser'}
+    superuser {true}
+  end
 
   factory :laurel_user, parent: :user do
     sca_name {'Lester Laurel'}
