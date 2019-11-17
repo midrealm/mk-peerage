@@ -121,6 +121,10 @@ FactoryBot.define do
   factory :royal, parent: :user do
     royalty {true}
   end
+  factory :superuser, parent: :user do
+    sca_name {'Susie Superuser'}
+    superuser {true}
+  end
 
   factory :laurel_user, parent: :user do
     sca_name {'Lester Laurel'}
@@ -132,6 +136,14 @@ FactoryBot.define do
   factory :pelican_user, parent: :user do
       sca_name {'Peter Pelican'}
       after(:create) do |u|
+        create(:pelican_peer, user: u)
+      end
+  end
+
+  factory :laurel_pelican_user, parent: :user do
+      sca_name {'Dorothy Double Peer'}
+      after(:create) do |u|
+        create(:laurel_peer, user: u)
         create(:pelican_peer, user: u)
       end
   end

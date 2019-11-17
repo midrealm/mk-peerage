@@ -39,6 +39,13 @@ class PeerageMailer < Devise::Mailer
     @from_email = from_email
     mail(to: user.email, from: self.class.no_reply, subject: "Contact from Midrealm Peerage Site: #{subject}", reply_to: from_email)
   end
+  def contact_order_secretary(secretary, subject, from_name, from_email, message)
+    @peerage = secretary.type.to_s
+    @message = message
+    @from_name = from_name
+    @from_email = from_email
+    mail(to: secretary.email, from: self.class.no_reply, subject: "Order Secretary Contact from Midrealm Peerage Site: #{subject}", reply_to: from_email)
+  end
 
   private
   def self.no_reply

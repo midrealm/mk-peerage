@@ -1,0 +1,17 @@
+<% title "Contact the Order Secretary for the #{peerage.capitalize}" %>
+<h1>Contact  <%=@secretary.sca_name%><br><small>Order Secretary for the Order of the <%=peerage.capitalize%></small></h1>
+
+<div class="containter">
+  <div class="col-md-6">
+    <%= bootstrap_form_for 'contact', url: order_secretary_contact_path(peerage) do |f| %>
+      <%= f.text_field :subject %>
+      <%= f.text_field :from_name, label: 'Your Name' %> 
+      <%= f.email_field :from_email, label: 'Your Email Address', as: :email %>
+      <%= f.text_area :message, label: 'Your message', as: :text, data: { behavior: 'markdown' } %>
+      <div class="form-group">
+        <%= recaptcha_tags %>
+      </div>
+      <%= f.submit 'Send Message'%>
+    <% end %>
+  </div>
+</div> 
