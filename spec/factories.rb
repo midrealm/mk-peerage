@@ -136,6 +136,14 @@ FactoryBot.define do
       end
   end
 
+  factory :laurel_pelican_user, parent: :user do
+      sca_name {'Dorothy Double Peer'}
+      after(:create) do |u|
+        create(:laurel_peer, user: u)
+        create(:pelican_peer, user: u)
+      end
+  end
+
   factory :admin, aliases: [:laurel_admin], parent: :user do
     sca_name {"Mundugus Admin"}
     after(:create) do |u|
