@@ -24,7 +24,7 @@ describe "get /chambers/laurel/candidates" do
     end
 
     it "shows results from last poll in table" do
-      p = create(:past_poll)
+      p = create(:past_published_poll)
       pr = create(:poll_result, candidate: @candidate, poll: p, wait: 123456)
       
       get "/chambers/laurel/candidates"
@@ -41,11 +41,11 @@ describe "get /chambers/laurel/candidates" do
     end
   end
 
-  it "for logged in royal, shows comments from last poll" do
+  it "for logged in royal, shows comments from last poll regardless if published" do
       @royal = create(:royal)
       sign_in(@royal)
       @candidate = create(:candidate, peerage_type: :laurel)
-      p = create(:past_poll)
+      p = create(:past_poll, published: false)
       pr = create(:poll_result, candidate: @candidate, poll: p, wait: 123456)
       get "/chambers/laurel/candidates"
       expect(response.body).to include("Comments from Last Poll")

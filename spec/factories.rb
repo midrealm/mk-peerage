@@ -30,19 +30,15 @@ FactoryBot.define do
     judgement {nil}
     comment {"My Advice to the Crown on this Candidate is... Yay"}
   end
-  factory :poll do
+  factory :poll, aliases: [:future_poll]  do
     peerage_type {:laurel}
     start_date {(DateTime.now + 1.days)}
     end_date {(DateTime.now+2.days)}
   end
-  factory :future_poll, class: Poll do 
-    peerage_type {:laurel}
-    start_date {(DateTime.now + 1.days)}
-    end_date {(DateTime.now+2.days)}
-  end
-  factory :past_poll, class: Poll do 
+  factory :past_poll, aliases: [:past_published_poll], class: Poll do 
     to_create {|instance| instance.save(validate: false) }
     peerage_type {:laurel}
+    published {true}
     start_date {(DateTime.now - 5.days)}
     end_date {(DateTime.now-2.days)}
   end

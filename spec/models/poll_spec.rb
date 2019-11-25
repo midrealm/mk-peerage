@@ -31,9 +31,9 @@ end
 RSpec.describe Poll, 'self.last_published_for(:peerage)' do
   context 'for laurel poll and pelican poll' do 
     before(:each) do
-      @laurel_poll = create(:past_poll, peerage_type: :laurel)
+      @laurel_poll = create(:past_published_poll, peerage_type: :laurel)
       create(:poll, peerage_type: :laurel)
-      @pelican_poll = create(:past_poll, peerage_type: :pelican)
+      @pelican_poll = create(:past_published_poll, peerage_type: :pelican)
       create(:poll, peerage_type: :pelican)
     end 
     it "returns pelican poll" do
@@ -62,8 +62,8 @@ RSpec.describe Poll, 'self.current(:peerage)' do
   end
   context 'for past laurel poll and pelican poll' do 
     before(:each) do
-      @laurel_poll = create(:past_poll, peerage_type: :laurel)
-      @pelican_poll = create(:past_poll, peerage_type: :pelican)
+      @laurel_poll = create(:past_published_poll, peerage_type: :laurel)
+      @pelican_poll = create(:past_published_poll, peerage_type: :pelican)
     end 
     it "returns nil for pelican poll" do
       expect(Poll.current(:pelican)).to eq(nil)

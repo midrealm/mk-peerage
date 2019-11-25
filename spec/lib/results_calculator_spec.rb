@@ -6,8 +6,8 @@ describe "calculate" do
     @rc = ResultsCalculator.new
   end
   it "handles polls for different peerages with the same end date" do
-    laurel_poll = create(:past_poll)
-    pelican_poll = create(:past_poll, peerage_type: :pelican)
+    laurel_poll = create(:past_poll, published: false)
+    pelican_poll = create(:past_poll, published: false, peerage_type: :pelican)
     lc = create(:laurel_candidate)
     pc = create(:pelican_candidate)
     laurel_advising = create(:advising, poll: laurel_poll, candidate: lc, submitted: true)
@@ -45,8 +45,7 @@ describe "calculate" do
 
   context "past poll" do
     before(:each) do
-      @past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.day)
-      @past_poll.save(validate: false)
+      @past_poll = create(:past_poll, published: false)
       @laurel1 = create(:laurel_peer)
       @laurel2 = create(:laurel_peer)
       @laurel3 = create(:laurel_peer)
