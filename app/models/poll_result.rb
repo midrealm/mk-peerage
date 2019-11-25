@@ -5,4 +5,5 @@ class PollResult < ApplicationRecord
   def advisings
     Advising.where(candidate: candidate, poll: poll, submitted: true)
   end
+
 end

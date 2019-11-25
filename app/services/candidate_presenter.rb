@@ -4,7 +4,7 @@ class CandidatePresenter
 
   def initialize(candidate)
     @candidate = candidate
-    @results = @candidate&.poll_results&.last
+    @results = @candidate.last_published_poll_result
   end
 
   def poll_result?

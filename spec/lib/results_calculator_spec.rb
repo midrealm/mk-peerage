@@ -5,6 +5,16 @@ describe "calculate" do
     @candidate = create(:candidate)
     @rc = ResultsCalculator.new
   end
+  it "handles polls for different peerages with the same end date" do
+    laurel_poll = create(:past_poll)
+    pelican_poll = create(:past_poll, peerage_type: :pelican)
+    lc = create(:laurel_candidate)
+    pc = create(:pelican_candidate)
+    laurel_advising = create(:advising, poll: laurel_poll, candidate: lc, submitted: true)
+    pelican_advising = create(:advising, poll: pelican_poll, candidate: pc, submitted: true)
+    @rc.calculate
+    expect(PollResult.count).to eq(2)
+  end
   it "does not create PollResults for if Poll results already exist" do
     p = create(:poll)
     c = create(:candidate)

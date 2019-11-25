@@ -28,6 +28,14 @@ class Candidate < ApplicationRecord
     self.vote ||= false
   end
 
+  def self.where_order(peerage)
+    Candidate.where(peerage_type: peerage)
+  end
+
+  def last_published_poll_result
+    PollResult.find_by(candidate: self, poll: Poll.last_published_for(peerage_type))
+  end
+
   def specialties_link
     array = []
     specialties.all.each do |spec|

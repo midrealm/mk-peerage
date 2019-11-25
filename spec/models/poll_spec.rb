@@ -27,6 +27,25 @@ RSpec.describe Poll, 'self.last_for(:peerage)' do
     end
   end
 end
+
+RSpec.describe Poll, 'self.last_published_for(:peerage)' do
+  context 'for laurel poll and pelican poll' do 
+    before(:each) do
+      @laurel_poll = create(:past_poll, peerage_type: :laurel)
+      create(:poll, peerage_type: :laurel)
+      @pelican_poll = create(:past_poll, peerage_type: :pelican)
+      create(:poll, peerage_type: :pelican)
+    end 
+    it "returns pelican poll" do
+      expect(Poll.last_published_for(:pelican)).to eq(@pelican_poll)
+    end
+    it "returns laurel poll" do
+      expect(Poll.last_published_for(:laurel)).to eq(@laurel_poll)
+    end
+  end
+end
+
+
   
 RSpec.describe Poll, 'self.current(:peerage)' do
   context 'for current laurel poll and pelican poll' do 

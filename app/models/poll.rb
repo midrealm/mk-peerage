@@ -17,6 +17,9 @@ class Poll < ApplicationRecord
     return nil
   end
 
+  def self.last_published_for(peerage)
+    Poll.where(peerage_type: peerage).where('end_date <=?', Date.today).order(:end_date).last
+  end
   def self.last_for(peerage) 
     Poll.where(peerage_type: peerage).last    
   end
