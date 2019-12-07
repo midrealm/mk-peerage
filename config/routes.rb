@@ -42,6 +42,8 @@ Rails.application.routes.draw do
       namespace :admin do
 
         resources :candidates, except: [:show]
+        resources :polls, only: [:index]
+        put '/polls/:id/publish' => 'polls#publish', as: :publish_poll
         resource :poll, except: [:show, :delete]
         resource :news, only: [:edit, :update]
         resources :peers, except: [:show, :delete]

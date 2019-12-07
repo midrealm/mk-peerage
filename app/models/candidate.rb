@@ -35,6 +35,10 @@ class Candidate < ApplicationRecord
   def last_published_poll_result
     PollResult.find_by(candidate: self, poll: Poll.last_published_for(peerage_type))
   end
+  def last_poll_result
+    PollResult.find_by(candidate: self, poll: Poll.last_for(peerage_type))
+  end
+  
 
   def specialties_link
     array = []

@@ -1,4 +1,19 @@
 require 'rails_helper'
+#index polls
+describe "get /chambers/:peerages/admin/polls" do
+  context "logged in authorized admin" do
+    before(:each) do
+      admin = create(:laurel_admin)
+      sign_in(admin)
+    end
+    it "shows management page" do
+      get "/chambers/laurel/admin/polls" do
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('Manage Laurel Polls')
+      end
+    end
+  end
+end
 #create poll
 describe "post /chambers/laurel/admin/poll" do
   before(:each) do
@@ -107,14 +122,14 @@ end
 
 #update poll
 describe "put /chambers/laurel/admin/poll" do
-  it "updates poll, and redirects to dashboard" do
+  it "updates poll, and redirects to poll management page" do
     admin = create("laurel_admin".to_sym)
     sign_in(admin)
     poll = create(:future_poll, peerage_type: :laurel)
     start_date = (DateTime.now + 3.days).strftime('%d-%b-%Y')
     end_date = (DateTime.now + 4.days).strftime('%d-%b-%Y')
     put "/chambers/laurel/admin/poll", params: { :poll => {start_date: start_date, end_date: end_date} }
-    expect(response).to redirect_to "/chambers"
+    expect(response).to redirect_to "/chambers/laurel/admin/polls"
   end
   it "updates poll for current poll" do
     admin = create("laurel_admin".to_sym)
@@ -122,7 +137,7 @@ describe "put /chambers/laurel/admin/poll" do
     poll = create(:current_poll, peerage_type: :laurel)
     end_date = (DateTime.now + 4.days).strftime('%d-%b-%Y')
     put "/chambers/laurel/admin/poll", params: { :poll => { end_date: end_date} }
-    expect(response).to redirect_to "/chambers"
+    expect(response).to redirect_to "/chambers/laurel/admin/polls"
     expect(Poll.last.end_date.strftime('%d-%b-%Y')).to eq(end_date)
   end
 
@@ -132,4 +147,14 @@ describe "put /chambers/laurel/admin/poll" do
     expect(response).to have_http_status(:found)
     expect(response.body).to include('redirected')
   end
+end
+#publish poll
+describe "put /chambers/laurel/admin/polls/id/publish" do
+  it "updates published status of past poll" do
+    admin = create("laurel_admin".to_sym)
+    sign_in(admin)
+    poll = create(:past_poll, published: false)
+    put "/chambers/laurel/admin/polls/#{poll.id}/publish"
+    expect(Poll.find(poll.id).published?).to be_truthy
+  end  
 end

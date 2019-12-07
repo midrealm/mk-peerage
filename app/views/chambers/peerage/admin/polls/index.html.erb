@@ -1,0 +1,36 @@
+<% title "Manage #{peerage.capitalize} Polls"%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage <%=peerage.capitalize%> Polls</li>
+  </ol>
+</nav>
+
+<% if @polls.active? %>
+<h2>Active Poll</h2>
+ <%= link_to 'Edit', edit_chambers_admin_poll_path(peerage), class: "btn btn-primary" %> <%= @polls.active.duration %> | <%= link_to 'Status', '#' %>
+<% else %>
+
+  <h2>Future Poll</h2>
+  <% if @polls.future? %>
+    <%= @polls.future.duration %>  <%= link_to 'Edit', edit_chambers_admin_poll_path(peerage), class: "btn btn-primary" %>  <%= link_to 'Delete', chambers_admin_poll_path, method: :delete, class: "btn btn-primary", data: {confirm: "Are you sure?"} %>
+  <% else %>
+    <%= link_to 'Create Future Poll', new_chambers_admin_poll_path(peerage), class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<h2>Past Polls</h2>
+<table class="table">
+<thead>
+<th>Dates</th><th>Published?</th><th>Action</th>
+</thead>
+<tbody>
+<% @polls.past.each do |p| %>
+<tr>
+<td><%=p.duration%></td>
+<td><%=p.published_status%></td>
+<td><%= form_with(url: chambers_admin_publish_poll_path(peerage,p.id), method: 'put') do %> <button type="submit" class="btn btn-primary"><%=p.publish_button_text%></button> <%end%></td>
+</tr>
+<% end %>
+</tbody>
+

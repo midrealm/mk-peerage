@@ -2,7 +2,11 @@ class Chambers::CandidatesController < ApplicationController
   before_action :authenticate_user!
   def index
     authorize! :read, peerage
-    @candidates = Candidate.where(peerage_type: peerage).map{|cand| CandidatePresenter.new(cand) }
+    if current_user.royalty?
+      @candidates = Candidate.where(peerage_type: peerage).map{|cand| RoyaltyCandidatePresenter.new(cand) }
+    else
+      @candidates = Candidate.where(peerage_type: peerage).map{|cand| CandidatePresenter.new(cand) }
+    end
   end
 
   def show
