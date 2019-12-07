@@ -158,3 +158,17 @@ describe "put /chambers/laurel/admin/polls/id/publish" do
     expect(Poll.find(poll.id).published?).to be_truthy
   end  
 end
+#analytics
+describe "get /chambers/laurel/admin/poll/analytics" do
+	before(:each) do
+		admin = create(:laurel_admin)
+		sign_in(admin)
+		@candidate = create(:laurel_candidate)
+		@poll = create(:current_poll)
+	end
+	it "show poll analytics for active poll" do
+		get "/chambers/laurel/admin/poll/analytics" 
+    expect(response).to have_http_status(:success)
+    expect(response.body).to include('Active Laurel Poll Analytics')
+	end
+end

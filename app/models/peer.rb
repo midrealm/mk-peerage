@@ -67,6 +67,9 @@ class Peer < ApplicationRecord
   def self.where_order(peerage)
     Peer.where(type: peerage.to_s.capitalize)
   end
+  def self.active(peerage)
+    Peer.where_order(peerage).select{ |p| p.active? }
+  end
 	def self.news_last_updated(peerage)
 		News.find_by(peerage_type: peerage)&.updated_at&.strftime('%d-%B-%Y')
 	end

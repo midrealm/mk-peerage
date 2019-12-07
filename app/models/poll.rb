@@ -26,6 +26,9 @@ class Poll < ApplicationRecord
   def self.last_for(peerage) 
     Poll.where(peerage_type: peerage).last    
   end
+  def self.active_for(peerage)
+    Poll.where(peerage_type: peerage).find{ |p| p.active? }
+  end
 
   def self.future_for(peerage)
     Poll.where(peerage_type: peerage).find{ |p| p.future? }

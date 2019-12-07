@@ -60,6 +60,15 @@ class Chambers::Admin::PollsController < ApplicationController
     redirect_to chambers_admin_polls_path(peerage)
   end
 
+  def analyze
+    poll = Poll.active_for(peerage)
+    if poll.nil?
+      flash[:error] = "No active poll"
+      redirect_to chambers_admin_polls_path(peerage) 
+    end
+    @presenter = PollAnalyticsPresenter.new(poll)
+  end
+
   private
   def poll_params
     params.require(:poll).permit(:start_date, :end_date)
