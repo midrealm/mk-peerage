@@ -68,6 +68,17 @@ class Chambers::Admin::PollsController < ApplicationController
     end
     @presenter = PollAnalyticsPresenter.new(poll)
   end
+  def calculate
+    poll = Poll.find(params[:id])
+    begin 
+      ResultsCalculator.new(poll).calculate
+    rescue ArgumentError => e
+      flash[:error] = e 
+      redirect_to chambers_admin_polls_path(peerage) 
+    end 
+    flash[:success] = "Successfully calculated poll results"
+    redirect_to chambers_admin_polls_path(peerage) 
+  end
 
   private
   def poll_params

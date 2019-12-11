@@ -26,6 +26,10 @@ class Poll < ApplicationRecord
   def self.last_for(peerage) 
     Poll.where(peerage_type: peerage).last    
   end
+  #Need to test this
+  def self.most_recent_with_results_for(peerage)
+    Poll.where(peerage_type: peerage).order(:end_date).select{ |p| PollResult.where(poll: p).any? }.last
+  end
   def self.active_for(peerage)
     Poll.where(peerage_type: peerage).find{ |p| p.active? }
   end

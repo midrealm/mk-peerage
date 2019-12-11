@@ -158,6 +158,19 @@ describe "put /chambers/laurel/admin/polls/id/publish" do
     expect(Poll.find(poll.id).published?).to be_truthy
   end  
 end
+#calculate poll
+describe "put /chambers/laurel/admin/polls/:id/calculate" do
+	it "calculates poll results for finished poll" do
+    admin = create("laurel_admin".to_sym)
+    sign_in(admin)
+    poll = create(:past_poll, published: false)
+		candidate = create(:laurel_candidate)
+    advising = create(:advising, candidate: candidate, peer: admin.laurel, poll: poll, submitted: true) 
+		expect(PollResult.count).to eq(0)
+    put "/chambers/laurel/admin/polls/#{poll.id}/calculate"
+		expect(PollResult.count).to eq(1)
+	end
+end
 #analytics
 describe "get /chambers/laurel/admin/poll/analytics" do
 	before(:each) do

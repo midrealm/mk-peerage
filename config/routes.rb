@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         resources :candidates, except: [:show]
         resources :polls, only: [:index]
         put '/polls/:id/publish' => 'polls#publish', as: :publish_poll
+        put '/polls/:id/calculate' => 'polls#calculate', as: :calculate_poll
         resource :poll, except: [:show, :delete]
         get '/poll/analytics' => 'polls#analyze', as: :analyze_poll
         resource :news, only: [:edit, :update]

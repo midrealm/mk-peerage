@@ -36,7 +36,7 @@ class Candidate < ApplicationRecord
     PollResult.find_by(candidate: self, poll: Poll.last_published_for(peerage_type))
   end
   def last_poll_result
-    PollResult.find_by(candidate: self, poll: Poll.last_for(peerage_type))
+    PollResult.find_by(candidate: self, poll: Poll.most_recent_with_results_for(peerage_type))
   end
   
 

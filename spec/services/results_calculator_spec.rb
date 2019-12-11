@@ -3,34 +3,33 @@ require 'results_calculator'
 describe "calculate" do
   before(:each) do
     @candidate = create(:candidate)
-    @rc = ResultsCalculator.new
   end
-  it "handles polls for different peerages with the same end date" do
+  it "only calculates data for submitted poll" do
     laurel_poll = create(:past_poll, published: false)
     pelican_poll = create(:past_poll, published: false, peerage_type: :pelican)
     lc = create(:laurel_candidate)
     pc = create(:pelican_candidate)
     laurel_advising = create(:advising, poll: laurel_poll, candidate: lc, submitted: true)
     pelican_advising = create(:advising, poll: pelican_poll, candidate: pc, submitted: true)
-    @rc.calculate
-    expect(PollResult.count).to eq(2)
+    ResultsCalculator.new(laurel_poll).calculate
+    expect(PollResult.count).to eq(1)
   end
   it "does not create PollResults for if Poll results already exist" do
-    p = create(:poll)
+    p = create(:past_poll)
     c = create(:candidate)
     poll_result = create(:poll_result, poll: p, candidate: c)    
     expect(PollResult.count).to eq(1)
-    @rc.calculate 
+    ResultsCalculator.new(p).calculate
     expect(PollResult.count).to eq(1)
   end
+
 
   it "does not create Poll Results for current poll" do
       current_poll = create(:current_poll)
       laurel = create(:laurel_peer)
 
       @advising = create(:advising, candidate: @candidate, peer: laurel, poll: current_poll, submitted: true, judgement: :elevate) 
-      @rc.calculate
-      expect(PollResult.count).to eq(0)    
+      expect{ResultsCalculator.new(current_poll).calculate}.to raise_error(ArgumentError)
   end
 
   it "does not create Poll Results for future poll" do
@@ -39,8 +38,7 @@ describe "calculate" do
 
       #this is advising isn't possible anyway)
       create(:advising, candidate: @candidate, peer: laurel, poll: future, submitted: true, judgement: :elevate) 
-      @rc.calculate
-      expect(PollResult.count).to eq(0)    
+      expect{ResultsCalculator.new(future).calculate}.to raise_error(ArgumentError)
   end
 
   context "past poll" do
@@ -62,13 +60,25 @@ describe "calculate" do
     it "creates PollResult for candidates" do
       expect(PollResult.count).to eq(0)
       @advising1.save
-      @rc.calculate
+      ResultsCalculator.new(@past_poll).calculate
       expect(PollResult.count).to eq(1)
+    end
+    it "updates PollResults if new results are in" do
+      @advising1.judgement = :elevate 
+      @advising1.save
+      ResultsCalculator.new(@past_poll).calculate
+      expect(PollResult.count).to eq(1)
+      expect(PollResult.first.elevate).to eq(1)
+      @advising2.judgement = :elevate 
+      @advising2.save
+      ResultsCalculator.new(@past_poll).calculate
+      expect(PollResult.count).to eq(1)
+      expect(PollResult.first.elevate).to eq(2)
     end
     it "creates poll results for past poll even when there's a scheduled poll" do
       future = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.day)
       @advising1.save
-      @rc.calculate
+      ResultsCalculator.new(@past_poll).calculate
       expect(PollResult.count).to eq(1)
       
     end
@@ -78,7 +88,7 @@ describe "calculate" do
       @advising2.judgement = :elevate
       @advising2.save
 
-      calculations = @rc.calculate
+      ResultsCalculator.new(@past_poll).calculate
       result = PollResult.last
       expect(result.elevate).to eq(2)
       expect(result.drop).to eq(0)
@@ -95,7 +105,7 @@ describe "calculate" do
       @advising2.judgement = :elevate
       @advising2.save
 
-      calculations = @rc.calculate
+      ResultsCalculator.new(@past_poll).calculate
       expect(PollResult.count).to eq(2)
       expect(PollResult.find_by(candidate: @candidate).wait).to eq(1)
       expect(PollResult.find_by(candidate: @candidate).elevate).to eq(0)
@@ -105,7 +115,7 @@ describe "calculate" do
     end
 
     it "handles candidate with no advisings" do
-      calculations =  @rc.calculate
+      ResultsCalculator.new(@past_poll).calculate
       expect(PollResult.count).to be(0) 
     end
   end

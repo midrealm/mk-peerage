@@ -22,14 +22,14 @@
 <h2>Past Polls</h2>
 <table class="table">
 <thead>
-<th>Dates</th><th>Published?</th><th>Action</th>
+<th>Dates</th><th>Calculated?</th><th>Published?</th>
 </thead>
 <tbody>
 <% @polls.past.each do |p| %>
 <tr>
 <td><%=p.duration%></td>
-<td><%=p.published_status%></td>
-<td><%= form_with(url: chambers_admin_publish_poll_path(peerage,p.id), method: 'put') do %> <button type="submit" class="btn btn-primary"><%=p.publish_button_text%></button> <%end%></td>
+<td><%=p.calculation_status%> <%=button_to 'Calculate', chambers_admin_calculate_poll_path(peerage, p.id), method: 'put', class: 'btn btn-primary ml-3', form_class: 'd-inline' %> </td>
+<td><%=p.published_status%> <%= button_to p.publish_button_text, chambers_admin_publish_poll_path(peerage,p.id), method: 'put', class: 'btn btn-primary ml-3', form_class: 'd-inline' %></td>
 </tr>
 <% end %>
 </tbody>

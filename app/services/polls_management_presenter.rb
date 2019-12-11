@@ -42,11 +42,7 @@ class PollManagementPresenter
   end
   
   def published_status
-    if @poll.published?
-      "<i class=\"fas fa-check\"></i> Yes".html_safe
-    else
-      "<i class=\"far fa-square\"></i> No".html_safe
-    end
+    yes_no(@poll.published?)
   end
   def publish_button_text
     if @poll.published?
@@ -55,9 +51,21 @@ class PollManagementPresenter
       "Publish"
     end
   end
+
+  def calculation_status
+    yes_no(PollResult.where(poll: @poll).any?)
+  end
   
   private
   def date(date)
    date.strftime("%b %d, %Y") 
+  end
+
+  def yes_no(bool)
+    if bool
+      "<i class=\"fas fa-check\"></i> Yes".html_safe
+    else
+      "<i class=\"far fa-square\"></i> No".html_safe
+    end
   end
 end
