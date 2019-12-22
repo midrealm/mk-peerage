@@ -7,11 +7,17 @@ class Chambers::CandidatesController < ApplicationController
     else
       @candidates = Candidate.where(peerage_type: peerage).map{|cand| CandidatePresenter.new(cand) }
     end
+
+    @poll_date = @candidates.find{ |c| c.poll_date.present?}&.poll_date || ''
   end
 
   def show
     authorize! :read, peerage
-    @candidate = CandidatePresenter.new(Candidate.find(params[:id]))
+    if current_user.royalty?
+      @candidate = RoyaltyCandidatePresenter.new(Candidate.find(params[:id]))
+    else
+      @candidate = CandidatePresenter.new(Candidate.find(params[:id]))
+    end
     raise "Access Denied" unless @candidate.peerage_type == peerage.to_s
     @comment = Comment.new
     @document = Document.new

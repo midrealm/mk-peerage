@@ -3,4 +3,5 @@ class RoyaltyCandidatePresenter < CandidatePresenter
     @candidate = candidate
     @results = @candidate.last_poll_result
   end
+
 end

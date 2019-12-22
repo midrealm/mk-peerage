@@ -11,6 +11,15 @@ class CandidatePresenter
     @results.present?
   end
 
+  def poll_date
+		if poll_result?
+      poll = @results.poll
+      "#{date(poll.start_date)} - #{date(poll.end_date)}"
+		else
+			''
+		end
+  end
+
   def advocates
     @candidate.advocacies.map{ |adv| "<a href=\"/#{adv.peer.peerage_type}/#{adv.peer.slug}\">#{adv.peer.sca_name}</a>" }.join(', ').html_safe
   end
@@ -65,5 +74,9 @@ class CandidatePresenter
     else
       ''
     end
+  end
+
+  def date(date)
+   date.strftime("%b %d, %Y") 
   end
 end

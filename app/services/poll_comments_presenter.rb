@@ -5,17 +5,6 @@ class PollCommentsPresenter < RoyaltyCandidatePresenter
     @results.advisings.map {|adv| PollCommentsAdvisingPresenter.new(adv)}
   end
 
-  def poll_date
-    poll = @results.poll
-    "#{date(poll.start_date)} - #{date(poll.end_date)}"
-  end
-	
-	
-
-  private
-  def date(date)
-   date.strftime("%b %d, %Y") 
-  end
 end
 
 class PollCommentsAdvisingPresenter
