@@ -19,9 +19,8 @@ class Chambers::CandidatesController < ApplicationController
 
   def poll_comments
     authorize! :read, PollResult
-    @candidate = Candidate.find(params[:id])
-    @pr = @candidate.poll_results.last
-    if @pr.nil? 
+		@candidate = PollCommentsPresenter.new(Candidate.find(params[:id]))
+    unless @candidate.poll_result?
       redirect_to chambers_candidates_path(peerage)
     end
   end

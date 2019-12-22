@@ -1,47 +1,61 @@
 <% title "Full Poll Results"%>
-<h3>Full Poll Results</h3>
-<div class="col-md-8">
-  <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
-  <% if @candidate.specialties.count > 0 %>
-    <strong>Specialties</strong>: <%= @candidate.specialties_link %><br>
-  <% end %>
-  <% if @candidate.peers.count > 0 %>
-    <strong>Advocates</strong>: <%= @candidate.advocates_link %> <br>
-  <%end%>
-  <% if @candidate.group %>
-  <strong>Group</strong>: <%= candidate_link(@candidate.group,peerage) %>
-  <% end %>
-  <table class="table">
-  <thead>
-  <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
-  <th>Rec%</th><th>Fav%</th>
-  </thead>
-  <tbody>
-  <tr>
-    <td><%=@pr.elevate%></td>
-    <td><%=@pr.wait%></td>
-    <td><%=@pr.no_strong_opinion%></td>
-    <td><%=@pr.drop%></td>
-    <td><%=@pr.rec%></td>
-    <td><%=@pr.fav%></td>
-  </tr>
-  </tbody>
-  </table>
-  
-  <h3>Comments</h3>
-  <% @pr.advisings.each do |adv| %>
-  <div class="container" style="padding: 10px">
-    <div class="col-md-2" style="text-align:center">
-    <%= image_tag adv.peer.profile_pic_thumb %><br/>
-    <%= link_to adv.peer.sca_name, peer_path(peerage,adv.peer.slug)%>
-    </div>
-    <div class="col-md-5">
-    <strong>Judgement:</strong> <%=adv.judgement_name%><br/>
-    <%= markdown(adv.comment) %>
-    </div>
+<h3>Full Poll Results<br><small>Poll Dates: <%=@candidate.poll_date%></small></h3>
+<div class ="d-md-flex flex-row-reverse">
+  <div >
+    <%= image_tag @candidate.profile_pic_full %>
   </div>
-  <% end %>
+  <div class="col-md">
+    <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
+    <% if @candidate.specialties? %>
+      <strong>Specialties</strong>: <%= @candidate.specialties %><br>
+    <% end %>
+    <% if @candidate.advocates? %>
+      <strong>Advocates</strong>: <%= @candidate.advocates %> <br>
+    <%end%>
+    <% if @candidate.group %>
+    <strong>Group</strong>: <%= candidate_link(@candidate.group,peerage) %>
+    <% end %>
+    <table class="table">
+    <thead>
+    <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
+    <th>Rec%</th><th>Fav%</th>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%=@candidate.elevate%></td>
+      <td><%=@candidate.wait%></td>
+      <td><%=@candidate.no_strong_opinion%></td>
+      <td><%=@candidate.drop%></td>
+      <td><%=@candidate.rec%></td>
+      <td><%=@candidate.fav%></td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
 </div>
-<div class="col-md-4">
-<%= image_tag @candidate.profile_pic_full %>
-</div>
+  
+  <h3>Order Advisings</h3>
+  <table class="table" data-behavior="dtable-shave">
+    <thead>
+      <th>Peer</th>
+      <th>Judgement</th>
+      <th>Comment</th>
+    </thead>
+    <tbody>
+    <% @candidate.advisings.each do |adv| %>
+      <tr> 
+        <td style="width:140px;text-align:center">
+          <%= link_to (image_tag adv.peer.profile_pic_thumb), peer_path(peerage,adv.peer.slug) %><br>
+          <%= link_to "#{adv.peer.sca_name} #{adv.peer.specialties_suffix}", peer_path(peerage,adv.peer.slug)%> 
+        </td>
+        <td>
+          <%= adv.judgement_name %> 
+        </td> 
+        <td data-behavior="shave">
+          <div class="short"> <%= markdown(adv.shortened_comment) %></div>
+          <div class="long d-none"><%=markdown(adv.comment)%>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>

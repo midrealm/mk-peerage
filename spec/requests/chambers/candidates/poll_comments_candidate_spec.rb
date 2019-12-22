@@ -11,7 +11,7 @@ describe "get /chambers/laurel/candidates/:id/poll_comments" do
     context 'past poll result' do
       before(:each) do
         @peer = create(:laurel_peer)
-        @p = build(:past_poll)
+        @p = create(:past_poll)
         @pr = create(:poll_result, candidate: @candidate, poll: @p, wait: 1)
         @advising = create(:advising, poll: @p, peer: @peer, candidate: @candidate,
           comment: 'I like this candidate, but not ready yet', submitted: true, 

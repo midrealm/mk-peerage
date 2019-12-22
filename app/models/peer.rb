@@ -57,6 +57,14 @@ class Peer < ApplicationRecord
     ApplicationController.helpers.collection_link(collection: superiors, label: 'sca_name', order: order, url_helper: 'peer_path')
   end
 
+  def specialties_suffix
+    if specialties?
+      "(#{specialties_sentence})" 
+    else
+      ""
+    end
+  end
+
   def self.subclass(peerage) 
     peerage.to_s.capitalize.constantize
   end
