@@ -59,8 +59,8 @@
           <%= adv.judgement_name %> 
         </td> 
         <td data-behavior="shave">
-          <div class="short"> <%= markdown(adv.shortened_comment) %></div>
-          <div class="long d-none"><%=markdown(adv.comment)%>
+          <div class="short d-none"> <%= markdown(adv.shortened_comment) %></div>
+          <div class="long"><%=markdown(adv.comment)%>
         </td>
       </tr>
     <% end %>

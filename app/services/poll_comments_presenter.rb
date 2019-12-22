@@ -1,4 +1,3 @@
-## Next Step: Work on Checking for Future Polls
 class PollCommentsPresenter < RoyaltyCandidatePresenter
 
   def advisings
@@ -14,6 +13,6 @@ class PollCommentsAdvisingPresenter
 		@advising = advising
 	end
 	def shortened_comment
-		@advising.comment.truncate(500, separator: /\s/)
+		@advising.comment.truncate(300, separator: /\s/)
 	end
 end
