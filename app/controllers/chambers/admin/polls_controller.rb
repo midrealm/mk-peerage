@@ -79,6 +79,10 @@ class Chambers::Admin::PollsController < ApplicationController
     flash[:success] = "Successfully calculated poll results"
     redirect_to chambers_admin_polls_path(peerage) 
   end
+  def offline
+    @presenter = OfflinePollPresenter.new(peerage)
+    render layout: 'offline'
+  end
 
   private
   def poll_params

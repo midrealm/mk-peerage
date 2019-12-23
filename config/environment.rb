@@ -5,5 +5,5 @@ require_relative 'application'
 Rails.application.initialize!
 
 Rails.application.configure do
-  config.action_mailer.default_url_options = {host: 'default.com', protocol: 'https' }
+  config.action_mailer.default_url_options = {host: 'localhost:3000', protocol: 'https' }
 end

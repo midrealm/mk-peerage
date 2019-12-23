@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1><%=peerage.capitalize%> Poll <small><%=@presenter.poll_date%></small></h1>
+      Your SCA Name: ______________________
+      <hr>
+      <h1>Vote List</h1>
+      <b>Key</b>: <span class="pr-5"><b>E</b>: Elevate to Peerage</span> <span class="pr-5"><b>W</b>: Wait</span> <span class="pr-5"><b>D</b>: Drop to Watch List</span> <span class="pr-5"><b>NSO</b>: No Strong Opinion</span><br>
+    </div>
+  </div>
+  <% @presenter.vote_list.each do |cand| %>
+  <div class="row mt-5 " style="page-break-inside: avoid">
+    <div class="col">
+      <h3><%= cand.sca_name %> (<%= cand.specialties_sentence %>)</h3>
+      <h5> Vote List </h5>
+      <span class="pr-5"><i class="far fa-circle"></i> E</span> 
+      <span class="pr-5"><i class="far fa-circle"></i> W</span>
+      <span class="pr-5"><i class="far fa-circle"></i> D</span>
+      <span class="pr-5"><i class="far fa-circle"></i> NSO</span><br>
+      <div>
+        Comment:
+      </div>
+    </div>
+    <div class="col-auto" style: 'height:200px'>
+     <%= image_tag cand.profile_pic.variant(resize:'400x400') %>
+    </div>
+  </div>
+  <% end %>
+  <div class="row" style="page-break-before:always">
+    <div class="col">
+        <h1>Watch List</h1>
+        <b>Key</b>: <span class="pr-5"><b>E</b>: Elevate to Vote List</span> <span class="pr-5"><b>W</b>: Wait</span> <span class="pr-5"><b>D</b>: Drop from Watch List</span> <span class="pr-5"><b>NSO</b>: No Strong Opinion</span><br>
+    </div>
+  </div>
+  <% @presenter.watch_list.each do |cand| %>
+  <div class="row mt-5 " style="page-break-inside: avoid">
+    <div class="col">
+      <h3><%= cand.sca_name %> (<%= cand.specialties_sentence %>)</h3>
+      <h5> Watch List </h5>
+      <span class="pr-5"><i class="far fa-circle"></i> E</span> 
+      <span class="pr-5"><i class="far fa-circle"></i> W</span>
+      <span class="pr-5"><i class="far fa-circle"></i> D</span>
+      <span class="pr-5"><i class="far fa-circle"></i> NSO</span><br>
+      <div>
+        Comment:
+      </div>
+    </div>
+    <div class="col-auto" style: 'height:200px'>
+     <%= image_tag cand.profile_pic.variant(resize:'400x400') %>
+    </div>
+  </div>
+  <% end %>
+</div>
