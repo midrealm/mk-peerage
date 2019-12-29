@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h1>Submit Offline <%=peerage.capitalize %> Poll</h1>
+    <%= bootstrap_form_for @ballot, url: chambers_admin_offline_poll_submitter_path do |f| %>
+      <%= f.select :peer_id, @ballot.peers.map{|p| [p.sca_name, p.id] }, {label: 'Peers', include_blank: true}, {class: 'selectpicker', data: {'live-search' => true}, required: true} %> 
+      <h3>Vote List</h3>
+      <%= f.fields_for :vote_list_advisings do |adv_field| %>
+      
+        <h4><%= adv_field.object.candidate.sca_name %></h4>
+        <%= adv_field.hidden_field :candidate_id, value: adv_field.object.candidate.id 
+        %>
+        <%= adv_field.select :judgement, @ballot.judgement_names, {include_blank: true}, required: true %>
+        <%= adv_field.text_area :comment, rows: 8 %>
+      <% end %>
+      <h3>Watch List</h3>
+      <%= f.fields_for :watch_list_advisings do |adv_field| %>
+      
+        <h4><%= adv_field.object.candidate.sca_name %></h4>
+        <%= adv_field.hidden_field :candidate_id, value: adv_field.object.candidate.id 
+        %>
+        <%= adv_field.select :judgement, @ballot.judgement_names, {include_blank: true}, required: true %>
+        <%= adv_field.text_area :comment, rows: 8 %>
+      <% end %>
+      <%= f.submit "Submit Ballot", class: 'btn btn-secondary btn-block' %>
+    <% end %>
+
+  </div>
+</div>

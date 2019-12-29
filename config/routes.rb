@@ -48,6 +48,7 @@ Rails.application.routes.draw do
         resource :poll, except: [:show, :delete]
         get '/poll/analytics' => 'polls#analyze', as: :analyze_poll
         get '/poll/offline' => 'polls#offline', as: :offline_poll
+				resource :offline_poll_submitter, only: [:new, :create]
         resource :news, only: [:edit, :update]
         resources :peers, except: [:show, :delete]
         namespace :peers do

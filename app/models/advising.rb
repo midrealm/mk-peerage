@@ -36,6 +36,21 @@ class Advising < ApplicationRecord
       'Drop from Watch List'
     end
   end
+  def self.judgement_abbreviations
+    Hash[Advising.judgements.keys.map{|j| [Advising.judgement_abbreviation(j),j]}]
+  end
+  def self.judgement_abbreviation(judgement)
+    case judgement
+    when 'elevate'
+      'E'
+    when 'wait'
+      'W'
+    when 'no_strong_opinion'
+      'NSO'
+    when 'drop'
+      'D'
+    end
+  end
 
   def judgement_name
     if candidate.vote?
