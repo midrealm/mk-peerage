@@ -1,0 +1,36 @@
+<div class="float-right">
+  <%= image_tag candidate.profile_pic_full.variant(resize: '200x200') %>
+</div>
+<div class="">
+  <strong>Status</strong>: <%=  candidate.status%><br>
+  <% if candidate.specialties? %>
+    <strong>Specialties</strong>: <%= candidate.specialties %> </br>
+  <% end %>
+  <% if candidate.advocates? %>
+    <strong>Advocates</strong>: <%= candidate.advocates %><br/>
+  <%end%>
+  <% if candidate.group %>
+    <strong>Group</strong>: <%= candidate_link(candidate.group, peerage) %><br>
+  <% end %>
+  <i>Poll results from <%=candidate.poll_date %></i></br>
+  <table class="table">
+    <thead >
+      <th>E</th>
+      <th>W</th>
+      <th>NSO</th>
+      <th>D</th>
+      <th>Rec%</th>
+      <th>Fav%</th>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%=candidate.elevate%></td>
+      <td><%=candidate.wait%></td>
+      <td><%=candidate.no_strong_opinion%></td>
+      <td><%=candidate.drop%></td>
+      <td><%=candidate.rec%></td>
+      <td><%=candidate.fav%></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

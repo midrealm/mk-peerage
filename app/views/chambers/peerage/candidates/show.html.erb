@@ -11,7 +11,6 @@
     <%= image_tag @candidate.profile_pic_full %>
   </div>
   <div class="col-md">
-    Poll Dates: <%= @candidate.poll_date%>
     <h1><%=@candidate.sca_name%><br/><small class="text-muted"><%=@candidate.specialties%></small></h1>
         <strong><%= @candidate.list %> List</strong></br>
         <% if @candidate.specialties? %>
@@ -23,6 +22,7 @@
         <% if @candidate.group %>
           <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
         <% end %>
+          <i>Poll results from <%=@candidate.poll_date %></i></br>
           <table class="table d-none d-md-table">
             <thead>
               <th>Elevate</th>
@@ -67,7 +67,7 @@
         <h3><%= link_to "Documents (#{@candidate.document_count})", chambers_documents_index_path(peerage, @candidate.id) %></h3>
         <h3>Comments</h3>
         <div class="d-flex flex-column" >
-          <% @candidate.comments.sort_by(&:created_at).each do |comment| %>
+          <% @candidate.comments.each do |comment| %>
           <div class="p-2">
             <div style="width:120px;float:left;text-align:center">
               <%= link_to (image_tag comment.peer.profile_pic_thumb), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>

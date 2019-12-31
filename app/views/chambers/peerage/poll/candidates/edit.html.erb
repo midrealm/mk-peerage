@@ -3,44 +3,57 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md">
-      <%= bootstrap_form_for @advising, url: chambers_edit_ballot_candidate_path(peerage,@candidate)  do |f| %>
-          <% if @candidate.vote? %>
-            <%= f.select :judgement, Advising.vote_list_judgements  %>
-          <% else %>
-            <%= f.select :judgement, Advising.watch_list_judgements  %>
-          <% end %>
+    <div class="col-md-6">
+      <%= bootstrap_form_for @ballot_entry.advising, as: :advising,  url: chambers_edit_ballot_candidate_path(peerage,@candidate.id), method: :put  do |f| %>
+          <%= f.select :judgement, @ballot_entry.judgements, {include_blank: true}, required: true  %>
           <%= f.text_area :comment, data: { behavior: 'markdown' }  %>
-        <%= f.submit 'Submit Advising' %>
+        <%= f.submit 'Submit Counsel to the Crown' %>
       <% end %>
     </div>
-    <div class="col-md">
-      <div class="d-flex flex-row-reverse">
-        <div>
-        <%= image_tag @candidate.profile_pic_full %>
+    <div class="col-md-6">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+          <a class="nav-item nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Comments</a>
+          <a class="nav-item nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents (<%=@candidate.document_count%>)</a>
+          <a class="nav-item nav-link" id="old-advisings-tab" data-toggle="tab" href="#old-advisings" role="tab" aria-controls="old-advisings" aria-selected="false">Former Counsel</a>
         </div>
-        <div>
-          <strong>Status</strong>: <%=  @candidate.vote ? "Vote List" : "Watch List" %><br>
-          <% if @candidate.specialties.count > 0 %> <strong>Specialties</strong>: <%= @candidate.specialties_link %> <% end %>
-          <% if @candidate.peers.count > 0 %>
-            <strong>Advocates</strong>: <%=@candidate.advocates_link%> <br>
-          <%end%>
-          <% if @candidate.group %>
-          <strong>Group</strong>: <%= candidate_link @candidate.group, peerage %>
+      </nav>
+      <div class="tab-content">
+       <div class="tab-pane show active" id="profile" role="tabpanel">
+          <div class="col">
+            <%= render "profile", candidate: @candidate %>
+          </div>
+        </div>
+        <div class="tab-pane" id="comments" role="tabpanel">
+          <div class="d-flex flex-column">
+            <%= render "/shared/comments", comments: @candidate.comments %>
+          </div>
+        </div>
+        <div class="tab-pane" id="documents" role="tabpanel">
+          <div class="d-flex flex-column">
+            <h3>Documents</h3>
+            <% if @candidate.documents.count > 0 %>
+              <%= render "/shared/documents_gallery", documents: @candidate.documents %>
+            <% else %>
+              There are no documents for this candidate
+            <% end %>
+          </div>
+        </div>
+        <div class="tab-pane" id="old-advisings" role="tabpanel">
+          <h3> Former Counsel to the Crown </h3>
+          <% @ballot_entry.old_advisings.each do |old| %>
+            <div class="p-2">
+              <h5><%=old.date%></h3>
+              <b>Judgement:</b> <%=old.judgement_name%><br>
+              <b>Comment: </b>
+              <div>
+              <%= markdown(old.comment)%>
+              </div> 
+            </div>
           <% end %>
         </div>
       </div>
-      <div class="d-flex flex-column">
-      <h3>Comments</h3>
-      <% @candidate.comments.each do |comment| %>
-      <div class="p-2">
-        <div style="width:120px;float:left">
-        <%= image_tag comment.peer.profile_pic_thumb %><br><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%>
-        </div>
-        <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %></p>
-        <%= markdown(comment.text) %>
-      </div>
-      <% end %> 
     </div>
   </div>
 </div>

@@ -20,6 +20,13 @@ class CandidatePresenter
 		end
   end
 
+  def status
+    if @candidate.vote?
+      'Vote List'
+    else
+      'Watch List'
+    end 
+  end
   def advocates
     @candidate.advocacies.map{ |adv| "<a href=\"/#{adv.peer.peerage_type}/#{adv.peer.slug}\">#{adv.peer.sca_name}</a>" }.join(', ').html_safe
   end
@@ -31,6 +38,10 @@ class CandidatePresenter
   def document_count
     @candidate.documents.count
   end
+  def comments
+    @candidate.comments.sort_by(&:created_at)
+  end
+
   def specialties
     array = []
     @candidate.specialties.all.each do |spec|

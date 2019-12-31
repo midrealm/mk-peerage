@@ -61,4 +61,12 @@ class Poll < ApplicationRecord
   def past?
     start_date.past? && end_date.past?
   end
+
+  def date
+    "#{date_string(start_date)} - #{date_string(end_date)}"
+  end
+  private  
+  def date_string(date)
+   date.strftime("%b %d, %Y") 
+  end
 end

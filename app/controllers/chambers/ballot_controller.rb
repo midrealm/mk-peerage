@@ -10,8 +10,9 @@ class Chambers::BallotController < ApplicationController
     end
   end
   def update
-    @advising = BallotEntry.new(candidate: Candidate.find(params[:id]), peer: current_user.peer(peerage)).advising
-    if @advising.update(advising_params)
+    @advising = Advising.find_or_initialize_by(candidate: Candidate.find(params[:id]), peer: current_user.peer(peerage), poll: Poll.current(peerage))
+	  @advising.assign_attributes(advising_params)
+    if @advising.save
       @advising.update(submitted: true)  
       redirect_to action: :index
     else
@@ -20,8 +21,10 @@ class Chambers::BallotController < ApplicationController
   end
   
   def edit
-    @candidate = Candidate.find(params[:id]) 
-    @advising = BallotEntry.new(candidate: @candidate, peer: current_user.peer(peerage)).advising
+		cand = Candidate.find(params[:id])
+		@ballot_entry = BallotEntry.new(candidate: cand, peer: current_user.peer(peerage))
+		@candidate = CandidatePresenter.new(cand)
+    @advising = @ballot_entry.advising
   end
   
   
