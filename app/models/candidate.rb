@@ -38,7 +38,10 @@ class Candidate < ApplicationRecord
   def last_poll_result
     PollResult.find_by(candidate: self, poll: Poll.most_recent_with_results_for(peerage_type))
   end
-  
+ 
+  def documents?
+    documents.count > 0
+  end 
 
   def specialties_link
     array = []

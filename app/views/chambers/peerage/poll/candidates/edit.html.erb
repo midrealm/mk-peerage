@@ -15,8 +15,12 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
           <a class="nav-item nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Comments</a>
-          <a class="nav-item nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents (<%=@candidate.document_count%>)</a>
-          <a class="nav-item nav-link" id="old-advisings-tab" data-toggle="tab" href="#old-advisings" role="tab" aria-controls="old-advisings" aria-selected="false">Former Counsel</a>
+          <% if @candidate.documents? %>
+            <a class="nav-item nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents (<%=@candidate.document_count%>)</a>
+					<% end %>
+          <% if @ballot_entry.old_advisings? %>
+            <a class="nav-item nav-link" id="old-advisings-tab" data-toggle="tab" href="#old-advisings" role="tab" aria-controls="old-advisings" aria-selected="false">Former Counsel</a>
+					<% end %>
         </div>
       </nav>
       <div class="tab-content">
@@ -30,29 +34,29 @@
             <%= render "/shared/comments", comments: @candidate.comments %>
           </div>
         </div>
-        <div class="tab-pane" id="documents" role="tabpanel">
-          <div class="d-flex flex-column">
-            <h3>Documents</h3>
-            <% if @candidate.documents.count > 0 %>
-              <%= render "/shared/documents_gallery", documents: @candidate.documents %>
-            <% else %>
-              There are no documents for this candidate
+				<% if @candidate.documents? %>
+          <div class="tab-pane" id="documents" role="tabpanel">
+            <div class="d-flex flex-column">
+              <h3>Documents</h3>
+                <%= render "/shared/documents_gallery", documents: @candidate.documents %>
+            </div>
+          </div>
+				<% end %>
+        <% if @ballot_entry.old_advisings? %>
+          <div class="tab-pane" id="old-advisings" role="tabpanel">
+            <h3> Former Counsel to the Crown </h3>
+            <% @ballot_entry.old_advisings.each do |old| %>
+              <div class="p-2">
+                <h5><%=old.date%></h3>
+                <b>Judgement:</b> <%=old.judgement_name%><br>
+                <b>Comment: </b>
+                <div>
+                <%= markdown(old.comment)%>
+                </div> 
+              </div>
             <% end %>
           </div>
-        </div>
-        <div class="tab-pane" id="old-advisings" role="tabpanel">
-          <h3> Former Counsel to the Crown </h3>
-          <% @ballot_entry.old_advisings.each do |old| %>
-            <div class="p-2">
-              <h5><%=old.date%></h3>
-              <b>Judgement:</b> <%=old.judgement_name%><br>
-              <b>Comment: </b>
-              <div>
-              <%= markdown(old.comment)%>
-              </div> 
-            </div>
-          <% end %>
-        </div>
+			<% end %>
       </div>
     </div>
   </div>
