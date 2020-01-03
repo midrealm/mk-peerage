@@ -64,29 +64,45 @@
             </tr>
             </tbody>
           </table>
-        <h3><%= link_to "Documents (#{@candidate.document_count})", chambers_documents_index_path(peerage, @candidate.id) %></h3>
-        <h3>Comments</h3>
-        <div class="d-flex flex-column" >
-          <% @candidate.comments.each do |comment| %>
-          <div class="p-2">
-            <div style="width:120px;float:left;text-align:center">
-              <%= link_to (image_tag comment.peer.profile_pic_thumb), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Comments</a>
+          <a class="nav-item nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents (<%=@candidate.document_count%>)</a>
+        </div>
+      </nav>
+      <div class="tab-content">
+        <div class="tab-pane show active" id="comments" role="tabpanel">
+          <div class="d-flex flex-column" >
+            <h3>Comments</h3>
+            <%= render "/shared/comments", comments: @candidate.comments %>
+            <div>
+              <h3>Add A Comment</h3>
+              <%= bootstrap_form_for @comment, url: chambers_comments_path do |f| %>
+                <%= f.text_area :text, hide_label: true, placeholder: 'Leave a comment...', data: { behavior: 'markdown' } %>
+                <%= f.hidden_field :candidate_id, value: @candidate.id %>
+                <%= f.submit %>
+              <% end %> 
             </div>
-            <p><strong>Date</strong>: <%= comment.created_at.strftime("%b %d, %Y") %><br>
-            <% if comment.peer.user === current_user %>
-              <%= link_to 'Edit Comment', edit_chambers_comment_path(comment.id) %>
-            <% end %></p>
-            <%= markdown(comment.text) %>
           </div>
-          <% end %>
-          <div>
-            <h3>Add A Comment</h3>
-            <%= bootstrap_form_for @comment, url: chambers_comments_path do |f| %>
-              <%= f.text_area :text, hide_label: true, placeholder: 'Leave a comment...', data: { behavior: 'markdown' } %>
-              <%= f.hidden_field :candidate_id, value: @candidate.id %>
-              <%= f.submit %>
-            <% end %> 
+        </div>
+        <div class="tab-pane" id="documents" role="tabpanel">
+          <div class="d-flex flex-column">
+            <% if @candidate.documents? %>
+              <%= render "/shared/documents_gallery", documents: @candidate.documents %>
+            <% else %>
+              There are currently no documents. You can upload one below.
+            <% end %>
+          <h3>Add an Image/Document</h3>
+          <%= bootstrap_form_for @document, url: chambers_documents_path do |f| %>
+            <%= f.file_field :document, label: 'File' %>
+            <%= f.hidden_field :candidate_id, value: @candidate.id %>
+            <%= f.text_field :name %>
+            <%= f.text_field :description %>
+            <%= f.submit %>
+          <% end %> 
           </div>
-    </div>
+        </div>
+      </div>
   </div>
+  <%= render "/shared/documents_gallery_modal" %>
 </div>

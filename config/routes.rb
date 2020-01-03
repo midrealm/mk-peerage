@@ -37,8 +37,6 @@ Rails.application.routes.draw do
       put '/poll/candidates/:id' => 'ballot#update'
       patch '/poll/candidates/:id' => 'ballot#update'
 
-      get '/candidates/:id/documents' => 'documents#index', as: :documents_index
-
       namespace :admin do
 
         resources :candidates, except: [:show]
