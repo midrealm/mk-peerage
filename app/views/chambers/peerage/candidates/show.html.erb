@@ -68,6 +68,12 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Comments</a>
           <a class="nav-item nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents" aria-selected="false">Documents (<%=@candidate.document_count%>)</a>
+        <% if @old_advisings.any? %>
+          <a class="nav-item nav-link" id="former-counsel-tab" data-toggle="tab" href="#former-counsel" role="tab" aria-controls="former-counsel" aria-selected="false">Former Counsel</a>
+        <% end %>
+        <% if @current_advising.exists? %>
+          <a class="nav-item nav-link" id="current-counsel-tab" data-toggle="tab" href="#current-counsel" role="tab" aria-controls="current-counsel" aria-selected="false">Current Counsel</a>
+        <% end %>
         </div>
       </nav>
       <div class="tab-content">
@@ -102,6 +108,35 @@
           <% end %> 
           </div>
         </div>
+        <% if @old_advisings.any? %>
+        <div class="tab-pane" id="former-counsel" role="tabpanel">
+          <h3> Former Counsel to the Crown </h3>
+          <% @old_advisings.advisings.each do |old| %>
+            <div class="p-2">
+              <h5><%=old.date%></h3>
+              <b>Judgement:</b> <%=old.judgement_name%><br>
+              <b>Comment: </b>
+              <div>
+              <%= markdown(old.comment)%>
+              </div> 
+            </div>
+          <% end %>
+        </div>
+        <%end %>
+        <% if @current_advising.exists? %>
+        <div class="tab-pane" id="current-counsel" role="tabpanel">
+          <h3> Current Counsel to the Crown </h3>
+            <%= link_to 'Edit Counsel', chambers_edit_ballot_candidate_path(peerage, @candidate.id), class: 'btn btn-primary' %><br>
+            <div class="p-2">
+              <h5><%=@current_advising.date%></h3>
+              <b>Judgement:</b> <%=@current_advising.judgement_name%><br>
+              <b>Comment: </b>
+              <div>
+              <%= markdown(@current_advising.comment)%>
+              </div> 
+            </div>
+        </div>
+        <%end %>
       </div>
   </div>
   <%= render "/shared/documents_gallery_modal" %>

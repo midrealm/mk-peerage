@@ -6,8 +6,11 @@ export default (() => {
     case '#comments':
       $('#comments-tab').tab('show') 
       break;
-    case '#old-advisings':
-      $('#old-advisings-tab').tab('show') 
+    case '#former-counsel':
+      $('#former-counsel-tab').tab('show') 
+      break;
+    case '#current-counsel':
+      $('#current-counsel-tab').tab('show') 
       break;
     case '#profile':
       $('#profile-tab').tab('show') 
@@ -23,7 +26,8 @@ export default (() => {
   $('#documents-tab').click(clickTab)
   $('#comments-tab').click(clickTab)
   $('#profile-tab').click(clickTab)
-  $('#old-advisings-tab').click(clickTab)
+  $('#former-counsel-tab').click(clickTab)
+  $('#current-counsel-tab').click(clickTab)
 
   
   

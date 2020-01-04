@@ -13,14 +13,17 @@ class Chambers::CandidatesController < ApplicationController
 
   def show
     authorize! :read, peerage
+    candidate = Candidate.find(params[:id])
     if current_user.royalty?
-      @candidate = RoyaltyCandidatePresenter.new(Candidate.find(params[:id]))
+      @candidate = RoyaltyCandidatePresenter.new(candidate)
     else
-      @candidate = CandidatePresenter.new(Candidate.find(params[:id]))
+      @candidate = CandidatePresenter.new(candidate)
     end
     raise "Access Denied" unless @candidate.peerage_type == peerage.to_s
     @comment = Comment.new
     @document = Document.new
+    @old_advisings = OldAdvisings.new(peer: current_user.peer(peerage), candidate: candidate)
+    @current_advising = CurrentAdvising.new(peer: current_user.peer(peerage), candidate: candidate) 
   end
 
   def poll_comments
