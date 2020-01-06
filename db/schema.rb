@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_023501) do
+ActiveRecord::Schema.define(version: 2020_01_06_192150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 2019_11_25_023501) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "submitted"
     t.integer "peer_id"
     t.integer "judgement"
     t.index ["candidate_id"], name: "index_advisings_on_candidate_id"

@@ -263,7 +263,6 @@ Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et males
       a.candidate = morley
       a.judgement = :wait
       a.comment = 'I do not believe he is ready yet.'
-      a.submitted = true
     end
     Advising.create do |a|
       a.poll = poll
@@ -279,7 +278,6 @@ Nunc vehicula purus elementum, volutpat mauris ac, imperdiet ante. Pellentesque 
 Mauris iaculis lectus lacinia ex porta, a ullamcorper enim auctor. Duis tempus tincidunt arcu sed blandit. In sed sodales augue, vitae pretium neque. Pellentesque nec dapibus felis. Fusce lacinia nibh purus, venenatis blandit nunc ullamcorper ut. Etiam sed blandit massa. Sed condimentum cursus mollis. Vestibulum nec felis non ante tempus sollicitudin. Etiam sollicitudin urna vitae lacinia aliquet. Mauris imperdiet quam hendrerit libero tincidunt, et condimentum odio convallis. Aliquam erat volutpat. Proin urna justo, sodales faucibus auctor sed, sodales et risus.
 
 Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam eu congue ligula. Aenean tincidunt mauris eros, facilisis malesuada leo vulputate eu. Aliquam viverra sollicitudin turpis.'
-      a.submitted = true
     end
     Advising.create do |a|
       a.poll = poll
@@ -287,7 +285,6 @@ Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et males
       a.candidate = morley
       a.judgement = :drop
       a.comment = 'No way man.'
-      a.submitted = true
     end
     Advising.create do |a|
       a.poll = poll
@@ -295,7 +292,6 @@ Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et males
       a.candidate = oliver
       a.judgement = :elevate
       a.comment = 'Looks great!'
-      a.submitted = true
     end
     Advising.create do |a|
       a.poll = poll
@@ -303,7 +299,6 @@ Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et males
       a.candidate = oliver
       a.judgement = :elevate
       a.comment = 'Looks great!'
-      a.submitted = true
     end
     Advising.create do |a|
       a.poll = poll
@@ -319,7 +314,6 @@ Nunc vehicula purus elementum, volutpat mauris ac, imperdiet ante. Pellentesque 
 Mauris iaculis lectus lacinia ex porta, a ullamcorper enim auctor. Duis tempus tincidunt arcu sed blandit. In sed sodales augue, vitae pretium neque. Pellentesque nec dapibus felis. Fusce lacinia nibh purus, venenatis blandit nunc ullamcorper ut. Etiam sed blandit massa. Sed condimentum cursus mollis. Vestibulum nec felis non ante tempus sollicitudin. Etiam sollicitudin urna vitae lacinia aliquet. Mauris imperdiet quam hendrerit libero tincidunt, et condimentum odio convallis. Aliquam erat volutpat. Proin urna justo, sodales faucibus auctor sed, sodales et risus.
 
 Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam eu congue ligula. Aenean tincidunt mauris eros, facilisis malesuada leo vulputate eu. Aliquam viverra sollicitudin turpis.'
-      a.submitted = true
     end
   end
   task :all => [:db_reset, :groups, :people, :calc_poll]

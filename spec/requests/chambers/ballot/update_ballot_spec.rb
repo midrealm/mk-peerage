@@ -17,7 +17,6 @@ describe "patch /chambers/laurel/poll/candidates/:id" do
         patch "/chambers/laurel/poll/candidates/#{@candidate.id}", params: { :advising => {comment: 'This is a comment', judgement: :elevate} }
         expect(Advising.last.comment).to include('This is a comment')
         expect(Advising.last.judgement_elevate?).to be_truthy
-        expect(Advising.last.submitted).to be_truthy
       end
       it "redirects to poll" do
         create(:advising, candidate: @candidate, poll: @poll, peer: @peer)

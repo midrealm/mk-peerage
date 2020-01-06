@@ -4,13 +4,13 @@ describe "calculate" do
   before(:each) do
     @candidate = create(:candidate)
   end
-  it "only calculates data for submitted poll" do
+  it "calculates data for saved advisings" do
     laurel_poll = create(:past_poll, published: false)
     pelican_poll = create(:past_poll, published: false, peerage_type: :pelican)
     lc = create(:laurel_candidate)
     pc = create(:pelican_candidate)
-    laurel_advising = create(:advising, poll: laurel_poll, candidate: lc, submitted: true)
-    pelican_advising = create(:advising, poll: pelican_poll, candidate: pc, submitted: true)
+    laurel_advising = create(:advising, poll: laurel_poll, candidate: lc)
+    pelican_advising = create(:advising, poll: pelican_poll, candidate: pc)
     ResultsCalculator.new(laurel_poll).calculate
     expect(PollResult.count).to eq(1)
   end
@@ -28,7 +28,7 @@ describe "calculate" do
       current_poll = create(:current_poll)
       laurel = create(:laurel_peer)
 
-      @advising = create(:advising, candidate: @candidate, peer: laurel, poll: current_poll, submitted: true, judgement: :elevate) 
+      @advising = create(:advising, candidate: @candidate, peer: laurel, poll: current_poll, judgement: :elevate) 
       expect{ResultsCalculator.new(current_poll).calculate}.to raise_error(ArgumentError)
   end
 
@@ -37,7 +37,7 @@ describe "calculate" do
       laurel = create(:laurel_peer)
 
       #this is advising isn't possible anyway)
-      create(:advising, candidate: @candidate, peer: laurel, poll: future, submitted: true, judgement: :elevate) 
+      create(:advising, candidate: @candidate, peer: laurel, poll: future, judgement: :elevate) 
       expect{ResultsCalculator.new(future).calculate}.to raise_error(ArgumentError)
   end
 
@@ -49,11 +49,11 @@ describe "calculate" do
       @laurel3 = create(:laurel_peer)
       @laurel4 = create(:laurel_peer)
       @laurel5 = create(:laurel_peer)
-      @advising1 = build(:advising, candidate: @candidate, peer: @laurel1, poll: @past_poll, submitted: true) 
-      @advising2 = build(:advising, candidate: @candidate, peer: @laurel2, poll: @past_poll, submitted: true) 
-      @advising3 = build(:advising, candidate: @candidate, peer: @laurel3, poll: @past_poll, submitted: true) 
-      @advising4 = build(:advising, candidate: @candidate, peer: @laurel4, poll: @past_poll, submitted: true) 
-      @advising5 = build(:advising, candidate: @candidate, peer: @laurel5, poll: @past_poll, submitted: true) 
+      @advising1 = build(:advising, candidate: @candidate, peer: @laurel1, poll: @past_poll) 
+      @advising2 = build(:advising, candidate: @candidate, peer: @laurel2, poll: @past_poll) 
+      @advising3 = build(:advising, candidate: @candidate, peer: @laurel3, poll: @past_poll) 
+      @advising4 = build(:advising, candidate: @candidate, peer: @laurel4, poll: @past_poll) 
+      @advising5 = build(:advising, candidate: @candidate, peer: @laurel5, poll: @past_poll) 
       
     end
 

@@ -13,7 +13,6 @@ class Chambers::BallotController < ApplicationController
     @advising = Advising.find_or_initialize_by(candidate: Candidate.find(params[:id]), peer: current_user.peer(peerage), poll: Poll.current(peerage))
 	  @advising.assign_attributes(advising_params)
     if @advising.save
-      @advising.update(submitted: true)  
       redirect_to action: :index
     else
       render :edit

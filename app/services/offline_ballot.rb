@@ -37,8 +37,8 @@ class OfflineBallot
 	end
 	def save
 		if valid? && advisings_valid?
-		  @vote_list_advisings.each { |adv| adv.submitted = true; adv.save } 
-		  @watch_list_advisings.each { |adv| adv.submitted = true; adv.save } 
+		  @vote_list_advisings.each { |adv| adv.save } 
+		  @watch_list_advisings.each { |adv| adv.save } 
 		else
 		  false
 		end

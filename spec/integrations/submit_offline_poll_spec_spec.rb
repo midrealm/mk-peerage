@@ -17,7 +17,6 @@ RSpec.feature 'Submit Offline Poll' do
     expect(page).to have_content('Poll Saved')
     expect(page).to have_content('Manage Laurel Polls')
     advising = Advising.first
-    expect(advising.submitted).to be_truthy
     expect(advising.judgement).to eq("wait")
     expect(advising.peer_id).to eq(laurel.laurel.id)
     expect(advising.poll_id).to eq(poll.id)

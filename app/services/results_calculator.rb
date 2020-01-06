@@ -8,7 +8,7 @@ class ResultsCalculator
   def calculate
     peerage = @poll.peerage_type
     Candidate.where_order(peerage).each do |cand|
-      advisings = Advising.where('poll_id = ? AND candidate_id = ? AND submitted = ?', @poll.id, cand.id, true)
+      advisings = Advising.where(poll: @poll, candidate: cand)
       unless advisings.empty?
         pr = PollResult.where(poll: @poll, candidate: cand).first_or_create
         pr.elevate = advisings.where(judgement: :elevate).count

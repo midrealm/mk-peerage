@@ -9,7 +9,7 @@ describe OfflineBallot, 'peers' do
     @ballot = OfflineBallot.new(:laurel)
   end
   it "only shows peers who have not yet completed a ballot" do
-    create(:advising, poll: @poll, peer: @peer, candidate: @candidate, submitted: true)
+    create(:advising, poll: @poll, peer: @peer, candidate: @candidate)
     expect(@ballot.peers.count).to eq(1)
     expect(@ballot.peers.first.sca_name).to eq(@peer2.sca_name)
   end

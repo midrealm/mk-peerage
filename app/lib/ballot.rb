@@ -12,7 +12,7 @@ class Ballot
 
   def complete?
     @candidates.each do |cand|
-      if @poll.advisings.find_by(peer: @peer, candidate: cand, submitted: true).nil?
+      if @poll.advisings.find_by(peer: @peer, candidate: cand).nil?
         return false
       end
     end
@@ -20,11 +20,11 @@ class Ballot
   end
 
   def submission_count
-    @poll.advisings.where(peer: @peer, submitted: true).count 
+    @poll.advisings.where(peer: @peer).count 
   end
 
   def submission_for?(candidate)
-    Advising.find_by(candidate: candidate, peer: @peer, poll: @poll, submitted: true).present?
+    Advising.find_by(candidate: candidate, peer: @peer, poll: @poll).present?
   end
 
   def percent_complete

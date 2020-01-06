@@ -165,7 +165,7 @@ describe "put /chambers/laurel/admin/polls/:id/calculate" do
     sign_in(admin)
     poll = create(:past_poll, published: false)
 		candidate = create(:laurel_candidate)
-    advising = create(:advising, candidate: candidate, peer: admin.laurel, poll: poll, submitted: true) 
+    advising = create(:advising, candidate: candidate, peer: admin.laurel, poll: poll) 
 		expect(PollResult.count).to eq(0)
     put "/chambers/laurel/admin/polls/#{poll.id}/calculate"
 		expect(PollResult.count).to eq(1)
