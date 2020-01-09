@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_192150) do
+ActiveRecord::Schema.define(version: 2020_01_08_184318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 2020_01_06_192150) do
     t.index ["candidate_id"], name: "index_advocacies_on_candidate_id"
     t.index ["peer_id"], name: "index_advocacies_on_peer_id"
     t.index ["user_id"], name: "index_advocacies_on_user_id"
+  end
+
+  create_table "ballots", force: :cascade do |t|
+    t.bigint "peer_id"
+    t.bigint "poll_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "seed"
+    t.index ["peer_id"], name: "index_ballots_on_peer_id"
+    t.index ["poll_id"], name: "index_ballots_on_poll_id"
   end
 
   create_table "candidates", id: :serial, force: :cascade do |t|
@@ -228,6 +238,8 @@ ActiveRecord::Schema.define(version: 2020_01_06_192150) do
   add_foreign_key "advocacies", "candidates"
   add_foreign_key "advocacies", "peers"
   add_foreign_key "advocacies", "users"
+  add_foreign_key "ballots", "peers"
+  add_foreign_key "ballots", "polls"
   add_foreign_key "candidates", "groups"
   add_foreign_key "comments", "candidates"
   add_foreign_key "comments", "peers"

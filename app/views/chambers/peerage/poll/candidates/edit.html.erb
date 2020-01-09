@@ -1,4 +1,12 @@
 <% title "#{peerage.capitalize} Poll for #{@candidate.sca_name}"%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item"><%= link_to "#{peerage.capitalize} Poll", chambers_ballot_path(peerage) %></li>
+    <li class="breadcrumb-item active" aria-current="page">Poll for <%=@candidate.sca_name%></li>
+  </ol>
+</nav>
+<%= render "progress_bar", ballot: @ballot_entry.ballot %>
 <h1><%= peerage.capitalize %> Poll for <%=@candidate.sca_name%></h1>
 
 <div class="container">

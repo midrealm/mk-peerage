@@ -46,7 +46,7 @@ class OfflineBallot
 
   private
   def peer_has_started_poll?(peer)
-    Ballot.new(peer).submission_count > 0
+    Advising.exists?(peer: peer, poll: @poll)
   end
 	def advisings_valid?
 		@vote_list_advisings.all?{ |adv| adv.valid? } && @watch_list_advisings.all? {|adv| adv.valid?}

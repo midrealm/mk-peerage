@@ -3,10 +3,11 @@ class Chambers::BallotController < ApplicationController
   before_action :authorize_peer
 
   def index
-    if Poll.current(peerage).nil?
+    current_poll = Poll.current(peerage)
+    if current_poll.nil?
       redirect_to chambers_path
     else
-      @ballot = Ballot.new(current_user.peer(peerage)) 
+      @ballot = BallotPresenter.new(Ballot.find_or_create_by(peer: current_user.peer(peerage), poll: current_poll))
     end
   end
   def update

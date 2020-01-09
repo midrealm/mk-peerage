@@ -1,0 +1,6 @@
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="<%=ballot.percent_complete%>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%=ballot.percent_complete%>%;">
+<%=ballot.percent_complete%>%
+  </div>
+</div>
+<div style="text-align:center"><h4><%=ballot.submission_count%>/<%=ballot.candidates.count%> Submitted</h4></div>

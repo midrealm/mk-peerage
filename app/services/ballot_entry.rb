@@ -27,6 +27,10 @@ class BallotEntry
     end
   end
 
+  def ballot
+    Ballot.find_or_initialize_by(peer: @peer, poll: @poll)
+  end
+
   
 end
 

@@ -20,6 +20,6 @@ class PollAnalyticsPeerPresenter
 	end	
 	private
 	def ballot
-	  Ballot.new(@peer)
+	  Ballot.find_or_initialize_by(peer: @peer, poll: Poll.current(@peer.order))
 	end
 end

@@ -1,24 +1,23 @@
 require 'rails_helper'
-require 'ballot'
-describe Ballot, 'initialize' do
+
+describe Ballot, "set_seed" do
   before(:each) do
-    @laurel = build(:laurel_peer)
-    @past_poll = create(:past_poll)
-    @current_poll = create(:current_poll)
+    @laurel = create(:laurel_peer)
+    @poll = create(:current_poll)
   end
-  it "initializes with current poll" do
-    b = Ballot.new(@laurel)
-    expect(b.poll).to eq(@current_poll)
+  it "sets the ballot seed after creating ballot" do
+    Ballot.create(peer: @laurel, poll: @poll)
+    expect(Ballot.first.seed).not_to be_nil
+  end
+
+  it "sets different ballot seeds for each ballot" do
+    new_laurel = create(:laurel_peer)
+    b1 = Ballot.create(peer: @laurel, poll: @poll)
+    b2 = Ballot.create(peer: new_laurel, poll: @poll)
+    expect(b1.seed).not_to eq(b2.seed)
   end
 end
 
-describe Ballot, 'validations' do
-  it "rejects ballots with past poll" do
-    @laurel = build(:laurel_peer)
-    @past_poll = create(:past_poll)
-    expect{Ballot.new(@laurel)}.to raise_error(ArgumentError)
-  end
-end
 describe Ballot, "complete?" do
   before(:each) do
     @laurel = create(:laurel_peer)
@@ -31,7 +30,7 @@ describe Ballot, "complete?" do
     @advising2 = build(:advising, candidate: @candidate2, 
       poll: @current_poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate)
-    @ballot = Ballot.new(@laurel)
+    @ballot = create(:ballot, peer: @laurel, poll: @current_poll)
   end
 
   it "returns true if the peer has completed the ballot for a given poll" do
@@ -56,7 +55,7 @@ describe Ballot, "submission_count" do
     @advising2 = build(:advising, candidate: @candidate2, 
       poll: @current_poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate)
-    @ballot = Ballot.new(@laurel)
+    @ballot = create(:ballot, peer: @laurel, poll: @current_poll)
   end
   it 'returns number of advisings saved for current poll' do
     @advising2.save
@@ -72,7 +71,8 @@ describe Ballot, "submission_for(candidate)" do
     @laurel = create(:laurel_peer)
     @candidate = create(:candidate)
     @poll = create(:current_poll)
-    @ballot = Ballot.new(@laurel)
+    @ballot = create(:ballot, peer: @laurel, poll: @poll)
+    
     @advising = build(:advising, candidate: @candidate, 
       poll: @poll, peer: @laurel, comment: 'Comment', 
       judgement: :elevate)
@@ -101,7 +101,7 @@ describe Ballot, 'percent_complete' do
       @advising2 = build(:advising, candidate: @candidate2, 
         poll: @poll, peer: @laurel, comment: 'Comment', 
         judgement: :elevate)
-      @ballot = Ballot.new(@laurel)
+      @ballot = create(:ballot, peer: @laurel, poll: @poll)
     end
     it "shows 0% complete for 0 of 2 completed submissions" do
       expect(@ballot.percent_complete).to eq(0)
@@ -122,9 +122,9 @@ describe Ballot, 'percent_complete' do
     end
   end
   it "shows 0 for no candidates" do
-    create(:current_poll)
+    poll = create(:current_poll)
     laurel = create(:laurel_peer)
-    ballot = Ballot.new(laurel)
+    ballot = create(:ballot, peer: laurel, poll: poll)
     expect(ballot.percent_complete).to eq(0)
   end
 end

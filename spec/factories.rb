@@ -1,5 +1,10 @@
 FactoryBot.use_parent_strategy = false
 FactoryBot.define do
+  factory :ballot do
+    association :peer, strategy: :build 
+    association :poll, factory: :current_poll,  strategy: :build
+  end
+
   factory :news, aliases: [:laurel_news] do
     peerage_type { :laurel }
     body { "So much News News News News" }

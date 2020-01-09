@@ -1,0 +1,22 @@
+<table class='table'>
+<thead>
+<th>Candidate</th><th>Specialties</th><th>Status</th>
+</thead>
+<tbody>
+<% candidates.each do |cand| %>
+  <% if ballot.submission_for?(cand.id) %>
+  <tr class="alert alert-success">
+  <% else %>
+    <tr >
+  <%end%>
+    <td><%= link_to cand.sca_name, chambers_edit_ballot_candidate_path(peerage,cand.id)%></td>
+    <td><%= cand.specialties_sentence %></td>
+  <% if ballot.submission_for?(cand.id)%>
+    <td><i class="fas fa-check"></i></td>
+  <% else %>
+    <td><i class="far fa-square"></i></td>
+  <% end %>
+</tr>
+<% end %>
+</tbody>
+</table>
