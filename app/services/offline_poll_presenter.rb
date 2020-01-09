@@ -1,13 +1,12 @@
 class OfflinePollPresenter
   def initialize(peerage)
     @peerage = peerage
-    @candidates = Candidate.where_order(@peerage)
 	end
   def vote_list
-    @candidates.where(vote:true).order(:sca_name).map { |c| OfflinePollCandidatePresenter.new(c) }
+    Candidate.vote_list(@peerage).order(:sca_name).map { |c| OfflinePollCandidatePresenter.new(c) }
   end
   def watch_list
-    @candidates.where(vote:false).order(:sca_name).map { |c| OfflinePollCandidatePresenter.new(c) }
+    Candidate.watch_list(@peerage).order(:sca_name).map { |c| OfflinePollCandidatePresenter.new(c) }
   end
   def poll_date
     p = Poll.active_for(@peerage)

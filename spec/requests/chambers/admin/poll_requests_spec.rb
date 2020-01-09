@@ -185,3 +185,24 @@ describe "get /chambers/laurel/admin/poll/analytics" do
     expect(response.body).to include('Active Laurel Poll Analytics')
 	end
 end
+
+#offline
+describe "get /chambers/laurel/admin/poll/offline" do
+	before(:each) do
+		admin = create(:laurel_admin)
+		sign_in(admin)
+		@vote_candidate = create(:laurel_candidate, sca_name: 'Violet Vote', vote: true)
+		@watch_candidate = create(:laurel_candidate, sca_name: 'Wally Watch', vote: false)
+		@poll = create(:current_poll)
+	end
+	it "show offline poll for printing for active poll" do
+		get "/chambers/laurel/admin/poll/offline" 
+    expect(response).to have_http_status(:success)
+    expect(response.body).to include('Laurel Poll')
+	end
+	it "shows vote and watch candidates " do
+		get "/chambers/laurel/admin/poll/offline" 
+    expect(response.body).to include('Wally Watch')
+    expect(response.body).to include('Violet Vote')
+	end
+end

@@ -28,6 +28,17 @@ class Candidate < ApplicationRecord
     self.vote ||= false
   end
 
+  def self.list(order:, list:)
+    list == :vote ? vote = true : vote = false
+    Candidate.where(peerage_type: order, vote: vote)
+  end
+  def self.vote_list(peerage)
+    Candidate.list(order: peerage, list: :vote)
+  end
+
+  def self.watch_list(peerage)
+    Candidate.list(order: peerage, list: :watch)
+  end
   def self.where_order(peerage)
     Candidate.where(peerage_type: peerage)
   end

@@ -11,8 +11,8 @@ class OfflineBallot
   def initialize(peerage)
     @peerage = peerage 
 		@poll = Poll.active_for(@peerage)
-		@vote_list_advisings = Candidate.where_order(@peerage).where(vote:true).order(:sca_name).map{ |c| Advising.find_or_initialize_by(candidate: c, poll: @poll, peer_id: @peer_id )}
-		@watch_list_advisings = Candidate.where_order(@peerage).where(vote:false).order(:sca_name).map{ |c| Advising.find_or_initialize_by(candidate: c, poll: @poll, peer_id: @peer_id )}
+		@vote_list_advisings = Candidate.vote_list(@peerage).order(:sca_name).map{ |c| Advising.find_or_initialize_by(candidate: c, poll: @poll, peer_id: @peer_id )}
+		@watch_list_advisings = Candidate.watch_list(@peerage).order(:sca_name).map{ |c| Advising.find_or_initialize_by(candidate: c, poll: @poll, peer_id: @peer_id )}
 		
   end
   def peers
