@@ -34,9 +34,10 @@ describe CandidatePresenter, 'initialize' do
   end
 end
 describe CandidatePresenter, 'poll_result?' do
-  it 'returns true when there is a last poll result' do
+  it 'returns true when there is a last published poll result' do
     candidate = create(:candidate)
-    create(:poll_result, candidate: candidate)
+    poll = create(:past_published_poll)
+    create(:poll_result, candidate: candidate, poll: poll)
     presenter = CandidatePresenter.new(candidate)
     
     expect(presenter.poll_result?).to be_truthy 
@@ -139,10 +140,10 @@ describe CandidatePresenter, 'advocates?' do
     expect(presenter.advocates?).to be_falsey 
   end
 end
-describe CandidatePresenter, 'last poll results' do
+describe CandidatePresenter, 'last published poll results' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
-    @poll = create(:past_poll) 
+    @poll = create(:past_published_poll) 
     @poll_result = create(:poll_result, candidate: @candidate, poll: @poll, elevate: 1, wait:2, drop:3, no_strong_opinion: 4, rec: 0.399999, fav: 0.59999)
     @presenter = CandidatePresenter.new(@candidate)
   end

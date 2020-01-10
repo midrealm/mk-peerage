@@ -1,0 +1,24 @@
+<% title "Active #{peerage.capitalize} Poll Analytics"%>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item" <%= link_to "Manage #{peerage.capitalize} Polls", chambers_admin_polls_path %></li>
+    <li class="breadcrumb-item active" aria-current="page">Active <%=peerage.capitalize%> Poll Analytics</li>
+  </ol>
+</nav>
+<h1>Active <%= peerage.capitalize %> Poll Analytics</h1>
+
+<table class="table" data-behavior='dtable' >
+<thead>
+<th>SCA Name</th>
+<th>Poll Submission Status</th>
+</thead>
+<tbody>
+<% @presenter.peers.each do |p| %>
+<tr>
+  <td><%=p.sca_name%></td>
+  <td><%=p.advisings_count%>/<%=p.ballot_candidates_count%></td>
+</tr>
+<% end %>
+</tbody>
+</table>

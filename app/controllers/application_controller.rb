@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
   def peerage
     PeerageParamHandler.new(params[:peerage]).peerage
   end
+  private
+  def authorize_admin
+    authorize! :manage, peerage
+  end
 end

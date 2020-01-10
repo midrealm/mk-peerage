@@ -3,6 +3,7 @@ class PollResult < ApplicationRecord
   belongs_to :poll
 
   def advisings
-    Advising.where(candidate: candidate, poll: poll, submitted: true)
+    Advising.where(candidate: candidate, poll: poll)
   end
+
 end

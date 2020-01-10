@@ -57,6 +57,14 @@ class Peer < ApplicationRecord
     ApplicationController.helpers.collection_link(collection: superiors, label: 'sca_name', order: order, url_helper: 'peer_path')
   end
 
+  def specialties_suffix
+    if specialties?
+      "(#{specialties_sentence})" 
+    else
+      ""
+    end
+  end
+
   def self.subclass(peerage) 
     peerage.to_s.capitalize.constantize
   end
@@ -66,6 +74,9 @@ class Peer < ApplicationRecord
   end 
   def self.where_order(peerage)
     Peer.where(type: peerage.to_s.capitalize)
+  end
+  def self.active(peerage)
+    Peer.where_order(peerage).select{ |p| p.active? }
   end
 	def self.news_last_updated(peerage)
 		News.find_by(peerage_type: peerage)&.updated_at&.strftime('%d-%B-%Y')

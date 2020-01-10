@@ -47,42 +47,4 @@ describe "get /chambers/laurel/poll/candidates/:id" do
       end
     end
   end  
-  describe "for active poll and past poll" do
-    before(:each) do
-      @past_poll = create(:past_poll, peerage_type: :laurel)
-      @current_poll = create(:current_poll, peerage_type: :laurel)
-    end
-    describe "for logged in laurel" do
-      before(:each) do
-        @peer = create(:laurel_peer)
-        sign_in(@peer.user)
-      end
-      it "creates new advising for peer and candidate when there hasn't been a created advising" do
-        expect(Advising.count).to eq(0)
-        get "/chambers/laurel/poll/candidates/#{@candidate.id}"
-        expect(Advising.count).to eq(1)
-        expect(Advising.last.peer.id).to eq(@peer.id)
-        expect(Advising.last.candidate).to eq(@candidate)
-      end
-      it "pulls in old poll data into active poll" do
-        @old_advising = create(:advising, poll: @past_poll, peer: @peer, 
-          candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
-
-          get "/chambers/laurel/poll/candidates/#{@candidate.id}"
-          expect(response.body).to include("This is my old comment")
-          expect(response.body).to include("<option selected=\"selected\" value=\"elevate\">Elevate to Peerage")
-      end
-      it "for pre edited poll, puts in pre edited stuff, not stuff from old poll" do
-        @old_advising = create(:advising, poll_id: @past_poll.id, peer: @peer, 
-          candidate_id: @candidate.id, judgement: :elevate, comment: "This is my old comment")
-
-        @new_advising = create(:advising, poll_id: nil, peer: @peer, 
-          candidate_id: @candidate.id, judgement: :drop, comment: "This is my new comment")
-        
-          get "/chambers/laurel/poll/candidates/#{@candidate.id}"
-          expect(response.body).to include("This is my new comment")
-          expect(response.body).to include("<option selected=\"selected\" value=\"drop\">Drop to Watch List")
-      end
-    end
-  end
 end

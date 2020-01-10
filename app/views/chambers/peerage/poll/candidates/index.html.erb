@@ -1,31 +1,13 @@
 <% title "#{peerage.capitalize} Poll"%>
-<h1>Poll</h1>
-<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="<%=@percent_complete%>" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: <%=@ballot.percent_complete%>%;">
-<%=@ballot.percent_complete%>%
-  </div>
-</div>
-<div style="text-align:center"><h4><%=@ballot.submission_count%>/<%=@ballot.candidates.count%> Submitted</h4></div>
-
-<table class='table'>
-<thead>
-<th>Candidate</th><th>List</th><th>Status</th>
-</thead>
-<tbody>
-<% @ballot.candidates.order(:sca_name).each do |cand| %>
-  <% if @ballot.submission_for?(cand) %>
-  <tr class="alert alert-success">
-  <% else %>
-    <tr >
-  <%end%>
-    <td><%= link_to cand.sca_name, chambers_edit_ballot_candidate_path(peerage,cand.id)%></td>
-    <td><%= cand.vote ? 'Vote List' : 'Watch List' %></td>
-  <% if @ballot.submission_for?(cand)%>
-    <td><i class="fas fa-check"></i></td>
-  <% else %>
-    <td><i class="far fa-square"></i></td>
-  <% end %>
-</tr>
-<% end %>
-</tbody>
-</table>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%=peerage.capitalize %> Poll</li>
+  </ol>
+</nav>
+<h1><%=peerage.capitalize%> Poll</h1>
+<%= render "progress_bar", ballot: @ballot %>
+<h2>Vote List Candidates</h2>
+<%= render  "ballot_table", candidates: @ballot.vote_list, ballot: @ballot %>
+<h2>Watch List Candidates</h2>
+<%= render  "ballot_table", candidates: @ballot.watch_list, ballot: @ballot %>

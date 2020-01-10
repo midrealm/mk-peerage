@@ -28,6 +28,32 @@ class Candidate < ApplicationRecord
     self.vote ||= false
   end
 
+  def self.list(order:, list:)
+    list == :vote ? vote = true : vote = false
+    Candidate.where(peerage_type: order, vote: vote)
+  end
+  def self.vote_list(peerage)
+    Candidate.list(order: peerage, list: :vote)
+  end
+
+  def self.watch_list(peerage)
+    Candidate.list(order: peerage, list: :watch)
+  end
+  def self.where_order(peerage)
+    Candidate.where(peerage_type: peerage)
+  end
+
+  def last_published_poll_result
+    PollResult.find_by(candidate: self, poll: Poll.last_published_for(peerage_type))
+  end
+  def last_poll_result
+    PollResult.find_by(candidate: self, poll: Poll.most_recent_with_results_for(peerage_type))
+  end
+ 
+  def documents?
+    documents.count > 0
+  end 
+
   def specialties_link
     array = []
     specialties.all.each do |spec|

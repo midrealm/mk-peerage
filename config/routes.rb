@@ -37,12 +37,16 @@ Rails.application.routes.draw do
       put '/poll/candidates/:id' => 'ballot#update'
       patch '/poll/candidates/:id' => 'ballot#update'
 
-      get '/candidates/:id/documents' => 'documents#index', as: :documents_index
-
       namespace :admin do
 
         resources :candidates, except: [:show]
+        resources :polls, only: [:index]
+        put '/polls/:id/publish' => 'polls#publish', as: :publish_poll
+        put '/polls/:id/calculate' => 'polls#calculate', as: :calculate_poll
         resource :poll, except: [:show, :delete]
+        get '/poll/analytics' => 'polls#analyze', as: :analyze_poll
+        get '/poll/offline' => 'polls#offline', as: :offline_poll
+				resource :offline_poll_submitter, only: [:new, :create]
         resource :news, only: [:edit, :update]
         resources :peers, except: [:show, :delete]
         namespace :peers do

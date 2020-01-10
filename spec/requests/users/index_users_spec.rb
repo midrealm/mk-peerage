@@ -41,6 +41,10 @@ describe "Get /chambers" do
       get "/chambers"
       expect(response.body).to include('Edit News')
     end
+    it "shows 'Manage Polls'" do
+      get "/chambers"
+      expect(response.body).to include('Manage Polls')
+    end
   end
   it "redirects if not logged in" do
     get "/chambers"
@@ -86,7 +90,7 @@ describe "Get /chambers" do
           expect(response.body).to include(@current_poll.end_date.strftime('%d-%b-%Y'))  
         end
         it "shows if user has completed the poll" do
-          @advising = create(:advising, candidate: @candidate, peer: @laurel, poll: @current_poll, submitted: true)
+          @advising = create(:advising, candidate: @candidate, peer: @laurel, poll: @current_poll)
           get "/chambers"
           expect(response.body).to include('Finished')  
           expect(response.body).to include('Edit Poll')  
@@ -127,22 +131,10 @@ describe "Get /chambers" do
         admin = create(:admin)
         sign_in(admin)
       end
-      it "shows create poll link for admin if no active or scheduled poll" do
-        past_poll = build(:poll, start_date: DateTime.now - 2.days, end_date: DateTime.now - 1.days)
-        past_poll.save(:validate => false)
-        get "/chambers"
-        expect(response.body).to include('Create New Poll')
-      end
       describe "active poll" do
         before(:each) do
           current_poll = create(:current_poll)
           get "/chambers"
-        end
-        it "does not show polling link for admin if there is an active poll" do
-          expect(response.body).not_to include('Create New Poll')
-        end
-        it "shows edit poll link for admin if there is an active poll" do
-          expect(response.body).to include('Edit Poll')
         end
         it "shows poll dates" do
           expect(response.body).to include('12:01 AM')
@@ -151,14 +143,8 @@ describe "Get /chambers" do
       end
       describe "scheduled poll" do
         before(:each) do
-          poll = create(:poll, start_date: DateTime.now + 1.days, end_date: DateTime.now + 2.days)
+          poll = create(:future_poll)
           get "/chambers"
-        end
-        it "does not show polling link for admin if there is a scheduled poll" do
-          expect(response.body).not_to include('Create New Poll')
-        end
-        it "shows edit poll link for admin if there is a scheduled poll" do
-          expect(response.body).to include('Edit Poll')
         end
         it "shows poll dates" do
           expect(response.body).to include('12:01 AM')

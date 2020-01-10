@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @specialties = Specialty.all
   end
   def index
-    @user = current_user
+    @user = DashboardUserPresenter.new(current_user)
   end
   def update
     current_user.assign_attributes(user_params)

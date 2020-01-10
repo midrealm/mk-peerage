@@ -3,6 +3,26 @@ require 'rails_helper'
 RSpec.describe Candidate, type: :model do
   it { should validate_presence_of(:peerage_type) }
 end
+RSpec.describe Candidate, "self.where_order(peerage)" do
+  it "returns only Laurel Candidates when :laurel submitted as peerage" do
+    create(:laurel_candidate)
+    create(:laurel_candidate)
+    create(:pelican_candidate)
+    candidates = Candidate.where_order(:laurel)
+    expect(candidates.count).to eq(2) 
+    expect(candidates.first.order).to eq(:laurel)
+    expect(candidates.second.order).to eq(:laurel)
+  end
+  it "returns only Pelicans when :pelican submitted as peerage" do
+    create(:pelican_peer)
+    create(:pelican_peer)
+    create(:laurel_peer)
+    candidates = Peer.where_order(:pelican)
+    expect(candidates.count).to eq(2) 
+    expect(candidates.first.order).to eq(:pelican)
+    expect(candidates.second.order).to eq(:pelican)
+  end
+end
 RSpec.describe Candidate, "specialties_link" do
   it "handles two specialties" do
     spec1 = create(:specialty, name: 'Spec', slug: 'spec')

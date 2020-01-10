@@ -21,25 +21,25 @@ describe "get /chambers/laurel/poll" do
         expect(response.body).to include(@candidate1.sca_name)
         expect(response.body).to include(@candidate2.sca_name)
       end
-      it "shows OK if advising has been submitted for a given candidate" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
+      it "shows OK if advising has been saved for a given candidate" do
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer)
         get "/chambers/laurel/poll"
         expect(response.body).to include("fa-check")
       end
-      it "does not shows OK if advising has not been submitted for a given candidate" do
+      it "does not shows OK if advising has not been saved for a given candidate" do
         get "/chambers/laurel/poll"
         expect(response.body).not_to include("fa-check")
       end
 
       it "show progress bar with percent of candidates complete" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer)
         get "/chambers/laurel/poll"
         expect(response.body).to include("width: 50%")
         expect(response.body).to include("progress-bar")
     
       end
-      it "shows how many have poll entries have been submitted" do
-        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer, submitted: true)
+      it "shows how many have poll entries have been saved" do
+        advising = create(:advising, poll: @poll, candidate: @candidate1, peer: @peer)
         get "/chambers/laurel/poll"
         expect(response.body).to include("1/2 Submitted")
       end

@@ -12,6 +12,9 @@ import './modules/editUserOpenArms'
 import './modules/candidateValidator'
 import './modules/addNewPeer'
 import './modules/userValidator'
+import './modules/shave'
+import './modules/gallery'
+import './modules/tabSwitcher'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';

@@ -33,3 +33,13 @@
 .vigilant{
   font-weight: bold; 
 }
+.my-link{
+  cursor: pointer;
+}
+
+span.my-link:hover {
+  text-decoration: underline;
+}
+.modal-full {
+    max-width: 80vw !important;
+}

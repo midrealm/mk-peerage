@@ -3,16 +3,17 @@ class Chambers::BallotController < ApplicationController
   before_action :authorize_peer
 
   def index
-    if Poll.current(peerage).nil?
+    current_poll = Poll.current(peerage)
+    if current_poll.nil?
       redirect_to chambers_path
     else
-      @ballot = Ballot.new(current_user.peer(peerage)) 
+      @ballot = BallotPresenter.new(Ballot.find_or_create_by(peer: current_user.peer(peerage), poll: current_poll))
     end
   end
   def update
-    @advising = BallotEntry.new(candidate: Candidate.find(params[:id]), peer: current_user.peer(peerage)).advising
-    if @advising.update(advising_params)
-      @advising.update(submitted: true)  
+    @advising = Advising.find_or_initialize_by(candidate: Candidate.find(params[:id]), peer: current_user.peer(peerage), poll: Poll.current(peerage))
+	  @advising.assign_attributes(advising_params)
+    if @advising.save
       redirect_to action: :index
     else
       render :edit
@@ -20,8 +21,10 @@ class Chambers::BallotController < ApplicationController
   end
   
   def edit
-    @candidate = Candidate.find(params[:id]) 
-    @advising = BallotEntry.new(candidate: @candidate, peer: current_user.peer(peerage)).advising
+		cand = Candidate.find(params[:id])
+		@ballot_entry = BallotEntry.new(candidate: cand, peer: current_user.peer(peerage))
+		@candidate = CandidatePresenter.new(cand)
+    @advising = @ballot_entry.advising
   end
   
   

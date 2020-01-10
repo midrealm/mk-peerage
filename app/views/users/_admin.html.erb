@@ -4,12 +4,4 @@
 <%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage) %><br>
 <%= link_to 'Manage Royalty', chambers_admin_royalty_index_path %><br>
 <%= link_to 'Edit News', edit_chambers_admin_news_path(peerage)%></br>
-<% unless poll.nil? %>
-  <% if poll.end_date.past? %>
-    <%= link_to 'Create New Poll', new_chambers_admin_poll_path(peerage)%>
-  <% else  %>
-    <%= link_to 'Edit Poll', edit_chambers_admin_poll_path(peerage)%> | <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
-  <% end %>
-<% else %>
-  <%= link_to 'Create New Poll', new_chambers_admin_poll_path(peerage)%>
-<% end %></br>
+<%= link_to 'Manage Polls', chambers_admin_polls_path(peerage) %> <% if poll&.future? || poll&.active? %>| <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM<%end%></br>

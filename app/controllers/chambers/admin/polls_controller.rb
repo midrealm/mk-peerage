@@ -2,6 +2,10 @@ class Chambers::Admin::PollsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
 
+  def index
+    @polls = PollsManagementPresenter.new(Poll.where_order(peerage))  
+  end
+
   def new
     @poll = Poll.new
   end
@@ -9,7 +13,7 @@ class Chambers::Admin::PollsController < ApplicationController
   def edit
     @poll = Poll.last_for(peerage)
     if @poll.end_date < DateTime.now #if last poll has already ended
-      redirect_to chambers_path
+      redirect_to chambers_admin_polls_path(peerage)
     end
   end
 
@@ -18,7 +22,7 @@ class Chambers::Admin::PollsController < ApplicationController
     @poll.peerage_type = peerage
     @poll.end_date = @poll.end_date + 23.hours + 59.minutes + 59.seconds unless @poll.end_date.nil?
     if @poll.save
-      redirect_to chambers_path
+      redirect_to chambers_admin_polls_path(peerage)
     else
       render :new
     end 
@@ -29,11 +33,57 @@ class Chambers::Admin::PollsController < ApplicationController
     @poll.assign_attributes(poll_params)
     @poll.end_date = @poll.end_date + 23.hours + 59.minutes + 59.seconds unless @poll.end_date.nil?
     if @poll.save
-      redirect_to chambers_path
+      redirect_to chambers_admin_polls_path(peerage)
     else
       render :edit
     end
   end
+
+  def destroy
+    poll = Poll.future_for(peerage)
+    if poll.destroy
+      flash[:success] = 'Future Poll Successfully Deleted'
+    else
+      flash[:error] = 'Future Poll could not be delted'
+    end 
+    redirect_to chambers_admin_polls_path(peerage)
+    
+  end
+
+  def publish
+    @poll = Poll.find(params[:id])
+    if @poll.update(published: !@poll.published)
+      flash[:success] = 'Past Poll successfully updated'
+    else
+      flash[:error] = "Couldn't update past poll"
+    end 
+    redirect_to chambers_admin_polls_path(peerage)
+  end
+
+  def analyze
+    poll = Poll.active_for(peerage)
+    if poll.nil?
+      flash[:error] = "No active poll"
+      redirect_to chambers_admin_polls_path(peerage) 
+    end
+    @presenter = PollAnalyticsPresenter.new(poll)
+  end
+  def calculate
+    poll = Poll.find(params[:id])
+    begin 
+      ResultsCalculator.new(poll).calculate
+    rescue ArgumentError => e
+      flash[:error] = e 
+      redirect_to chambers_admin_polls_path(peerage) 
+    end 
+    flash[:success] = "Successfully calculated poll results"
+    redirect_to chambers_admin_polls_path(peerage) 
+  end
+  def offline
+    @presenter = OfflinePollPresenter.new(peerage)
+    render layout: 'offline'
+  end
+
   private
   def poll_params
     params.require(:poll).permit(:start_date, :end_date)

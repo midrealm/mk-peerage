@@ -1,10 +1,5 @@
 class Chambers::DocumentsController < ApplicationController
   before_action :authenticate_user!
-  def index
-    authorize! :read, peerage
-    @candidate = CandidatePresenter.new(Candidate.find(params[:id]))
-    @document = Document.new
-  end
 
   def create
     document = Document.new(candidate_id: document_params[:candidate_id], document: document_params[:document],
@@ -12,7 +7,7 @@ class Chambers::DocumentsController < ApplicationController
     if document.save
       flash[:success] = "Document Upload Successful"
       candidate = Candidate.find(params['document']['candidate_id'])
-      redirect_to chambers_documents_index_path(candidate.order,candidate)
+      redirect_to "#{chambers_candidate_path(candidate.order,candidate)}#documents"
     else
       flash[:error] = "Document Upload Unsuccessful: #{document.errors.full_messages.to_sentence}"
     end

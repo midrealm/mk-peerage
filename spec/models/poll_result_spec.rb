@@ -11,13 +11,10 @@ RSpec.describe PollResult, 'advisings' do
       poll = create(:past_poll)
       @pr = build(:poll_result, candidate: candidate, poll: poll)
       advising = create(:advising, poll: poll, peer: laurel, candidate: candidate,
-        comment: 'I like this candidate, but not ready yet', submitted: true, 
-        judgement: :elevate)
-      unsubmitted_advising = create(:advising, poll: poll, peer: laurel2, candidate: candidate,
-        comment: 'I like this candidate, but not ready yet', submitted: false, 
+        comment: 'I like this candidate, but not ready yet', 
         judgement: :elevate)
     end
-    it 'should return submitted advisings' do
+    it 'should return saved advisings' do
       expect(@pr.advisings.count).to eq(1)
     end
   end
