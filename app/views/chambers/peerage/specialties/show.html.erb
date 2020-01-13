@@ -7,4 +7,4 @@
   </ol>
 </nav>
 <h1><%=@specialty.name.capitalize%></h1>
-<%= render '/shared/candidates_table', candidates: @specialty.candidates.map{ |spec| CandidatePresenter.new(spec) } %>
+<%= render '/shared/candidates_table', candidates: @specialty.candidates.map{ |spec| CandidatePresenter.new(candidate: spec) } %>

@@ -1,10 +1,11 @@
 class CandidatePresenter
   extend Forwardable
   def_delegators :@candidate, :sca_name, :comments, :profile_pic, :profile_pic_full, :profile_pic_thumb, :list, :group, :documents, :peerage_type, :id, :documents?
+  attr_reader :results
 
-  def initialize(candidate)
+  def initialize(candidate:, results_picker: ResultsPicker.new)
     @candidate = candidate
-    @results = @candidate.last_published_poll_result
+    @results = results_picker.results(candidate)
   end
 
   def poll_result?
@@ -21,11 +22,11 @@ class CandidatePresenter
   end
 
   def status
-    if @candidate.vote?
-      'Vote List'
-    else
-      'Watch List'
-    end 
+    #Parent method
+  end
+
+  def index_tr_class
+    #Parent Method
   end
   def advocates
     @candidate.advocacies.map{ |adv| "<a href=\"/#{adv.peer.peerage_type}/#{adv.peer.slug}\">#{adv.peer.sca_name}</a>" }.join(', ').html_safe
