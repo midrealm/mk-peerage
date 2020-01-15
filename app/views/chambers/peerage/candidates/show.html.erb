@@ -7,63 +7,11 @@
   </ol>
 </nav>
 <div class ="d-md-flex flex-row-reverse">
-  <div >
+  <div class="ml-3 mb-3">
     <%= image_tag @candidate.profile_pic_full %>
   </div>
   <div class="col-md">
-    <h1><%=@candidate.sca_name%><br/><small class="text-muted"><%=@candidate.specialties%></small></h1>
-        <strong><%= @candidate.status %></strong></br>
-        <% if @candidate.specialties? %>
-          <strong>Specialties</strong>: <%= @candidate.specialties %> </br>
-        <% end %>
-        <% if @candidate.advocates? %>
-          <strong>Advocates</strong>: <%= @candidate.advocates %><br/>
-        <%end%>
-        <% if @candidate.group %>
-          <strong>Group</strong>: <%= candidate_link(@candidate.group, peerage) %><br>
-        <% end %>
-          <i>Poll results from <%=@candidate.poll_date %></i></br>
-          <table class="table d-none d-md-table">
-            <thead>
-              <th>Elevate</th>
-              <th>Wait</th>
-              <th>No Strong Opinion</th>
-              <th>Drop</th>
-              <th>Rec%</th>
-              <th>Fav%</th>
-            </thead>
-            <tbody>
-            <tr>
-              <td><%=@candidate.elevate%></td>
-              <td><%=@candidate.wait%></td>
-              <td><%=@candidate.no_strong_opinion%></td>
-              <td><%=@candidate.drop%></td>
-              <td><%=@candidate.rec%></td>
-              <td><%=@candidate.fav%></td>
-            </tr>
-            </tbody>
-          </table>
-
-          <table class="table d-md-none">
-            <thead class="d-md-none">
-              <th>E</th>
-              <th>W</th>
-              <th>NSO</th>
-              <th>D</th>
-              <th>Rec%</th>
-              <th>Fav%</th>
-            </thead>
-            <tbody>
-            <tr>
-              <td><%=@candidate.elevate%></td>
-              <td><%=@candidate.wait%></td>
-              <td><%=@candidate.no_strong_opinion%></td>
-              <td><%=@candidate.drop%></td>
-              <td><%=@candidate.rec%></td>
-              <td><%=@candidate.fav%></td>
-            </tr>
-            </tbody>
-          </table>
+    <%= render "profile", candidate: @candidate %>
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Comments</a>

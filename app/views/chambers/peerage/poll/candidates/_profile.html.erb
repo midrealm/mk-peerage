@@ -2,7 +2,7 @@
   <%= image_tag candidate.profile_pic_full.variant(resize: '200x200') %>
 </div>
 <div class="">
-  <strong>Status</strong>: <%=  candidate.status%><br>
+  <strong>Status</strong>: <span class="<%=candidate.show_status_class%>"><%=  candidate.status%></span><br>
   <% if candidate.specialties? %>
     <strong>Specialties</strong>: <%= candidate.specialties %> </br>
   <% end %>

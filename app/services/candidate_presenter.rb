@@ -8,6 +8,14 @@ class CandidatePresenter
     @results = results_picker.results(candidate)
   end
 
+  def self.for(candidate:, results_picker: ResultsPicker.new)
+    if candidate.vote?
+      VoteListCandidatePresenter.new(candidate: candidate, results_picker: results_picker)
+    else
+      WatchListCandidatePresenter.new(candidate: candidate, results_picker: results_picker)
+    end
+  end
+
   def poll_result?
     @results.present?
   end

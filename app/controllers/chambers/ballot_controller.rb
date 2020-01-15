@@ -23,7 +23,7 @@ class Chambers::BallotController < ApplicationController
   def edit
 		cand = Candidate.find(params[:id])
 		@ballot_entry = BallotEntry.new(candidate: cand, peer: current_user.peer(peerage))
-		@candidate = CandidatePresenter.new(candidate: cand)
+		@candidate = CandidatePresenter.for(candidate: cand)
     @advising = @ballot_entry.advising
   end
   
@@ -38,5 +38,6 @@ class Chambers::BallotController < ApplicationController
   def self.controller_path
     'chambers/peerage/poll/candidates'
   end
+
 end
 

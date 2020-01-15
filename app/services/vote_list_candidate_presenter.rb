@@ -3,6 +3,12 @@ class VoteListCandidatePresenter < CandidatePresenter
     "Vote List"
   end
   def index_tr_class
-    'vote_tr'
+    'vote-tr'
+  end
+  def show_box_class
+    'vote-show-box'
+  end
+  def show_status_class
+    'vote-show-status'
   end
 end

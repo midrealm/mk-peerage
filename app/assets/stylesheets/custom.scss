@@ -44,19 +44,31 @@ span.my-link:hover {
     max-width: 80vw !important;
 }
 
-.vote{
+
+.vote-tr{
   background: cornsilk;
   font-weight: 600;
+  a, a:hover {
+    color: #009e00;
+  }
 }
 
-.vote_tr{
-  background: cornsilk;
-  font-weight: 600;
-}
-
-.vote_heading{
+.vote-show-box{
     border: 3px goldenrod solid;
     padding: 10px;
-    background-color: cornsilk;
 }
 
+.watch-show-status{
+  color: dimgray;
+  font-weight: 700;
+}
+
+.watch-show-box{
+    border: 3px silver solid;
+    padding: 10px;
+}
+
+.vote-show-status{
+  color: darkgoldenrod;
+  font-weight: 700;
+}

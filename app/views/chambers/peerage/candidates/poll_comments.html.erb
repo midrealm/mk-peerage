@@ -6,46 +6,18 @@
     <li class="breadcrumb-item active" aria-current="page">Full Poll Results for <%=@candidate.sca_name%></li>
   </ol>
 </nav>
-<h3>Full Poll Results<br><small>Poll Dates: <%=@candidate.poll_date%></small></h3>
 <div class ="d-md-flex flex-row-reverse">
-  <div >
+  <div class="ml-3 mb-3">
     <%= image_tag @candidate.profile_pic_full %>
   </div>
   <div class="col-md">
-    <h1><%= link_to @candidate.sca_name, chambers_candidate_path(peerage,@candidate.id)%></h1>
-    <% if @candidate.specialties? %>
-      <strong>Specialties</strong>: <%= @candidate.specialties %><br>
-    <% end %>
-    <% if @candidate.advocates? %>
-      <strong>Advocates</strong>: <%= @candidate.advocates %> <br>
-    <%end%>
-    <% if @candidate.group %>
-    <strong>Group</strong>: <%= candidate_link(@candidate.group,peerage) %>
-    <% end %>
-    <table class="table">
-    <thead>
-    <th>Elevate</th><th>Wait</th><th>No Strong Opinion</th><th>Drop</th>
-    <th>Rec%</th><th>Fav%</th>
-    </thead>
-    <tbody>
-    <tr>
-      <td><%=@candidate.elevate%></td>
-      <td><%=@candidate.wait%></td>
-      <td><%=@candidate.no_strong_opinion%></td>
-      <td><%=@candidate.drop%></td>
-      <td><%=@candidate.rec%></td>
-      <td><%=@candidate.fav%></td>
-    </tr>
-    </tbody>
-    </table>
-  </div>
-</div>
+    <%= render "profile", candidate: @candidate %>
   
-  <h3>Order Advisings</h3>
+  <h3>Counsel from the Order</h3>
   <table class="table" data-behavior="dtable-shave">
     <thead>
       <th>Peer</th>
-      <th>Judgement</th>
+      <th>Judgment</th>
       <th>Comment</th>
     </thead>
     <tbody>
