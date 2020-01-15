@@ -1,0 +1,13 @@
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= peerage.capitalize %></a>
+  <div class="dropdown-menu">
+		<%= link_to "View #{peerage.capitalize} Candidates", chambers_candidates_path(peerage), class: 'dropdown-item'  %>
+		<%= link_to "Browse Candidates By Group", chambers_groups_path(peerage), class: 'dropdown-item'  %>
+		<%= link_to "Browse Candidates By Specialty", chambers_specialties_path(peerage), class: 'dropdown-item'  %>
+		<%= link_to "Contact the Order Secretary", order_secretary_contact_path(peerage), class: 'dropdown-item'  %>
+    <% if peer.poll? && can?(:take_poll, peerage) %>
+    <%= link_to peer.ballot.action, chambers_ballot_path(peerage), class: 'dropdown-item'%>
+    <% end %>
+	
+  </div>
+</li>

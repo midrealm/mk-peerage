@@ -1,8 +1,15 @@
 <% title "Private Chambers"%>
 <h1>Private Chambers</h1>
 <% if can? :read, PollResult %>
-<%= render 'royalty' %>
+  <div class="col">
+  <%= render 'royalty' %>
+  </div>
 <% end %>
+  <div class="col">
+    <%= link_to 'Edit Your Profile', users_edit_path %><br>
+    <%= link_to 'Change Your Password', users_edit_password_path %><br />
+    <%= link_to('Logout', destroy_user_session_path, :method => :delete, id: 'dashboard-logout' )%>
+  </div>
 <% @user.peers.each do |peer| 
 %>
   <div class='col-md-6'>
