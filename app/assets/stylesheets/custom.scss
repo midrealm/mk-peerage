@@ -43,3 +43,32 @@ span.my-link:hover {
 .modal-full {
     max-width: 80vw !important;
 }
+
+
+.vote-tr{
+  background: cornsilk;
+  font-weight: 600;
+  a, a:hover {
+    color: #009e00;
+  }
+}
+
+.vote-show-box{
+    border: 3px goldenrod solid;
+    padding: 10px;
+}
+
+.watch-show-status{
+  color: dimgray;
+  font-weight: 700;
+}
+
+.watch-show-box{
+    border: 3px silver solid;
+    padding: 10px;
+}
+
+.vote-show-status{
+  color: darkgoldenrod;
+  font-weight: 700;
+}

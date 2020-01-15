@@ -4,7 +4,7 @@ describe "get /chambers/laurel/candidates" do
     before(:each) do
       @peer = create(:laurel_peer)
       sign_in(@peer.user)
-      @candidate = create(:candidate, peerage_type: :laurel)
+      @candidate = create(:candidate, peerage_type: :laurel, vote: true)
       
     end
     it "shows list of candidates" do
@@ -29,6 +29,10 @@ describe "get /chambers/laurel/candidates" do
       
       get "/chambers/laurel/candidates"
       expect(response.body).to include("123456")
+    end
+    it "shows what list the candidate is on" do
+      get "/chambers/laurel/candidates"
+      expect(response.body).to include("Vote List")
     end
 
     it "does not show comments from last poll" do

@@ -17,13 +17,13 @@
 </thead>
 <tbody>
   <% candidates.each do |cand| %>
-    <tr>
+    <tr class="<%=cand.index_tr_class %>" >
       <td style="width:140px;text-align:center">
         <%= link_to (image_tag cand.profile_pic_thumb), chambers_candidate_path(peerage,cand.id) %><br>
         <%= link_to "#{cand.sca_name}", chambers_candidate_path(peerage,cand.id)%>
       </td>
       <td><%=cand.specialties%></td>
-      <td><%=cand.list%></td>
+      <td><%=cand.status%></td>
       <% if can?(:read, PollResult) %>
         <td>
           <% if cand.poll_result? %><%= link_to 'Comments', chambers_poll_comments_path(peerage,cand.id)%><%end%>

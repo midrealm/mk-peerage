@@ -6,7 +6,7 @@ describe CandidatePresenter, 'initialize' do
     @candidate = create(:laurel_candidate, group: @group)
     @comment = create(:comment, candidate: @candidate, peer: @laurel) 
     @document = create(:document, candidate: @candidate, peer: @laurel)
-    @presenter = CandidatePresenter.new(@candidate)
+    @presenter = CandidatePresenter.new(candidate: @candidate)
   end
   it "shows candidate id" do
     expect(@presenter.id).to eq(@candidate.id)
@@ -38,13 +38,13 @@ describe CandidatePresenter, 'poll_result?' do
     candidate = create(:candidate)
     poll = create(:past_published_poll)
     create(:poll_result, candidate: candidate, poll: poll)
-    presenter = CandidatePresenter.new(candidate)
+    presenter = CandidatePresenter.new( candidate: candidate)
     
     expect(presenter.poll_result?).to be_truthy 
   end
   it 'returns false when there is no last poll result' do
     candidate = create(:candidate)
-    presenter = CandidatePresenter.new(candidate)
+    presenter = CandidatePresenter.new( candidate: candidate)
     
     expect(presenter.poll_result?).to be_falsey 
   end
@@ -55,11 +55,11 @@ describe CandidatePresenter, 'document_count' do
   end
   it 'returns count of documents' do
     document = create(:document, candidate:@candidate)
-    presenter = CandidatePresenter.new(@candidate)
+    presenter = CandidatePresenter.new( candidate: @candidate)
     expect(presenter.document_count).to eq(1) 
   end 
   it 'returns 0 for no documents' do
-    presenter = CandidatePresenter.new(@candidate)
+    presenter = CandidatePresenter.new( candidate: @candidate)
     expect(presenter.document_count).to eq(0) 
   end
 end
@@ -69,14 +69,14 @@ describe CandidatePresenter, 'specialties' do
     @candidate = create(:laurel_candidate, specialty_detail: 'Motets')
     @specialty = create(:specialty, name: 'Music')
     create(:specialization, candidate: @candidate, specialty: @specialty)
-    @presenter = CandidatePresenter.new(@candidate)
+    @presenter = CandidatePresenter.new( candidate: @candidate)
     expect(@presenter.specialties).to eq('<a href="/chambers/laurel/specialties/music">Music</a>, Motets')
   end  
   it "outputs no specialty_detail appropriately" do
     @candidate = create(:laurel_candidate, specialty_detail: '')
     @specialty = create(:specialty, name: 'Music')
     create(:specialization, candidate: @candidate, specialty: @specialty)
-    @presenter = CandidatePresenter.new(@candidate)
+    @presenter = CandidatePresenter.new( candidate: @candidate)
     expect(@presenter.specialties).to eq('<a href="/chambers/laurel/specialties/music">Music</a>')
   end
 end
@@ -85,24 +85,24 @@ describe CandidatePresenter, 'specialties?' do
       candidate = create(:laurel_candidate, specialty_detail: 'Motets')
       specialty = create(:specialty, name: 'Music')
       create(:specialization, candidate: candidate, specialty: specialty)
-      presenter = CandidatePresenter.new(candidate)
+      presenter = CandidatePresenter.new( candidate: candidate)
       expect(presenter.specialties?).to be_truthy
     end
     it 'returns true for one specialty and no detail' do
       candidate = create(:laurel_candidate, specialty_detail: nil)
       specialty = create(:specialty, name: 'Music')
       create(:specialization, candidate: candidate, specialty: specialty)
-      presenter = CandidatePresenter.new(candidate)
+      presenter = CandidatePresenter.new( candidate: candidate)
       expect(presenter.specialties?).to be_truthy
     end
     it 'returns true for specialty detail and no Specialty' do
       candidate = create(:laurel_candidate, specialty_detail: 'Motets')
-      presenter = CandidatePresenter.new(candidate)
+      presenter = CandidatePresenter.new( candidate: candidate)
       expect(presenter.specialties?).to be_truthy
     end
     it 'returns false for no specialty detail or Specialty'  do
       candidate = create(:laurel_candidate, specialty_detail: nil)
-      presenter = CandidatePresenter.new(candidate)
+      presenter = CandidatePresenter.new( candidate: candidate)
       expect(presenter.specialties?).to be_falsey
     end 
 end
@@ -114,13 +114,13 @@ describe CandidatePresenter, 'advocates' do
     create(:advocacy, candidate: @candidate, peer: @laurel)
   end
   it "returns advocate as a link"  do
-    presenter = CandidatePresenter.new(@candidate)
+    presenter = CandidatePresenter.new( candidate: @candidate)
     expect(presenter.advocates).to eq("<a href=\"/laurel/#{@laurel.slug}\">#{@laurel.sca_name}</a>")  
   end
   it "returns advocates as links separated by ', '" do
     laurel2 = create(:laurel_user, sca_name: 'Bob', slug: 'bob')
     create(:advocacy, candidate: @candidate, peer: laurel2.laurel)
-    presenter = CandidatePresenter.new(@candidate)
+    presenter = CandidatePresenter.new( candidate: @candidate)
     expect(presenter.advocates).to eq("<a href=\"/laurel/#{@laurel.slug}\">#{@laurel.sca_name}</a>, <a href=\"/laurel/bob\">Bob</a>")  
   end
 end
@@ -129,13 +129,13 @@ describe CandidatePresenter, 'advocates?' do
     candidate = create(:laurel_candidate) 
     laurel = create(:laurel_peer)
     create(:advocacy, candidate: candidate, peer: laurel)
-    presenter = CandidatePresenter.new(candidate)
+    presenter = CandidatePresenter.new( candidate: candidate)
    
     expect(presenter.advocates?).to be_truthy 
   end
   it "returns false if there are no advocates" do
     candidate = create(:laurel_candidate) 
-    presenter = CandidatePresenter.new(candidate)
+    presenter = CandidatePresenter.new( candidate: candidate)
    
     expect(presenter.advocates?).to be_falsey 
   end
@@ -145,7 +145,7 @@ describe CandidatePresenter, 'last published poll results' do
     @candidate = create(:laurel_candidate)     
     @poll = create(:past_published_poll) 
     @poll_result = create(:poll_result, candidate: @candidate, poll: @poll, elevate: 1, wait:2, drop:3, no_strong_opinion: 4, rec: 0.399999, fav: 0.59999)
-    @presenter = CandidatePresenter.new(@candidate)
+    @presenter = CandidatePresenter.new( candidate: @candidate)
   end
   it "shows elevate" do
     expect(@presenter.elevate).to eq(@poll_result.elevate)
@@ -169,7 +169,7 @@ end
 describe CandidatePresenter, 'last poll results for no polls' do
   before(:each) do
     @candidate = create(:laurel_candidate)     
-    @presenter = CandidatePresenter.new(@candidate)
+    @presenter = CandidatePresenter.new( candidate: @candidate)
   end
   it "shows elevate" do
     expect(@presenter.elevate).to eq('')
