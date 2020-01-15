@@ -1,4 +1,4 @@
-<table class="table" data-behavior="dtable" data-order='[[2, "asc"],[0,"asc"]]'>
+<table class="table" data-behavior="dtable-hidepics" data-order='[[2, "asc"],[0,"asc"]]'>
 <thead>
 <th>Name</th>
 <th>Specialties</th>
@@ -19,7 +19,7 @@
   <% candidates.each do |cand| %>
     <tr class="<%=cand.index_tr_class %>" >
       <td style="width:140px;text-align:center">
-        <%= link_to (image_tag cand.profile_pic_thumb), chambers_candidate_path(peerage,cand.id) %><br>
+        <div class="profile_pic"><%= link_to (image_tag cand.profile_pic_thumb), chambers_candidate_path(peerage,cand.id) %></div>
         <%= link_to "#{cand.sca_name}", chambers_candidate_path(peerage,cand.id)%>
       </td>
       <td><%=cand.specialties%></td>
