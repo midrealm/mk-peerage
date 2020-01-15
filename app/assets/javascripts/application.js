@@ -15,6 +15,7 @@ import './modules/userValidator'
 import './modules/shave'
 import './modules/gallery'
 import './modules/tabSwitcher'
+import './modules/hidePictures'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';
