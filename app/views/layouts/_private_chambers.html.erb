@@ -1,11 +1,16 @@
 <% if user_signed_in? %>
+<% user = DashboardUserPresenter.new(current_user) %>
   <li class='nav-item'><a class="nav-link" href="/chambers">Private Chambers</a></li>
+	<% user.peers.each do |peer| %>
+	  <%= render "/layouts/peerage_navbar", peerage: peer.order, peer: peer %>
+	<% end %>
   <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.sca_name %></a>
     <div class="dropdown-menu">
       <%= link_to 'Update Profile', users_edit_path, class: 'dropdown-item' %>
       <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'dropdown-item') %>
     </div>
+	</li>
 <% else %>
 <li class='nav-item'><a class="nav-link" href="/users/sign_in">Private Chambers</a></li>
 <% end %>

@@ -26,7 +26,7 @@ RSpec.feature 'set_peer_to_active_on_first_login' do
     end
     feature 'signing in a second time does not set active status' do
       background do
-        click_on  'Logout'
+        click_on  'dashboard-logout'
         sign_in(User.first)  
       end
       scenario 'laurel and pelican still inactive' do
