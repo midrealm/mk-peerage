@@ -35,6 +35,7 @@ gem 'cancancan'
 gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'webpacker', '~> 4.x'
 
 
 group :development, :test do

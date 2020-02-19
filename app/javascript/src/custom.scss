@@ -1,0 +1,74 @@
+.peer-profile-parent{
+  position: relative;
+  bottom: 0;
+  right: 0; 
+  height: 400px;
+  width: 300px;
+  .profile-pic{
+    position: relative;
+    bottom: 0;
+    right: 0; 
+  }
+  .arms{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;  
+  }    
+}      
+.plate{
+  padding: 0.5rem;
+  margin: 0.5rem;
+  text-align: center;
+  width: 300px;
+  height: 75px;
+  border: 1px solid darkgoldenrod;
+  background: palegoldenrod;
+  a, a:hover {
+    color: darkgreen;
+  }
+}
+.deceased{
+  background: #dedede; 
+}
+.vigilant{
+  font-weight: bold; 
+}
+.my-link{
+  cursor: pointer;
+}
+
+span.my-link:hover {
+  text-decoration: underline;
+}
+.modal-full {
+    max-width: 80vw !important;
+}
+
+
+.vote-tr{
+  background: cornsilk;
+  font-weight: 600;
+  a, a:hover {
+    color: #009e00;
+  }
+}
+
+.vote-show-box{
+    border: 3px goldenrod solid;
+    padding: 10px;
+}
+
+.watch-show-status{
+  color: dimgray;
+  font-weight: 700;
+}
+
+.watch-show-box{
+    border: 3px silver solid;
+    padding: 10px;
+}
+
+.vote-show-status{
+  color: darkgoldenrod;
+  font-weight: 700;
+}
