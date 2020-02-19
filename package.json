@@ -51,7 +51,6 @@
   },
   "scripts": {
     "webpack:start": "webpack -w --config webpack.dev.js",
-    "webpack:deploy": "webpack --config webpack.prod.js",
-    "heroku-postbuild": "npm run webpack:deploy"
+    "webpack:deploy": "webpack --config webpack.prod.js"
   }
 }
