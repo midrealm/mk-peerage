@@ -26,7 +26,6 @@
     "datatables.net-buttons": "^1.6.1",
     "datatables.net-buttons-bs4": "^1.6.1",
     "easymde": "^2.8.0",
-    "extract-text-webpack-plugin": "3.0.2",
     "node-sass": "^4.7.2",
     "popper.js": "^1.12.9",
     "postcss-loader": "^2.1.0",
