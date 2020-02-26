@@ -48,10 +48,6 @@
     "popper.js": "^1.12.9",
     "webpack": "3.11.0"
   },
-  "scripts": {
-    "webpack:start": "webpack -w --config webpack.dev.js",
-    "webpack:deploy": "webpack --config webpack.prod.js"
-  },
   "resolutions": {
     "js-yaml": "3.13.1"
   }
