@@ -4,7 +4,13 @@
 </thead>
 <% documents.each do |doc| %>
   <tr>
-    <td><%= link_to image_tag(doc.document_thumb), '#galleryModal', data: { largesrc: url_for(doc.document_full), toggle: 'modal' } %></td>
+    <% if doc.document.variable? %>
+    <td><%= link_to image_tag(doc.document.variant(resize: '100x100')), '#galleryModal', data: { largesrc: url_for(doc.document), toggle: 'modal' } %></td>
+    <% elsif doc.document.previewable? %>
+    <td><%= link_to image_tag(doc.document.preview(resize: "100x100")), rails_blob_path(doc.document, disposition: "attachment") %></td>
+    <% else %>
+    <td><%= link_to doc.document.filename, rails_blob_path(doc.document, disposition: "attachment")  %></td>
+    <% end %>
     <td><%= doc.name %></td>
     <td><%= doc.description %></td>
     <td><%= doc.created_at.strftime('%b %-d, %Y')%></td>
