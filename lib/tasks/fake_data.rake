@@ -11,10 +11,6 @@ namespace :fake_data do
     Rake::Task['groups'].invoke
   end
 
-  task :calc_poll => :environment do
-    Rake::Task['calculate_poll_results'].invoke
-  end
-
   task :people => :environment do
     Specialty.create([{name: 'Music', peerage_type: :laurel, slug: 'music'}, {name: 'Costuming', peerage_type: :laurel, slug: 'costuming'}, {name: 'Painting', peerage_type: :laurel, slug: 'painting'}, {name: 'Calligraphy & Illumination', peerage_type: :laurel, slug: 'calligraphy_and_illumination'}])
 
@@ -316,6 +312,6 @@ Mauris iaculis lectus lacinia ex porta, a ullamcorper enim auctor. Duis tempus t
 Proin sit amet turpis nec velit euismod sodales at non libero. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam eu congue ligula. Aenean tincidunt mauris eros, facilisis malesuada leo vulputate eu. Aliquam viverra sollicitudin turpis.'
     end
   end
-  task :all => [:db_reset, :groups, :people, :calc_poll]
-  task :all_heroku => [:db_schema_load, :groups, :people, :calc_poll]
+  task :all => [:db_reset, :groups, :people]
+  task :all_heroku => [:db_schema_load, :groups, :people]
 end
