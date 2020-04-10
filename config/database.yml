@@ -19,5 +19,4 @@ test:
   database: mkpeerage_test
 
 production:
-  <<: *default
-  database: mkpeerage_production
+  url: <%= ENV['DATABASE_URL'] %>
