@@ -1,7 +1,7 @@
 require 'rails_helper'
-RSpec.feature 'Reset Peer Email and Reset Password for Peer' do
+RSpec.describe 'Reset Peer Email and Reset Password for Peer' do
   include_context 'when signed in through capybara'
-  scenario 'admin resets peer email and sends reset password email for same peerage peer' do
+  it 'admin resets peer email and sends reset password email for same peerage peer' do
     admin = create(:admin)
     laurel = create(:laurel_user, email: 'stuff@example.com')
     sign_in(admin)

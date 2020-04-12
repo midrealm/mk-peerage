@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+      - "4000:4000" #for selenium-chrome
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+      - tmp:/usr/src/app/tmp
+    env_file:
+      - .env/development/database
+      - .env/development/web
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
+      - SELENIUM_DRIVER_URL=http://selenium-chrome:4444/wd/hub
+      - CAPYBARA_APP_HOST=http://web:4000
+  
+  webpack-dev-server:
+    build: .
+    command: ./bin/webpack-dev-server
+    ports:
+      - 3035:3035
+    volumes:
+      - .:/usr/src/app
+      - gem_cache:/gems
+      - tmp:/usr/src/app/tmp
+    env_file:
+      - .env/development/database
+      - .env/development/web
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+      - NODE_ENV=development
+      - RAILS_ENV=development
+      
+  selenium-chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+    ports:
+      - "5900:5900"
+
+  database:
+    image: postgres
+    env_file:
+      - .env/development/database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  gem_cache:
+  tmp:

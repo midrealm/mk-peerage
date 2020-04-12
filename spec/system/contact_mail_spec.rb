@@ -1,6 +1,6 @@
 require 'rails_helper'
 TEST_SUBJECT = 'Test subject'
-RSpec.feature 'Contact email' do
+RSpec.describe 'Contact email' do
   def send_mail(body = nil)
     subject = TEST_SUBJECT
     from = 'bob@example.com'
@@ -36,24 +36,24 @@ RSpec.feature 'Contact email' do
     laurel
   end
 
-  scenario 'sends email to pelican' do
+  it 'sends email to pelican' do
     pelican = setup_pelican_contact
     send_mail
     expect_email_to(pelican.email)
   end
-  scenario 'sends email to laurel' do
+  it 'sends email to laurel' do
     laurel = setup_laurel_contact
     send_mail
     expect_email_to(laurel.email)
   end
 
-  scenario 'sends email to laurel order secretary' do
+  it 'sends email to laurel order secretary' do
     laurel = setup_laurel_secretary_contact
     send_mail
     expect_email_to(laurel.email)
   end
 
-  scenario 'does not send an empty email to pelican' do
+  it 'does not send an empty email to pelican' do
     setup_pelican_contact
     expect { send_mail('') }.not_to change(ActionMailer::Base.deliveries, :count)
   end
@@ -63,7 +63,7 @@ RSpec.feature 'Contact email' do
       Recaptcha.configuration.skip_verify_env << "test"
       allow_any_instance_of(Recaptcha::Adapters::ControllerMethods).to receive(:verify_recaptcha).and_return(false)
     end
-    scenario 'does not send email' do
+    it 'does not send email' do
       setup_laurel_contact
       expect { send_mail }.not_to change(ActionMailer::Base.deliveries, :count)
     end

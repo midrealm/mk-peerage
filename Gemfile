@@ -11,7 +11,6 @@ gem 'puma', '~> 3.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -23,7 +22,6 @@ gem "bootsnap", ">= 1.4.4", require: false
 # Use Capistrano for deployment
 
 gem 'devise', '~> 4.7.0'
-gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'aws-sdk-s3'
 gem 'image_processing'
 gem 'mini_magick'
@@ -45,20 +43,21 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'capybara'
-  #gem 'capybara-webkit'
-  #gem 'teaspoon-mocha' #Turned off for webpack
-  #gem 'magic_lamp' #turned off for webpack
   gem "rspec_junit_formatter"
+  gem 'selenium-webdriver'
+  gem 'pry'
+  gem 'pry-byebug'
+
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
-  gem 'guard-rspec', require: false
+  #gem 'guard-rspec', require: false
   gem 'capistrano-rails'
   gem 'capistrano-nvm', require: false
   gem 'capistrano-rbenv'
-  gem 'foreman'
+  gem 'listen'
 end
 
 group :test do
