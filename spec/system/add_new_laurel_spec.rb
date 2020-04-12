@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature 'Add New Laurel' do
+RSpec.describe 'Add New Laurel' do
   include_context 'when signed in through capybara'
-  scenario 'adds new laurel when appropriate info is filled in' do
+  it 'adds new laurel when appropriate info is filled in' do
     admin = create(:admin)
     expect(User.count).to eq(1)
     sign_in(admin)

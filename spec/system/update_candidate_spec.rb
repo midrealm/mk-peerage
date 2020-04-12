@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature 'Update Candidate info' do
+RSpec.describe 'Update Candidate info' do
   include_context 'when signed in through capybara'
-  scenario 'updates candidate info' do
+  it 'updates candidate info' do
 		image = "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
 
     admin = create(:laurel_admin, sca_name: 'Laurel1')

@@ -1,7 +1,7 @@
 require 'rails_helper'
-RSpec.feature 'Submit Offline Poll' do
+RSpec.describe 'Submit Offline Poll' do
   include_context 'when signed in through capybara'
-  scenario 'admin submits offline poll' do
+  it 'admin submits offline poll' do
     admin = create(:admin)
     laurel = create(:laurel_user, sca_name: 'Elle Example')
     candidate = create(:laurel_candidate, vote: true)

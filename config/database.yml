@@ -12,11 +12,11 @@ default: &default
 
 development:
   <<: *default
-  database: mkpeerage_development
+  database: mk-peerage_development
 
 test:
   <<: *default
-  database: mkpeerage_test
+  database: mk-peerage_test
 
 production:
   url: <%= ENV['DATABASE_URL'] %>

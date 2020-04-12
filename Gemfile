@@ -45,6 +45,8 @@ group :development, :test do
   gem 'capybara'
   gem "rspec_junit_formatter"
   gem 'selenium-webdriver'
+  gem 'pry'
+  gem 'pry-byebug'
 
 end
 

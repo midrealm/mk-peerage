@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature 'Update Peer info' do
+RSpec.describe 'Update Peer info' do
   include_context 'when signed in through capybara'
-  scenario 'updates peer info' do
+  it 'updates peer info' do
 		image = "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
     superior = create(:laurel_user, sca_name: 'My Laurel')
     peer = create(:laurel_user, sca_name: 'Fake Name')

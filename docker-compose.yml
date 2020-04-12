@@ -9,11 +9,14 @@ services:
     volumes:
       - .:/usr/src/app
       - gem_cache:/gems
+      - tmp:/usr/src/app/tmp
     env_file:
       - .env/development/database
       - .env/development/web
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
+      - SELENIUM_DRIVER_URL=http://selenium-chrome:4444/wd/hub
+      - CAPYBARA_APP_HOST=http://web:4000
   
   webpack-dev-server:
     build: .
@@ -23,6 +26,7 @@ services:
     volumes:
       - .:/usr/src/app
       - gem_cache:/gems
+      - tmp:/usr/src/app/tmp
     env_file:
       - .env/development/database
       - .env/development/web
@@ -48,3 +52,4 @@ services:
 volumes:
   db_data:
   gem_cache:
+  tmp:
