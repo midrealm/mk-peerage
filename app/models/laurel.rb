@@ -24,7 +24,7 @@ class Laurel < Peer
     "To continue the instruction of my dependents,<br/>\n"\
     "To increase the glory of the Middle Kingdom,<br/>\n"\
     "And to be worthy of the Wreath I wear...<br/>\n"\
-    "thus swear I, <<Name>>.<br/>\n".html_safe
+    "thus swear I, [ Name ].<br/>\n".html_safe
   end
   def self.order_secretary
     Laurel.find_by(admin: true)

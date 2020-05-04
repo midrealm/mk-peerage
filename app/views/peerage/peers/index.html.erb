@@ -1,28 +1,19 @@
-<% title "Laurel Roll of Honor" %>
-<h1 class="text-center">Roll of Honor</h1>
-<h3 class="text-center"><%=@order_title%><br><small>Active in the Kingdom</small></h3>
+<% title @honor_roll.page_title %>
+<h1 class="text-center"><%=@honor_roll.page_title%></h1>
+<h3 class="text-center"><%=@honor_roll.order_title%><br><small>Active in the Kingdom</small></h3>
 <div class="d-flex flex-wrap justify-content-center">
-<% @active_peers.each do |p| %>
-	<div class="plate <%if p.vigilant?%>vigilant<%end%>">
-      <% name = p.sca_name %>
-      <% if p.specialties? %>
-        <% name = "#{p.sca_name} (#{p.specialties_sentence})" %>
-      <% end %>
-      <%= link_to(name, peer_path(peerage,p.slug)) %>
+<% @honor_roll.active_peers.each do |p| %>
+	<div class="<%=@honor_roll.css_class%> <%if p.vigilant?%>vigilant<%end%>">
+      <%= link_to(p.sca_name, peer_path(peerage,p.slug)) %>
   </div>
 <%end %>
 </div>
 
-<h3 class="text-center"><%=@order_title%><br><small>Inactive in the Kingdom</small></h3>
+<h3 class="text-center"><%=@honor_roll.order_title%><br><small>Inactive in the Kingdom</small></h3>
 <div class="d-flex flex-wrap justify-content-center">
-<% @inactive_peers.each do |p| %>
-	<div class="plate <%if p.deceased %>deceased<%end%>">
-      <% name = p.sca_name %>
-      <% if p.specialties? %>
-        <% name = "#{p.sca_name} (#{p.specialties_sentence})" %>
-      <% end %>
-      <%= link_to(name, peer_path(peerage,p.slug)) %>
+<% @honor_roll.inactive_peers.each do |p| %>
+	<div class="<%=@honor_roll.css_class%> <%if p.deceased %>deceased<%end%>">
+      <%= link_to(p.sca_name, peer_path(peerage,p.slug)) %>
   </div>
-
 <% end %>
 </div>

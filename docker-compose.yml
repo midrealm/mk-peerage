@@ -10,6 +10,7 @@ services:
       - .:/usr/src/app
       - gem_cache:/gems
       - tmp:/usr/src/app/tmp
+      - storage:/usr/src/app/storage
     env_file:
       - .env/development/database
       - .env/development/web
@@ -27,6 +28,7 @@ services:
       - .:/usr/src/app
       - gem_cache:/gems
       - tmp:/usr/src/app/tmp
+      - storage:/usr/src/app/storage
     env_file:
       - .env/development/database
       - .env/development/web
@@ -53,3 +55,4 @@ volumes:
   db_data:
   gem_cache:
   tmp:
+  storage:
