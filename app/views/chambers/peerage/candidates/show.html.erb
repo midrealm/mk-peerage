@@ -6,6 +6,7 @@
     <li class="breadcrumb-item active" aria-current="page"><%=@candidate.sca_name%></li>
   </ol>
 </nav>
+<div class = "container <%=peerage%>-border-left">
 <div class ="d-md-flex flex-row-reverse">
   <div class="ml-3 mb-3">
     <%= image_tag @candidate.profile_pic_full %>
@@ -88,4 +89,5 @@
       </div>
   </div>
   <%= render "/shared/documents_gallery_modal" %>
+</div>
 </div>

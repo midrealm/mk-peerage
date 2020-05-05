@@ -1,6 +1,8 @@
-<h3>Royal Options</h3>
+<h3 class="card-title">Royal Options</h3>
 <% Peer.orders.each do |peerage| %>
-  <%= link_to "View #{peerage.capitalize} Candidates", chambers_candidates_path(peerage) %><br>
-  <%= link_to "Browse #{peerage.capitalize} Candidates By Group", chambers_groups_path(peerage) %><br/>
+<div class="list-group">
+  <%= link_to "View #{peerage.capitalize} Candidates", chambers_candidates_path(peerage), class: "list-group-item list-group-item-action"%>
+  <%= link_to "Browse #{peerage.capitalize} Candidates By Group", chambers_groups_path(peerage), class: "list-group-item list-group-item-action"%>
+</div>
 <%end%>
 

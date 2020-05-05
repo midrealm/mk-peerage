@@ -6,14 +6,16 @@
     <li class="breadcrumb-item active" aria-current="page">Specialties</li>
   </ol>
 </nav>
-<h1><%=peerage.capitalize%> Specialties</h1>
-<ul>
-<% @specialties.each do |spec| %>
-  <% count = spec.peers.count%>
-  <% if count > 0 %>
-  <% spec_name = spec.name.capitalize %>
-  <% spec_name = "#{spec.parent.name.capitalize} -> #{spec.name.capitalize}" if spec.ancestors? %>
-  <li><%=link_to spec_name, specialty_path(peerage, spec.slug)%> (<%=count%>)</li>
-  <% end %>
-<%end %>
-</ul>
+<div class="container <%=peerage%>-border-left">
+  <h1><%=peerage.capitalize%> Specialties</h1>
+  <ul>
+  <% @specialties.each do |spec| %>
+    <% count = spec.peers.count%>
+    <% if count > 0 %>
+    <% spec_name = spec.name.capitalize %>
+    <% spec_name = "#{spec.parent.name.capitalize} -> #{spec.name.capitalize}" if spec.ancestors? %>
+    <li><%=link_to spec_name, specialty_path(peerage, spec.slug)%> (<%=count%>)</li>
+    <% end %>
+  <%end %>
+  </ul>
+</div>

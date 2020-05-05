@@ -1,7 +1,7 @@
 class PeersController < ApplicationController
   def show
     peer = Peer.where_order(peerage).joins(:user).find_by(users: {slug: params[:slug]})
-    @peer = PeerPresenter.new(peer)
+    @peer = PeerPresenter.for(peer)
     
     render template: "peerage/peers/show"
   end

@@ -2,13 +2,16 @@ class Pelican < Peer
   def self.mailing_list
     ENV['PELICAN_MAILING_LIST']
   end 
+  def self.order_title
+    "Order of the Pelican"
+  end
 
   def self.collection
     'pelicanate'
   end
 
   def self.dependent_name
-    'protege'
+    'protégé'
   end
 
   def self.image

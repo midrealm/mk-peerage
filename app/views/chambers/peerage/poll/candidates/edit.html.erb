@@ -6,6 +6,7 @@
     <li class="breadcrumb-item active" aria-current="page">Poll for <%=@candidate.sca_name%></li>
   </ol>
 </nav>
+<div class="container <%=peerage%>-border-left">
 <%= render "progress_bar", ballot: @ballot_entry.ballot %>
 <h1><%= peerage.capitalize %> Poll for <%=@candidate.sca_name%></h1>
 
@@ -69,4 +70,5 @@
       <%= render "/shared/documents_gallery_modal" %>
     </div>
   </div>
+</div>
 </div>

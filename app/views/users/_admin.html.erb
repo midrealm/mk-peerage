@@ -1,7 +1,12 @@
-<h3>Admin Tasks</h3>
+<h3 class="card-title">Admin Tasks</h3>
 <% poll = Poll.last_for(peerage) %>
-<%= link_to 'Manage Candidates', chambers_admin_candidates_path(peerage) %><br>
-<%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage) %><br>
-<%= link_to 'Manage Royalty', chambers_admin_royalty_index_path %><br>
-<%= link_to 'Edit News', edit_chambers_admin_news_path(peerage)%></br>
-<%= link_to 'Manage Polls', chambers_admin_polls_path(peerage) %> <% if poll&.future? || poll&.active? %>| <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM<%end%></br>
+<div class="list-group">
+  <%= link_to 'Manage Candidates', chambers_admin_candidates_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <%= link_to "Manage #{peerage.capitalize}s", chambers_admin_peers_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <%= link_to 'Manage Royalty', chambers_admin_royalty_index_path, class: "list-group-item list-group-item-action"  %>
+  <%= link_to 'Edit News', edit_chambers_admin_news_path(peerage), class: "list-group-item list-group-item-action" %>
+  <%= link_to 'Manage Polls', chambers_admin_polls_path(peerage), class: "list-group-item list-group-item-action"  %> 
+</div>
+<% if poll&.future? || poll&.active? %> 
+  <p><b>Open Polls:</b> <%= poll.start_date.strftime('%d-%b-%Y') %> 12:01 AM - <%= poll.end_date.strftime('%d-%b-%Y') %> 11:59 PM
+<%end%>

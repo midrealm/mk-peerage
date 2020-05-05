@@ -2,27 +2,40 @@
 <h1>Private Chambers</h1>
 <div class="row">
   <div class="col-md-6">
-    <h3> User Options </h3>
-    <%= link_to 'Edit Your Profile', users_edit_path %><br>
-    <%= link_to 'Change Your Password', users_edit_password_path %><br />
-    <%= link_to('Logout', destroy_user_session_path, :method => :delete, id: 'dashboard-logout' )%>
+    <div class="card mr-2 ml-2 mt-2">
+      <div class='card-body'>
+        <h3 class='card-title'> User Options </h3>
+        <div class="list-group">
+          <%= link_to 'Edit Your Profile', users_edit_path, class: "list-group-item list-group-item-action" %>
+          <%= link_to 'Change Your Password', users_edit_password_path, class: "list-group-item list-group-item-action"  %>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete, id: 'dashboard-logout', class: "list-group-item list-group-item-action"  )%>
+        </div>
+    </div>
   </div>
+</div>
 <% if can? :read, PollResult %>
   <div class="col-md-6">
-  <%= render 'royalty' %>
+    <div class='card  mr-2 ml-2 mt-2'>
+      <div class="card-body">
+        <%= render 'royalty' %>
+      </div>
+    </div>
   </div>
 <% end %>
 </div>
 <div class="row">
 <% @user.peers.each do |peer| 
 %>
-  <div class='col-md-6'>
-    <h3><%= peer.peerage_name %></h3>
-    <%= render 'normal', peerage: peer.order, peer: peer %>
-    <% if can? :manage, peer.order %>
-      <%= render 'admin', peerage: peer.order %>
-    <% end %>
+  <div class="col-md-6">
+    <div class='<%=peer.order%>-card card mr-2 ml-2 mt-2'>
+      <div class='card-body'>
+        <h3 class='card-title'><%= peer.peerage_name %></h3>
+        <%= render 'normal', peerage: peer.order, peer: peer %>
+        <% if can? :manage, peer.order %>
+          <%= render 'admin', peerage: peer.order %>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end 
-%>
+<% end %>
 </div>

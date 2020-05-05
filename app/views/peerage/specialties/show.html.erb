@@ -7,5 +7,7 @@
     <li class="breadcrumb-item active" aria-current="page"><%=@specialty%></li>
   </ol>
 </nav>
-<h1><%=@specialty.name.capitalize%></h1>
-<%= render '/shared/peers_table', peers: @specialty.peers %>
+<div class="container <%=peerage%>-border-left">
+  <h1><%=@specialty.name.capitalize%></h1>
+  <%= render '/shared/peers_table', peers: @specialty.peers %>
+</div>

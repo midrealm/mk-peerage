@@ -7,8 +7,10 @@
     <li class="breadcrumb-item active" aria-current="page"><%=@group%></li>
   </ol>
 </nav>
-<h1><%=@group%></h1>
-<ul>
-<%= render '/peerage/groups/draw_tree', node: @group %>
-</ul>
-<%= render '/shared/peers_table', peers: @group.all_peers(peerage)%>
+<div class="container <%=peerage%>-border-left">
+  <h1><%=@group%></h1>
+  <ul>
+  <%= render '/peerage/groups/draw_tree', node: @group %>
+  </ul>
+  <%= render '/shared/peers_table', peers: @group.all_peers(peerage)%>
+</div>

@@ -6,6 +6,7 @@
   </ol>
 </nav>
 
+  <div class="container <%=peerage%>-border-left">
 <% if @polls.active? %>
 <h2>Active Poll</h2>
  <%= link_to 'Edit', edit_chambers_admin_poll_path(peerage), class: "btn btn-primary" %> <%= @polls.active.duration %> <br> 
@@ -36,4 +37,5 @@
 </tr>
 <% end %>
 </tbody>
+</div>
 

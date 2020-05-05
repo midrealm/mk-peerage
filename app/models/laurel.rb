@@ -2,6 +2,9 @@ class Laurel < Peer
   def self.mailing_list 
     ENV['LAUREL_MAILING_LIST']
   end
+  def self.order_title
+    "Order of the Laurel"
+  end
 
   def self.collection
     'laurelate'
