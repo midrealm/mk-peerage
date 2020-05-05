@@ -6,14 +6,16 @@
     <li class="breadcrumb-item active" aria-current="page">Edit</li>
   </ol>
 </nav>
-<h1>Edit <%=peerage.capitalize%> <%=@peer.sca_name%></h1>
-<div class="container">
-  <div class="col-md-4">
-    <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peer_path(peerage,@peer.id) do |f| %>
-      <%= f.form_group :deceased do %>
-        <%= f.check_box :deceased, label: "User is deceased" %>
-      <% end %>
-      <%= f.submit "Update #{peerage.capitalize}" %>
-    <%end %>
+<div class="container <%=peerage%>-border-left">
+  <h1>Edit <%=peerage.capitalize%> <%=@peer.sca_name%></h1>
+  <div class="container">
+    <div class="col-md-4">
+      <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peer_path(peerage,@peer.id) do |f| %>
+        <%= f.form_group :deceased do %>
+          <%= f.check_box :deceased, label: "User is deceased" %>
+        <% end %>
+        <%= f.submit "Update #{peerage.capitalize}" %>
+      <%end %>
+    </div>
   </div>
 </div>

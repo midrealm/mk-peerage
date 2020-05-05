@@ -6,5 +6,8 @@
     <li class="breadcrumb-item active" aria-current="page">New</li>
   </ol>
 </nav>
-<h1>Add New Candidate</h1>
-<%= render 'form', url: chambers_admin_candidates_path(peerage)%>
+
+<div class="container <%=peerage%>-border-left">
+  <h1>Add New Candidate</h1>
+  <%= render 'form', url: chambers_admin_candidates_path(peerage)%>
+</div>

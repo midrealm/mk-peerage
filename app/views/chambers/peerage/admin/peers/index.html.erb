@@ -5,21 +5,23 @@
     <li class="breadcrumb-item active" aria-current="page">Manage <%=peerage.capitalize%>s</li>
   </ol>
 </nav>
-<h1>Manage <%=peerage.capitalize%>s</h1>
-<%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %><br/>
-<%= link_to "Reset #{peerage.capitalize}'s password", chambers_admin_peers_password_path %><br>
-<%= link_to "Set #{peerage.capitalize}'s email address and reset their password", chambers_admin_peers_email_path %>
-<table class='table' data-behavior="dtable">
-  <thead>
-    <th>Name</th><th>Show</th><th>Edit</th>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-      <td><%=user.sca_name%></td>
-      <td><%=link_to 'Show', peer_path(peerage,user.slug)%></td>
-      <td><%=link_to 'Edit', edit_chambers_admin_peer_path(peerage,user.id)%></td>
-      </tr>
-    <% end %>
-  </tbody
-</table>
+<div class="container <%=peerage%>-border-left">
+  <h1>Manage <%=peerage.capitalize%>s</h1>
+  <%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %><br/>
+  <%= link_to "Reset #{peerage.capitalize}'s password", chambers_admin_peers_password_path %><br>
+  <%= link_to "Set #{peerage.capitalize}'s email address and reset their password", chambers_admin_peers_email_path %>
+  <table class='table' data-behavior="dtable">
+    <thead>
+      <th>Name</th><th>Show</th><th>Edit</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+        <td><%=user.sca_name%></td>
+        <td><%=link_to 'Show', peer_path(peerage,user.slug)%></td>
+        <td><%=link_to 'Edit', edit_chambers_admin_peer_path(peerage,user.id)%></td>
+        </tr>
+      <% end %>
+    </tbody
+  </table>
+</div>
