@@ -3,7 +3,9 @@
   <div class="dropdown-menu">
 		<%= link_to "View #{peerage.capitalize} Candidates", chambers_candidates_path(peerage), class: 'dropdown-item'  %>
 		<%= link_to "Browse Candidates By Group", chambers_groups_path(peerage), class: 'dropdown-item'  %>
-		<%= link_to "Browse Candidates By Specialty", chambers_specialties_path(peerage), class: 'dropdown-item'  %>
+    <% if Peer.subclass(peerage).specialties_on? %>
+		  <%= link_to "Browse Candidates By Specialty", chambers_specialties_path(peerage), class: 'dropdown-item'  %>
+    <% end %>
 		<%= link_to "Contact the Order Secretary", order_secretary_contact_path(peerage), class: 'dropdown-item'  %>
     <% if peer.poll? && can?(:take_poll, peerage) %>
     <%= link_to peer.ballot.action, chambers_ballot_path(peerage), class: 'dropdown-item'%>

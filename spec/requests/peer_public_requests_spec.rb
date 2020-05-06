@@ -97,6 +97,18 @@ describe "outside world's view of peerage" do
           expect(response.body).to include("/laurel/groups/the_barrows")
           expect(response.body).to include("/laurel/groups/poopland")
       end
+      it "shows specialties for lauels" do
+        group = create(:group, name: "High Haven", slug: "high_haven")
+        create(:laurel_user, group: group)
+        get "/laurel/groups/high_haven"
+        expect(response.body).to include("<th>Specialty</th>")
+      end
+      it "does not show specialties for pelicans" do
+        group = create(:group, name: "High Haven", slug: "high_haven")
+        create(:pelican_user, group: group)
+        get "/pelican/groups/high_haven"
+        expect(response.body).not_to include("<th>Specialty</th>")
+      end
   end
 
 #peers index

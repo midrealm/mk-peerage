@@ -1,7 +1,7 @@
 class PeerPresenter
   extend Forwardable
   def_delegators :@peer, :sca_name, :modern_name,  :profile_pic, :profile_pic_full, :profile_pic_thumb, :arms, :group, :specialties_link, :peerage_type,
-    :specialties?, :elevated_by, :elevation_date, :dependent_name, :superiors, :superiors_link, :dependent_of, :bio, :slug, :order_title
+    :specialties?, :elevated_by, :elevation_date, :dependent_name, :superiors, :superiors_link, :dependent_of, :bio, :slug, :order_title, :specialties_on?
 
   def initialize(peer)
     @peer = peer

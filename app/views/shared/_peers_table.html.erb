@@ -1,14 +1,20 @@
 <h3><%=peerage.capitalize%>s</h3>
 <table class="table" data-behavior="dtable">
 <thead>
-<th>Name</th><th>Specialty</th><th>Group</th>
+<th>Name</th>
+<% if Peer.subclass(peerage).specialties_on? %>
+  <th>Specialty</th>
+<% end %>
+<th>Group</th>
 </thead>
 <tbody>
 
 <% peers.each do |peer|%>
   <tr>
   <td><%= link_to peer.sca_name, peer_path(peerage,peer.slug)%></td>
-  <td><%=peer.specialties_link%></td>
+  <% if Peer.subclass(peerage).specialties_on? %>
+    <td><%=peer.specialties_link%></td>
+  <% end %>
   <td><%=link_to peer.group, group_path(peerage,peer.group.slug) unless peer.group.nil?%></td>
   </tr>
 <% end %>

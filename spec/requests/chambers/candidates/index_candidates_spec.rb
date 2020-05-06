@@ -22,6 +22,10 @@ describe "get /chambers/laurel/candidates" do
       get "/chambers/laurel/candidates"
       expect(response.body).to include("Molly Mindingus")
     end
+    it "shows specialties for laurel candidates" do
+      get "/chambers/laurel/candidates"
+      expect(response.body).to include("<th>Specialties</th>")
+    end
 
     it "shows results from last poll in table" do
       p = create(:past_published_poll)
@@ -71,5 +75,19 @@ describe "get /chambers/laurel/candidates" do
     get "/chambers/laurel/candidates"
     expect(response).to have_http_status(:found)
     expect(response.body).to include("redirected")
+  end
+end
+describe "get /chambers/pelican/candidates" do
+  context "signed in pelican" do
+    before(:each) do
+      @peer = create(:pelican_peer)
+      sign_in(@peer.user)
+      @candidate = create(:candidate, peerage_type: :pelican, vote: true)
+      
+    end
+    it "does not show specialties for pelican candidates" do
+      get "/chambers/pelican/candidates"
+      expect(response.body).not_to include("<th>Specialties</th>")
+    end
   end
 end

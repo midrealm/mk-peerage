@@ -34,11 +34,11 @@ describe "Get /users/edit" do
       get "/users/edit"
       expect(response.body).to include('#pelican')
     end
-    it "shows only pelican appropriate specialities" do
+    it "does not show pelican specialties" do
       create(:specialty, peerage_type: :laurel, name: 'Laurel Specialty')
       create(:specialty, peerage_type: :pelican, name: 'Pelican Specialty')
       get "/users/edit"
-      expect(response.body).to include('Pelican Specialty')
+      expect(response.body).not_to include('Pelican Specialty')
       expect(response.body).not_to include('Laurel Specialty')
     end
   end

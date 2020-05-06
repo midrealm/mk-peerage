@@ -9,14 +9,18 @@
       <% if signed_in? && current_user.sca_name == @peer.sca_name %>
         <%= link_to('Edit Profile', users_edit_path(peerage: peerage)) %>
       <% end %>
-      <h1><%=@peer.sca_name%><br><small><%=@peer.specialties_link%></h1>
+      <h1><%=@peer.sca_name%><br>
+      <% if @peer.specialties_on? %>
+        <small><%=@peer.specialties_link%>
+      <% end %>
+      </h1>
       <h3><small><%=@peer.order_title%></small></h3>
       <% if @peer.has_ever_signed_in? %>
         <%= link_to "Send #{@peer.sca_name} a Message", contact_path(peerage, @peer.slug), class: "btn btn-primary" %><br/>
       <% end %>
       
       <% if @peer.modern_name.present? %><strong>Modern Name:</strong> <%=@peer.modern_name%><br><%end%>
-      <% if @peer.specialties? %>
+      <% if @peer.specialties_on? && @peer.specialties? %>
          <strong>Specialties:</strong> <%=@peer.specialties_link%><br/>
      <% end %>
       <% if @peer.group.present? %>

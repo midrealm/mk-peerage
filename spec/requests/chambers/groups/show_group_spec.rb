@@ -21,4 +21,21 @@ describe "get /chambers/PEERAGE/groups/:slug" do
     expect(response.body).to include("chambers/laurel/groups/the_barrows")
     expect(response.body).to include("chambers/laurel/groups/poopland")
   end
+  it "shows specialties for laurel candidates" do
+    group = create(:group, name: "High Haven", slug: "high_haven")
+    laurel_user = create(:laurel_user, group: group)
+    sign_in(laurel_user)
+    candidate = create(:candidate, group: group, sca_name: "Dingus McDoooooogle", peerage_type: :laurel)
+    get "/chambers/laurel/groups/high_haven"
+    expect(response.body).to include("<th>Specialty</th>")
+  end
+  it "does not show specialties for pelican candidates" do
+    group = create(:group, name: "High Haven", slug: "high_haven")
+    pelican_user = create(:pelican_user, group: group)
+    sign_in(pelican_user)
+    candidate = create(:pelican_candidate, group: group, sca_name: "Dingus McDoooooogle", peerage_type: :laurel)
+    get "/chambers/pelican/groups/high_haven"
+    expect(response.body).not_to include("<th>Specialty</th>")
+  end
 end
+

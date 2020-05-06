@@ -35,4 +35,8 @@ class Pelican < Peer
   def self.order_secretary
     Pelican.find_by(admin: true)
   end
+
+  def self.specialties_on?
+    false
+  end
 end

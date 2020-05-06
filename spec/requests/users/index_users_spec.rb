@@ -15,6 +15,10 @@ describe "Get /chambers" do
       get "/chambers"
       expect(response.body).to include('/chambers/laurel/candidates')
     end
+    it "shows Laurel specialties" do
+      get "/chambers"
+      expect(response.body).to include('/chambers/laurel/specialties')
+    end
     it "does not show Admin Tasks" do
       get "/chambers"
       expect(response).to have_http_status(:success)
@@ -124,6 +128,14 @@ describe "Get /chambers" do
         it "does not show take poll link for active poll" do
           expect(response.body).not_to include('Take Poll')  
         end
+      end
+    end
+    describe "for non-royal pelican user" do
+      it "does not show pelican candidate specialties" do
+        pelican = create(:pelican_user)
+        sign_in(pelican)
+        get "/chambers"
+        expect(response.body).not_to include('<a class="list-group-item list-group-item-action" href="/chambers/pelican/specialties">Browse Candidates By Specialty</a>')  
       end
     end
     describe "for admin user" do

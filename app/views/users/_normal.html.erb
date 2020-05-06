@@ -6,7 +6,9 @@
   <%= link_to 'Edit Your Profile', users_edit_path( peerage: peerage ), class: "list-group-item list-group-item-action"  %>
   <%= link_to 'View Candidates', chambers_candidates_path(peerage), class: "list-group-item list-group-item-action"  %>
   <%= link_to 'Browse Candidates By Group', chambers_groups_path(peerage), class: "list-group-item list-group-item-action"  %>
-  <%= link_to 'Browse Candidates By Specialty', chambers_specialties_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <% if Peer.subclass(peerage).specialties_on? %>
+    <%= link_to 'Browse Candidates By Specialty', chambers_specialties_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <% end %>
   <%= link_to 'Contact the Order Secretary', order_secretary_contact_path(peerage), class: "list-group-item list-group-item-action"  %>
   <% if peer.poll? && can?(:take_poll, peerage) %>
   <%= link_to peer.ballot.action, chambers_ballot_path(peerage),  class: "list-group-item list-group-item-action"  %> 

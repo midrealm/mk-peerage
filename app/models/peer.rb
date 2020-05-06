@@ -54,6 +54,14 @@ class Peer < ApplicationRecord
     array.push specialty_detail if specialty_detail.present?
     array.join(', ')
   end
+ 
+  def self.specialties_on? 
+    true
+  end
+
+  def specialties_on?
+    self.class.specialties_on?
+  end  
 
   def specialties?
    specialties.count > 0 || specialty_detail.present? 

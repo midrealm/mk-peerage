@@ -11,7 +11,7 @@
   <% @presenter.vote_list.each do |cand| %>
   <div class="row mt-5 " style="page-break-inside: avoid">
     <div class="col">
-      <h3><%= cand.sca_name %> (<%= cand.specialties_sentence %>)</h3>
+      <h3><%= cand.name%></h3>
       <h5> Vote List </h5>
       <span class="pr-5"><i class="far fa-circle"></i> E</span> 
       <span class="pr-5"><i class="far fa-circle"></i> W</span>
@@ -35,7 +35,7 @@
   <% @presenter.watch_list.each do |cand| %>
   <div class="row mt-5 " style="page-break-inside: avoid">
     <div class="col">
-      <h3><%= cand.sca_name %> (<%= cand.specialties_sentence %>)</h3>
+      <h3><%= cand.name%></h3>
       <h5> Watch List </h5>
       <span class="pr-5"><i class="far fa-circle"></i> E</span> 
       <span class="pr-5"><i class="far fa-circle"></i> W</span>
