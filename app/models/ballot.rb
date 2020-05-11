@@ -6,6 +6,9 @@ class Ballot < ApplicationRecord
   def candidates
    Candidate.where_order(peer.order)
   end
+  def end_date
+    poll.end_date
+  end
 
   def complete?
     candidates.each do |cand|

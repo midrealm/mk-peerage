@@ -1,6 +1,6 @@
 class BallotPresenter
   extend Forwardable
-  def_delegators :@ballot, :percent_complete, :submission_count, :candidates, :submission_for?
+  def_delegators :@ballot, :percent_complete, :submission_count, :candidates, :submission_for? 
 
   def initialize(ballot)
     @ballot = ballot
@@ -14,6 +14,9 @@ class BallotPresenter
   def watch_list
     srand(@ballot.seed)
     @ballot.candidates.where(vote: false).shuffle.map{|c| BallotCandidatePresenter.new(c)}
+  end
+  def end_date
+    @ballot.end_date.strftime("%A, %B %e, %Y")
   end
 end
 

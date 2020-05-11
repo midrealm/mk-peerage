@@ -1,5 +1,5 @@
 <% comments.each do |comment| %>
-<div class="p-2">
+<div class="p-2 comment">
   <div style="width:120px;float:left;text-align:center">
     <%= link_to (image_tag comment.peer.profile_pic_thumb), peer_path(peerage,comment.peer.slug) %><br/><%= link_to comment.peer.sca_name, peer_path(peerage,comment.peer.slug)%><br>
   </div>
