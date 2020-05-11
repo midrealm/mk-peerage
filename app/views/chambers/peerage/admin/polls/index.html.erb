@@ -8,10 +8,10 @@
 
 <% if @polls.active? %>
 <h2>Active Poll</h2>
- <%= link_to 'Edit', edit_chambers_admin_poll_path(peerage), class: "btn btn-primary" %> <%= @polls.active.duration %> <br> 
-<%= link_to 'Status', chambers_admin_analyze_poll_path(peerage)  %><br>
-<%= link_to 'Generate Offline Poll', chambers_admin_offline_poll_path %></br>
-<%= link_to 'Submit Offline Poll', new_chambers_admin_offline_poll_submitter_path %></br>
+<%= @polls.active.duration %> <%= link_to 'Edit Poll', edit_chambers_admin_poll_path(peerage), class: "btn btn-primary" %>
+<%= link_to 'Status', chambers_admin_analyze_poll_path(peerage), class: "btn btn-secondary" %>
+<%= link_to 'Generate Offline Poll', chambers_admin_offline_poll_path,class: "btn btn-secondary"  %>
+<%= link_to 'Submit Offline Poll', new_chambers_admin_offline_poll_submitter_path, class: "btn btn-secondary"  %>
 <% else %>
 
   <h2>Future Poll</h2>

@@ -8,14 +8,14 @@
 </nav>
 <h1>Active <%= peerage.capitalize %> Poll Analytics</h1>
 
-<table class="table" data-behavior='dtable' >
+<table class="table" data-behavior='dtable-pollanalytics' >
 <thead>
 <th>SCA Name</th>
 <th>Poll Submission Status</th>
 </thead>
 <tbody>
 <% @presenter.peers.each do |p| %>
-<tr>
+<tr class="<%= "not-started d-none" unless p.started_poll? %>" >
   <td><%=p.sca_name%></td>
   <td><%=p.advisings_count%>/<%=p.ballot_candidates_count%></td>
 </tr>

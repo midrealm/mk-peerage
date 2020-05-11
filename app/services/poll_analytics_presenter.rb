@@ -12,6 +12,9 @@ class PollAnalyticsPeerPresenter
 	def initialize(peer)
 		@peer = peer
 	end
+  def started_poll?
+    ballot.submission_count > 0
+  end
   def advisings_count
 		ballot.submission_count
 	end
