@@ -13,6 +13,20 @@ RSpec.describe Poll, type: :model do
 
 end
 
+RSpec.describe Poll, 'total_respondents' do
+  it "returns the total number of peers who have responded to a poll" do
+    poll = create(:poll)
+    candidate1 = create(:laurel_candidate)
+    candidate2 = create(:laurel_candidate)
+    candidate3 = create(:laurel_candidate)
+    peer = create(:laurel_peer)
+    peer2 = create(:laurel_peer)
+    advising = create(:advising, poll: poll, candidate: candidate1, peer: peer)
+    advising2 = create(:advising, poll: poll, candidate: candidate2, peer: peer)
+    expect(poll.total_respondents).to eq(1)
+  end
+end
+
 RSpec.describe Poll, 'self.last_for(:peerage)' do
   context 'for laurel poll and pelican poll' do 
     before(:each) do

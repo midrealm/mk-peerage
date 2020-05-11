@@ -35,6 +35,7 @@ import '../modules/shave'
 import '../modules/gallery'
 import '../modules/tabSwitcher'
 import '../modules/hidePictures'
+import '../modules/pollAnalyticsTable'
 
 import fontawesome from '@fortawesome/fontawesome';
 import solid from '@fortawesome/fontawesome-free-solid';

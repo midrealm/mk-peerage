@@ -10,10 +10,11 @@
 <% end %>
   <th class="d-none d-md-table-cell">Elevate now</th>
   <th class="d-none d-md-table-cell">Wait</th>
-  <th class="d-none d-md-table-cell">No Strong Opinion</th>
   <th class="d-none d-md-table-cell">Drop</th>
-  <th class="d-none d-md-table-cell">Rec%</th>
-  <th class="d-none d-md-table-cell">Fav%</th>
+  <th class="d-none d-md-table-cell">No Strong Opinion</th>
+  <th class="d-none d-md-table-cell" >No Counsel</th>
+  <th class="d-none d-md-table-cell" title="(E+D+W)/(Total Respondents)">Rec%</th>
+  <th class="d-none d-md-table-cell" title="(E-D)/(Total Respondents)">Fav%</th>
   <th>Region</th>
   <th>Advocate(s)</th>
 </thead>
@@ -35,8 +36,9 @@
       <% end %>
       <td class="d-none d-md-table-cell"><%=cand.elevate%></td>
       <td class="d-none d-md-table-cell"><%=cand.wait%></td>
-      <td class="d-none d-md-table-cell"><%=cand.no_strong_opinion%></td>
       <td class="d-none d-md-table-cell"><%=cand.drop%></td>
+      <td class="d-none d-md-table-cell"><%=cand.no_strong_opinion%></td>
+      <td class="d-none d-md-table-cell"><%=cand.no_response%></td>
       <td class="d-none d-md-table-cell"><%=cand.rec%></td>
       <td class="d-none d-md-table-cell"><%=cand.fav%></td>
       <td> <% if cand.group.present? %> <%= candidate_region_link(cand.group,peerage) %> <% end %> </td>

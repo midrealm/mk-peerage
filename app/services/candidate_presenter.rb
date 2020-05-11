@@ -81,6 +81,9 @@ class CandidatePresenter
   def no_strong_opinion
     @results&.no_strong_opinion || ''
   end
+  def no_response
+    @results&.no_response || ''
+  end
   def rec
     if @results&.rec
       "#{(@results.rec * 100).round}%" 
