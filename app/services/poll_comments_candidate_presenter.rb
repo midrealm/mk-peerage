@@ -2,7 +2,7 @@ class PollCommentsCandidatePresenter
   extend Forwardable
   def_delegators :@candidate, :sca_name, :comments, :profile_pic, :profile_pic_full, :profile_pic_thumb, :list, :group, 
     :documents, :peerage_type, :id, :documents?, :poll_result?, :poll_date, :status, :advocates, :advocates?, :document_count, 
-    :comments, :specialties, :specialties?, :elevate, :wait, :drop, :no_strong_opinion, :rec, :fav, :date,
+    :comments, :specialties, :specialties?, :elevate, :wait, :drop, :no_strong_opinion, :no_response, :rec, :fav, :date,
     :show_box_class, :show_status_class
 
   def initialize(candidate)

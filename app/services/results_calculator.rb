@@ -15,8 +15,9 @@ class ResultsCalculator
         pr.drop = advisings.where(judgement: :drop).count
         pr.no_strong_opinion = advisings.where(judgement: :no_strong_opinion).count
         pr.wait = advisings.where(judgement: :wait).count
-        pr.rec = (pr.elevate + pr.drop + pr.wait)/advisings.count
-        pr.fav = (pr.elevate - pr.drop)/advisings.count
+        pr.no_response = @poll.total_respondents - advisings.count
+        pr.rec = (pr.elevate + pr.drop + pr.wait)/@poll.total_respondents.to_f
+        pr.fav = (pr.elevate - pr.drop)/@poll.total_respondents.to_f
         pr.save
       end
     end
