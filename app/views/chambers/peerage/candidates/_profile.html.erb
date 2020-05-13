@@ -15,17 +15,19 @@
        <thead>
          <th>Elevate</th>
          <th>Wait</th>
-         <th>No Strong Opinion</th>
          <th>Drop</th>
-         <th>Rec%</th>
-         <th>Fav%</th>
+         <th>No Strong Opinion</th>
+         <th>No Counsel</th>
+         <th title="(E+D+W)/(Total Respondents)">Rec%</th>
+         <th title="(E-D)/(Total Respondents)">Fav%</th>
        </thead>
        <tbody>
        <tr>
          <td><%=candidate.elevate%></td>
          <td><%=candidate.wait%></td>
-         <td><%=candidate.no_strong_opinion%></td>
          <td><%=candidate.drop%></td>
+         <td><%=candidate.no_strong_opinion%></td>
+         <td><%=candidate.no_response%></td>
          <td><%=candidate.rec%></td>
          <td><%=candidate.fav%></td>
        </tr>
@@ -36,17 +38,19 @@
        <thead class="d-md-none">
          <th>E</th>
          <th>W</th>
-         <th>NSO</th>
          <th>D</th>
-         <th>Rec%</th>
-         <th>Fav%</th>
+         <th>NSO</th>
+         <th>NC</th>
+         <th title="(E+D+W)/(Total Respondents)">Rec%</th>
+         <th title="(E-D)/(Total Respondents)">Fav%</th>
        </thead>
        <tbody>
        <tr>
          <td><%=candidate.elevate%></td>
          <td><%=candidate.wait%></td>
-         <td><%=candidate.no_strong_opinion%></td>
          <td><%=candidate.drop%></td>
+         <td><%=candidate.no_strong_opinion%></td>
+         <td><%=candidate.no_response%></td>
          <td><%=candidate.rec%></td>
          <td><%=candidate.fav%></td>
        </tr>

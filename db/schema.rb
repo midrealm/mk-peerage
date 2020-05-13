@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_08_184318) do
+ActiveRecord::Schema.define(version: 2020_05_12_184125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2020_01_08_184318) do
     t.float "fav"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "no_response"
     t.index ["candidate_id"], name: "index_poll_results_on_candidate_id"
     t.index ["poll_id"], name: "index_poll_results_on_poll_id"
   end

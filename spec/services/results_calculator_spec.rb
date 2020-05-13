@@ -71,7 +71,7 @@ describe "calculate" do
       expect(PollResult.first.elevate).to eq(1)
       @advising2.judgement = :elevate 
       @advising2.save
-      ResultsCalculator.new(@past_poll).calculate
+      ResultsCalculator.new(Poll.first).calculate
       expect(PollResult.count).to eq(1)
       expect(PollResult.first.elevate).to eq(2)
     end
@@ -117,6 +117,24 @@ describe "calculate" do
     it "handles candidate with no advisings" do
       ResultsCalculator.new(@past_poll).calculate
       expect(PollResult.count).to be(0) 
+    end
+    it "handles candidate with incomplete advisings" do
+      cand = create(:laurel_candidate)
+      @advising1.judgement = :wait
+      @advising1.save
+
+      create(:advising, candidate: cand, peer: @laurel2, poll: @past_poll, judgement: :wait) 
+      create(:advising, candidate: cand, peer: @laurel3, poll: @past_poll, judgement: :elevate) 
+      create(:advising, candidate: cand, peer: @laurel4, poll: @past_poll, judgement: :no_strong_opinion) 
+      ResultsCalculator.new(@past_poll).calculate
+      pr = PollResult.find_by(candidate: cand)
+      expect(pr.no_response).to eq(1)
+      expect(pr.wait).to eq(1)
+      expect(pr.elevate).to eq(1)
+      expect(pr.no_strong_opinion).to eq(1)
+      expect(pr.drop).to eq(0)
+      expect(pr.rec).to eq(0.5)
+      expect(pr.fav).to eq(0.25)
     end
   end
   

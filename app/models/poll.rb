@@ -51,6 +51,11 @@ class Poll < ApplicationRecord
     end
   end
 
+
+  def total_respondents
+    peers.uniq.count
+  end
+
   def active? 
     self.start_date.past? && self.end_date.future? 
   end
