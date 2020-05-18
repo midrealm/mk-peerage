@@ -28,5 +28,6 @@ module Peerage
     # the framework and any gems in your application.
     config.serve_static_assets = true #added for heroku
     config.active_record.sqlite3.represent_boolean_as_integer = true
+    config.time_zone =  'Eastern Time (US & Canada)'
   end
 end
