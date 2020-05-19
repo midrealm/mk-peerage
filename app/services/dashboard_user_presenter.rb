@@ -7,7 +7,18 @@ class DashboardUserPresenter
   end
 
   def peers
-    @user.peers.map{|p| DashboardPeerPresenter.new(p)}
+    if @user.superuser?
+      Peer.orders.map do |o|
+        p = @user.peer(o)
+        if p
+          DashboardPeerPresenter.new(p)
+        else
+          DashboardPeerPresenter.new(Peer.subclass(o).new())
+        end
+      end
+    else
+      @user.peers.map{|p| DashboardPeerPresenter.new(p)}
+    end
   end
 end
 

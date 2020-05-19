@@ -30,7 +30,9 @@
     <div class='<%=peer.order%>-card card mr-2 ml-2 mt-2'>
       <div class='card-body'>
         <h3 class='card-title'><%= peer.peerage_name %></h3>
-        <%= render 'normal', peerage: peer.order, peer: peer %>
+        <% if can? :read, peer.order %>
+          <%= render 'normal', peerage: peer.order, peer: peer %>
+        <% end %>
         <% if can? :manage, peer.order %>
           <%= render 'admin', peerage: peer.order %>
         <% end %>
