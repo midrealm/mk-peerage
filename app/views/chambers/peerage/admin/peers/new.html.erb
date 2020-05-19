@@ -6,7 +6,7 @@
     <li class="breadcrumb-item active" aria-current="page">New</li>
   </ol>
 </nav>
-<div class="container">
+<div class="container <%=peerage%>-border-left">
   <h1>Add New <%=peerage.capitalize%></h1>
   <div class="col-md-4" data-behavior='addNewPeer' data-peerage="<%=peerage%>">
     <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peers_path(peerage) do |f| %>

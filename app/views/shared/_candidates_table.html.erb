@@ -1,14 +1,21 @@
 <h3><%=peerage.capitalize%> Candidates</h3>
 <table class="table" data-behavior="dtable" data-order='[[2, "asc"],[0,"asc"]]'>
 <thead>
-<th>Name</th><th>Specialty</th><th>List</th><th>Group</th>
+<th>Name</th>
+<% if Peer.subclass(peerage).specialties_on? %>
+  <th>Specialty</th>
+<% end %>
+<th>List</th>
+<th>Group</th>
 </thead>
 <tbody>
 
 <% candidates.each do |candidate| %>
   <tr>
   <td><%= link_to candidate.sca_name, chambers_candidate_path(peerage,candidate.id)%></td>
-  <td><%=candidate.specialties_link%></td>
+  <% if Peer.subclass(peerage).specialties_on? %>
+    <td><%=candidate.specialties_link%></td>
+  <% end %>
   <td><%=candidate.list%></td>
   <td><%=link_to candidate.group, chambers_group_path(peerage, candidate.group.slug) unless candidate.group.nil?%></td>
   </tr>

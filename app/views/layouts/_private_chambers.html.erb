@@ -1,8 +1,10 @@
 <% if user_signed_in? %>
 <% user = DashboardUserPresenter.new(current_user) %>
-  <li class='nav-item'><a class="nav-link" href="/chambers">Private Chambers</a></li>
+  <li class='nav-item'><a class="btn btn-secondary btn-block" href="/chambers">Private Chambers</a></li>
 	<% user.peers.each do |peer| %>
+    <% if can? :read, peer.order %> 
 	  <%= render "/layouts/peerage_navbar", peerage: peer.order, peer: peer %>
+    <% end %>
 	<% end %>
   <li class="nav-item dropdown">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.sca_name %></a>

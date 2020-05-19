@@ -5,10 +5,12 @@
     <li class="breadcrumb-item active" aria-current="page"><%=peerage.capitalize %> Poll</li>
   </ol>
 </nav>
-<h1><%=peerage.capitalize%> Poll</h1>
-<h4>Open until 11:59pm on <b><%=@ballot.end_date%></b> </h4>
-<%= render "progress_bar", ballot: @ballot %>
-<h2>Vote List Candidates</h2>
-<%= render  "ballot_table", candidates: @ballot.vote_list, ballot: @ballot %>
-<h2>Watch List Candidates</h2>
-<%= render  "ballot_table", candidates: @ballot.watch_list, ballot: @ballot %>
+<div class="container <%=peerage%>-border-left">
+  <h4>Open until 11:59pm on <b><%=@ballot.end_date%></b> </h4>
+  <h1><%=peerage.capitalize%> Poll</h1>
+  <%= render "progress_bar", ballot: @ballot %>
+  <h2>Vote List Candidates</h2>
+  <%= render  "ballot_table", candidates: @ballot.vote_list, ballot: @ballot %>
+  <h2>Watch List Candidates</h2>
+  <%= render  "ballot_table", candidates: @ballot.watch_list, ballot: @ballot %>
+</div>

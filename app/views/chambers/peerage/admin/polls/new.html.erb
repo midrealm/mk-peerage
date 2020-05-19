@@ -5,14 +5,15 @@
     <li class="breadcrumb-item active" aria-current="page">New <%=peerage.capitalize%> Poll</li>
   </ol>
 </nav>
-<h1>Create New <%=peerage.capitalize%> Poll</h1>
-<div class="container">
-  <div class="col-md-4">
-    <%= bootstrap_form_for @poll, url: chambers_admin_poll_path(peerage) do |f| %>
-      <%= f.text_field :start_date, data: { behavior: 'startdatepicker'} %>
-      <%= f.text_field :end_date, data: { behavior: 'enddatepicker'} %>
-      <%= f.submit "Create Poll" %>
-    <%end%> 
+<div class="container <%=peerage%>-border-left">
+  <h1>Create New <%=peerage.capitalize%> Poll</h1>
+  <div class="container">
+    <div class="col-md-4">
+      <%= bootstrap_form_for @poll, url: chambers_admin_poll_path(peerage) do |f| %>
+        <%= f.text_field :start_date, data: { behavior: 'startdatepicker'} %>
+        <%= f.text_field :end_date, data: { behavior: 'enddatepicker'} %>
+        <%= f.submit "Create Poll" %>
+      <%end%> 
+    </div>
   </div>
 </div>
-

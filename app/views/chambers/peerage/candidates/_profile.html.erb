@@ -1,7 +1,7 @@
 
 <div class="<%= candidate.show_box_class%>">
   <h1><%=candidate.sca_name%><br/><small class="text-muted"><%=candidate.specialties%></small></h1>
-   <h4 class="<%=candidate.show_status_class%>"><%= candidate.status %></h4>
+   <h4 class="<%=candidate.show_status_class%>"><%=peerage.capitalize%> <%= candidate.status %></h4>
    <% if candidate.advocates? %>
      <strong>Advocates</strong>: <%= candidate.advocates %><br/>
    <%end%>

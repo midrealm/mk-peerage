@@ -24,4 +24,12 @@ class OfflinePollCandidatePresenter
   def initialize(candidate)
     @candidate = candidate
   end 
+ 
+  def name
+    if Peer.subclass(@candidate.order).specialties_on? && @candidate.specialties?
+      "#{@candidate.sca_name} (#{@candidate.specialties_sentence})"
+    else
+      @candidate.sca_name
+    end
+  end 
 end

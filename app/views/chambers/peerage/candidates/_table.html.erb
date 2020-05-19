@@ -1,7 +1,9 @@
 <table class="table" data-behavior="dtable-hidepics" data-order='[[2, "asc"],[0,"asc"]]'>
 <thead>
 <th>Name</th>
-<th>Specialties</th>
+<% if Peer.subclass(peerage).specialties_on? %>
+  <th>Specialties</th>
+<% end %>
 <th>List</th>
 <% if can?(:read, PollResult) %>
 <th>Comments from Last Poll</th>
@@ -23,7 +25,9 @@
         <div class="profile_pic"><%= link_to (image_tag cand.profile_pic_thumb), chambers_candidate_path(peerage,cand.id) %></div>
         <%= link_to "#{cand.sca_name}", chambers_candidate_path(peerage,cand.id)%>
       </td>
-      <td><%=cand.specialties%></td>
+      <% if Peer.subclass(peerage).specialties_on? %>
+        <td><%=cand.specialties%></td>
+      <%end%>
       <td><%=cand.status%></td>
       <% if can?(:read, PollResult) %>
         <td>

@@ -2,9 +2,11 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to 'Private Chambers', '/chambers' %></li>
-    <li class="breadcrumb-item"><%= link_to 'Specialties', chambers_specialties_path(peerage) %></li>
+    <li class="breadcrumb-item"><%= link_to "#{peerage.capitalize} Candidate Specialties", chambers_specialties_path(peerage) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%=@specialty.name.capitalize%></li>
   </ol>
 </nav>
-<h1><%=@specialty.name.capitalize%></h1>
-<%= render '/shared/candidates_table', candidates: @specialty.candidates.map{ |spec| CandidatePresenter.new(candidate: spec) } %>
+<div class="container <%=peerage%>-border-left">
+  <h1><%=@specialty.name.capitalize%></h1>
+  <%= render '/shared/candidates_table', candidates: @specialty.candidates.map{ |spec| CandidatePresenter.new(candidate: spec) } %>
+</div>

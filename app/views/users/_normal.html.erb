@@ -1,14 +1,19 @@
-<%= link_to 'View Your Profile', peer_path(peerage, current_user.slug) %><br>
-<%= link_to 'Edit Your Profile', users_edit_path( peerage: peerage ) %><br>
-<%= link_to 'View Candidates', chambers_candidates_path(peerage) %><br>
-<%= link_to 'Browse Candidates By Group', chambers_groups_path(peerage) %><br/>
-<%= link_to 'Browse Candidates By Specialty', chambers_specialties_path(peerage) %><br/>
-<%= link_to 'Contact the Order Secretary', order_secretary_contact_path(peerage) %><br/>
-<% if peer.poll? && can?(:take_poll, peerage) %>
-    <%= link_to peer.ballot.action, chambers_ballot_path(peerage)%> | <%=peer.ballot.status%> | 
-  Open Until Midnight on: <%= peer.ballot.end_date %> <br/>
-<% end %>
 <h4>News</h4>
 <%= markdown(Peer.news_body(peerage)) %>
 <small>Last updated: <%=Peer.news_last_updated(peerage)%></small><br>
-
+<div class="list-group">
+  <%= link_to 'View Your Profile', peer_path(peerage, current_user.slug), class: "list-group-item list-group-item-action"  %>
+  <%= link_to 'Edit Your Profile', users_edit_path( peerage: peerage ), class: "list-group-item list-group-item-action"  %>
+  <%= link_to 'View Candidates', chambers_candidates_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <%= link_to 'Browse Candidates By Group', chambers_groups_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <% if Peer.subclass(peerage).specialties_on? %>
+    <%= link_to 'Browse Candidates By Specialty', chambers_specialties_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <% end %>
+  <%= link_to 'Contact the Order Secretary', order_secretary_contact_path(peerage), class: "list-group-item list-group-item-action"  %>
+  <% if peer.poll? && can?(:take_poll, peerage) %>
+  <%= link_to peer.ballot.action, chambers_ballot_path(peerage),  class: "list-group-item list-group-item-action"  %> 
+  <% end %>
+</div>
+  <% if peer.poll? && can?(:take_poll, peerage) %>
+  <p><b>Poll status:</b> <%=peer.ballot.status%> | Open Until Midnight on: <%=peer.ballot.end_date%></p>
+  <% end %>

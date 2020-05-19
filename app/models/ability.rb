@@ -20,6 +20,7 @@ class Ability
 			can :manage, :royalty
 			Peer.orders.each do |order|
 				can :manage, order
+        cannot :read, order if user.peer(order).nil?
 			end
 		end
    

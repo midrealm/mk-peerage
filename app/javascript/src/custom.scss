@@ -15,7 +15,7 @@
     right: 0px;  
   }    
 }      
-.plate{
+.laurel-plate{
   padding: 0.5rem;
   margin: 0.5rem;
   text-align: center;
@@ -27,6 +27,38 @@
     color: darkgreen;
   }
 }
+.pelican-plate{
+  padding: 0.5rem;
+  margin: 0.5rem;
+  text-align: center;
+  width: 300px;
+  height: 65px;
+  border: 1px solid #391903;
+  background: #dda747e0;
+  a, a:hover {
+    color: darkred;
+  }
+}
+
+.laurel-border-left{
+	border-left: 5px solid darkgreen;
+}
+.pelican-border-left{
+	border-left: 5px solid darkgoldenrod;
+}
+.laurel-card{
+	border: 3px solid darkgreen !important;
+  a, a:hover {
+    color: darkgreen;
+  }
+}
+.pelican-card{
+	border: 3px solid darkgoldenrod !important;
+  a, a:hover {
+    color: darkred;
+  }
+}
+
 .deceased{
   background: #dedede; 
 }

@@ -1,6 +1,28 @@
 require "rails_helper"
 
 describe "Get /chambers" do
+  describe "loggin in super user" do
+    before(:each) do
+      superuser = create(:laurel_user, superuser: true)
+      sign_in(superuser)
+    end
+    it "sees Laurel Candidates" do
+      get "/chambers"
+      expect(response.body).to include('/chambers/laurel/candidates')
+    end
+    it "sees Laurel Admin" do
+      get "/chambers"
+      expect(response.body).to include('Manage Laurels')
+    end
+    it "sees Pelican Admin" do
+      get "/chambers"
+      expect(response.body).to include('Manage Pelicans')
+    end
+    it "does not see Pelican Candidates" do
+      get "/chambers"
+      expect(response.body).not_to include('/chambers/pelican/candidates')
+    end
+  end
   describe "logged in non-royal" do
     before(:each) do
       peer = create(:laurel_user)
@@ -14,6 +36,10 @@ describe "Get /chambers" do
     it "shows link to candidates" do
       get "/chambers"
       expect(response.body).to include('/chambers/laurel/candidates')
+    end
+    it "shows Laurel specialties" do
+      get "/chambers"
+      expect(response.body).to include('/chambers/laurel/specialties')
     end
     it "does not show Admin Tasks" do
       get "/chambers"
@@ -124,6 +150,14 @@ describe "Get /chambers" do
         it "does not show take poll link for active poll" do
           expect(response.body).not_to include('Take Poll')  
         end
+      end
+    end
+    describe "for non-royal pelican user" do
+      it "does not show pelican candidate specialties" do
+        pelican = create(:pelican_user)
+        sign_in(pelican)
+        get "/chambers"
+        expect(response.body).not_to include('<a class="list-group-item list-group-item-action" href="/chambers/pelican/specialties">Browse Candidates By Specialty</a>')  
       end
     end
     describe "for admin user" do

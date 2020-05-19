@@ -19,6 +19,11 @@ class Peer < ApplicationRecord
   def order
     type.downcase.to_sym
   end
+
+  def order_title
+    self.class.order_title
+  end
+
   #helpers
   def profile_pic_data_uri
     "data:image/jpeg;base64,#{Base64.strict_encode64(profile_pic.blob.download)}"
@@ -49,6 +54,14 @@ class Peer < ApplicationRecord
     array.push specialty_detail if specialty_detail.present?
     array.join(', ')
   end
+ 
+  def self.specialties_on? 
+    true
+  end
+
+  def specialties_on?
+    self.class.specialties_on?
+  end  
 
   def specialties?
    specialties.count > 0 || specialty_detail.present? 

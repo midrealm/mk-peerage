@@ -1,6 +1,10 @@
 <table class='table'>
 <thead>
-<th>Candidate</th><th>Specialties</th><th>Status</th>
+<th>Candidate</th>
+  <% if Peer.subclass(peerage).specialties_on? %>
+    <th>Specialties</th>
+  <%end %>
+<th>Status</th>
 </thead>
 <tbody>
 <% candidates.each do |cand| %>
@@ -10,7 +14,9 @@
     <tr >
   <%end%>
     <td><%= link_to cand.sca_name, chambers_edit_ballot_candidate_path(peerage,cand.id)%></td>
+  <% if Peer.subclass(peerage).specialties_on? %>
     <td><%= cand.specialties_sentence %></td>
+  <% end %>
   <% if ballot.submission_for?(cand.id)%>
     <td><i class="fas fa-check"></i></td>
   <% else %>

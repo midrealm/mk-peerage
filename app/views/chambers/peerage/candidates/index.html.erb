@@ -5,8 +5,10 @@
     <li class="breadcrumb-item active" aria-current="page"><%= peerage.capitalize %> Candidates</li>
   </ol>
 </nav>
+  <div class="container <%=peerage%>-border-left">
   <h1><%= peerage.capitalize %> Candidates</h1> 
     <i>Poll results from <%=@poll_date %></i></br>
 <%= render 'chambers/peerage/candidates/table', candidates: @candidates%>
+</div>
 
 
