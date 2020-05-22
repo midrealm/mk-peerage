@@ -2,7 +2,7 @@ class Chambers::CandidatesController < ApplicationController
   before_action :authenticate_user!
   def index
     authorize! :read, peerage
-    @candidates = Candidate.where_order(peerage).map{|cand| CandidatePresenter.for(candidate: cand, results_picker: results_picker) }
+    @candidates = Candidate.where_order(peerage).order(vote: :desc, sca_name: :asc).map{|cand| CandidatePresenter.for(candidate: cand, results_picker: results_picker) }
 
     @poll_date = @candidates.find{ |c| c.poll_date.present?}&.poll_date || ''
   end

@@ -3,7 +3,7 @@ export default (() => {
   $("table[data-behavior='dtable']").DataTable(
       {
         "pageLength": 50, 
-        "saveState": true,
+        "stateSave": true,
       });
 
 })()
