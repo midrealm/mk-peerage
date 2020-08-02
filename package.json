@@ -42,7 +42,8 @@
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^4.0.0",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
     "jquery": "^3.3.1"
