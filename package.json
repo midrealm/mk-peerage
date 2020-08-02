@@ -27,6 +27,7 @@
     "datatables.net-buttons-bs4": "^1.6.1",
     "easymde": "^2.8.0",
     "elliptic": "^6.5.3",
+    "lodash": "^4.17.19",
     "minimist": "^1.2.3",
     "node-sass": "^4.7.2",
     "popper.js": "^1.12.9",
