@@ -27,6 +27,7 @@
     "datatables.net-buttons-bs4": "^1.6.1",
     "easymde": "^2.8.0",
     "elliptic": "^6.5.3",
+    "lodash": "^4.17.19",
     "minimist": "^1.2.3",
     "node-sass": "^4.7.2",
     "popper.js": "^1.12.9",
@@ -41,9 +42,10 @@
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^4.0.0",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
-    "jquery": "^3.3.1"
+    "jquery": "^3.5.0"
   }
 }
