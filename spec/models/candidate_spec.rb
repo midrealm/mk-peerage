@@ -62,16 +62,16 @@ RSpec.describe Candidate, "enforce_parent_specialty" do
     @candidate = create(:laurel_candidate)
   end
   it "sets parent specialty if child specialty selected and parent specializaiton doesn't already exit" do
-    @candidate.update_attributes(:specialty_ids => [@child.id])
+    @candidate.update(:specialty_ids => [@child.id])
     expect(@candidate.specialties.count).to eq(2)
   end
   it "only sets one parent specialization even if two new children created" do
     child2 = create(:specialty, name: 'Child2', parent_id: @parent.id) 
-    @candidate.update_attributes( :specialty_ids => [@child.id, child2.id])
+    @candidate.update( :specialty_ids => [@child.id, child2.id])
     expect(@candidate.specialties.count).to eq(3)
   end
   it "sets only one parent if child and parent selected" do
-    @candidate.update_attributes(:specialty_ids => [@child.id, @parent.id])
+    @candidate.update(:specialty_ids => [@child.id, @parent.id])
     expect(@candidate.specialties.count).to eq(2)
   end
 end

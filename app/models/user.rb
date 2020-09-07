@@ -28,8 +28,11 @@ class User < ApplicationRecord
   after_save :enforce_parent_specialty
 	after_create :set_arms
 
-  scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
-
+  #scope :all_except, -> (peerage) { User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id')) }
+  
+  def self.all_except(peerage)
+    User.where.not(id: Peer.all.where(type: peerage.to_s.capitalize).joins(:user).pluck('users.id'))
+  end
   def peer(peerage)
     p_type = peerage.to_s.capitalize
     peers.find_by(type: p_type) 

@@ -9,7 +9,7 @@ class Chambers::Admin::PeersController < ApplicationController
     @users = Peer.where_order(peerage)
   end
   def create
-    adder = UserAdder.new(user_params)
+    adder = UserAdder.new(**user_params)
     success = adder.add
     user = adder.user
     if success

@@ -62,8 +62,7 @@ class Peer < ApplicationRecord
   def specialties_on?
     self.class.specialties_on?
   end  
-
-  def specialties?
+def specialties?
    specialties.count > 0 || specialty_detail.present? 
   end
   def superiors_link
