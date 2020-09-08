@@ -39,6 +39,14 @@
               <%= link_to 'Browse By Group', groups_path('pelican'), class: 'dropdown-item'%>
               <%= link_to 'Contact the Order Secretary', order_secretary_contact_path('pelican'), class: 'dropdown-item'%>
             </div>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MOD</a>
+            <div class="dropdown-menu">
+              <%= link_to 'Home', order_path('mod'), class: 'dropdown-item'%>
+              <%= link_to 'Roll of Honor', roll_of_honor_path('mod'), class: 'dropdown-item'%>
+              <%= link_to 'Browse By Group', groups_path('mod'), class: 'dropdown-item'%>
+              <%= link_to 'Contact the Order Secretary', order_secretary_contact_path('mod'), class: 'dropdown-item'%>
+            </div>
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
