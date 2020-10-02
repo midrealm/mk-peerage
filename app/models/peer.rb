@@ -177,4 +177,4 @@ def specialties?
 end
 require_dependency 'laurel'
 require_dependency 'pelican'
-require_dependency 'mod'
+require_dependency 'defense'

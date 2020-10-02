@@ -40,7 +40,7 @@ namespace :fake_data do
   		p.user_id = byrd.id
     end
 
-    Mod.create do |p|
+    Defense.create do |p|
       p.active = true
       p.elevation_date = Date.parse('1560-May-10')
       p.elevated_by = 'Elizabeth I'
@@ -63,7 +63,7 @@ namespace :fake_data do
 
 		byrd.arms.attach(io: File.open('lib/assets/fake_data/byrd_coa.jpg'), filename: 'byrd_coa.jpg', content_type: 'image/jpeg');
 		byrd.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
-		byrd.mod.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
+		byrd.defense.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 		byrd.pelican.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 	
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))

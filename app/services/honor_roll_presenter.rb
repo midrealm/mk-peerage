@@ -22,8 +22,8 @@ class HonorRollPresenter
       HonorRollLaurelsPresenter.new(peerage)
     when :pelican
       HonorRollPelicansPresenter.new(peerage)
-    when :mod
-      HonorRollModPresenter.new(peerage)
+    when :defense
+      HonorRollDefensePresenter.new(peerage)
     end
   end
   private
@@ -56,7 +56,7 @@ class HonorRollLaurelsPresenter < HonorRollPresenter
   end
 end
 
-class HonorRollModPresenter < HonorRollPresenter
+class HonorRollDefensePresenter < HonorRollPresenter
   def order_title
     "Masters and Mistresses of Defense"
   end

@@ -1,4 +1,4 @@
-class Mod < Peer
+class Defense < Peer
   def self.mailing_list
     ENV['MOD_MAILING_LIST']
   end 
@@ -31,7 +31,7 @@ class Mod < Peer
   end
 
   def self.order_secretary
-    Mod.find_by(admin: true)
+    Defense.find_by(admin: true)
   end
 
   def self.specialties_on?

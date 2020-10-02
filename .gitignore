@@ -10,6 +10,7 @@ storage/
 /lib/assets/init_images.tar.gz 
 /lib/assets/init_images/ 
 /lib/tasks/peer_migrate.rake
+/lib/tasks/defense_migrate.rake
 /lib/tasks/aardvark.rake
 #peerage ignore
 /public/system/
