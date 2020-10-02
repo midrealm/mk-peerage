@@ -10,25 +10,12 @@ class PeerPresenter
   def has_ever_signed_in?
     !!@peer.user.last_sign_in_at 
   end
+  
+  def peer_div_css
+    "#{@peer.order}-border-left"
+  end
 
   def self.for(peer)
-    case peer.order
-    when :laurel
-      LaurelPeerPresenter.new(peer)
-    when :pelican
-      PelicanPeerPresenter.new(peer)
-    end
-  end
-end
-
-class LaurelPeerPresenter < PeerPresenter
-  def peer_div_css
-    "laurel-border-left"
-  end
-end
-
-class PelicanPeerPresenter < PeerPresenter
-  def peer_div_css
-    "pelican-border-left"
+    self.new(peer)
   end
 end

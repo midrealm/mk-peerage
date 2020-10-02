@@ -27,6 +27,18 @@
     color: darkgreen;
   }
 }
+.mod-plate{
+  padding: 0.5rem;
+  margin: 0.5rem;
+  text-align: center;
+  width: 300px;
+  height: 75px;
+  border: 3px solid #611410;
+  background: #9c1b1b;
+  a, a:hover {
+    color: ghostwhite;
+  }
+}
 .pelican-plate{
   padding: 0.5rem;
   margin: 0.5rem;
@@ -46,6 +58,9 @@
 .pelican-border-left{
 	border-left: 5px solid darkgoldenrod;
 }
+.defense-border-left{
+  border-left: 5px solid #9c1b1b;
+}
 .laurel-card{
 	border: 3px solid darkgreen !important;
   a, a:hover {
@@ -54,6 +69,12 @@
 }
 .pelican-card{
 	border: 3px solid darkgoldenrod !important;
+  a, a:hover {
+    color: darkred;
+  }
+}
+.defense-card{
+	border: 3px solid darkred !important;
   a, a:hover {
     color: darkred;
   }

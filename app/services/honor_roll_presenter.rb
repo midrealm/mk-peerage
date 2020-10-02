@@ -22,6 +22,8 @@ class HonorRollPresenter
       HonorRollLaurelsPresenter.new(peerage)
     when :pelican
       HonorRollPelicansPresenter.new(peerage)
+    when :defense
+      HonorRollDefensePresenter.new(peerage)
     end
   end
   private
@@ -51,6 +53,18 @@ class HonorRollLaurelsPresenter < HonorRollPresenter
   end
   def css_class
     "laurel-plate"
+  end
+end
+
+class HonorRollDefensePresenter < HonorRollPresenter
+  def order_title
+    "Masters and Mistresses of Defense"
+  end
+  def page_title
+    "MOD Roll of Honor"
+  end
+  def css_class
+    "mod-plate"
   end
 end
 

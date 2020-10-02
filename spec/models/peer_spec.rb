@@ -81,7 +81,7 @@ end
 
 RSpec.describe Peer, "self.orders" do
   it "returns array of all the orders" do
-    expect(Peer.orders).to contain_exactly(:laurel, :pelican)
+    expect(Peer.orders).to contain_exactly(:laurel, :pelican, :defense)
   end 
 end
 

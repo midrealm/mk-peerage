@@ -40,8 +40,31 @@ namespace :fake_data do
   		p.user_id = byrd.id
     end
 
+    Defense.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1560-May-10')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Motets'
+      p.bio = 'I am a Master of Defense'
+      p.admin = true
+  		p.user_id = byrd.id
+    end
+    Pelican.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1560-May-10')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Motets'
+      p.bio = 'I am a Pelican Too!'
+      p.admin = true
+  		p.user_id = byrd.id
+    end
+
 		byrd.arms.attach(io: File.open('lib/assets/fake_data/byrd_coa.jpg'), filename: 'byrd_coa.jpg', content_type: 'image/jpeg');
 		byrd.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
+		byrd.defense.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
+		byrd.pelican.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 	
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))
 
@@ -103,7 +126,6 @@ namespace :fake_data do
     morley = Candidate.create do |u|
       u.sca_name = 'Thomas Morley'
       u.vote = true
-      u.profile_pic = File.open('lib/assets/fake_data/morley.png')
       u.group = Group.find_by(name: 'Northwoods')
       u.peerage_type = :laurel
     end    
@@ -160,7 +182,6 @@ namespace :fake_data do
       p.vigilant = false
       p.specialty_detail = 'Portraits'
       p.bio = 'Yay Painting.'
-      p.profile_pic = 
       p.admin = false
 			p.user = holbein
     end
