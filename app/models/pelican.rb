@@ -10,6 +10,10 @@ class Pelican < Peer
     'pelicanate'
   end
 
+  def self.plural
+    'pelicans'
+  end
+
   def self.dependent_name
     'protégé'
   end

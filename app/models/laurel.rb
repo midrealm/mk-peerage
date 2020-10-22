@@ -9,6 +9,10 @@ class Laurel < Peer
   def self.collection
     'laurelate'
   end
+  
+  def self.plural
+    'laurels'
+  end
 
   def self.dependent_name
     'apprentice'
