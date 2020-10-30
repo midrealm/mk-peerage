@@ -23,7 +23,7 @@ class Peer < ApplicationRecord
   def order_title
     self.class.order_title
   end
-
+  
   #helpers
   def profile_pic_data_uri
     "data:image/jpeg;base64,#{Base64.strict_encode64(profile_pic.blob.download)}"
@@ -178,3 +178,4 @@ end
 require_dependency 'laurel'
 require_dependency 'pelican'
 require_dependency 'defense'
+require_dependency 'chivalry'

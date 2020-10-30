@@ -24,6 +24,8 @@ class HonorRollPresenter
       HonorRollPelicansPresenter.new(peerage)
     when :defense
       HonorRollDefensePresenter.new(peerage)
+    when :chivalry
+      HonorRollChivalryPresenter.new(peerage)
     end
   end
   private
@@ -61,10 +63,21 @@ class HonorRollDefensePresenter < HonorRollPresenter
     "Masters and Mistresses of Defense"
   end
   def page_title
-    "MOD Roll of Honor"
+    "Defense Roll of Honor"
   end
   def css_class
-    "mod-plate"
+    "defense-plate"
+  end
+end
+class HonorRollChivalryPresenter < HonorRollPresenter
+  def order_title
+    "Order of the Chivalry"
+  end
+  def page_title
+    "Chivalry Roll of Honor"
+  end
+  def css_class
+    "chivalry-plate"
   end
 end
 

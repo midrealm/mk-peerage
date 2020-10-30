@@ -21,6 +21,26 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          <!--
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chivalry</a>
+            <div class="dropdown-menu">
+              <%= link_to 'Home', order_path('chivalry'), class: 'dropdown-item'%>
+              <%= link_to 'Roll of Honor', roll_of_honor_path('chivalry'), class: 'dropdown-item'%>
+              <%= link_to 'Browse By Group', groups_path('chivalry'), class: 'dropdown-item'%>
+              <%= link_to 'Contact the Order Secretary', order_secretary_contact_path('chivalry'), class: 'dropdown-item'%>
+            </div>
+          </li>
+          -->
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Defense</a>
+            <div class="dropdown-menu">
+              <%= link_to 'Home', order_path('defense'), class: 'dropdown-item'%>
+              <%= link_to 'Roll of Honor', roll_of_honor_path('defense'), class: 'dropdown-item'%>
+              <%= link_to 'Browse By Group', groups_path('defense'), class: 'dropdown-item'%>
+              <%= link_to 'Contact the Order Secretary', order_secretary_contact_path('defense'), class: 'dropdown-item'%>
+            </div>
+          </li>
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laurel</a>
             <div class="dropdown-menu">
@@ -40,17 +60,6 @@
               <%= link_to 'Contact the Order Secretary', order_secretary_contact_path('pelican'), class: 'dropdown-item'%>
             </div>
           </li>
-          <!--
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Defense</a>
-            <div class="dropdown-menu">
-              <%= link_to 'Home', order_path('defense'), class: 'dropdown-item'%>
-              <%= link_to 'Roll of Honor', roll_of_honor_path('defense'), class: 'dropdown-item'%>
-              <%= link_to 'Browse By Group', groups_path('defense'), class: 'dropdown-item'%>
-              <%= link_to 'Contact the Order Secretary', order_secretary_contact_path('defense'), class: 'dropdown-item'%>
-            </div>
-          </li>
-          -->
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
         <%= render "/layouts/private_chambers" %>   

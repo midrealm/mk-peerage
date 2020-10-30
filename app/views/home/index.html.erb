@@ -1,17 +1,21 @@
 <div style="text-align:center;">
-  <h1>Middle Kingdom Peerage Orders</h1>
+  <h1 class="mb-5">Middle Kingdom Peerage Orders</h1>
       <div class="row">
         <!--
-        <div class="col-sm">
+        <div class="home-col col-sm">
+          <%= image_tag(Chivalry.image) %>
+          <h3><%= link_to 'The Order of the Chivalry', order_path('chivalry')%></h3>
+        </div>
+        -->
+        <div class="home-col col-sm">
           <%= image_tag(Defense.image) %>
           <h3><%= link_to 'The Order of Defense', order_path('defense')%></h3>
         </div>
-        -->
-        <div class="col-sm">
+        <div class="home-col col-sm">
           <%= image_tag(Laurel.image) %>
           <h3><%= link_to 'The Order of the Laurel', order_path('laurel')%></h3>
         </div>
-        <div class="col-sm">
+        <div class="home-col col-sm">
           <%= image_tag(Pelican.image) %>
           <h3><%= link_to 'The Order of the Pelican', order_path('pelican')%></h3>
         </div>

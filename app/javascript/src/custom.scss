@@ -27,7 +27,19 @@
     color: darkgreen;
   }
 }
-.mod-plate{
+.chivalry-plate{
+  padding: 0.5rem;
+  margin: 0.5rem;
+  text-align: center;
+  width: 300px;
+  height: 75px;
+  border: 1px solid #a0a0a0;
+  background: #3c3c3c;
+  a, a:hover {
+    color: white;
+  }
+}
+.defense-plate{
   padding: 0.5rem;
   margin: 0.5rem;
   text-align: center;
@@ -52,6 +64,9 @@
   }
 }
 
+.home-col{
+  min-width:250px
+}
 .laurel-border-left{
 	border-left: 5px solid darkgreen;
 }
@@ -60,6 +75,9 @@
 }
 .defense-border-left{
   border-left: 5px solid #9c1b1b;
+}
+.chivalry-border-left{
+  border-left: 5px solid black;
 }
 .laurel-card{
 	border: 3px solid darkgreen !important;
@@ -80,8 +98,17 @@
   }
 }
 
+.chivalry-card{
+	border: 3px solid black !important;
+  a, a:hover {
+    color: black;
+  }
+}
 .deceased{
   background: #dedede; 
+  a, a:hover {
+    color: black;
+  }
 }
 .vigilant{
   font-weight: bold; 

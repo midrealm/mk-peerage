@@ -1,6 +1,6 @@
 class Defense < Peer
   def self.mailing_list
-    ENV['MOD_MAILING_LIST']
+    ENV['DEFENSE_MAILING_LIST']
   end 
   def self.order_title
     "Order of Defense"
@@ -10,12 +10,16 @@ class Defense < Peer
     'defenders'
   end
 
+  def self.plural
+    'mods'
+  end
+
   def self.dependent_name
     'provost'
   end
 
   def self.image
-    'mod.png'
+    'defense.png'
   end
 
   def self.oath
