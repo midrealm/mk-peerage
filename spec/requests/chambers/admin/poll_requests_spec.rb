@@ -19,8 +19,8 @@ describe "post /chambers/laurel/admin/poll" do
   before(:each) do
     admin = create("laurel_admin".to_sym)
     sign_in(admin)
-    @start_date = (Date.today + 1.day).strftime("%d-%b-%Y") 
-    @end_date = (Date.today + 2.days).strftime("%d-%b-%Y") 
+    @start_date = '01-Jan-3000' 
+    @end_date = '03-Jan-3000'
     @params = { :poll => {start_date: @start_date, end_date: @end_date} }
   end
   it "creates new poll" do
