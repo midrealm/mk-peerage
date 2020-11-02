@@ -13,6 +13,10 @@ class Defense < Peer
   def self.plural
     'mods'
   end
+  
+  def self.singular
+    'mod'
+  end
 
   def self.dependent_name
     'provost'

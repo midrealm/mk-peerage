@@ -1,15 +1,15 @@
-<% title "Manage #{peerage.capitalize}s"%>
+<% title "Manage #{Peer.subclass(peerage).plural.capitalize}"%>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to 'Chambers', '/chambers' %></li>
-    <li class="breadcrumb-item active" aria-current="page">Manage <%=peerage.capitalize%>s</li>
+    <li class="breadcrumb-item active" aria-current="page">Manage <%=Peer.subclass(peerage).plural.capitalize%></li>
   </ol>
 </nav>
 <div class="container <%=peerage%>-border-left">
-  <h1>Manage <%=peerage.capitalize%>s</h1>
-  <%= link_to "Add New #{peerage.capitalize}", new_chambers_admin_peer_path(peerage) %><br/>
-  <%= link_to "Reset #{peerage.capitalize}'s password", chambers_admin_peers_password_path %><br>
-  <%= link_to "Set #{peerage.capitalize}'s email address and reset their password", chambers_admin_peers_email_path %>
+  <h1>Manage <%=Peer.subclass(peerage).plural.capitalize%></h1>
+  <%= link_to "Add New #{Peer.subclass(peerage).singular.capitalize}", new_chambers_admin_peer_path(peerage) %><br/>
+  <%= link_to "Reset #{Peer.subclass(peerage).singular.capitalize}'s password", chambers_admin_peers_password_path %><br>
+  <%= link_to "Set #{Peer.subclass(peerage).singular.capitalize}'s email address and reset their password", chambers_admin_peers_email_path %>
   <table class='table' data-behavior="dtable">
     <thead>
       <th>Name</th><th>Show</th><th>Edit</th>

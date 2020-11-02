@@ -130,6 +130,14 @@ def specialties?
     self.class.peerage_name
   end
 
+  #default
+  def self.singular
+    peerage_type
+  end
+  def self.plural
+    "#{peerage_type}s"
+  end
+
   def email
     user.email
   end

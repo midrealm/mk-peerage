@@ -13,6 +13,9 @@ class Chivalry < Peer
   def self.plural
     'knights'
   end
+  def self.singular
+    'knight'
+  end
   def self.dependent_name
     'squire'
   end
