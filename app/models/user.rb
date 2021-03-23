@@ -58,7 +58,7 @@ class User < ApplicationRecord
 
   private
   def set_slug
-    self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_')
+    self.slug = I18n.transliterate(self.sca_name).downcase.tr(' ','_').tr('.','_')
   end
   def enforce_parent_specialty
     self.peers.all.each do |peer|
