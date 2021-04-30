@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Add New Candidate' do
   include_context 'when signed in through capybara'
-  it 'adds new candidate when appropriate info is filled in', js: true do
+  it 'adds new candidate when appropriate info is filled in' do
     expect(Candidate.count).to eq(0)
     admin = create(:admin)
     sign_in(admin)
@@ -11,7 +11,7 @@ RSpec.describe 'Add New Candidate' do
     visit '/chambers/laurel/admin/candidates/new' 
     fill_in 'candidate_sca_name', with: 'Smarty Pants'
     all('#candidate_group_id option')[1].select_option
-    attach_file 'profile_pic_input', Rails.root + 'spec/fixtures/images/portrait.jpg', make_visible: true
+    attach_file 'profile_pic_input', Rails.root + 'spec/fixtures/images/portrait.jpg'
     click_on 'crop_button'
     click_on 'Create Candidate'
     
