@@ -1,4 +1,4 @@
-FROM ruby:2.7.0
+FROM ruby:2.7.2
 
 LABEL maintainer="nique.rio@gmail.com"
 
