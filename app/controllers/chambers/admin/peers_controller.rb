@@ -23,6 +23,7 @@ class Chambers::Admin::PeersController < ApplicationController
   end
   def edit
     @peer = Peer.find(params[:id])
+    @user = @peer.user
     raise "Access Denied" unless @peer.order == peerage
   end
   def update
@@ -44,7 +45,7 @@ class Chambers::Admin::PeersController < ApplicationController
     params.require(peerage).permit(:id, :sca_name, :email, :vigilant).merge(peerage: peerage).to_hash.symbolize_keys
   end
   def update_user_params
-    params.require(peerage).permit(:deceased)
+    params.require(:user).permit(:deceased, :group_id, "#{peerage}_attributes".to_sym => [:id, :active])
   end
   def authorize_admin
     authorize! :manage, peerage

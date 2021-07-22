@@ -86,7 +86,7 @@ describe "put /chambers/laurel/admin/peers/:id" do
       expect(User.last.sca_name).to eq("Newly Deceased")
       expect(Peer.last.active).to be_truthy
       expect(User.last.deceased).to be_falsy
-      put "/chambers/laurel/admin/peers/#{newly_deceased.peers.first.id}", params: { :laurel => {deceased: true} }
+      put "/chambers/laurel/admin/peers/#{newly_deceased.peers.first.id}", params: { :user => {deceased: true, group_id: nil, laurel_attributes: {id: newly_deceased.peers.first.id, active: false} } }
       expect(response).to redirect_to "/chambers/laurel/admin/peers"
       expect(Peer.last.active).to be_falsy
       expect(User.last.deceased).to be_truthy
