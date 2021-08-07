@@ -8,8 +8,7 @@
 <div class="container <%=peerage%>-border-left">
   <h1>Manage <%=Peer.subclass(peerage).plural.capitalize%></h1>
   <div class="d-flex mb-3 mt-3">
-  <%= link_to "Add New #{Peer.subclass(peerage).singular.capitalize}", new_chambers_admin_peer_path(peerage), class: "btn btn-primary mr-5" %>  
-  <%= link_to "Set #{Peer.subclass(peerage).singular.capitalize}'s email address and reset their password", chambers_admin_peers_email_path, class: "btn btn-primary" %>
+  <%= link_to "Add New #{Peer.subclass(peerage).singular.capitalize}", new_chambers_admin_peer_path(peerage), class: "btn btn-primary" %>  
   </div>
   <table class='table' data-behavior="dtable">
     <thead>
