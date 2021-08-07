@@ -2,7 +2,8 @@ class Chambers::Admin::Peers::EmailController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
   def new
-    @user = User.find(params[:user_id])
+    @user = User.find_by_id(params[:user_id])
+    redirect_to chambers_admin_peers_path(peerage) if @user.nil?
   end
   def create
     @peers = Peer.where_order(peerage).map{|x| ["#{x.sca_name} (#{x.email})", x.user.id] }

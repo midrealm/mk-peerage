@@ -50,7 +50,7 @@ Rails.application.routes.draw do
         resource :news, only: [:edit, :update]
         resources :peers, except: [:show, :delete]
         namespace :peers do
-          get 'password' => 'password#new'
+          #get 'password' => 'password#new'
           post 'password' => 'password#create'
           get 'email' => 'email#new'
           post 'email' => 'email#create'

@@ -1,9 +1,6 @@
 class Chambers::Admin::Peers::PasswordController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_admin
-  def new
-    @peers = Peer.where_order(peerage).map{|x| ["#{x.sca_name} (#{x.email})", x.user.id] }
-  end
   def create
     @user = User.find(params[:id])
     token = @user.send_reset_password_instructions
