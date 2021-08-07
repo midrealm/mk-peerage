@@ -7,19 +7,21 @@
 </nav>
 <div class="container <%=peerage%>-border-left">
   <h1>Manage <%=Peer.subclass(peerage).plural.capitalize%></h1>
-  <%= link_to "Add New #{Peer.subclass(peerage).singular.capitalize}", new_chambers_admin_peer_path(peerage) %><br/>
-  <%= link_to "Reset #{Peer.subclass(peerage).singular.capitalize}'s password", chambers_admin_peers_password_path %><br>
-  <%= link_to "Set #{Peer.subclass(peerage).singular.capitalize}'s email address and reset their password", chambers_admin_peers_email_path %>
+  <div class="d-flex mb-3 mt-3">
+  <%= link_to "Add New #{Peer.subclass(peerage).singular.capitalize}", new_chambers_admin_peer_path(peerage), class: "btn btn-primary mr-5" %>  
+  <%= link_to "Set #{Peer.subclass(peerage).singular.capitalize}'s email address and reset their password", chambers_admin_peers_email_path, class: "btn btn-primary" %>
+  </div>
   <table class='table' data-behavior="dtable">
     <thead>
-      <th>Name</th><th>Show</th><th>Edit</th>
+      <th>Name</th><th>Email Address</th><th>Send Reset Password Email</th><th>Edit</th>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
         <td><%=user.sca_name%></td>
-        <td><%=link_to 'Show', peer_path(peerage,user.slug)%></td>
-        <td><%=link_to 'Edit', edit_chambers_admin_peer_path(peerage,user.id)%></td>
+        <td class="d-flex justify-content-between"><%=user.email%> <%=link_to 'Update', chambers_admin_peers_email_path(peerage, user_id: user.user_id), class: "btn btn-secondary" %></td>
+        <td><%=button_to 'Reset Password', chambers_admin_peers_password_path, params: {id: user.user_id }, method: :post, class: 'btn btn-secondary' %></td>
+        <td><%=link_to 'Edit', edit_chambers_admin_peer_path(peerage,user.id), class: "btn btn-primary"%></td>
         </tr>
       <% end %>
     </tbody
