@@ -10,10 +10,17 @@
   <h1>Edit <%=peerage.capitalize%> <%=@peer.sca_name%></h1>
   <div class="container">
     <div class="col-md-4">
-      <%= bootstrap_form_for @peer, as: peerage, url: chambers_admin_peer_path(peerage,@peer.id) do |f| %>
+      <%= bootstrap_form_for @user, url: chambers_admin_peer_path(peerage,@peer.id) do |f| %>
+        
+          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}}%>
         <%= f.form_group :deceased do %>
-          <%= f.check_box :deceased, label: "User is deceased" %>
+          <%= f.check_box :deceased, label: "Peer is deceased" %>
         <% end %>
+        <%= f.fields_for peerage do |p| %>
+          <%= p.form_group :active do %>
+          <%= p.check_box :active, label: "Peer is active" %>
+        <% end %>
+      <%end %>
         <%= f.submit "Update #{peerage.capitalize}" %>
       <%end %>
     </div>
