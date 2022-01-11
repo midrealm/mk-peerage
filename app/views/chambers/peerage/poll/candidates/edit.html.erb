@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-md-6">
       <%= bootstrap_form_for @ballot_entry.advising, as: :advising,  url: chambers_edit_ballot_candidate_path(peerage,@candidate.id), method: :put  do |f| %>
-          <%= f.select :judgement, @ballot_entry.judgements, {label: "Judgment", include_blank: true}, required: true  %>
+          <%= f.select :judgement, @ballot_entry.judgements, {label: "Counsel", include_blank: true}, required: true  %>
           <%= f.text_area :comment, data: { behavior: 'markdown' }  %>
         <%= f.submit 'Submit Counsel to the Crown' %>
       <% end %>
@@ -57,7 +57,7 @@
             <% @ballot_entry.old_advisings.each do |old| %>
               <div class="p-2">
                 <h5><%=old.date%></h3>
-                <b>Judgement:</b> <%=old.judgement_name%><br>
+                <b>Counsel:</b> <%=old.judgement_name%><br>
                 <b>Comment: </b>
                 <div>
                 <%= markdown(old.comment)%>
