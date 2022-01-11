@@ -31,9 +31,6 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: "Get Vim"
-          command: sudo apt-get update -yqq && sudo apt-get install -yqq --no-install-recommends vim
 
       - run:
          name: "Update Node.js and npm"
