@@ -23,7 +23,7 @@
     "color-string": "1.6.0",
     "core-js": "^3.6.4",
     "croppie": "^2.6.1",
-    "datatables.net": "^1.10.16",
+    "datatables.net": "1.11.3",
     "datatables.net-bs4": "^1.10.16",
     "datatables.net-buttons": "^1.6.1",
     "datatables.net-buttons-bs4": "^1.6.1",
