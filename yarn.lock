@@ -997,7 +997,7 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@rails/webpacker@^4.2.2":
+"@rails/webpacker@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-4.3.0.tgz#3793b3aed08ed0b661f1bed9de0739abacb6a834"
   integrity sha512-DmKGjKugLeeytT1TO9fUBBjdA3YwQ19zoWK5JDL8V1rM0bf6WRf1n9DZTiVmuf0WO1gp5ej5pJ9b3NjZwfAz4Q==
@@ -3137,7 +3137,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.10.16:
+datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.11.5:
   version "1.11.5"
   resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.11.5.tgz#7767a27991c75716ce7fef1aa6a41d01bfeaefbd"
   integrity sha512-tYE9MnyWIW4P8nm41yQnCqW4dUPK3M7qsuxQY5rViFFKDEU0bUUNAnE9+69P5/4Exe4uyXaY05xFkD00niPZUA==
@@ -3145,7 +3145,7 @@ datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.10.16:
     datatables.net ">=1.11.3"
     jquery ">=1.7"
 
-datatables.net-buttons-bs4@^1.6.1:
+datatables.net-buttons-bs4@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/datatables.net-buttons-bs4/-/datatables.net-buttons-bs4-1.7.1.tgz#d2fdef1f1b4073129d42806d24b8f037e9bd473b"
   integrity sha512-s+fwsgAAWp7mOKwuztPH06kaw2JNAJ71VNTw/TqGQTL6BK9FshweDKZSRIB/ePcc/Psiy8fhNEj3XHxx4OO6BA==
@@ -3154,7 +3154,7 @@ datatables.net-buttons-bs4@^1.6.1:
     datatables.net-buttons "1.7.1"
     jquery ">=1.7"
 
-datatables.net-buttons@1.7.1, datatables.net-buttons@^1.6.1:
+datatables.net-buttons@1.7.1, datatables.net-buttons@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/datatables.net-buttons/-/datatables.net-buttons-1.7.1.tgz#b701bda4bf4dd76ebc9238251c62d13c18b2bb34"
   integrity sha512-D2OxZeR18jhSx+l0xcfAJzfUH7l3LHCu0e606fV7+v3hMhphOfljjZYLaiRmGiR9lqO/f5xE/w2a+OtG/QMavw==
@@ -3162,7 +3162,7 @@ datatables.net-buttons@1.7.1, datatables.net-buttons@^1.6.1:
     datatables.net "^1.10.15"
     jquery ">=1.7"
 
-datatables.net@>=1.11.3, datatables.net@^1.10.15, datatables.net@^1.10.16:
+datatables.net@>=1.11.3, datatables.net@^1.10.15, datatables.net@^1.11.5:
   version "1.11.5"
   resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.11.5.tgz#858a69953a01e1d5b18786769802117b04b8e3c9"
   integrity sha512-nlFst2xfwSWaQgaOg5sXVG3cxYC0tH8E8d65289w9ROgF2TmLULOOpcdMpyxxUim/qEwVSEem42RjkTWEpr3eA==
