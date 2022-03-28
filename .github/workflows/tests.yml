@@ -28,14 +28,14 @@ jobs:
         with:
           ruby-version: 2.7.2
           bundler-cache: true
-      - name: Setup up node 12.18.4
+      - name: Setup up node 12.20.0
         uses: actions/setup-node@v2
         with:
-          node-version: '12.18.4'
+          node-version: '12.20.0'
           cache: 'yarn'
       - name: Install yarn packages
         run: |
-          yarn policies set-version 1.22.5
+          yarn policies set-version 1.22.18
           yarn install --frozen-lockfile
       - name: Set up DB
         run: bundle exec rails db:setup
