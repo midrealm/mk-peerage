@@ -4,6 +4,7 @@ latest.dump
 /public/javascripts
 /public/stylesheets
 yarn-error.log
+.env
 
 storage/
 #peerage init ignore

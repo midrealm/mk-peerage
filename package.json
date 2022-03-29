@@ -1,7 +1,7 @@
 {
   "license": "SEE LICENSE IN THE MODULES HEREIN",
   "engines": {
-    "node": "12.20.0",
+    "node": "12.22.11",
     "yarn": "1.22.18"
   },
   "dependencies": {
