@@ -323,7 +323,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 4.3)
-  rails (~> 6.0.3)
+  rails (~> 6.0.4)
   recaptcha
   redcarpet
   rspec-rails
