@@ -24,9 +24,7 @@ gem 'devise', '~> 4.7.0'
 gem 'aws-sdk-s3'
 gem 'image_processing'
 gem 'mini_magick'
-gem "bootstrap_form",
-    git: "https://github.com/bootstrap-ruby/bootstrap_form.git",
-    branch: "master"
+gem "bootstrap_form", '~> 4.5'
 gem 'redcarpet'
 gem 'cancancan'
 gem 'ancestry'
