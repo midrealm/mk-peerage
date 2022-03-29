@@ -12,7 +12,7 @@ RSpec.describe "chambers/peerage/candidates/_gallery.html.erb" do
     it "shows a pdf" do
       c = create(:candidate)
       d = create(:document, candidate: c, name: 'My Document Name', document: FilesTestHelper.pdf)
-      render partial: "/shared/documents_gallery.html.erb", locals: { documents: Candidate.first.documents, peerage: :laurel }
+      render partial: "/shared/documents_gallery", locals: { documents: Candidate.first.documents, peerage: :laurel }
       expect(rendered).to have_content "My Document Name"
     end 
   end
@@ -20,7 +20,7 @@ RSpec.describe "chambers/peerage/candidates/_gallery.html.erb" do
     it "shows a docx" do
       c = create(:candidate)
       d = create(:document, candidate: c, name: 'My Document Name', document: FilesTestHelper.docx)
-      render partial: "/shared/documents_gallery.html.erb", locals: { documents: Candidate.first.documents, peerage: :laurel }
+      render partial: "/shared/documents_gallery", locals: { documents: Candidate.first.documents, peerage: :laurel }
       expect(rendered).to have_content "My Document Name"
     end 
   end

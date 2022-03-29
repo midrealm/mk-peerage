@@ -34,7 +34,7 @@ class Peer < ApplicationRecord
   end
 
   def profile_pic_thumb
-    profile_pic.variant(combine_options: {resize: '100x133', gravity: 'South', chop: '0x33'})
+    profile_pic.variant(resize: '100x133', gravity: 'South', chop: '0x33')
   end
 
   def specialties_link

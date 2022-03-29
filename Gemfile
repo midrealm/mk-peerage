@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 ruby '2.7.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.4'
-gem 'pg', '~> 0.21.0' #set for heroku
+gem 'rails', '~> 6.1.0'
+gem 'pg', '~> 1.3.4' #set for heroku
 #gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
@@ -23,7 +23,6 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem 'devise', '~> 4.7.0'
 gem 'aws-sdk-s3'
 gem 'image_processing'
-gem 'mini_magick'
 gem "bootstrap_form", '~> 4.5'
 gem 'redcarpet'
 gem 'cancancan'
@@ -35,7 +34,6 @@ gem 'webpacker', '~> 4.x'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_bot_rails'
