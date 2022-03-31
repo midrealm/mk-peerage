@@ -4,7 +4,7 @@ module FilesTestHelper
 
 
   def jpg_name; 'test.jpg' end
-  def jpg; upload(jpg_name, 'image/jpg') end
+  def jpg; upload(jpg_name, 'image/jpeg') end
 
   def pdf_name; 'test.pdf' end
   def pdf; upload(pdf_name, 'application/pdf') end

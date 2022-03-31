@@ -9,8 +9,6 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
-      - tmp:/app/tmp
-      - storage:/app/storage
     env_file:
       - .env
       - .env-dev-values
@@ -27,8 +25,6 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
-      - tmp:/app/tmp
-      - storage:/app/storage
     env_file:
       - .env-dev-values
       - .env
@@ -54,5 +50,3 @@ services:
 volumes:
   db_data:
   gem_cache:
-  tmp:
-  storage:

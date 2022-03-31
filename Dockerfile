@@ -32,5 +32,7 @@ RUN mkdir -p /gems && chown ${UID}:${GID} /gems
 
 ENV BUNDLE_PATH /gems
 
+USER ${UNAME}
+#COPY --chown=${UID}:${GID} . /app
 WORKDIR /app
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
