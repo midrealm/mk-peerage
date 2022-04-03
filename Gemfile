@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.5'
+ruby '3.1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0.0'
@@ -26,7 +26,7 @@ gem 'cancancan'
 gem 'ancestry'
 gem 'validates_email_format_of'
 gem 'recaptcha', require: 'recaptcha/rails'
-gem 'webpacker', '~> 4.x'
+gem 'webpacker', '~> 5.x'
 
 
 group :development, :test do
