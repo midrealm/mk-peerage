@@ -7,13 +7,11 @@ services:
       - "3000:3000"
       - "4000:4000" #for selenium-chrome
     volumes:
-      - .:/usr/src/app
+      - .:/app
       - gem_cache:/gems
-      - tmp:/usr/src/app/tmp
-      - storage:/usr/src/app/storage
     env_file:
-      - .env/development/database
-      - .env/development/web
+      - .env
+      - .env-dev-values
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
       - SELENIUM_DRIVER_URL=http://selenium-chrome:4444/wd/hub
@@ -25,13 +23,11 @@ services:
     ports:
       - 3035:3035
     volumes:
-      - .:/usr/src/app
+      - .:/app
       - gem_cache:/gems
-      - tmp:/usr/src/app/tmp
-      - storage:/usr/src/app/storage
     env_file:
-      - .env/development/database
-      - .env/development/web
+      - .env-dev-values
+      - .env
     environment:
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
       - NODE_ENV=development
@@ -47,12 +43,10 @@ services:
   database:
     image: postgres
     env_file:
-      - .env/development/database
+      - .env-dev-values
     volumes:
       - db_data:/var/lib/postgresql/data
 
 volumes:
   db_data:
   gem_cache:
-  tmp:
-  storage:

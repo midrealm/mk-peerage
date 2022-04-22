@@ -1,4 +1,10 @@
-FROM ruby:2.7.2
+ARG RUBY_VERSION=3.1.0
+FROM ruby:${RUBY_VERSION}
+
+ARG BUNDLER_VERSION=2.3.10
+ARG UNAME=app
+ARG UID=1000
+ARG GID=1000
 
 LABEL maintainer="nique.rio@gmail.com"
 
@@ -17,9 +23,16 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
 
 RUN yarn policies set-version 1.22.18
 
-WORKDIR /usr/src/app
 
-RUN gem install bundler:2.1.4
+RUN gem install bundler:${BUNDLER_VERSION}
+
+RUN groupadd -g ${GID} -o ${UNAME}
+RUN useradd -m -d /app -u ${UID} -g ${GID} -o -s /bin/bash ${UNAME}
+RUN mkdir -p /gems && chown ${UID}:${GID} /gems
+
 ENV BUNDLE_PATH /gems
 
+USER ${UNAME}
+#COPY --chown=${UID}:${GID} . /app
+WORKDIR /app
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]

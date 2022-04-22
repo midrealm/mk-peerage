@@ -4,7 +4,7 @@ module FilesTestHelper
 
 
   def jpg_name; 'test.jpg' end
-  def jpg; upload(jpg_name, 'image/jpg') end
+  def jpg; upload(jpg_name, 'image/jpeg') end
 
   def pdf_name; 'test.pdf' end
   def pdf; upload(pdf_name, 'application/pdf') end
@@ -16,6 +16,6 @@ module FilesTestHelper
 
   def upload(name, type)
     file_path = Rails.root.join('spec', 'fixtures', name)
-    fixture_file_upload(file_path, type)
+    Rack::Test::UploadedFile.new(file_path, type)
   end
 end
