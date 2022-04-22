@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -46,8 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.integer "candidate_id"
     t.integer "poll_id"
     t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "peer_id"
     t.integer "judgement"
     t.index ["candidate_id"], name: "index_advisings_on_candidate_id"
@@ -59,8 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.integer "user_id"
     t.integer "candidate_id"
     t.boolean "apprenticeship"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "peer_id"
     t.index ["candidate_id"], name: "index_advocacies_on_candidate_id"
     t.index ["peer_id"], name: "index_advocacies_on_peer_id"
@@ -70,8 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
   create_table "ballots", force: :cascade do |t|
     t.bigint "peer_id"
     t.bigint "poll_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "seed"
     t.index ["peer_id"], name: "index_ballots_on_peer_id"
     t.index ["poll_id"], name: "index_ballots_on_poll_id"
@@ -80,8 +80,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
   create_table "candidates", id: :serial, force: :cascade do |t|
     t.string "sca_name"
     t.boolean "vote"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "group_id"
     t.string "specialty_detail"
     t.integer "peerage_type"
@@ -92,8 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
   create_table "comments", id: :serial, force: :cascade do |t|
     t.integer "candidate_id"
     t.text "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "peer_id"
     t.index ["candidate_id"], name: "index_comments_on_candidate_id"
     t.index ["peer_id"], name: "index_comments_on_peer_id"
@@ -102,8 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
   create_table "dependencies", id: :serial, force: :cascade do |t|
     t.integer "peer_id"
     t.integer "superior_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["peer_id", "superior_id"], name: "index_dependencies_on_peer_id_and_superior_id", unique: true
     t.index ["peer_id"], name: "index_dependencies_on_peer_id"
     t.index ["superior_id"], name: "index_dependencies_on_superior_id"
@@ -112,8 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
   create_table "documents", id: :serial, force: :cascade do |t|
     t.integer "peer_id"
     t.integer "candidate_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.text "description"
     t.index ["candidate_id"], name: "index_documents_on_candidate_id"
@@ -122,15 +122,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
 
   create_table "group_types", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "groups", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "group_type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "ancestry"
     t.integer "ancestry_depth", default: 0
     t.string "slug"
@@ -141,8 +141,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
   create_table "news", force: :cascade do |t|
     t.integer "peerage_type"
     t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "peers", id: :serial, force: :cascade do |t|
@@ -154,8 +154,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.string "dependent_of"
     t.boolean "admin"
     t.string "specialty_detail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.string "type"
     t.index ["user_id"], name: "index_peers_on_user_id"
@@ -170,26 +170,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.integer "elevate"
     t.float "rec"
     t.float "fav"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "no_response"
     t.index ["candidate_id"], name: "index_poll_results_on_candidate_id"
     t.index ["poll_id"], name: "index_poll_results_on_poll_id"
   end
 
   create_table "polls", id: :serial, force: :cascade do |t|
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "start_date", precision: nil
+    t.datetime "end_date", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "peerage_type"
     t.boolean "published"
   end
 
   create_table "specializations", id: :serial, force: :cascade do |t|
     t.integer "specialty_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "candidate_id"
     t.integer "peer_id"
     t.index ["candidate_id"], name: "index_specializations_on_candidate_id"
@@ -199,8 +199,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
 
   create_table "specialties", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "peerage_type"
     t.string "slug"
     t.string "ancestry"
@@ -211,15 +211,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_193628) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "sca_name"
     t.string "modern_name"
     t.string "street"
