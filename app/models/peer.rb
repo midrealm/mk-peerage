@@ -83,7 +83,7 @@ def specialties?
 
   def self.orders
     #order matters; this is the order they were addded to the site
-    [:laurel, :pelican, :chivalry, :defense]
+    [:laurel, :pelican, :defense, :chivalry]
     #Peer.subclasses.map{|x| x.name.downcase.to_sym}
   end 
   def self.where_order(peerage)
