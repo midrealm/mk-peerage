@@ -56,7 +56,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  ActionMailer::Base.smtp_settings = {
+  config.action_mailer.smtp_settings = {
     :address          => "smtp.sendgrid.net",
     :port             => "25",
     :authentication   => :plain,
