@@ -63,7 +63,7 @@
           <% @old_advisings.advisings.each do |old| %>
             <div class="p-2">
               <h5><%=old.date%></h3>
-              <b>Judgement:</b> <%=old.judgement_name%><br>
+              <b>Counsel:</b> <%=old.judgement_name%><br>
               <b>Comment: </b>
               <div>
               <%= markdown(old.comment)%>
@@ -78,7 +78,7 @@
             <%= link_to 'Edit Counsel', chambers_edit_ballot_candidate_path(peerage, @candidate.id), class: 'btn btn-primary' %><br>
             <div class="p-2">
               <h5><%=@current_advising.date%></h3>
-              <b>Judgement:</b> <%=@current_advising.judgement_name%><br>
+              <b>Counsel:</b> <%=@current_advising.judgement_name%><br>
               <b>Comment: </b>
               <div>
               <%= markdown(@current_advising.comment)%>

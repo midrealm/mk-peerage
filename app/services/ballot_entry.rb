@@ -24,6 +24,9 @@ class BallotEntry
       Advising.vote_list_judgements
     else
       Advising.watch_list_judgements
+    end.reject do |x,y| 
+      #jadzia: removed 2022-06-07 to maybe help with the statistics
+      y == 'no_strong_opinion' 
     end
   end
 
