@@ -1,6 +1,6 @@
 class CandidatePresenter
   extend Forwardable
-  def_delegators :@candidate, :sca_name, :comments, :profile_pic, :profile_pic_full, :profile_pic_thumb, :list, :group, :documents, :peerage_type, :id, :documents?
+  def_delegators :@candidate, :sca_name, :comments, :profile_pic, :profile_pic_full, :profile_pic_thumb, :list, :group, :peerage_type, :id 
   attr_reader :results
 
   def initialize(candidate:, results_picker: ResultsPicker.new)
@@ -19,7 +19,15 @@ class CandidatePresenter
   def poll_result?
     @results.present?
   end
-
+  def documents
+    @candidate.documents.select{|x| x.document.present? }
+  end
+  def documents?
+    documents.any?
+  end
+  def document_count
+    documents.count
+  end
   def poll_date
 		if poll_result?
       poll = @results.poll
@@ -44,9 +52,6 @@ class CandidatePresenter
     @candidate.advocacies.count > 0
   end
 
-  def document_count
-    @candidate.documents.count
-  end
   def comments
     @candidate.comments.sort_by(&:created_at)
   end
