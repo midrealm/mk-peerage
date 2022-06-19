@@ -4,13 +4,13 @@ class Chambers::DocumentsController < ApplicationController
   def create
     document = Document.new(candidate_id: document_params[:candidate_id], document: document_params[:document],
        name: document_params[:name], description: document_params[:description], peer_id: peer.id)
+    candidate = Candidate.find(params['document']['candidate_id'])
     if document.save
-      flash[:success] = "Document Upload Successful"
-      candidate = Candidate.find(params['document']['candidate_id'])
-      redirect_to "#{chambers_candidate_path(candidate.order,candidate)}#documents"
+      flash[:success] = "Your document was uploaded successfully"
     else
-      flash[:error] = "Document Upload Unsuccessful: #{document.errors.full_messages.to_sentence}"
+      flash[:error] = "Your document was not able to be uploaded: #{document.errors.full_messages.to_sentence}"
     end
+      redirect_to "#{chambers_candidate_path(candidate.order,candidate)}#documents"
   end
   private
   def document_params
