@@ -14,6 +14,13 @@ FactoryBot.define do
     name { 'String' }
     association :peer, strategy: :build
     association :candidate, strategy: :build
+    after(:build) do |document|
+      document.document.attach(
+      io: File.open(Rails.root.join('spec', 'fixtures', 'test.jpg')),
+      filename: 'test.jpg',
+      content_type: 'image/jpeg'
+    )
+    end
   end
   factory :poll_result do
     association :candidate, strategy: :build
