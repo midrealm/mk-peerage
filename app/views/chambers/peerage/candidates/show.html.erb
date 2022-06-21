@@ -49,9 +49,9 @@
             <% end %>
           <h3>Add an Image/Document</h3>
           <%= bootstrap_form_for @document, url: chambers_documents_path do |f| %>
-            <%= f.file_field :document, label: 'File' %>
+            <%= f.file_field :document, label: 'File', required: true %>
             <%= f.hidden_field :candidate_id, value: @candidate.id %>
-            <%= f.text_field :name %>
+            <%= f.text_field :name, required: true %>
             <%= f.text_field :description %>
             <%= f.submit %>
           <% end %> 
