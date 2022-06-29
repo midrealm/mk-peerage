@@ -10,6 +10,10 @@ RSpec.describe Poll, type: :model do
     poll = build(:poll, start_date: DateTime.now - 3.day, end_date: DateTime.now + 1.day)
     expect(poll.valid?).to be_falsey
   end
+  it "accepts polls with start_date of today" do
+    poll = build(:poll, start_date: DateTime.now, end_date: DateTime.now + 1.day)
+    expect(poll.valid?).to be_truthy
+  end
 
 end
 

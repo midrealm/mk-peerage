@@ -19,9 +19,12 @@ class Poll < ApplicationRecord
     end    
     return nil
   end
+  def self.today_at_midnight
+    Time.zone.parse(Time.zone.today.to_s)
+  end
 
   def self.last_published_for(peerage)
-    Poll.where(peerage_type: peerage).where(published: true).where('end_date <=?', Date.today).order(:end_date).last 
+    Poll.where(peerage_type: peerage).where(published: true).where('end_date <=?', self.today_at_midnight).order(:end_date).last 
   end
   def self.last_for(peerage) 
     Poll.where(peerage_type: peerage).last    
@@ -39,7 +42,7 @@ class Poll < ApplicationRecord
   end
 
   def start_date_cannot_be_in_the_past
-    if !start_date.nil? and start_date < Date.today.to_datetime
+    if !start_date.nil? and start_date < today_at_midnight
         errors.add(:start_date, 'start_date cannot be in the past')
     end
   end
@@ -73,5 +76,8 @@ class Poll < ApplicationRecord
   private  
   def date_string(date)
    date.strftime("%b %d, %Y") 
+  end
+  def today_at_midnight
+    Poll.today_at_midnight
   end
 end
