@@ -2,17 +2,21 @@ class HonorRollPresenter
   def initialize(peerage)
     @peerage = peerage
   end
+
   def active_peers
-    peers(active: true) 
+    peers(active: true)
   end
+
   def inactive_peers
-    peers(active: false) 
+    peers(active: false)
   end
 
   def order_title
   end
+
   def page_title
   end
+
   def css_class
   end
 
@@ -28,9 +32,11 @@ class HonorRollPresenter
       HonorRollChivalryPresenter.new(peerage)
     end
   end
+
   private
+
   def peers(active:)
-    Peer.where_order(@peerage).where(active: active).joins(:user).order(:sca_name).map{|p| HonorRollPeerPresenter.for(p)}
+    Peer.where_order(@peerage).where(active: active).joins(:user).order(:sca_name).map { |p| HonorRollPeerPresenter.for(p) }
   end
 end
 
@@ -38,9 +44,11 @@ class HonorRollPelicansPresenter < HonorRollPresenter
   def order_title
     "Masters and Mistresses of the Pelican"
   end
+
   def page_title
     "Pelican Roll of Honor"
   end
+
   def css_class
     "pelican-plate"
   end
@@ -50,9 +58,11 @@ class HonorRollLaurelsPresenter < HonorRollPresenter
   def order_title
     "Masters and Mistresses of the Laurel"
   end
+
   def page_title
     "Laurel Roll of Honor"
   end
+
   def css_class
     "laurel-plate"
   end
@@ -62,20 +72,25 @@ class HonorRollDefensePresenter < HonorRollPresenter
   def order_title
     "Masters and Mistresses of Defense"
   end
+
   def page_title
     "Defense Roll of Honor"
   end
+
   def css_class
     "defense-plate"
   end
 end
+
 class HonorRollChivalryPresenter < HonorRollPresenter
   def order_title
     "Order of the Chivalry"
   end
+
   def page_title
     "Chivalry Roll of Honor"
   end
+
   def css_class
     "chivalry-plate"
   end
@@ -90,7 +105,7 @@ class HonorRollPeerPresenter
 
   def self.for(peer)
     case peer.order
-    when (:laurel)
+    when :laurel
       HonorRollLaurelPresenter.new(peer)
     else
       HonorRollPeerPresenter.new(peer)
