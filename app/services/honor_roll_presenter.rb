@@ -70,7 +70,7 @@ end
 
 class HonorRollDefensePresenter < HonorRollPresenter
   def order_title
-    "Masters and Mistresses of Defense"
+    "Masters of Defense"
   end
 
   def page_title
