@@ -1,40 +1,61 @@
-# MK-Peerage
+# Middle Kingdom Peerage Portal
 live site http://peerage.midrealm.org
 
-## To set up for front-end development
+## Developer set up
 
-make sure node and yarn are at versions in package.json
+### Prerequistes
 
-I use nvm to install node, so to get node to the correct version 
-```
-nvm install [version]
-```
+* [docker](https://www.docker.com/)
+* [docker compose](https://docs.docker.com/compose/install/)
 
-for yarn: 
-```
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version [version]
-source .bashrc
-```
+### Instructions
 
-You will want to set up the environment variables. Create a file in rails root called ".env" and save the following:
-```
-# .env
-export RECAPTCHA_SITE_KEY  = '6LcQmCcTAAAAAPoEURxzZ0qeqSlIRoEc_03rF6aE'
-export RECAPTCHA_SECRET_KEY = '6LcQmCcTAAAAAM1_iGi5tR00EDVd0Za-OJGmsebG'
-export LAUREL_MAILING_LIST = 'laurel_list@mailinator.com'
-export PELICAN_MAILING_LIST = 'pelican_list@mailinator.com'
-```
-then 
-```
-$ bundle exec rails s
-```
+1. Run the `init.sh` script:
 
-then go to localhost:3000 in your browser
+    ```bash
+    ./init.sh
+    ```
+    
+    This will set up your .env file if you don't already have one, build the docker
+    images, install the gems, and install the node modules. 
+    
+    For setting up the .env file, there's some logic to figure out what your UID
+    and GID are so that the user in the container has the some UID and GID as you.
+    Having those ids match means that files saved in the container (and then mapped
+    to your workstation) will be owned by you. This has been a particular problem
+    for Mac users.
 
-For actually doing development, you'll need to start the webpack-dev-server
-and the rails server. You can do this by runnning in separte terminals:
-```
-$ webpack-dev-server
-$ bundle exec rails s
-```
+2. Spin up the containers:
 
+    ```bash
+    docker compose up -d
+    ```
+
+3. Set up the database
+    
+    ```bash
+    docker compose run --rm web bundle exec rails fake_data:all
+    ```
+
+    This will create the databases, load the schema, and load the fake data. (The script for this is in `lib/tasks/fake_data.rake`)
+
+4. You probably need to turn the `web` container back on again.
+
+   ```
+   docker compose up -d 
+   ```
+
+   Use, `ps` to check that all of the containers are running
+
+   ```
+   docker compose ps
+   ```
+
+6. View the development site in the browser: http://localhost:3000
+
+7. To run tests, in the terminal run:
+
+   ```
+   docker compose run --rm web bundle exec rspec
+   ```
+    
