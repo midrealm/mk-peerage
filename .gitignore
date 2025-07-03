@@ -4,6 +4,8 @@ latest.dump
 /public/javascripts
 /public/stylesheets
 yarn-error.log
+.cache/
+.yarnrc
 .env
 
 storage/
