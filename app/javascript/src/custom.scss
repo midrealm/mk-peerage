@@ -1,3 +1,25 @@
+// Color constants - WCAG AA Compliant
+$laurel-color: darkgreen;
+$laurel-background: palegoldenrod;
+
+$chivalry-color: white;
+$chivalry-background: #3c3c3c;
+
+$defense-color: ghostwhite;
+$defense-background: #9c1b1b;
+
+$pelican-background: #dda747;
+$pelican-color: darkred;
+
+$mark-color: white;
+$mark-background: #315c82;
+
+// Custom Styles
+.peer-image {
+  max-height: 200px;
+  max-width: 100%;
+  height: auto;
+}
 .peer-profile-parent{
   position: relative;
   bottom: 0;
@@ -13,54 +35,49 @@
     position: absolute;
     bottom: 0px;
     right: 0px;  
-  }    
-}      
-.laurel-plate{
+  }
+}
+
+.peer-plate{
   padding: 0.5rem;
   margin: 0.5rem;
   text-align: center;
   width: 300px;
   height: 75px;
+}
+.laurel-plate{
   border: 1px solid darkgoldenrod;
-  background: palegoldenrod;
+  background: $laurel-background;
   a, a:hover {
-    color: darkgreen;
+    color: $laurel-color;
   }
 }
 .chivalry-plate{
-  padding: 0.5rem;
-  margin: 0.5rem;
-  text-align: center;
-  width: 300px;
-  height: 75px;
   border: 1px solid #a0a0a0;
-  background: #3c3c3c;
+  background: $chivalry-background;
   a, a:hover {
-    color: white;
+    color: $chivalry-color;
   }
 }
 .defense-plate{
-  padding: 0.5rem;
-  margin: 0.5rem;
-  text-align: center;
-  width: 300px;
-  height: 75px;
   border: 3px solid #611410;
-  background: #9c1b1b;
+  background: $defense-background;
   a, a:hover {
-    color: ghostwhite;
+    color: $defense-color;
   }
 }
 .pelican-plate{
-  padding: 0.5rem;
-  margin: 0.5rem;
-  text-align: center;
-  width: 300px;
-  height: 65px;
   border: 1px solid #391903;
-  background: #dda747e0;
+  background: $pelican-background;
   a, a:hover {
-    color: darkred;
+    color: $pelican-color;
+  }
+}
+.mark-plate{
+  border: 1px solid #391903;
+  background: $mark-background;
+  a, a:hover {
+    color: $mark-color;
   }
 }
 
@@ -68,42 +85,52 @@
   min-width:250px
 }
 .laurel-border-left{
-	border-left: 5px solid darkgreen;
+	border-left: 5px solid $laurel-color;
 }
 .pelican-border-left{
-	border-left: 5px solid darkgoldenrod;
+	border-left: 5px solid $pelican-background;
 }
 .defense-border-left{
-  border-left: 5px solid #9c1b1b;
+  border-left: 5px solid $defense-background;
 }
 .chivalry-border-left{
-  border-left: 5px solid black;
+  border-left: 5px solid $chivalry-background;
 }
+.mark-border-left{
+  border-left: 5px solid $mark-background;
+}
+
 .laurel-card{
-	border: 3px solid darkgreen !important;
+	border: 3px solid $laurel-color !important;
   a, a:hover {
-    color: darkgreen;
+    color: $laurel-color;
   }
 }
 .pelican-card{
-	border: 3px solid darkgoldenrod !important;
+	border: 3px solid $pelican-background !important;
   a, a:hover {
-    color: darkred;
+    color: $pelican-color;
   }
 }
 .defense-card{
-	border: 3px solid darkred !important;
+	border: 3px solid $defense-background !important;
   a, a:hover {
-    color: darkred;
+    color: $defense-background;
+  }
+}
+.chivalry-card{
+	border: 3px solid $chivalry-background !important;
+  a, a:hover {
+    color: $chivalry-background;
+  }
+}
+.mark-card{
+  border: 3px solid $mark-background !important;
+  a, a:hover {
+    color: $mark-background;
   }
 }
 
-.chivalry-card{
-	border: 3px solid black !important;
-  a, a:hover {
-    color: black;
-  }
-}
 .deceased{
   background: #dedede; 
   a, a:hover {
@@ -129,7 +156,7 @@ span.my-link:hover {
   background: cornsilk;
   font-weight: 600;
   a, a:hover {
-    color: #009e00;
+    color: darkgreen;
   }
 }
 

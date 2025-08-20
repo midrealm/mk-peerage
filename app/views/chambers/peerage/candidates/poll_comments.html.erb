@@ -8,7 +8,7 @@
 </nav>
 <div class ="d-md-flex flex-row-reverse">
   <div class="ml-3 mb-3">
-    <%= image_tag @candidate.profile_pic_full %>
+    <%= image_tag(@candidate.profile_pic_full, alt: "#{@candidate.sca_name}'s profile picture") %>
   </div>
   <div class="col-md">
     <%= render "profile", candidate: @candidate %>
@@ -24,7 +24,7 @@
     <% @candidate.advisings.each do |adv| %>
       <tr> 
         <td style="width:140px;text-align:center">
-          <%= link_to (image_tag adv.peer.profile_pic_thumb), peer_path(peerage,adv.peer.slug) %><br>
+          <%= link_to image_tag(adv.peer.profile_pic_thumb, alt: "#{adv.peer.sca_name}'s profile picture"), peer_path(peerage,adv.peer.slug) %><br>
           <%= link_to "#{adv.peer.sca_name} #{adv.peer.specialties_suffix}", peer_path(peerage,adv.peer.slug)%> 
         </td>
         <td>

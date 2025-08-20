@@ -34,7 +34,7 @@ class Chivalry < Peer
     "Foremost in battle,<br/>\n"\
     "Courteous at all times,<br/>\n"\
     "Champion of the right and the good.<br/>\n"\
-    "Thus swear I, Sir/Master <<Name>>.".html_safe
+    "Thus swear I, Sir/Master [ Name ].".html_safe
   end
 
   def self.order_secretary

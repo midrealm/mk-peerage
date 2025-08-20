@@ -27,8 +27,6 @@ namespace :fake_data do
       u.deceased = false
       u.group = Group.find_by(name: 'Cynnabar')
     end
-
-
     Laurel.create do |p|
       p.active = true
       p.elevation_date = Date.parse('1560-May-10')
@@ -39,7 +37,6 @@ namespace :fake_data do
       p.admin = true
   		p.user_id = byrd.id
     end
-
     Defense.create do |p|
       p.active = true
       p.elevation_date = Date.parse('1560-May-10')
@@ -60,11 +57,33 @@ namespace :fake_data do
       p.admin = true
   		p.user_id = byrd.id
     end
+    Chivalry.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1560-May-10')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Motets'
+      p.bio = 'I am a Knight Too!'
+      p.admin = true
+  		p.user_id = byrd.id
+    end
+    Mark.create do |p|
+      p.active = true
+      p.elevation_date = Date.parse('1560-May-10')
+      p.elevated_by = 'Elizabeth I'
+      p.vigilant = false
+      p.specialty_detail = 'Motets'
+      p.bio = 'I am a Hunter Too!'
+      p.admin = true
+  		p.user_id = byrd.id
+    end
 
 		byrd.arms.attach(io: File.open('lib/assets/fake_data/byrd_coa.jpg'), filename: 'byrd_coa.jpg', content_type: 'image/jpeg');
 		byrd.laurel.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 		byrd.defense.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 		byrd.pelican.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
+    byrd.chivalry.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
+    byrd.mark.profile_pic.attach(io: File.open('lib/assets/fake_data/byrd.png'), filename: 'byrd.png', content_type: 'image/png');
 	
     Specialization.create(peer: byrd.laurel, specialty: Specialty.find_by(name: 'Music'))
 

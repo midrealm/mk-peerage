@@ -1,3 +1,15 @@
+// WCAG AA Compliant Color Constants
+$navbar-light-color: #6c6c6c !default;
+$breadcrumb-active-color: #495057 !default;
+
+$primary: #0062e5 !default;
+
+.bootstrap-select .dropdown-toggle.btn-light {
+  background-color: #ffffff !important;
+  border-color: #ced4da !important;
+  color: #495057 !important;
+}
+
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-select/dist/css/bootstrap-select";
 @import "~datatables.net-bs4/css/dataTables.bootstrap4";
