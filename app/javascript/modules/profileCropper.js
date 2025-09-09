@@ -48,8 +48,8 @@ export default (() => {
           size: 'viewport'
         }).then(function(resp){
           //add image to profile_preview div
-          $('#profile_preview').empty().append($('<img>',{src: resp})).removeClass('d-none');
-         
+          $('#profile_preview').empty().append($('<img>',{src: resp, alt: 'Profile Preview'})).removeClass('d-none');
+
           //hide croppie and crop divs
           $('#croppie').addClass('d-none')
           $('#crop_button').addClass('d-none')

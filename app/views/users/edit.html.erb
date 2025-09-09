@@ -1,43 +1,57 @@
 <% title "Edit Profile"%>
+<% peerage = params[:peerage] || nil %>
 <h1>Edit Profile</h1>
 <div class="container">
   <div class="d-md-flex flex-row">
     <div class="col-md">
 
       <ul class="nav nav-tabs" id="myTabs" role="tablist">
-        <li role="presentation" class="nav-item"><a class="nav-link <%= 'active' if peerage.nil? %> " href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a></li>
+        <li role="presentation" class="nav-item">
+          <a class="nav-link <%= 'active' if peerage.nil? %> " href="#personal" aria-controls="personal" role="tab" data-toggle="tab" aria-selected="<%= peerage.nil? ? 'true' : 'false' %>" id="personal-tab">Personal</a>
+        </li>
         <!-- <li role="presentation"><a  class="nav-link" href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li> -->
         <% @user.peers.each do |p| %>
-          <% link_class = 'nav-link' %>
-          <% link_class = link_class + ' active' if peerage == p.order  %>
-          <li role="presentation" class="nav-item"><%= link_to p.peerage_name, "##{p.peerage_type}", class: link_class, role: 'tab', 'data-toggle': 'tab' %></li>
+        <% link_class = 'nav-link' %>
+        <% link_class = link_class + ' active' if peerage == p.order  %>
+        <li role="presentation" class="nav-item">
+          <%= link_to p.peerage_name, "##{p.peerage_type}",
+              class: link_class,
+              role: 'tab',
+              'data-toggle': 'tab',
+              'aria-controls': p.peerage_type,
+              'aria-selected': (peerage == p.order) ? 'true' : 'false',
+              id: "#{p.peerage_type}-tab" %>
+        </li>
         <% end %>
       </ul>
 
 
       <%= bootstrap_form_for @user, url: users_edit_path do |f| %>
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane <%= 'show active' if peerage.nil? %>  " id="personal">
+        <div role="tabpanel" class="tab-pane <%= 'show active' if peerage.nil? %>" id="personal" aria-labelledby="personal-tab">
           <%= f.email_field :email, label: 'Email address' %>
           <%= f.text_field :sca_name, label: 'SCA Name' %>
           <%= f.text_field :modern_name, label: 'Modern Name' %>
-          <%= f.file_field :arms, class: 'd-none d-md-block' %>
-          <input type="hidden" id="arms_cache" value=<%= @user.arms_data_uri %> >
+          <%= f.file_field :arms, label: 'Coat of Arms (optional)', class: 'd-none d-md-block' %>
+          <%= f.hidden_field :arms_cache, value: @user.arms_data_uri %>
           <div class="d-md-none alert alert-info">Update Arms on larger screen</div>
-          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}}%>
+          <%= f.select :group_id, Hash[Group.all.map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}}
+              %>
         </div>
-      <%# render "edit_contact", f: f 
-        %>
+        <%# render "edit_contact", f: f %>
 
         <% @user.peers.each do |peer| %>
-        <%= render  'peer_form', f: f, peer: peer %>
+        <div role="tabpanel" class="tab-pane <%= 'show active' if peerage == peer.order %>" id="<%= peer.peerage_type %>" aria-labelledby="<%= peer.peerage_type %>-tab">
+          <%= render  'peer_form', f: f, peer: peer %>
+        </div>
         <%end %>
-        
-        <%= f.submit class: 'btn btn-default', id: 'user_submit' %>
-      <% end %>
+
+        <%= f.submit 'Update Profile', class: 'btn btn-secondary', id: 'user_submit' %>
       </div>
+      <% end %>
     </div>
 
-  <%= render 'image_cropper_preview', user: @user %>
-  
+    <%= render 'image_cropper_preview', user: @user %>
+
+  </div>
 </div>

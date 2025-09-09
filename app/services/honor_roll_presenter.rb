@@ -26,6 +26,8 @@ class HonorRollPresenter
       HonorRollDefensePresenter.new(peerage)
     when :chivalry
       HonorRollChivalryPresenter.new(peerage)
+    when :mark
+      HonorRollMarkPresenter.new(peerage)
     end
   end
   private
@@ -42,7 +44,7 @@ class HonorRollPelicansPresenter < HonorRollPresenter
     "Pelican Roll of Honor"
   end
   def css_class
-    "pelican-plate"
+    "peer-plate pelican-plate"
   end
 end
 
@@ -54,7 +56,7 @@ class HonorRollLaurelsPresenter < HonorRollPresenter
     "Laurel Roll of Honor"
   end
   def css_class
-    "laurel-plate"
+    "peer-plate laurel-plate"
   end
 end
 
@@ -66,7 +68,7 @@ class HonorRollDefensePresenter < HonorRollPresenter
     "Defense Roll of Honor"
   end
   def css_class
-    "defense-plate"
+    "peer-plate defense-plate"
   end
 end
 class HonorRollChivalryPresenter < HonorRollPresenter
@@ -77,7 +79,18 @@ class HonorRollChivalryPresenter < HonorRollPresenter
     "Chivalry Roll of Honor"
   end
   def css_class
-    "chivalry-plate"
+    "peer-plate chivalry-plate"
+  end
+end
+class HonorRollMarkPresenter < HonorRollPresenter
+  def order_title
+    "Order of the Mark"
+  end
+  def page_title
+    "Mark Roll of Honor"
+  end
+  def css_class
+    "peer-plate mark-plate"
   end
 end
 

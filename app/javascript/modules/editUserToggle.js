@@ -7,7 +7,7 @@ export default (() => {
     const tab = e.target.hash.substr(1);
     if(tab === 'personal'){
       var input = $('#arms_cache')
-      var img = $('<img>', {src: input.val(), width: '100px'})
+      var img = $('<img>', {src: input.val(), width: '100px', alt: 'Arms Preview'});
       $('#profile_preview').html(img) 
     }else if(peerages.includes(tab)){
       peerImagePreview(tab)
@@ -19,7 +19,7 @@ export default (() => {
   function peerImagePreview(peer){
     var input = $(`#${peer} input[data-behavior="profile-data"]`)
     input.addClass('active')
-    var img = $('<img>').attr('src', input.val())
+    var img = $('<img>').attr('src', input.val()).attr('alt', `${peer} Preview`);
     $('#profile_preview').html(img) 
   };
 
