@@ -1,8 +1,19 @@
-version: '3'
+x-condition-healthy: &healthy
+  condition: service_healthy
+
+x-healthcheck-defaults: &healthcheck-defaults
+  interval: 5s
+  timeout: 10s
+  start_period: 10s
+  retries: 5
 
 services:
   web:
-    build: .
+    build: 
+      context: .
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     ports:
       - "3000:3000"
       - "4000:4000" #for selenium-chrome
@@ -12,6 +23,8 @@ services:
     env_file:
       - .env
       - .env-dev-values
+    depends_on:
+      database: *healthy
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
       - SELENIUM_DRIVER_URL=http://selenium-chrome:4444/wd/hub
@@ -46,6 +59,10 @@ services:
       - .env-dev-values
     volumes:
       - db_data:/var/lib/postgresql/data
+    healthcheck:
+      <<: *healthcheck-defaults
+      test: [ "CMD", "pg_isready"]
+
 
 volumes:
   db_data:

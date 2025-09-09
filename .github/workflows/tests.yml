@@ -20,7 +20,7 @@ jobs:
       - name: Create .env file
         run: |
           sed 's/DATABASE_HOST=database/DATABASE_HOST=localhost/' .env-dev-values > .env-actions
-          cat .env-example .env-actions > .env
+          cat env.example .env-actions > .env
       - name: Load .env file
         uses: xom9ikk/dotenv@v1.0.2
       - name: Set up Ruby 3.1.0
@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '12.22.12'
-          cache: 'yarn'
+          #cache: 'yarn'
       - name: Install yarn packages
         run: |
           yarn policies set-version 1.22.18
