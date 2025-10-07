@@ -111,6 +111,18 @@ FactoryBot.define do
     type {'Pelican'}
   end
 
+  factory :defense_peer, parent: :peer do
+    type {'Defense'}
+  end
+
+  factory :chivalry_peer, parent: :peer do
+    type {'Chivalry'}
+  end
+
+  factory :mark_peer, parent: :peer do
+    type {'Mark'}
+  end
+
   factory :dependency do
     association :peer, strategy: :build
     association :superior , factory: :peer
@@ -164,6 +176,27 @@ FactoryBot.define do
     sca_name {"Mundingus Admin"}
     after(:create) do |u|
        create(:pelican_peer, user: u, admin: true)
+    end
+  end
+
+  factory :mark_admin, parent: :user do
+    sca_name {"Mark Admin"}
+    after(:create) do |u|
+       create(:mark_peer, user: u, admin: true)
+    end
+  end
+
+  factory :defense_admin, parent: :user do
+    sca_name {"Defense Admin"}
+    after(:create) do |u|
+       create(:defense_peer, user: u, admin: true)
+    end
+  end
+
+  factory :chivalry_admin, parent: :user do
+    sca_name {"Chivalry Admin"}
+    after(:create) do |u|
+       create(:chivalry_peer, user: u, admin: true)
     end
   end
 

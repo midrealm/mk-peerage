@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="col-auto" style: 'height:200px'>
-     <%= image_tag cand.profile_pic.variant(resize:'400x400') %>
+     <%= image_tag(cand.profile_pic.variant(resize:'400x400'), alt: "#{cand.name}'s profile picture") %>
     </div>
   </div>
   <% end %>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="col-auto" style: 'height:200px'>
-     <%= image_tag cand.profile_pic.variant(resize:'400x400') %>
+     <%= image_tag(cand.profile_pic.variant(resize:'400x400'), alt: "#{cand.name}'s profile picture") %>
     </div>
   </div>
   <% end %>

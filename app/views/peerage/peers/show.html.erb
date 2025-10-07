@@ -2,8 +2,8 @@
 <div class="container">
   <div class="d-md-flex flex-row-reverse">
     <div class='peer-profile-parent'>
-       <%= image_tag @peer.profile_pic_full, class: 'profile-pic'%>
-       <%= image_tag @peer.arms.variant(resize: "100x200"), class: 'arms'%>
+       <%= image_tag(@peer.profile_pic_full, class: 'profile-pic', alt: "#{@peer.sca_name}'s profile picture") %>
+       <%= image_tag(@peer.arms.variant(resize: "100x200"), class: 'arms', alt: "#{@peer.sca_name}'s arms") %>
     </div>
     <div class="col-md <%=@peer.peer_div_css%>">
       <% if signed_in? && current_user.sca_name == @peer.sca_name %>

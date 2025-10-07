@@ -56,6 +56,18 @@ RSpec.describe Peer, "order" do
     peer = build(:pelican_peer)
     expect(peer.order).to eq(:pelican) 
   end
+  it "returns :defense for a Defense Peer" do
+    peer = build(:defense_peer)
+    expect(peer.order).to eq(:defense) 
+  end
+  it "returns :chivalry for a Chivalry Peer" do
+    peer = build(:chivalry_peer)
+    expect(peer.order).to eq(:chivalry) 
+  end
+  it "returns :mark for a Mark Peer" do
+    peer = build(:mark_peer)
+    expect(peer.order).to eq(:mark) 
+  end
 end
 
 RSpec.describe Peer, "self.where_order(peerage)" do
@@ -81,7 +93,7 @@ end
 
 RSpec.describe Peer, "self.orders" do
   it "returns array of all the orders" do
-    expect(Peer.orders).to contain_exactly(:laurel, :pelican, :defense, :chivalry)
+    expect(Peer.orders).to contain_exactly(:laurel, :pelican, :defense, :chivalry, :mark)
   end 
 end
 

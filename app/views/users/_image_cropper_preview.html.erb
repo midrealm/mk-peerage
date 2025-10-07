@@ -1,5 +1,5 @@
-<% image_preview = image_tag user.arms.variant(resize: "100x200") %>
-<% image_preview = image_tag user.peer(peerage).profile_pic_full unless peerage.nil? %>
+<% image_preview = image_tag(user.arms.variant(resize: "100x200"), alt: "#{user.sca_name}'s coat of arms") %>
+<% image_preview = image_tag(user.peer(peerage).profile_pic_full, alt: "#{user.sca_name}'s profile picture") unless peerage.nil? %>
 <div class="d-none d-md-block col-md">
   <div class="d-flex flex-column">
     <div id="profile_preview">
@@ -9,6 +9,6 @@
     </div>
     <div class="ml-5">
       <button class="btn btn-default d-none " id="crop_button">Finish</button>
-    </div> 
+    </div>
   </div>
 </div>

@@ -16,18 +16,18 @@
           <%= f.form_group :vote, label: {text: "List Status"} do %>
             <%= f.radio_button :vote, true, label: "Vote" %>
             <%= f.radio_button :vote, false, label: "Watch" %>
-          <% end %> 
+          <% end %>
         <% end %>
         <%= f.select :group_id, Hash[Group.after_depth(0).map{|g| ["#{g.group_type.name} of #{g.name}",g.id]}], {label: 'Group', include_blank: true, }, {class: 'selectpicker', data: {'live-search' => 'true'} } %>
         <% if Peer.subclass(peerage).specialties_on? %>
-        <%= f.select :specialty_ids, 
-          Specialty.where(peerage_type: peerage).pluck(:name, :id).map{|x| [ Specialty.find(x[1]).ancestors? ? "#{Specialty.find(x[1]).parent.name} -> #{x[0]}" : x[0] , x[1]] }.sort,
-         {label: 'Specialties', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}, multiple: true} %>
-        <%= f.text_field :specialty_detail %>
+          <%= f.select :specialty_ids, 
+            Specialty.where(peerage_type: peerage).pluck(:name, :id).map{|x| [ Specialty.find(x[1]).ancestors? ? "#{Specialty.find(x[1]).parent.name} -> #{x[0]}" : x[0] , x[1]] }.sort,
+            {label: 'Specialties', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}, multiple: true} %>
+          <%= f.text_field :specialty_detail %>
         <% end %>
         <%= f.select :peer_ids, Peer.where(type: peerage.capitalize).joins(:user).pluck(:sca_name, :id).sort, {label: 'Advocates', include_blank: true}, {class: 'selectpicker', data: {'live-search' => 'true'}, multiple: true } %>
         <input data-behavior="profile-data" class='active' type="hidden" id="candidate_profile_pic" name="candidate[profile_pic]" value=''>
-      <%= f.submit class: 'btn btn-secondary', id: 'candidate_submit'%>
+        <%= f.submit class: 'btn btn-secondary', id: 'candidate_submit'%>
       <% end %>
     </div>
     <div class="d-none d-md-block col-md">
@@ -36,12 +36,12 @@
         </div>
         <div id="profile_preview">
           <% if @candidate.profile_pic.attached?%>
-            <%= image_tag @candidate.profile_pic_full %>
+            <%= image_tag(@candidate.profile_pic_full, alt: "#{@candidate.sca_name}'s profile picture") %>
           <% end %>
         </div>
         <div class="ml-5">
           <button class="btn btn-default d-none " id="crop_button">Finish</button>
-        </div> 
+        </div>
       </div>
     </div>
   </div>
